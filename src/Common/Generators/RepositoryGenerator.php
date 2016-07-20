@@ -5,7 +5,6 @@ namespace Rougin\Weasley\Common\Generators;
 use Rougin\Describe\Describe;
 use Doctrine\Common\Inflector\Inflector;
 
-use Rougin\Weasley\DescribeDriver;
 use Rougin\Weasley\Common\Configuration;
 
 /**
