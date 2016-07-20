@@ -1,0 +1,34 @@
+{
+    "name": "rougin/weasley",
+    "description": "A code generator for Slytherin",
+    "keywords": [
+        "code",
+        "generator",
+        "slytherin"
+    ],
+    "homepage": "https://github.com/rougin/weasley",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rougin Royce Gutib",
+            "email": "rougingutib@gmail.com",
+            "homepage": "http://rougin.github.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "rougin/blueprint": "^0.2.0",
+        "rougin/describe": "^1.4",
+        "doctrine/inflector": "^1.1",
+        "league/flysystem": "^1.0"
+    },
+    "bin": [
+        "bin/weasley",
+        "bin/weasley.php"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rougin\\Weasley\\": "src/"
+        }
+    }
+}

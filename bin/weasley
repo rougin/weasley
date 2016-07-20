@@ -1,0 +1,5 @@
+#!/usr/bin/env php
+<?php
+
+// Load and run the Weasley application
+require 'weasley.php';
