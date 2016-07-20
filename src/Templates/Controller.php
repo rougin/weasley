@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ application }}\Http\Controllers;
+namespace {{ application }}\{{ namespaces.controllers }};
 
 use {{ application }}\Validators\{{ singular | title }}Validator;
 use {{ application }}\Repositories\{{ singular | title }}Repository;

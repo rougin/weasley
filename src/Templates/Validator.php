@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ application }}\Validators;
+namespace {{ application }}\{{ namespaces.validators }};
 
 use Valitron\Validator;
 

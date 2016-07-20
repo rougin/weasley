@@ -132,6 +132,7 @@ class CreateCommand extends AbstractCommand
                 $item = ucfirst($data['singular']);
 
                 break;
+            case 'middleware':
             case 'repository':
             case 'validator':
                 $item = ucfirst(Inflector::singularize($name) . $type);
@@ -141,14 +142,10 @@ class CreateCommand extends AbstractCommand
 
         $fileName  = $directory . '/' . $item . '.php';
 
-        // if ($this->filesystem->has($fileName)) {
-        //     $text = ucfirst($this->type) . ' already exists.';
-
-        //     return $output->writeln('<error>' . $text . '</error>');
-        // }
-
         if ($this->filesystem->has($fileName)) {
-            $this->filesystem->delete($fileName);
+            $text = ucfirst($this->type) . ' already exists.';
+
+            return $output->writeln('<error>' . $text . '</error>');
         }
 
         $this->filesystem->write($fileName, $content);

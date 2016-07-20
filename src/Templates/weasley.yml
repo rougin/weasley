@@ -2,12 +2,12 @@ database:
     driver: mysql
     hostname: localhost
     username: root
-    password: 
-    name: sisig_factory
+    password: ''
+    name: ''
     charset: utf8
 
 defaults:
-    application: Foobar
+    application: App
     author: Rougin Royce Gutib
     email: rougingutib@gmail.com
 
@@ -22,8 +22,9 @@ folders:
 namespaces:
     components: Components
     controllers: Http\Controllers
+    middlewares: Http\Middlewares
     models: Models
     repositories: Repositories
     validators: Validators
 
-output: %%CURRENT_DIRECTORY%%/Output
+output: %%CURRENT_DIRECTORY%%

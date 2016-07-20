@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ application }}\Components;
+namespace {{ application }}\{{ namespaces.components }};
 
 use Rougin\Slytherin\Component\AbstractComponent;
 
