@@ -10,6 +10,12 @@ Via Composer
 $ composer require rougin/weasley:dev-master
 ```
 
+## Usage
+
+``` bash
+$ php vendor/bin/weasley init
+```
+
 ## Credits
 
 - [Rougin Royce Gutib][link-author]
