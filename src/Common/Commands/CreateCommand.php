@@ -143,6 +143,7 @@ class CreateCommand extends AbstractCommand
         $fileName  = $directory . '/' . $item . '.php';
 
         if ($this->filesystem->has($fileName)) {
+            // $this->filesystem->delete($fileName);
             $text = ucfirst($this->type) . ' already exists.';
 
             return $output->writeln('<error>' . $text . '</error>');
