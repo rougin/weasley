@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use Rougin\Weasley\Common\Configuration;
 use Rougin\Weasley\Common\Commands\AbstractCommand;
+use Rougin\Weasley\Common\Generators\ViewGenerator;
 
 /**
  * Create View Command
@@ -45,26 +46,31 @@ class CreateViewCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $config = Configuration::get();
+        $templates = str_replace('Commands', 'Templates', __DIR__);
+        $contents = [];
+
+        $generator = new ViewGenerator($this->describe);
 
         $data = [
-            'plural'   => Inflector::pluralize($input->getArgument('name')),
-            'singular' => Inflector::singularize($input->getArgument('name')),
+            '{name}'        => $input->getArgument('name'),
+            '{pluralTitle}' => Inflector::pluralize(ucfirst($input->getArgument('name'))),
+            '{plural}'      => Inflector::pluralize($input->getArgument('name')),
+            '{singular}'    => Inflector::singularize($input->getArgument('name')),
         ];
 
-        $contents = [
-            'create' => $this->renderer->render('Views/create.twig', $data),
-            'edit'   => $this->renderer->render('Views/edit.twig', $data),
-            'index'  => $this->renderer->render('Views/index.twig', $data),
-            'show'   => $this->renderer->render('Views/show.twig', $data),
-        ];
+        $contents['create'] = $generator->generate($data, $templates, 'create');
+        $contents['edit']   = $generator->generate($data, $templates, 'edit');
+        $contents['index']  = $generator->generate($data, $templates, 'index');
+        $contents['show']   = $generator->generate($data, $templates, 'show');
 
-        $fileName  = $config->folders->views . '/' . $data['plural'] . '/';
+        $fileName = $config->folders->views . '/' . $data['{plural}'] . '/';
 
         foreach ($contents as $type => $content) {
             $view = $fileName . $type . '.twig';
 
             if ($this->filesystem->has($view)) {
-                return $output->writeln('<error>View already exists.</error>');
+                $this->filesystem->delete($view);
+                // return $output->writeln('<error>View already exists.</error>');
             }
 
             $this->filesystem->write($view, $content);

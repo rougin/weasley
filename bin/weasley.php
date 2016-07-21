@@ -66,14 +66,5 @@ $app->injector->delegate('Rougin\Describe\Describe', function () use ($config)
     return new Rougin\Describe\Describe($driver);
 });
 
-// Adds a "init" command if the file does not exists
-if ( ! file_exists(BLUEPRINT_FILENAME)) {
-    $command = $app->injector->make('Rougin\Weasley\Commands\InitializationCommand');
-
-    $app->console->add($command);
-
-    return $app->run();
-}
-
 // Run the application
 $app->run();
