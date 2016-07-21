@@ -24,7 +24,7 @@ class {{ singular | title }}Repository extends EntityRepository
     {
         ${{ singular }} = new {{ singular | title }};
 
-        {{ columns | raw }}
+        {{ createColumns | raw }}
 
         $this->_em->persist(${{ singular }});
         $this->_em->flush();
@@ -57,7 +57,7 @@ class {{ singular | title }}Repository extends EntityRepository
     {
         ${{ singular }} = $this->find($id);
 
-        {{ columns | raw }}
+        {{ updateColumns | raw }}
 
         $this->_em->persist(${{ singular }});
         $this->_em->flush();

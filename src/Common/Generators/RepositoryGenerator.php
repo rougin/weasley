@@ -57,7 +57,8 @@ class RepositoryGenerator extends BaseGenerator
         $columns = $this->describe->getTable($data['name']);
         $counter = 0;
 
-        $data['columns'] = '';
+        $data['createColumns'] = '';
+        $data['updateColumns'] = '';
 
         foreach ($columns as $column) {
             if ( ! $column->isForeignKey()) {
@@ -78,17 +79,20 @@ class RepositoryGenerator extends BaseGenerator
             $data['foreignClasses'] .= "\nuse " . $config->defaults->application . '\\' .
                 $config->namespaces->models . '\\' . ucfirst($referencedTable) . ';';
 
-            $data['columns'] .= $template;
+            $data['createColumns'] .= $template;
+            $data['updateColumns'] .= $template;
 
             if ($counter < (count($columns) - 1)) {
-                $data['columns'] .= '        ';
+                $data['createColumns'] .= '        ';
+                $data['updateColumns'] .= '        ';
             }
 
             $counter++;
         }
 
-        if ($data['columns'] != '') {
-            $data['columns'] .= "\n        ";
+        if ($data['createColumns'] != '') {
+            $data['createColumns'] .= "\n        ";
+            $data['updateColumns'] .= "\n        ";
         }
 
         $counter = 0;
@@ -114,17 +118,36 @@ class RepositoryGenerator extends BaseGenerator
                 $keywords['{mutatorName}'] = Inflector::camelize('set_' . $referencedTable);
             }
 
+            if ($column->getField() == 'datetime_created' || $column->getField() == 'datetime_updated') {
+                $template = str_replace('$data[\'{name}\']', "'now'", $template);
+            } else if ($column->getField() == 'password') {
+                $template = str_replace('$data[\'{name}\']', 'md5($data[\'{name}\'])', $template);
+            }
+
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);
 
-            $data['columns'] .= $template;
+            if ($column->getField() != 'datetime_updated') {
+                $data['createColumns'] .= $template;
+            }
+
+            if ($column->getField() != 'datetime_created') {
+                $data['updateColumns'] .= $template;
+            }
 
             if ($counter < (count($columns) - 1)) {
-                $data['columns'] .= '        ';
+                if ($column->getField() != 'datetime_updated') {
+                    $data['createColumns'] .= '        ';
+                }
+
+                if ($column->getField() != 'datetime_created') {
+                    $data['updateColumns'] .= '        ';
+                }
             }
 
             $counter++;
         }
 
-        $data['columns'] = trim($data['columns']);
+        $data['createColumns'] = trim($data['createColumns']);
+        $data['updateColumns'] = trim($data['updateColumns']);
     }
 }
