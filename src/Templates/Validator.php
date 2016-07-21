@@ -20,7 +20,9 @@ class {{ singular | title }}Validator extends BaseValidator
      */
     protected function setLabels(Validator &$validator)
     {
-        //
+        $validator->labels([
+            {{ labels | raw }}
+        ]);
     }
 
     /**
@@ -32,6 +34,6 @@ class {{ singular | title }}Validator extends BaseValidator
      */
     protected function setRules(Validator &$validator, $data = [])
     {
-        {{ columns | raw }}
+        {{ rules | raw }}
     }
 }
