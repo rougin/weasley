@@ -69,8 +69,8 @@ class CreateViewCommand extends AbstractCommand
             $view = $fileName . $type . '.twig';
 
             if ($this->filesystem->has($view)) {
-                $this->filesystem->delete($view);
-                // return $output->writeln('<error>View already exists.</error>');
+                // $this->filesystem->delete($view);
+                return $output->writeln('<error>View already exists.</error>');
             }
 
             $this->filesystem->write($view, $content);
