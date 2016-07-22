@@ -76,6 +76,20 @@ class ViewGenerator
 
             $keywords = [ '{columnTitle}' => $columnTitle, '{name}' => $column->getField() ];
 
+            // column is a boolean (tinyint)
+            if ($column->getDataType() == 'integer' && $column->getLength() == 1) {
+                $template = str_replace(
+                    [ '<input type="text" name="{name}" class="form-control" value="{{ session.old.{name} }}" />', '{columnTitle}'], 
+                    [ '<input type="checkbox" name="{name}" />', '{columnTitle}?' ], 
+                    $template);
+            } else if ($column->getField() == 'password') {
+                if ($type == 'edit') {
+                    $template = str_replace(' value="{{ item.{name} }}"', '', $template);
+                }
+
+                $template = str_replace('type="text"', 'type="password"', $template);
+            }
+
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);
 
             $data['{columnForm}'] .= $template;
@@ -94,6 +108,21 @@ class ViewGenerator
 
             $counter++;
         }
+
+        $actions = '' .
+            '<td>' . "\n              " .
+                '<a href="{{ (\'/' . Inflector::pluralize($data['{name}']) . '/\' ~ item.id ~ \'/edit\') | url }}" class="btn btn-xs btn-info">' . "\n                " .
+                    '<i class="icon ion-edit"></i> Update' . "\n              " .
+                '</a>' . "\n               " .
+                '<form action="{{ (\'/' . Inflector::pluralize($data['{name}']) . '/\' ~ item.id) | url }}" style="display: inline-block" method="POST">' . "\n                 " .
+                    '<input type="hidden" name="_method" value="DELETE" />' . "\n                " .
+                    '<button type="submit" class="btn btn-xs btn-danger">' . "\n                   " .
+                        '<i class="icon ion-trash-b"></i> Delete' . "\n                 " .
+                    '</button>' . "\n              " .
+                '</form>' . "\n            " .
+            '</td>';
+
+        array_push($tableBody, $actions);
 
         $data['{columnForm}']   = trim($data['{columnForm}']);
         $data['{tableHeading}'] = implode("\n          ", $tableHeading);

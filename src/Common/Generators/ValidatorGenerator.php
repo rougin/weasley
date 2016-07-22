@@ -46,7 +46,9 @@ class ValidatorGenerator
         $data['rules']  = '';
 
         foreach ($columns as $column) {
-            if ($column->isPrimaryKey() || $column->isNull()) {
+            $isBoolean = ($config->getDataType() == 'integer' && $config->getLength() == 1);
+
+            if ($column->isPrimaryKey() || $column->isNull() || $isBoolean) {
                 continue;
             }
 

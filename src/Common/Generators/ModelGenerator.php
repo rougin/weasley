@@ -122,6 +122,18 @@ class ModelGenerator extends BaseGenerator
                 '{class}'        => '',
             ];
 
+            if ($column->getField() == 'datetime_created' || $column->getField() == 'datetime_updated') {
+                // $keywords['{datatype}'] = '\DateTime';
+
+                if (strpos($data['foreignClasses'], "\nuse DateTime;") === false) {
+                    $data['foreignClasses'] .= "\nuse DateTime;";
+                }
+
+                $data['methods'] = str_replace('@param  {datatype}', '@param  \DateTime', $data['methods']);
+                $data['methods'] = str_replace('@return {datatype}', '@return \DateTime', $data['methods']);
+                $data['methods'] = str_replace('= ${variable};', '= new DateTime(${variable});', $data['methods']);
+            }
+
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);
             $data['methods'] = str_replace(array_keys($keywords), array_values($keywords), $data['methods']);
 
