@@ -1,6 +1,6 @@
-# Sisig Factory
+# {{ application.name }}
 
-Sisig Factory Sales & Inventory System
+{{ application.description }}
 
 ## Getting Started
 

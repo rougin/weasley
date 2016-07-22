@@ -44,8 +44,19 @@ class CreateApplicationCommand extends AbstractCommand
         $slash = DIRECTORY_SEPARATOR;
 
         $directory = str_replace('Commands', 'Templates' . $slash . 'Application', __DIR__);
-        $templates = $this->glob($directory . $slash . '**');
+        $templates = $this->glob($directory . $slash . '*.*');
+        $appDirectory = $directory . $slash;
         $result = [];
+
+        array_push($templates, $appDirectory . '.editorconfig');
+        array_push($templates, $appDirectory . '.env.example');
+        array_push($templates, $appDirectory . '.gitignore');
+        array_push($templates, $appDirectory . '.htaccess');
+        array_push($templates, $appDirectory . 'public' . $slash . '.htaccess');
+        array_push($templates, $appDirectory . 'app' . $slash . '.htaccess');
+        array_push($templates, $appDirectory . 'src' . $slash . '.htaccess');
+        array_push($templates, $appDirectory . 'app' . $slash . 'database' . $slash . 'migrations' . $slash . '.gitignore');
+        array_push($templates, $appDirectory . 'app' . $slash . 'database' . $slash . 'seeds' . $slash . '.gitignore');
 
         $data = [
             'application' => $config->application,
