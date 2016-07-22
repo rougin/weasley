@@ -75,6 +75,8 @@ class CreateApplicationCommand extends AbstractCommand
             $this->filesystem->write($sourceFile, $contents);
         }
 
+        system('composer update');
+
         $text = 'Application created successfully.';
 
         return $output->writeln('<info>' . $text . '</info>');
