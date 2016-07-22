@@ -44,7 +44,7 @@ class CreateApplicationCommand extends AbstractCommand
         $slash = DIRECTORY_SEPARATOR;
 
         $directory = str_replace('Commands', 'Templates' . $slash . 'Application', __DIR__);
-        $templates = $this->glob($directory . $slash . '**.*');
+        $templates = $this->glob($directory . $slash . '**');
         $result = [];
 
         $data = [
@@ -57,9 +57,11 @@ class CreateApplicationCommand extends AbstractCommand
             $sourceFile = str_replace($directory . $slash, '', $template);
             $contents = $this->renderer->render('Application' . $slash . $sourceFile, $data);
 
-            if ( ! $this->filesystem->has($sourceFile)) {
-                $this->filesystem->write($sourceFile, $contents);
+            if ($this->filesystem->has($sourceFile)) {
+                $this->filesystem->delete($sourceFile);
             }
+
+            $this->filesystem->write($sourceFile, $contents);
         }
 
         $text = 'Application created successfully.';
