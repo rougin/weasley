@@ -46,7 +46,7 @@ class ValidatorGenerator
         $data['rules']  = '';
 
         foreach ($columns as $column) {
-            $isBoolean = ($config->getDataType() == 'integer' && $config->getLength() == 1);
+            $isBoolean = ($column->getDataType() == 'integer' && $column->getLength() == 1);
 
             if ($column->isPrimaryKey() || $column->isNull() || $isBoolean) {
                 continue;
@@ -62,18 +62,23 @@ class ValidatorGenerator
             $label    = ucfirst(str_replace('_', ' ', Inflector::tableize($column->getField())));
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);
 
-            if ($column->getField() != 'datetime_created' && $column->getField() != 'datetime_updated') {
+            // if ($column->getField() == 'username') {
+            //     $unique = str_replace('\'required\'', '\'unique\'', $template);
+            //     $template .= "        " . $unique;
+            // }
+
+            if ($column->getField() != 'datetime_created' && $column->getField() != 'datetime_updated' && $column->getField() != 'password') {
                 $data['labels'] .= '\'' . $column->getField() . '\' => \'' . $label . '\',';
                 $data['rules'] .= $template;
             }
 
             if ($column->getField() == 'password') {
+                $data['labels'] .= '\'' . $column->getField() . '\' => \'' . $label . '\',';
                 $data['labels'] .= "\n            " . '\'password_confirmation\' => \'Password confirmation\',';
-                // $data['rules'] .= "        " . str_replace('{name}', 'Password confirmation', $this->validatorTemplate);
             }
 
             if ($counter < (count($columns) - 1)) {
-                if ($column->getField() != 'datetime_created' && $column->getField() != 'datetime_updated') {
+                if ($column->getField() != 'datetime_created' && $column->getField() != 'datetime_updated' && $column->getField() != 'password') {
                     $data['rules']  .= '        ';
                     $data['labels'] .= "\n" . '            ';
                 }
@@ -92,6 +97,7 @@ class ValidatorGenerator
 
             $data['rules']  .= "\n\n        " .
                 'if ($data[\'password\'] != null || ! isset($data[\'_method\'])) { ' . "\n            " .
+                    '$validator->rule(\'required\', \'password\');' . "\n            " .
                     '$validator->rule(\'equals\', \'password\', \'password_confirmation\');' . "\n        " .
                 '}';
         }

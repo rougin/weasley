@@ -64,7 +64,7 @@ class ViewGenerator
             $template = $this->columnFormTemplate;
 
             if ($type == 'edit') {
-                $template = str_replace('session.old.{name}', 'item.{name}', $template);
+                $template = str_replace('session.old.{name}', 'item.{value}', $template);
             }
 
             $columnTitle = ucwords(str_replace('_', ' ', Inflector::tableize($column->getField())));
@@ -76,15 +76,28 @@ class ViewGenerator
 
             $keywords = [ '{columnTitle}' => $columnTitle, '{name}' => $column->getField() ];
 
+            if ($type == 'edit') {
+                $keywords['{value}'] = Inflector::camelize($keywords['{name}']);
+            }
+
             // column is a boolean (tinyint)
             if ($column->getDataType() == 'integer' && $column->getLength() == 1) {
                 $template = str_replace(
                     [ '<input type="text" name="{name}" class="form-control" value="{{ session.old.{name} }}" />', '{columnTitle}'], 
                     [ '<input type="checkbox" name="{name}" />', '{columnTitle}?' ], 
-                    $template);
+                    $template
+                );
+
+                if ($type == 'edit') {
+                    $template = str_replace(
+                        '<input type="text" name="{name}" class="form-control" value="{{ item.{value} }}" />', 
+                        '<input type="checkbox" name="{name}" {{ item.{value} ? \'checked\' : \'\' }} />', 
+                        $template
+                    );
+                }
             } else if ($column->getField() == 'password') {
                 if ($type == 'edit') {
-                    $template = str_replace(' value="{{ item.{name} }}"', '', $template);
+                    $template = str_replace(' value="{{ item.{value} }}"', '', $template);
                 }
 
                 $template = str_replace('type="text"', 'type="password"', $template);
@@ -95,7 +108,12 @@ class ViewGenerator
             $data['{columnForm}'] .= $template;
 
             if ($column->getField() == 'password') {
-                $keywords = [ '{columnTitle}' => 'Confirm Password', '{name}' => 'password_confirmation' ];
+                $keywords = [
+                    '{columnTitle}' => 'Confirm Password',
+                    '{name}'        => 'password_confirmation',
+                    'type="text"'   => 'type="password"',
+                    ' value="{{ session.old.password_confirmation }}"' => '',
+                ];
 
                 $template = str_replace(array_keys($keywords), array_values($keywords), $this->columnFormTemplate);
 
