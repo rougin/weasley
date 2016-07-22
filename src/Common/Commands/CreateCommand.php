@@ -138,12 +138,12 @@ class CreateCommand extends AbstractCommand
 
                 $generator->concat($data);
 
-                $fileName = str_replace($item, 'BaseValidator', $fileName);
+                $validator = str_replace($item, 'BaseValidator', $fileName);
 
-                if ( ! $this->filesystem->has($fileName)) {
+                if ( ! $this->filesystem->has($validator)) {
                     $content = $this->renderer->render('BaseValidator.php', $data);
 
-                    $this->filesystem->write($fileName, $content);
+                    $this->filesystem->write($validator, $content);
                 }
 
                 break;
