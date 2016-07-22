@@ -49,7 +49,7 @@ class CreateApplicationCommand extends AbstractCommand
         $result = [];
 
         array_push($templates, $appDirectory . '.editorconfig');
-        array_push($templates, $appDirectory . '.env.example');
+        array_push($templates, $appDirectory . '.env');
         array_push($templates, $appDirectory . '.gitignore');
         array_push($templates, $appDirectory . '.htaccess');
         array_push($templates, $appDirectory . 'public' . $slash . '.htaccess');
