@@ -2,23 +2,26 @@
 
 namespace {{ application.name }}\{{ namespaces.components }};
 
+use Zend\Diactoros\Response;
+use Zend\Diactoros\ServerRequestFactory;
+
 use Rougin\Slytherin\Component\AbstractComponent;
 
 /**
- * {{ name | title }} Component
+ * HTTP Component
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class {{ name | title }}Component extends AbstractComponent
+class HttpComponent extends AbstractComponent
 {
     /**
-     * Types of components:
-     * "dispatcher", "debugger", "http", "middleware".
+     * Type of the component:
+     * dispatcher, debugger, http, middleware
      * 
      * @var string
      */
-    protected $type = '';
+    protected $type = 'http';
 
     /**
      * Returns an instance from the named class.
@@ -27,6 +30,6 @@ class {{ name | title }}Component extends AbstractComponent
      */
     public function get()
     {
-        //
+        return [ ServerRequestFactory::fromGlobals(), new Response ];
     }
 }

@@ -1,25 +1,25 @@
 <?php
 
-namespace {{ application }}\{{ namespaces.controllers }};
+namespace {{ application.name }}\{{ namespaces.controllers }};
 
-use {{ application }}\{{ namespaces.validators }}\{{ singular | title }}Validator;
-use {{ application }}\{{ namespaces.repositories }}\{{ singular | title }}Repository;
+use {{ application.name }}\{{ namespaces.validators }}\{{ singular | title }}Validator;
+use {{ application.name }}\{{ namespaces.repositories }}\{{ singular | title }}Repository;
 
 /**
  * {{ plural | title }} Controller
  *
- * @package {{ application }}
- * @author  {{ author }} <{{ email }}>
+ * @package {{ application.name }}
+ * @author  {{ author.name }} <{{ author.email }}>
  */
 class {{ plural | title }}Controller extends BaseController
 {
     /**
-     * @var \{{ application }}\Repositories\{{ singular | title }}Repository
+     * @var \{{ application.name }}\Repositories\{{ singular | title }}Repository
      */
     protected $repository;
 
     /**
-     * @param \{{ application }}\Repositories\{{ singular | title }}Repository $repository
+     * @param \{{ application.name }}\Repositories\{{ singular | title }}Repository $repository
      */
     public function __construct({{ singular | title }}Repository $repository)
     {

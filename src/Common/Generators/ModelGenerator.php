@@ -166,7 +166,7 @@ class ModelGenerator extends BaseGenerator
         $keywords['{referencedTable}'] = ucfirst($referencedTable);
         $keywords['{description}']     = $referencedTable;
         $keywords['{class}']           = ucfirst($referencedTable) . ' ';
-        $keywords['{datatype}']        = '\\' . $config->defaults->application . '\\' .
+        $keywords['{datatype}']        = '\\' . $config->application->name . '\\' .
             $config->namespaces->models . '\\' . ucfirst($referencedTable);
 
         $template = str_replace(array_keys($keywords), array_values($keywords), $template);

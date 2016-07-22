@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ application }}\{{ namespaces.middlewares }};
+namespace {{ application.name }}\{{ namespaces.middlewares }};
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -8,8 +8,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * {{ name | title }} Middleware
  *
- * @package {{ application }}
- * @author  {{ author }} <{{ email }}>
+ * @package {{ application.name }}
+ * @author  {{ author.name }} <{{ author.email }}>
  */
 class {{ name | title }}Middleware
 {

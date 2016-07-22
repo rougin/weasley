@@ -1,14 +1,14 @@
 <?php
 
-namespace {{ application }}\{{ namespaces.validators }};
+namespace {{ application.name }}\{{ namespaces.validators }};
 
 use Valitron\Validator;
 
 /**
  * {{ singular | title }} Validator
  *
- * @package {{ application }}
- * @author  {{ author }} <{{ email }}>
+ * @package {{ application.name }}
+ * @author  {{ author.name }} <{{ author.email }}>
  */
 class {{ singular | title }}Validator extends BaseValidator
 {

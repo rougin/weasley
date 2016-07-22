@@ -2,31 +2,33 @@
 
 namespace {{ application.name }}\{{ namespaces.components }};
 
+use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\SerializerInterface;
+
 use Rougin\Slytherin\Component\AbstractComponent;
 
 /**
- * {{ name | title }} Component
+ * Serializer Component
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class {{ name | title }}Component extends AbstractComponent
+class SerializerComponent extends AbstractComponent
 {
     /**
-     * Types of components:
-     * "dispatcher", "debugger", "http", "middleware".
+     * Name of the class to be added in the container.
      * 
      * @var string
      */
-    protected $type = '';
+    protected $className = SerializerInterface::class;
 
     /**
      * Returns an instance from the named class.
-     * 
+     *
      * @return mixed
      */
     public function get()
     {
-        //
+        return SerializerBuilder::create()->build();
     }
 }

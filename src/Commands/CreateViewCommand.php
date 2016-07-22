@@ -36,12 +36,6 @@ class CreateViewCommand extends AbstractCommand
                 'name',
                 InputArgument::REQUIRED,
                 'Name of the view'
-            )->addOption(
-                'application',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'Name of the application',
-                $config->defaults->application
             );
     }
 
@@ -77,7 +71,7 @@ class CreateViewCommand extends AbstractCommand
 
         if ( ! $this->filesystem->has($layout)) {
             $template = file_get_contents($templates . '/Views/layout.twig');
-            $keywords = [ '{application}' => $input->getOption('application') ];
+            $keywords = [ '{application}' => $config->application->name ];
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);
 
             $this->filesystem->write($layout, $template);

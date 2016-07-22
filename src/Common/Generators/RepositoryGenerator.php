@@ -76,7 +76,7 @@ class RepositoryGenerator extends BaseGenerator
 
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);
 
-            $data['foreignClasses'] .= "\nuse " . $config->defaults->application . '\\' .
+            $data['foreignClasses'] .= "\nuse " . $config->application->name . '\\' .
                 $config->namespaces->models . '\\' . ucfirst($referencedTable) . ';';
 
             $data['createColumns'] .= $template;

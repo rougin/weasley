@@ -1,16 +1,16 @@
 <?php
 
-namespace {{ application }}\{{ namespaces.repositories }};
+namespace {{ application.name }}\{{ namespaces.repositories }};
 
 use Doctrine\ORM\EntityRepository;
 
-use {{ application }}\{{ namespaces.models }}\{{ singular | title }};{{ foreignClasses }}
+use {{ application.name }}\{{ namespaces.models }}\{{ singular | title }};{{ foreignClasses }}
 
 /**
  * {{ singular | title }} Repository
  *
- * @package {{ application }}
- * @author  {{ author }} <{{ email }}>
+ * @package {{ application.name }}
+ * @author  {{ author.name }} <{{ author.email }}>
  */
 class {{ singular | title }}Repository extends EntityRepository
 {
@@ -18,7 +18,7 @@ class {{ singular | title }}Repository extends EntityRepository
      * Creates a new item.
      * 
      * @param  array $data
-     * @return \{{ application }}\Models\{{ singular | title }}
+     * @return \{{ application.name }}\Models\{{ singular | title }}
      */
     public function create(array $data = [])
     {
@@ -51,7 +51,7 @@ class {{ singular | title }}Repository extends EntityRepository
      *
      * @param  integer $id
      * @param  array   $data
-     * @return \{{ application }}\Models\{{ singular | title }}
+     * @return \{{ application.name }}\Models\{{ singular | title }}
      */
     public function update($id, array $data = [])
     {

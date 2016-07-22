@@ -52,24 +52,6 @@ class CreateCommand extends AbstractCommand
                 'name',
                 InputArgument::REQUIRED,
                 'Name of the ' . $this->type
-            )->addOption(
-                'application',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'Name of the application',
-                $config->defaults->application
-            )->addOption(
-                'author',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'Author of the ' . $this->type,
-                $config->defaults->author
-            )->addOption(
-                'email',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'Email of the author',
-                $config->defaults->email
             );
     }
 
@@ -87,9 +69,8 @@ class CreateCommand extends AbstractCommand
         $type = Inflector::pluralize($this->type);
 
         $data = [
-            'application'    => $input->getOption('application'),
-            'author'         => $input->getOption('author'),
-            'email'          => $input->getOption('email'),
+            'application'    => $config->application,
+            'author'         => $config->author,
             'name'           => $input->getArgument('name'),
             'plural'         => Inflector::pluralize($name),
             'singular'       => Inflector::singularize($name),

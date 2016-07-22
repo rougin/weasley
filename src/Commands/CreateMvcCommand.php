@@ -30,28 +30,29 @@ class CreateMvcCommand extends AbstractCommand
 
         $this
             ->setName('make:mvc')
+            ->setDescription('Creates a new controller, model, view, repository and validator')
             ->addArgument(
                 'name',
                 InputArgument::REQUIRED,
-                'Name of the MVC'
+                'Base table name for the files'
             )->addOption(
                 'application',
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'Name of the application',
-                $config->defaults->application
+                $config->application->name
             )->addOption(
                 'author',
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'Author of the MVC',
-                $config->defaults->author
+                $config->author->name
             )->addOption(
                 'email',
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'Email of the author',
-                $config->defaults->email
+                $config->author->email
             );
     }
 
@@ -75,7 +76,7 @@ class CreateMvcCommand extends AbstractCommand
         foreach ($commands as $command) {
             $arguments = [
                 'command' => $command,
-                'name'    => $input->getArgument('name')
+                'name'    => $input->getArgument('name'),
             ];
 
             $input = new ArrayInput($arguments);

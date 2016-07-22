@@ -2,23 +2,27 @@
 
 namespace {{ application.name }}\{{ namespaces.components }};
 
+use Zend\Stratigility\MiddlewarePipe;
+
 use Rougin\Slytherin\Component\AbstractComponent;
+use Rougin\Slytherin\Middleware\Stratigility\Middleware;
+
 
 /**
- * {{ name | title }} Component
+ * Middleware Component
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class {{ name | title }}Component extends AbstractComponent
+class MiddlewareComponent extends AbstractComponent
 {
     /**
-     * Types of components:
-     * "dispatcher", "debugger", "http", "middleware".
+     * Type of the component:
+     * dispatcher, debugger, http, middleware
      * 
      * @var string
      */
-    protected $type = '';
+    protected $type = 'middleware';
 
     /**
      * Returns an instance from the named class.
@@ -27,6 +31,6 @@ class {{ name | title }}Component extends AbstractComponent
      */
     public function get()
     {
-        //
+        return new Middleware(new MiddlewarePipe);
     }
 }

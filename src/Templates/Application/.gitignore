@@ -1,0 +1,7 @@
+.env
+build
+composer.lock
+docs
+public/bower_components
+src/Proxies
+vendor

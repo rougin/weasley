@@ -6,10 +6,18 @@ database:
     name: ''
     charset: utf8
 
-defaults:
-    application: App
-    author: Rougin Royce Gutib
+application:
+    name: App
+    description: Yet another application on top of Slytherin
+    homepage: https://bitbucket.org/acme/app
+    license: Proprietary
+    repository: rougin/weasley
+
+author:
+    name: Rougin Royce Gutib
     email: rougingutib@gmail.com
+    homepage: http://rougin.github.io
+    role: Developer
 
 folders:
     components: src/Components

@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ application }}\{{ namespaces.validators }};
+namespace {{ application.name }}\{{ namespaces.validators }};
 
 use Valitron\Validator;
 
@@ -9,8 +9,8 @@ use Valitron\Validator;
  *
  * A base class for a validator.
  * 
- * @package {{ application }}
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @package {{ application.name }}
+ * @author  {{ author.name }} <{{ author.email }}>
  */
 class BaseValidator implements ValidatorInterface
 {
