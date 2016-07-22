@@ -12,7 +12,7 @@ use Valitron\Validator;
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class BaseValidator implements ValidatorInterface
+class BaseValidator
 {
     /**
      * @var array
