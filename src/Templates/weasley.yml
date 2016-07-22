@@ -11,7 +11,7 @@ application:
     description: Yet another application on top of Slytherin
     homepage: https://bitbucket.org/acme/app
     license: Proprietary
-    repository: rougin/weasley
+    repository: rougin/app
 
 author:
     name: Rougin Royce Gutib

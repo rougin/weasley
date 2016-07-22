@@ -26,7 +26,6 @@
         "pagerfanta/pagerfanta": "^1.0",
         "robmorgan/phinx": "^0.6.2",
         "rougin/slytherin": "^0.7.0",
-        "rougin/weasley": "dev-master",
         "twig/twig": "^1.24",
         "vlucas/phpdotenv": "^2.2",
         "vlucas/valitron": "^1.2",
@@ -35,7 +34,10 @@
     },
     "require-dev": {
         "phpunit/phpunit" : "4.*",
-        "scrutinizer/ocular": "~1.1"
+        "rougin/weasley": "dev-master",
+        "scrutinizer/ocular": "~1.1",
+        "symfony/console": "~2.8",
+        "symfony/yaml": "~2.8"
     },
     "autoload": {
         "psr-4": {
