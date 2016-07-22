@@ -80,6 +80,14 @@ class ViewGenerator
 
             $data['{columnForm}'] .= $template;
 
+            if ($column->getField() == 'password') {
+                $keywords = [ '{columnTitle}' => 'Confirm Password', '{name}' => 'password_confirmation' ];
+
+                $template = str_replace(array_keys($keywords), array_values($keywords), $this->columnFormTemplate);
+
+                $data['{columnForm}'] .= '        ' . $template;
+            }
+
             if ($counter < (count($columns) - 1)) {
                 $data['{columnForm}'] .= '        ';
             }
@@ -90,8 +98,6 @@ class ViewGenerator
         $data['{columnForm}']   = trim($data['{columnForm}']);
         $data['{tableHeading}'] = implode("\n          ", $tableHeading);
         $data['{tableBody}']    = implode("\n            ", $tableBody);
-
-        // $data['{columnTitle}'] = str_replace('_', ' ', $data['{columnTitle}']);
 
         $item = file_get_contents($templatesPath . '/Views/' . $type . '.twig');
         $item = str_replace(array_keys($data), array_values($data), $item);
