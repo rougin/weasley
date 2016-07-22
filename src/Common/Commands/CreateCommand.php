@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Rougin\Weasley\Common\Configuration;
 use Rougin\Weasley\Common\Generators\ModelGenerator;
 use Rougin\Weasley\Common\Generators\ValidatorGenerator;
+use Rougin\Weasley\Common\Generators\ControllerGenerator;
 use Rougin\Weasley\Common\Generators\RepositoryGenerator;
 
 /**
@@ -78,30 +79,8 @@ class CreateCommand extends AbstractCommand
             'foreignClasses' => '',
         ];
 
-        switch ($this->type) {
-            case 'model':
-                $generator = new ModelGenerator($this->describe);
-
-                $generator->concat($data);
-
-                break;
-            case 'repository':
-                $generator = new RepositoryGenerator($this->describe);
-
-                $generator->concat($data);
-
-                break;
-            case 'validator':
-                $generator = new ValidatorGenerator($this->describe);
-
-                $generator->concat($data);
-
-                break;
-        }
-
         $directory = $config->folders->$type;
         $type      = ucfirst($this->type);
-        $content   = $this->renderer->render($this->type . '.php', $data);
         $item      = ucfirst(Inflector::pluralize($name) . $type);
 
         switch ($this->type) {
@@ -123,6 +102,55 @@ class CreateCommand extends AbstractCommand
 
         $fileName  = $directory . '/' . $item . '.php';
 
+        switch ($this->type) {
+            case 'controller':
+                $generator     = new ControllerGenerator($this->describe);
+                $httpDirectory = str_replace('Controllers', '', $config->folders->controllers);
+                $routeFile     = str_replace('Controllers', '', $config->output . '/' . $config->folders->controllers);
+                $routeContents = file_get_contents($routeFile . 'routes.php');
+
+                $generator->generateRoute($routeContents, $input->getArgument('name'));
+                $generator->generateRoute($routeContents, $input->getArgument('name'));
+
+                if ( ! $this->filesystem->has($fileName)) {
+                    if ($this->filesystem->has($httpDirectory . 'routes.php')) {
+                        $this->filesystem->update($httpDirectory . 'routes.php', $routeContents);
+                    } else {
+                        $this->filesystem->write($httpDirectory . 'routes.php', $routeContents);
+                    }
+                }
+
+                break;
+            case 'model':
+                $generator = new ModelGenerator($this->describe);
+
+                $generator->concat($data);
+
+                break;
+            case 'repository':
+                $generator = new RepositoryGenerator($this->describe);
+
+                $generator->concat($data);
+
+                break;
+            case 'validator':
+                $generator = new ValidatorGenerator($this->describe);
+
+                $generator->concat($data);
+
+                $fileName = str_replace($item, 'BaseValidator', $fileName);
+
+                if ( ! $this->filesystem->has($fileName)) {
+                    $content = $this->renderer->render('BaseValidator.php', $data);
+
+                    $this->filesystem->write($fileName, $content);
+                }
+
+                break;
+        }
+
+        $content = $this->renderer->render($this->type . '.php', $data);
+
         if ($this->filesystem->has($fileName)) {
             // $this->filesystem->delete($fileName);
             $text = ucfirst($this->type) . ' already exists.';
@@ -131,15 +159,6 @@ class CreateCommand extends AbstractCommand
         }
 
         $this->filesystem->write($fileName, $content);
-
-        if ($this->type == 'validator') {
-            $fileName = str_replace($item, 'BaseValidator', $fileName);
-
-            if ( ! $this->filesystem->has($fileName)) {
-                $content = $this->renderer->render('BaseValidator.php', $data);
-                $this->filesystem->write($fileName, $content);
-            }
-        }
 
         $text = ucfirst($this->type) . ' created successfully.';
 

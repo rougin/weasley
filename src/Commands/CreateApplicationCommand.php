@@ -66,10 +66,16 @@ class CreateApplicationCommand extends AbstractCommand
 
         foreach ($templates as $template) {
             $sourceFile = str_replace($directory . $slash, '', $template);
-            $contents = $this->renderer->render('Application' . $slash . $sourceFile, $data);
 
             if ($this->filesystem->has($sourceFile)) {
                 $this->filesystem->delete($sourceFile);
+            }
+
+            if (strpos($sourceFile, '.twig') === false) {
+                $contents = $this->renderer->render('Application' . $slash . $sourceFile, $data);
+            } else {
+                $contents = file_get_contents($appDirectory . $sourceFile);
+                $contents = str_replace('{application}', $config->application->name, $contents);
             }
 
             $this->filesystem->write($sourceFile, $contents);

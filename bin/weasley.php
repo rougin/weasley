@@ -13,8 +13,8 @@ $console = new Symfony\Component\Console\Application;
 $app = new Rougin\Blueprint\Blueprint($console, $injector);
 
 // Information of the application
-$app->console->setName('Slytherin Generator');
-$app->console->setVersion('0.1.0');
+$app->console->setName('Weasley');
+$app->console->setVersion('0.2.0');
 
 // Adds a "init" command if the file does not exists
 if ( ! file_exists(BLUEPRINT_FILENAME)) {
