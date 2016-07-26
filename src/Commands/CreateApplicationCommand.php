@@ -49,8 +49,8 @@ class CreateApplicationCommand extends AbstractCommand
         $result = [];
 
         array_push($templates, $appDirectory . '.editorconfig');
-        array_push($templates, $appDirectory . '.env');
-        array_push($templates, $appDirectory . '.gitignore');
+        array_push($templates, $appDirectory . '.env.file');
+        array_push($templates, $appDirectory . '.gitignore.file');
         array_push($templates, $appDirectory . '.htaccess');
         array_push($templates, $appDirectory . 'public' . $slash . '.htaccess');
         array_push($templates, $appDirectory . 'app' . $slash . '.htaccess');
@@ -76,6 +76,10 @@ class CreateApplicationCommand extends AbstractCommand
             } else {
                 $contents = file_get_contents($appDirectory . $sourceFile);
                 $contents = str_replace('{application}', $config->application->name, $contents);
+            }
+
+            if (strpos($sourceFile, '.file') !== false) {
+                $sourceFile = str_replace('.file', '', $sourceFile);
             }
 
             $this->filesystem->write($sourceFile, $contents);
