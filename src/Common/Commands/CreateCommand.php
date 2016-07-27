@@ -53,6 +53,12 @@ class CreateCommand extends AbstractCommand
                 'name',
                 InputArgument::REQUIRED,
                 'Name of the ' . $this->type
+            )->addOption(
+                'overwrite',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Overwrite the specified files',
+                false
             );
     }
 
@@ -75,7 +81,7 @@ class CreateCommand extends AbstractCommand
             'name'           => $input->getArgument('name'),
             'plural'         => Inflector::pluralize($name),
             'singular'       => Inflector::singularize($name),
-            'namespaces'     => (object) $config->namespaces,
+            'namespaces'     => $config->namespaces,
             'foreignClasses' => '',
         ];
 
@@ -149,11 +155,14 @@ class CreateCommand extends AbstractCommand
 
         $content = $this->renderer->render($this->type . '.php', $data);
 
-        if ($this->filesystem->has($fileName)) {
-            // $this->filesystem->delete($fileName);
+        if ($this->filesystem->has($fileName) && ! $input->getOption('overwrite')) {
             $text = ucfirst($this->type) . ' already exists.';
 
             return $output->writeln('<error>' . $text . '</error>');
+        }
+
+        if ($input->getOption('overwrite')) {
+            $this->filesystem->delete($fileName);
         }
 
         $this->filesystem->write($fileName, $content);

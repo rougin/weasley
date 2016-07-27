@@ -56,7 +56,7 @@ class ControllerGenerator extends BaseGenerator
         $endBracket = $lines[count($lines) - 2];
 
         if ($endBracket != '];') {
-            $endBracket = $lines[count($lines) - 1];            
+            $endBracket = $lines[count($lines) - 1];
         }
 
         $template      = $this->routesTemplate . $endBracket;

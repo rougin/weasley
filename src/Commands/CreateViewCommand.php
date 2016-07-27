@@ -36,6 +36,12 @@ class CreateViewCommand extends AbstractCommand
                 'name',
                 InputArgument::REQUIRED,
                 'Name of the view'
+            )->addOption(
+                'overwrite',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Overwrite the specified files',
+                false
             );
     }
 
@@ -80,9 +86,12 @@ class CreateViewCommand extends AbstractCommand
         foreach ($contents as $type => $content) {
             $view = $fileName . $type . '.twig';
 
-            if ($this->filesystem->has($view)) {
-                // $this->filesystem->delete($view);
+            if ($this->filesystem->has($view) && ! $input->getOption('overwrite')) {
                 return $output->writeln('<error>View already exists.</error>');
+            }
+
+            if ($input->getOption('overwrite')) {
+                $this->filesystem->delete($view);
             }
 
             $this->filesystem->write($view, $content);
