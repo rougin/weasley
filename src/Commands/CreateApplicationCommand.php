@@ -31,6 +31,16 @@ class CreateApplicationCommand extends AbstractCommand
     }
 
     /**
+     * Checks whether the command is enabled or not in the current environment.
+     *
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return ! $this->filesystem->has('public/index.php');
+    }
+
+    /**
      * Executes the command.
      * 
      * @param  \Symfony\Component\Console\Input\InputInterface   $input
