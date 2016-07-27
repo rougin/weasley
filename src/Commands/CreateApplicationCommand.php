@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use Rougin\Weasley\Common\Helpers;
 use Rougin\Weasley\Common\Configuration;
 use Rougin\Weasley\Common\Commands\AbstractCommand;
 
@@ -25,8 +26,6 @@ class CreateApplicationCommand extends AbstractCommand
      */
     protected function configure()
     {
-        $config = Configuration::get();
-
         $this->setName('make:app')
             ->setDescription('Creates a base application');
     }
@@ -44,7 +43,7 @@ class CreateApplicationCommand extends AbstractCommand
         $slash = DIRECTORY_SEPARATOR;
 
         $directory = str_replace('Commands', 'Templates' . $slash . 'Application', __DIR__);
-        $templates = $this->glob($directory . $slash . '*.*');
+        $templates = Helpers::glob($directory . $slash . '*.*');
         $appDirectory = $directory . $slash;
         $result = [];
 
@@ -61,55 +60,16 @@ class CreateApplicationCommand extends AbstractCommand
         $data = [
             'application' => $config->application,
             'author'      => $config->author,
+            'directory'   => $directory,
             'namespaces'  => (object) $config->namespaces,
         ];
 
-        foreach ($templates as $template) {
-            $sourceFile = str_replace($directory . $slash, '', $template);
-
-            if ($this->filesystem->has($sourceFile)) {
-                $this->filesystem->delete($sourceFile);
-            }
-
-            if (strpos($sourceFile, '.twig') === false) {
-                $contents = $this->renderer->render('Application' . $slash . $sourceFile, $data);
-            } else {
-                $contents = file_get_contents($appDirectory . $sourceFile);
-                $contents = str_replace('{application}', $config->application->name, $contents);
-            }
-
-            if (strpos($sourceFile, '.file') !== false) {
-                $sourceFile = str_replace('.file', '', $sourceFile);
-            }
-
-            $this->filesystem->write($sourceFile, $contents);
-        }
+        Helpers::render($this->filesystem, $this->renderer, $templates, $data);
 
         system('composer update');
 
         $text = 'Application created successfully.';
 
         return $output->writeln('<info>' . $text . '</info>');
-    }
-
-    /**
-     * Find pathnames matching a pattern.
-     * 
-     * @param  string  $pattern
-     * @param  integer $flags
-     * @return array
-     */
-    public function glob($pattern, $flags = 0)
-    {
-        $files      = glob($pattern, $flags);
-        $slash      = DIRECTORY_SEPARATOR;
-        $newPattern = dirname($pattern) . $slash . '*';
-
-        foreach (glob($newPattern, GLOB_ONLYDIR|GLOB_NOSORT) as $directory) {
-            $anotherPattern = $directory . $slash . basename($pattern);
-            $files = array_merge($files, $this->glob($anotherPattern, $flags));
-        }
-
-        return $files;
     }
 }
