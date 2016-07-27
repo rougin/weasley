@@ -19,6 +19,11 @@ use Rougin\Weasley\Common\Commands\AbstractCommand;
  */
 class CreateAuthenticationCommand extends AbstractCommand
 {
+    protected $routesTemplate = "\n    " . '// Routes for authentication' . "\n    " .
+        '[\'GET\', \'/sign-in\', [ {application}\{namespace}\AuthenticationController::class, \'index\' ] ],' . "\n    " .
+        '[\'POST\', \'/sign-in\', [ {application}\{namespace}\AuthenticationController::class, \'authenticate\' ] ],' . "\n    " .
+        '[\'GET\', \'/sign-out\', [ {application}\{namespace}\AuthenticationController::class, \'destroy\' ] ],' . "\n";
+
     /**
      * Configures the current command.
      *
@@ -62,10 +67,7 @@ class CreateAuthenticationCommand extends AbstractCommand
      */
     public function isEnabled()
     {
-        $config = Configuration::get();
-        $file = $config->folders->controllers . '/AuthenticationController.php';
-
-        return ! $this->filesystem->has($file);
+        return $this->filesystem->has('public/index.php');
     }
 
     /**
@@ -92,9 +94,11 @@ class CreateAuthenticationCommand extends AbstractCommand
 
         $controller = $this->renderer->render('Authentication/AuthenticationController.php', $data);
         $validator  = $this->renderer->render('Authentication/SignInValidator.php', $data);
+        $routes     = $this->generateRoute($config);
 
         $controllerFile = $config->folders->controllers . '/AuthenticationController.php';
-        $validatorFile = $config->folders->validators . '/SignInValidator.php';
+        $validatorFile  = $config->folders->validators . '/SignInValidator.php';
+        $routeFile      = $config->folders->http . '/' . 'routes.php';
 
         if ($this->filesystem->has($controllerFile) && ! $input->getOption('overwrite')) {
             $text = 'AuthenticationController.php already exists.';
@@ -108,11 +112,45 @@ class CreateAuthenticationCommand extends AbstractCommand
             return $output->writeln('<error>' . $text . '</error>');
         }
 
+        if ($input->getOption('overwrite')) {
+            $this->filesystem->delete($controllerFile);
+            $this->filesystem->delete($validatorFile);
+        }
+
         $this->filesystem->write($controllerFile, $controller);
         $this->filesystem->write($validatorFile, $validator);
+        $this->filesystem->update($routeFile, $routes);
 
-        $text = 'Base authentication created successfully.';
+        $text = 'Basic authentication created successfully.';
 
         return $output->writeln('<info>' . $text . '</info>');
+    }
+
+    /**
+     * Generates route contents.
+     * 
+     * @param  object $config
+     * @return string
+     */
+    protected function generateRoute($config)
+    {
+        $routeFile     = $config->folders->http . '/' . 'routes.php';
+        $routeContents = file_get_contents($config->output . '/' . $routeFile);
+        $lines         = preg_split("/\\r\\n|\\r|\\n/", $routeContents);
+        $endBracket    = $lines[count($lines) - 2];
+
+        if ($endBracket != '];') {
+            $endBracket = $lines[count($lines) - 1];
+        }
+
+        $template      = $this->routesTemplate . $endBracket;
+        $routeContents = str_replace($endBracket, $template, $routeContents);
+
+        $keywords = [
+            '{application}' => $config->application->name,
+            '{namespace}'   => $config->namespaces->controllers,
+        ];
+
+        return str_replace(array_keys($keywords), array_values($keywords), $routeContents);
     }
 }
