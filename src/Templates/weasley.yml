@@ -22,6 +22,7 @@ author:
 folders:
     components: src/Components
     controllers: src/Http/Controllers
+    http: src/Http
     models: src/Models
     repositories: src/Repositories
     validators: src/Validators
