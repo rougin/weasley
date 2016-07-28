@@ -98,7 +98,6 @@ class CreateAuthenticationCommand extends AbstractCommand
 
         $controllerFile = $config->folders->controllers . '/AuthenticationController.php';
         $validatorFile  = $config->folders->validators . '/SignInValidator.php';
-        $routeFile      = $config->folders->http . '/' . 'routes.php';
 
         if ($this->filesystem->has($controllerFile) && ! $input->getOption('overwrite')) {
             $text = 'AuthenticationController.php already exists.';
@@ -119,7 +118,7 @@ class CreateAuthenticationCommand extends AbstractCommand
 
         $this->filesystem->write($controllerFile, $controller);
         $this->filesystem->write($validatorFile, $validator);
-        $this->filesystem->update($routeFile, $routes);
+        $this->filesystem->update($config->files->routes, $routes);
 
         $text = 'Basic authentication created successfully.';
 
@@ -134,23 +133,22 @@ class CreateAuthenticationCommand extends AbstractCommand
      */
     protected function generateRoute($config)
     {
-        $routeFile     = $config->folders->http . '/' . 'routes.php';
-        $routeContents = file_get_contents($config->output . '/' . $routeFile);
-        $lines         = preg_split("/\\r\\n|\\r|\\n/", $routeContents);
-        $endBracket    = $lines[count($lines) - 2];
+        $contents   = file_get_contents($config->output . '/' . $config->files->routes);
+        $lines      = preg_split("/\\r\\n|\\r|\\n/", $contents);
+        $endBracket = $lines[count($lines) - 2];
 
         if ($endBracket != '];') {
             $endBracket = $lines[count($lines) - 1];
         }
 
-        $template      = $this->routesTemplate . $endBracket;
-        $routeContents = str_replace($endBracket, $template, $routeContents);
+        $template = $this->routesTemplate . $endBracket;
+        $contents = str_replace($endBracket, $template, $contents);
 
         $keywords = [
             '{application}' => $config->application->name,
             '{namespace}'   => $config->namespaces->controllers,
         ];
 
-        return str_replace(array_keys($keywords), array_values($keywords), $routeContents);
+        return str_replace(array_keys($keywords), array_values($keywords), $contents);
     }
 }

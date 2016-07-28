@@ -110,17 +110,16 @@ class CreateCommand extends AbstractCommand
 
         switch ($this->type) {
             case 'controller':
-                $generator     = new ControllerGenerator($this->describe);
-                $routeFile     = $config->folders->http . '/' . 'routes.php';
-                $routeContents = file_get_contents($config->output . '/' . $routeFile);
+                $generator = new ControllerGenerator($this->describe);
+                $routes    = $this->filesystem->read($config->files->routes);
 
-                $generator->generateRoute($routeContents, $input->getArgument('name'));
+                $generator->generateRoute($routes, $input->getArgument('name'));
 
                 if ( ! $this->filesystem->has($fileName)) {
-                    if ($this->filesystem->has($routeFile)) {
-                        $this->filesystem->update($routeFile, $routeContents);
+                    if ($this->filesystem->has($config->files->routes)) {
+                        $this->filesystem->update($config->files->routes, $routes);
                     } else {
-                        $this->filesystem->write($routeFile, $routeContents);
+                        $this->filesystem->write($config->files->routes, $routes);
                     }
                 }
 
