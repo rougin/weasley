@@ -1,33 +1,33 @@
 paths:
-    migrations: %%PHINX_CONFIG_DIR%%/app/database/migrations
-    seeds: %%PHINX_CONFIG_DIR%%/app/database/seeds
+    migrations: %%PHINX_CONFIG_DIR%%/{{ folders.migrations }}
+    seeds: %%PHINX_CONFIG_DIR%%/{{ folders.seeds }}
 
 environments:
     default_migration_table: phinxlog
-    default_database: development
+    default_database: {{ application.environment }}
     production:
-        adapter: mysql
-        host: localhost
-        name: production_db
-        user: root
-        pass: ''
-        port: 3306
-        charset: utf8
+        adapter: {{ application.environment == 'production' ? database.driver : 'mysql' }}
+        host: {{ application.environment == 'production' ? database.hostname : 'localhost' }}
+        name: {{ application.environment == 'production' ? database.name : 'production_db' }}
+        user: {{ application.environment == 'production' ? database.username : 'root' }}
+        pass: {{ (application.environment == 'production' ? database.password : '\'\'') | raw }}
+        port: {{ application.environment == 'production' ? database.port : '3306' }}
+        charset: {{ application.environment == 'production' ? database.charset : 'utf8' }}
 
     development:
-        adapter: mysql
-        host: localhost
-        name: development_db
-        user: root
-        pass: ''
-        port: 3306
-        charset: utf8
+        adapter: {{ application.environment == 'development' ? database.driver : 'mysql' }}
+        host: {{ application.environment == 'development' ? database.hostname : 'localhost' }}
+        name: {{ application.environment == 'development' ? database.name : 'development_db' }}
+        user: {{ application.environment == 'development' ? database.username : 'root' }}
+        pass: {{ (application.environment == 'development' ? database.password : '\'\'') | raw }}
+        port: {{ application.environment == 'development' ? database.port : '3306' }}
+        charset: {{ application.environment == 'development' ? database.charset : 'utf8' }}
 
     testing:
-        adapter: mysql
-        host: localhost
-        name: testing_db
-        user: root
-        pass: ''
-        port: 3306
-        charset: utf8
+        adapter: {{ application.environment == 'testing' ? database.driver : 'mysql' }}
+        host: {{ application.environment == 'testing' ? database.hostname : 'localhost' }}
+        name: {{ application.environment == 'testing' ? database.name : 'testing_db' }}
+        user: {{ application.environment == 'testing' ? database.username : 'root' }}
+        pass: {{ (application.environment == 'testing' ? database.password : '\'\'') | raw }}
+        port: {{ application.environment == 'testing' ? database.port : '3306' }}
+        charset: {{ application.environment == 'testing' ? database.charset : 'utf8' }}

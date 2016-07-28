@@ -4,6 +4,7 @@ database:
     username: root
     password: ''
     name: ''
+    port: 3306
     charset: utf8
 
 application:
@@ -12,6 +13,9 @@ application:
     homepage: https://bitbucket.org/acme/app
     license: Proprietary
     repository: rougin/app
+    environment: development
+    url: http://localhost:8000
+    timezone: Asia/Manila
 
 author:
     name: Rougin Royce Gutib
@@ -23,8 +27,10 @@ folders:
     components: src/Components
     controllers: src/Http/Controllers
     http: src/Http
+    migrations: app/database/migrations
     models: src/Models
     repositories: src/Repositories
+    seeds: app/database/seeds
     validators: src/Validators
     views: app/views
 
