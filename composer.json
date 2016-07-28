@@ -19,7 +19,7 @@
     ],
     "require": {
         "rougin/blueprint": "^0.2.1",
-        "rougin/describe": "^1.4",
+        "rougin/describe": "^1.5",
         "doctrine/inflector": "^1.1",
         "league/flysystem": "^1.0"
     },
