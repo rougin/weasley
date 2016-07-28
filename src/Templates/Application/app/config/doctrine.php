@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Configurations for Doctrine.
+ * Returns a listing of configurations for Doctrine.
  *
  * @var array
  */
 return [
-    'developer_mode' => $_ENV['ENVIRONMENT'] == 'development',
+    'developer_mode' => env('ENVIRONMENT') == 'development',
     'model_paths'    => [ base('src/Models') ],
     'proxy_path'     => base('src/Proxies'),
 ];

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * A listing of middlewares.
+ * Returns a listing of middlewares.
  *
  * @var array
  */
