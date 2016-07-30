@@ -27,6 +27,7 @@ class ControllerGenerator extends BaseGenerator
     protected $repositoryTemplate = [
         'constructor' => ', {singularTitle}Repository ${singular}Repository',
         'definition'  => "\n        " . '$this->{singular}Repository = ${singular}Repository;',
+        'dropdown'    => '${plural} = $this->{singular}Repository->findAll();' . "\n        ",
         'namespace'   => "\n" . 'use {application}\{namespace}\{singularTitle}Repository;',
         'parameter'   => "\n    " . ' * @param \{application}\{namespace}\{singularTitle}Repository ${singular}Repository',
         'variable'    => "\n\n    " .
@@ -72,8 +73,10 @@ class ControllerGenerator extends BaseGenerator
         $columns = $this->describe->getTable($data['name']);
 
         $data['repository'] = (object) [
+            'compacts'     => '',
             'constructors' => '',
             'definitions'  => '',
+            'dropdowns'    => '',
             'name'         => 'repository',
             'namespaces'   => '',
             'parameters'   => '',
@@ -87,30 +90,42 @@ class ControllerGenerator extends BaseGenerator
                 $keywords = [
                     '{application}'   => $config->application->name,
                     '{namespace}'     => $config->namespaces->repositories,
-                    '{singular}'      => Inflector::singularize($referencedTable),
+                    '{plural}'        => Inflector::pluralize($referencedTable),
                     '{singularTitle}' => ucfirst(Inflector::singularize($referencedTable)),
+                    '{singular}'      => Inflector::singularize($referencedTable),
                 ];
 
                 $data['repository']->name = $data['singular'] . 'Repository';
 
+                $compact     = ', \'{plural}\'';
                 $constructor = $this->repositoryTemplate['constructor'];
                 $definition  = $this->repositoryTemplate['definition'];
+                $dropdown    = $this->repositoryTemplate['dropdown'];
                 $namespace   = $this->repositoryTemplate['namespace'];
                 $parameter   = $this->repositoryTemplate['parameter'];
                 $variable    = $this->repositoryTemplate['variable'];
 
+                $compact     = str_replace(array_keys($keywords), array_values($keywords), $compact);
                 $constructor = str_replace(array_keys($keywords), array_values($keywords), $constructor);
                 $definition  = str_replace(array_keys($keywords), array_values($keywords), $definition);
+                $dropdown    = str_replace(array_keys($keywords), array_values($keywords), $dropdown);
                 $namespace   = str_replace(array_keys($keywords), array_values($keywords), $namespace);
                 $parameter   = str_replace(array_keys($keywords), array_values($keywords), $parameter);
                 $variable    = str_replace(array_keys($keywords), array_values($keywords), $variable);
 
+                $data['repository']->compacts     .= $compact;
                 $data['repository']->constructors .= $constructor;
                 $data['repository']->definitions  .= $definition;
+                $data['repository']->dropdowns    .= $dropdown;
                 $data['repository']->namespaces   .= $namespace;
                 $data['repository']->parameters   .= $parameter;
                 $data['repository']->variables    .= $variable;
             }
+        }
+
+        if ( ! empty($data['repository']->dropdowns)) {
+            $data['repository']->dropdowns = substr($data['repository']->dropdowns, 0, count($data['repository']->dropdowns) - 9);
+            $data['repository']->dropdowns .= "\n        ";
         }
     }
 

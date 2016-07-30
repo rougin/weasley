@@ -33,7 +33,7 @@ class {{ plural | title }}Controller extends BaseController
      */
     public function create()
     {
-        return view('{{ plural }}/create');
+        {{ repository.dropdowns | raw }}return view('{{ plural }}/create'{{ repository.compacts | raw }});
     }
 
     /**
@@ -58,9 +58,9 @@ class {{ plural | title }}Controller extends BaseController
      */
     public function edit($id)
     {
-        $item = $this->{{ repository.name }}->find($id);
+        {{ repository.dropdowns | raw }}$item = $this->{{ repository.name }}->find($id);
 
-        return view('{{ plural }}/edit', compact('item'));
+        return view('{{ plural }}/edit', compact('item'{{ repository.compacts | raw }}));
     }
 
     /**
