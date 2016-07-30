@@ -26,12 +26,12 @@ class ControllerGenerator extends BaseGenerator
      */
     protected $routesTemplate = '' .
         "\n    " . '// Routes for {pluralTitle} Controller' . "\n    " .
-        '[ \'GET\', \'/{plural}\', [ {application}\{namespace}\UsersController::class, \'index\' ], config(\'middlewares\') ],' . "\n    " .
-        '[ \'GET\', \'/{plural}/create\', [ {application}\{namespace}\UsersController::class, \'create\' ], config(\'middlewares\') ],' . "\n    " .
-        '[ \'POST\', \'/{plural}\', [ {application}\{namespace}\UsersController::class, \'store\' ], config(\'middlewares\') ],' . "\n    " .
-        '[ \'GET\', \'/{plural}/:id/edit\', [ {application}\{namespace}\UsersController::class, \'edit\' ], config(\'middlewares\') ],' . "\n    " .
-        '[ \'PUT\', \'/{plural}/:id\', [ {application}\{namespace}\UsersController::class, \'update\' ], config(\'middlewares\') ],' . "\n    " .
-        '[ \'DELETE\', \'/{plural}/:id\', [ {application}\{namespace}\UsersController::class, \'delete\' ], config(\'middlewares\') ],' . "\n";
+        '[ \'GET\', \'/{plural}\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'index\' ], config(\'middlewares\') ],' . "\n    " .
+        '[ \'GET\', \'/{plural}/create\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'create\' ], config(\'middlewares\') ],' . "\n    " .
+        '[ \'POST\', \'/{plural}\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'store\' ], config(\'middlewares\') ],' . "\n    " .
+        '[ \'GET\', \'/{plural}/:id/edit\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'edit\' ], config(\'middlewares\') ],' . "\n    " .
+        '[ \'PUT\', \'/{plural}/:id\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'update\' ], config(\'middlewares\') ],' . "\n    " .
+        '[ \'DELETE\', \'/{plural}/:id\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'delete\' ], config(\'middlewares\') ],' . "\n";
 
     /**
      * @param \Rougin\Describe\Describe $describe
