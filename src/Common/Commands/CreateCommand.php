@@ -155,14 +155,14 @@ class CreateCommand extends AbstractCommand
 
         $content = $this->renderer->render($this->type . '.php', $data);
 
-        if ($this->filesystem->has($fileName) && ! $input->getOption('overwrite')) {
-            $text = ucfirst($this->type) . ' already exists.';
+        if ($this->filesystem->has($fileName)) {
+            if ( ! $input->getOption('overwrite')) {
+                $text = ucfirst($this->type) . ' already exists.';
 
-            return $output->writeln('<error>' . $text . '</error>');
-        }
-
-        if ($input->getOption('overwrite')) {
-            $this->filesystem->delete($fileName);
+                return $output->writeln('<error>' . $text . '</error>');
+            } else {
+                $this->filesystem->delete($fileName);
+            }
         }
 
         $this->filesystem->write($fileName, $content);
