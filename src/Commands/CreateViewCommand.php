@@ -62,7 +62,7 @@ class CreateViewCommand extends AbstractCommand
 
         $data = [
             '{name}'        => $input->getArgument('name'),
-            '{pluralTitle}' => Inflector::pluralize(ucfirst($input->getArgument('name'))),
+            '{pluralTitle}' => Inflector::ucwords(str_replace('_', ' ', Inflector::pluralize($input->getArgument('name')))),
             '{plural}'      => Inflector::pluralize($input->getArgument('name')),
             '{singular}'    => Inflector::singularize($input->getArgument('name')),
         ];
