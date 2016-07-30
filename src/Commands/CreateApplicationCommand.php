@@ -72,6 +72,7 @@ class CreateApplicationCommand extends AbstractCommand
             'author'      => $config->author,
             'database'    => $config->database,
             'directory'   => $directory,
+            'files'     => $config->files,
             'folders'     => $config->folders,
             'namespaces'  => (object) $config->namespaces,
         ];

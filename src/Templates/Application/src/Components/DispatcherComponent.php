@@ -29,7 +29,7 @@ class DispatcherComponent extends AbstractComponent
      */
     public function get()
     {
-        $routes = require __DIR__ . '/../../{{ folders.routes }}';
+        $routes = require __DIR__ . '/../../{{ files.routes }}';
 
         return new Dispatcher(new Router($routes));
     }
