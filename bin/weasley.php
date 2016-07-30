@@ -40,10 +40,27 @@ $app->setTemplatePath(str_replace('bin', 'src', __DIR__ . '/Templates'))
 
 $app->injector->delegate('Rougin\Describe\Describe', function () use ($config)
 {
-    $configuration = $config->database;
-    $name = $config->database->driver;
+    switch ($config->database->driver) {
+        case 'mysql':
+        case 'mysqli':
+            $pdo = new PDO(
+                'mysql:host=' . $config->database->hostname .
+                ';dbname=' . $config->database->name,
+                $config->database->username,
+                $config->database->password
+            );
 
-    $driver = new Rougin\Describe\Drivers\DatabaseDriver($name, $configuration);
+            $driver = new Rougin\Describe\Driver\MySQLDriver($pdo, $config->database->name);
+
+            break;
+        case 'pdo':
+        case 'sqlite':
+        case 'sqlite3':
+            $pdo = new PDO($config->database->hostname);
+            $driver = new Rougin\Describe\Driver\SQLiteDriver($pdo);
+
+            break;
+    }
 
     return new Rougin\Describe\Describe($driver);
 });
