@@ -104,7 +104,7 @@ class ModelGenerator extends BaseGenerator
                 if ( ! $column->isForeignKey()) {
                     $data['methods'] .= $this->mutatorMethodTemplate . "\n    ";
                 } else {
-                    $data['foreignClasses'] .= "\nuse Doctrine\ORM\Mapping\ManyToOne;\n" .
+                    $data['foreignClasses'] = "\nuse Doctrine\ORM\Mapping\ManyToOne;\n" .
                         "use Doctrine\ORM\Mapping\JoinColumn;";
                 }
             }
