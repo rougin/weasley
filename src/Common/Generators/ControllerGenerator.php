@@ -73,7 +73,10 @@ class ControllerGenerator extends BaseGenerator
         $columns = $this->describe->getTable($data['name']);
 
         $data['repository'] = (object) [
-            'compacts'     => '',
+            'compacts'     => (object) [
+                'create' => [],
+                'edit'   => '',
+            ],
             'constructors' => '',
             'definitions'  => '',
             'dropdowns'    => '',
@@ -113,14 +116,20 @@ class ControllerGenerator extends BaseGenerator
                 $parameter   = str_replace(array_keys($keywords), array_values($keywords), $parameter);
                 $variable    = str_replace(array_keys($keywords), array_values($keywords), $variable);
 
-                $data['repository']->compacts     .= $compact;
-                $data['repository']->constructors .= $constructor;
-                $data['repository']->definitions  .= $definition;
-                $data['repository']->dropdowns    .= $dropdown;
-                $data['repository']->namespaces   .= $namespace;
-                $data['repository']->parameters   .= $parameter;
-                $data['repository']->variables    .= $variable;
+                $data['repository']->compacts->edit .= $compact;
+                $data['repository']->constructors   .= $constructor;
+                $data['repository']->definitions    .= $definition;
+                $data['repository']->dropdowns      .= $dropdown;
+                $data['repository']->namespaces     .= $namespace;
+                $data['repository']->parameters     .= $parameter;
+                $data['repository']->variables      .= $variable;
+
+                array_push($data['repository']->compacts->create, "'" . $keywords['{plural}'] . "'");
             }
+        }
+
+        if ( ! empty($data['repository']->compacts->create)) {
+            $data['repository']->compacts->create = ', compact(' . implode(', ', $data['repository']->compacts->create) . ')';
         }
 
         if ( ! empty($data['repository']->dropdowns)) {
