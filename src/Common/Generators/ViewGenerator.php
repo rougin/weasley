@@ -141,6 +141,8 @@ class ViewGenerator extends BaseGenerator
                         $template
                     );
                 }
+            } else if ($column->getDataType() == 'date') {
+                $template = str_replace('type="text"', 'type="date"', $template);
             } else if ($column->getField() == 'password') {
                 if ($type == 'edit') {
                     $template = str_replace(' value="{{ item.{value} }}"', '', $template);
