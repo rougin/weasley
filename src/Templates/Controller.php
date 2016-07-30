@@ -2,8 +2,8 @@
 
 namespace {{ application.name }}\{{ namespaces.controllers }};
 
-use {{ application.name }}\{{ namespaces.validators }}\{{ singular | title }}Validator;
-use {{ application.name }}\{{ namespaces.repositories }}\{{ singular | title }}Repository;{{ repository.namespaces }}
+use {{ application.name }}\{{ namespaces.validators }}\{{ singularTitle }}Validator;
+use {{ application.name }}\{{ namespaces.repositories }}\{{ singularTitle }}Repository;{{ repository.namespaces }}
 
 /**
  * {{ plural | title | replace({'_': ' '}) }} Controller
@@ -14,14 +14,14 @@ use {{ application.name }}\{{ namespaces.repositories }}\{{ singular | title }}R
 class {{ pluralTitle }}Controller extends BaseController
 {
     /**
-     * @var \{{ application.name }}\Repositories\{{ singular | title }}Repository
+     * @var \{{ application.name }}\Repositories\{{ singularTitle }}Repository
      */
     protected ${{ repository.name }};{{ repository.variables }}
 
     /**
-     * @param \{{ application.name }}\Repositories\{{ singular | title }}Repository ${{ repository.name }}{{ repository.parameters }}
+     * @param \{{ application.name }}\Repositories\{{ singularTitle }}Repository ${{ repository.name }}{{ repository.parameters }}
      */
-    public function __construct({{ singular | title }}Repository ${{ repository.name }}{{ repository.constructors }})
+    public function __construct({{ singularTitle }}Repository ${{ repository.name }}{{ repository.constructors }})
     {
         $this->{{ repository.name }} = ${{ repository.name }};{{ repository.definitions | raw }}
     }
@@ -46,7 +46,7 @@ class {{ pluralTitle }}Controller extends BaseController
     {
         $this->{{ repository.name }}->delete($id);
 
-        $message = '{{ singular | title }} deleted successfully!';
+        $message = '{{ singularTitle }} deleted successfully!';
 
         return redirect('{{ plural }}', compact('message'));
     }
@@ -84,11 +84,11 @@ class {{ pluralTitle }}Controller extends BaseController
     {
         $parameters = request()->getParsedBody();
 
-        validate({{ singular | title }}Validator::class, $parameters);
+        validate({{ singularTitle }}Validator::class, $parameters);
 
         ${{ singular }} = $this->{{ repository.name }}->create($parameters);
 
-        $message = '{{ singular | title }} created successfully!';
+        $message = '{{ singularTitle }} created successfully!';
 
         return redirect('{{ plural }}', compact('message'));
     }
@@ -103,11 +103,11 @@ class {{ pluralTitle }}Controller extends BaseController
     {
         $parameters = request()->getParsedBody();
 
-        validate({{ singular | title }}Validator::class, $parameters);
+        validate({{ singularTitle }}Validator::class, $parameters);
 
         $this->{{ repository.name }}->update($id, $parameters);
 
-        $message = '{{ singular | title }} updated successfully!';
+        $message = '{{ singularTitle }} updated successfully!';
 
         return redirect('{{ plural }}', compact('message'));
     }
