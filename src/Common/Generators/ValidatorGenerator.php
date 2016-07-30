@@ -11,7 +11,7 @@ use Doctrine\Common\Inflector\Inflector;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class ValidatorGenerator
+class ValidatorGenerator extends BaseGenerator
 {
     /**
      * @var \Rougin\Describe\Describe
@@ -62,6 +62,11 @@ class ValidatorGenerator
             $label    = ucfirst(str_replace('_', ' ', Inflector::tableize($column->getField())));
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);
 
+            if ($column->isForeignKey()) {
+                $referencedTable = $this->stripTableSchema($column->getReferencedTable());
+                $label = ucfirst(str_replace('_', ' ', Inflector::tableize($referencedTable)));
+            }
+
             // if ($column->getField() == 'username') {
             //     $unique = str_replace('\'required\'', '\'unique\'', $template);
             //     $template .= "        " . $unique;
@@ -78,8 +83,11 @@ class ValidatorGenerator
             }
 
             if ($counter < (count($columns) - 1)) {
-                if ($column->getField() != 'datetime_created' && $column->getField() != 'datetime_updated' && $column->getField() != 'password') {
-                    $data['rules']  .= '        ';
+                if ($column->getField() != 'datetime_created' && $column->getField() != 'datetime_updated') {
+                    if ($column->getField() != 'password') {
+                        $data['rules']  .= '        ';
+                    }
+
                     $data['labels'] .= "\n" . '            ';
                 }
             }

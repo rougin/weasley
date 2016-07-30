@@ -85,12 +85,13 @@ class ViewGenerator extends BaseGenerator
             $template = $this->columnFormTemplate;
 
             if ($column->isForeignKey()) {
-                $template        = $this->foreignColumnFormTemplate;
                 $referencedTable = $this->stripTableSchema($column->getReferencedTable());
+                $foreignColumns  = $this->describe->getTable($referencedTable);
+                $template        = $this->foreignColumnFormTemplate;
 
-                foreach ($columns as $otherColumn) {
-                    if ( ! $otherColumn->isPrimaryKey() && ! $otherColumn->isForeignKey()) {
-                        $description = $otherColumn->getField();
+                foreach ($foreignColumns as $foreignColumn) {
+                    if ( ! $foreignColumn->isPrimaryKey() && ! $foreignColumn->isForeignKey()) {
+                        $description = $foreignColumn->getField();
 
                         break;
                     }
