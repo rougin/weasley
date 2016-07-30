@@ -12,7 +12,7 @@ use Rougin\Describe\Describe;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class ViewGenerator
+class ViewGenerator extends BaseGenerator
 {
     /**
      * @var \Rougin\Describe\Describe
@@ -27,6 +27,24 @@ class ViewGenerator
             '<label class="control-label">{columnTitle}</label>' . "\n          " .
             '<div>' . "\n            " .
                 '<input type="text" name="{name}" class="form-control" value="{{ session.old.{name} }}" />' . "\n            " .
+                '<small class="text-danger">{{ session.validation.{name}[0] }}</small>' . "\n          " .
+            '</div>' . "\n        " .
+        '</div>' . "\n";
+
+    /**
+     * @var string
+     */
+    public $foreignColumnFormTemplate = '' .
+        '<div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">' . "\n          " .
+            '<label class="control-label">{columnTitle}</label>' . "\n          " .
+            '<div>' . "\n            " .
+                '<select name="{name}" class="selectpicker form-control" data-live-search="true">' . "\n              " .
+                    '{% for {singular} in {plural} %}' . "\n                " .
+                        '<option value="{{ {singular}.id }}" {{ session.old.{name} == {singular}.id ? \'selected\' : \'\' }}>' . "\n                  " .
+                            '{{ {singular}.{description} }}' . "\n                " .
+                        '</option>' . "\n              " .
+                    '{% endfor %}' . "\n            " .
+                '</select>' . "\n            " .
                 '<small class="text-danger">{{ session.validation.{name}[0] }}</small>' . "\n          " .
             '</div>' . "\n        " .
         '</div>' . "\n";
@@ -61,7 +79,23 @@ class ViewGenerator
                 continue;
             }
 
+            $description = 'name';
+            $referencedTable = '';
+
             $template = $this->columnFormTemplate;
+
+            if ($column->isForeignKey()) {
+                $template        = $this->foreignColumnFormTemplate;
+                $referencedTable = $this->stripTableSchema($column->getReferencedTable());
+
+                foreach ($columns as $otherColumn) {
+                    if ( ! $otherColumn->isPrimaryKey() && ! $otherColumn->isForeignKey()) {
+                        $description = $otherColumn->getField();
+
+                        break;
+                    }
+                }
+            }
 
             if ($type == 'edit') {
                 $template = str_replace('session.old.{name}', 'item.{value}', $template);
@@ -74,7 +108,13 @@ class ViewGenerator
                 array_push($tableBody, '<td>{{ item.' . Inflector::camelize($column->getField()) . ' }}</td>');
             }
 
-            $keywords = [ '{columnTitle}' => $columnTitle, '{name}' => $column->getField() ];
+            $keywords = [
+                '{columnTitle}' => $columnTitle,
+                '{description}' => $description,
+                '{name}'        => $column->getField(),
+                '{plural}'      => Inflector::pluralize($referencedTable),
+                '{singular}'    => Inflector::singularize($referencedTable),
+            ];
 
             if ($type == 'edit') {
                 $keywords['{value}'] = Inflector::camelize($keywords['{name}']);
