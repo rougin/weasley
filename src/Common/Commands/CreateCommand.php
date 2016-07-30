@@ -145,7 +145,7 @@ class CreateCommand extends AbstractCommand
 
                 $generator->concat($data);
 
-                $validator = str_replace($item, 'BaseValidator', $fileName);
+                $validator = str_replace(Inflector::classify($item), 'BaseValidator', $fileName);
 
                 if ( ! $this->filesystem->has($validator)) {
                     $content = $this->renderer->render('BaseValidator.php', $data);
