@@ -120,28 +120,26 @@ class RepositoryGenerator extends BaseGenerator
 
             if ($column->getField() == 'datetime_created' || $column->getField() == 'datetime_updated') {
                 $template = str_replace('$data[\'{name}\']', "'now'", $template);
-            } else if ($column->getField() == 'password') {
-                $template = str_replace('$data[\'{name}\']', ' ! empty($data[\'{name}\']) ? md5($data[\'{name}\']) : $data[\'{name}\']', $template);
             } else if ($column->getDataType() == 'integer' && $column->getLength() == 1) {
                 $template = str_replace('$data[\'{name}\']', 'isset($data[\'{name}\'])', $template);
             }
 
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);
 
-            if ($column->getField() != 'datetime_updated') {
+            if ($column->getField() != 'datetime_updated' && $column->getField() != 'password') {
                 $data['createColumns'] .= $template;
             }
 
-            if ($column->getField() != 'datetime_created') {
+            if ($column->getField() != 'datetime_created' && $column->getField() != 'password') {
                 $data['updateColumns'] .= $template;
             }
 
             if ($counter < (count($columns) - 1)) {
-                if ($column->getField() != 'datetime_updated') {
+                if ($column->getField() != 'datetime_updated' && $column->getField() != 'password') {
                     $data['createColumns'] .= '        ';
                 }
 
-                if ($column->getField() != 'datetime_created') {
+                if ($column->getField() != 'datetime_created' && $column->getField() != 'password') {
                     $data['updateColumns'] .= '        ';
                 }
             }
@@ -151,5 +149,19 @@ class RepositoryGenerator extends BaseGenerator
 
         $data['createColumns'] = trim($data['createColumns']);
         $data['updateColumns'] = trim($data['updateColumns']);
+
+        foreach ($columns as $column) {
+            if ($column->getField() != 'password') {
+                continue;
+            }
+
+            $table = strtolower($data['singular']);
+            $mutator = Inflector::camelize('set_' . $column->getField());
+
+            $data['updateColumns'] .= "\n\n        " .
+                'if ($data[\'' . $column->getField() . '\']) {' . "\n            " .
+                    '$' . $table . '->' . $mutator . '(md5($data[\'' . $column->getField() . '\']));' . "\n        " .
+                '}';
+        }
     }
 }
