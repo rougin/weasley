@@ -121,7 +121,7 @@ class RepositoryGenerator extends BaseGenerator
             if ($column->getField() == 'datetime_created' || $column->getField() == 'datetime_updated') {
                 $template = str_replace('$data[\'{name}\']', "'now'", $template);
             } else if ($column->getField() == 'password') {
-                $template = str_replace('$data[\'{name}\']', 'md5($data[\'{name}\'])', $template);
+                $template = str_replace('$data[\'{name}\']', ' ! empty($data[\'{name}\']) ? md5($data[\'{name}\']) : $data[\'{name}\']', $template);
             } else if ($column->getDataType() == 'integer' && $column->getLength() == 1) {
                 $template = str_replace('$data[\'{name}\']', 'isset($data[\'{name}\'])', $template);
             }
