@@ -22,6 +22,26 @@ class ControllerGenerator extends BaseGenerator
     protected $describe;
 
     /**
+     * @var array
+     */
+    protected $repositoryTemplate = [
+        'constructor' => ', {singularTitle}Repository ${singular}Repository',
+        'definition'  => "\n        " . '$this->{singular}Repository = ${singular}Repository;',
+        'namespace'   => "\n" . 'use {application}\{namespace}\{singularTitle}Repository;',
+        'parameter'   => "\n    " . ' * @param \{application}\{namespace}\{singularTitle}Repository ${singular}Repository',
+        'variable'    => "\n\n    " .
+            '/**' . "\n    " .
+             ' * @var \{application}\{namespace}\{singularTitle}Repository' . "\n    " .
+             ' */' . "\n    " .
+             'protected ${singular}Repository;',
+    ];
+
+    /**
+     * @var \App\Repositories\UserRepository
+     */
+    protected $userRepository;
+
+    /**
      * @var string
      */
     protected $routesTemplate = '' .
@@ -41,6 +61,58 @@ class ControllerGenerator extends BaseGenerator
         $this->describe = $describe;
     }
 
+    /**
+     * Returns the required data for model.
+     * 
+     * @return void
+     */
+    public function concat(array &$data)
+    {
+        $config = Configuration::get();
+        $columns = $this->describe->getTable($data['name']);
+
+        $data['repository'] = (object) [
+            'constructors' => '',
+            'definitions'  => '',
+            'name'         => 'repository',
+            'namespaces'   => '',
+            'parameters'   => '',
+            'variables'    => '',
+        ];
+
+        foreach ($columns as $column) {
+            if ($column->isForeignKey()) {
+                $referencedTable = $this->stripTableSchema($column->getReferencedTable());
+
+                $keywords = [
+                    '{application}'   => $config->application->name,
+                    '{namespace}'     => $config->namespaces->repositories,
+                    '{singular}'      => Inflector::singularize($referencedTable),
+                    '{singularTitle}' => ucfirst(Inflector::singularize($referencedTable)),
+                ];
+
+                $data['repository']->name = $data['singular'] . 'Repository';
+
+                $constructor = $this->repositoryTemplate['constructor'];
+                $definition  = $this->repositoryTemplate['definition'];
+                $namespace   = $this->repositoryTemplate['namespace'];
+                $parameter   = $this->repositoryTemplate['parameter'];
+                $variable    = $this->repositoryTemplate['variable'];
+
+                $constructor = str_replace(array_keys($keywords), array_values($keywords), $constructor);
+                $definition  = str_replace(array_keys($keywords), array_values($keywords), $definition);
+                $namespace   = str_replace(array_keys($keywords), array_values($keywords), $namespace);
+                $parameter   = str_replace(array_keys($keywords), array_values($keywords), $parameter);
+                $variable    = str_replace(array_keys($keywords), array_values($keywords), $variable);
+
+                $data['repository']->constructors .= $constructor;
+                $data['repository']->definitions  .= $definition;
+                $data['repository']->namespaces   .= $namespace;
+                $data['repository']->parameters   .= $parameter;
+                $data['repository']->variables    .= $variable;
+            }
+        }
+    }
 
     /**
      * Generates route contents.

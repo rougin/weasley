@@ -3,7 +3,7 @@
 namespace {{ application.name }}\{{ namespaces.controllers }};
 
 use {{ application.name }}\{{ namespaces.validators }}\{{ singular | title }}Validator;
-use {{ application.name }}\{{ namespaces.repositories }}\{{ singular | title }}Repository;
+use {{ application.name }}\{{ namespaces.repositories }}\{{ singular | title }}Repository;{{ repository.namespaces }}
 
 /**
  * {{ plural | title }} Controller
@@ -16,14 +16,14 @@ class {{ plural | title }}Controller extends BaseController
     /**
      * @var \{{ application.name }}\Repositories\{{ singular | title }}Repository
      */
-    protected $repository;
+    protected ${{ repository.name }};{{ repository.variables }}
 
     /**
-     * @param \{{ application.name }}\Repositories\{{ singular | title }}Repository $repository
+     * @param \{{ application.name }}\Repositories\{{ singular | title }}Repository ${{ repository.name }}{{ repository.parameters }}
      */
-    public function __construct({{ singular | title }}Repository $repository)
+    public function __construct({{ singular | title }}Repository ${{ repository.name }}{{ repository.constructors }})
     {
-        $this->repository = $repository;
+        $this->{{ repository.name }} = ${{ repository.name }};{{ repository.definitions | raw }}
     }
 
     /**
@@ -44,7 +44,7 @@ class {{ plural | title }}Controller extends BaseController
      */
     public function delete($id)
     {
-        $this->repository->delete($id);
+        $this->{{ repository.name }}->delete($id);
 
         $message = '{{ singular | title }} deleted successfully!';
 
@@ -58,7 +58,7 @@ class {{ plural | title }}Controller extends BaseController
      */
     public function edit($id)
     {
-        $item = $this->repository->find($id);
+        $item = $this->{{ repository.name }}->find($id);
 
         return view('{{ plural }}/edit', compact('item'));
     }
@@ -70,7 +70,7 @@ class {{ plural | title }}Controller extends BaseController
      */
     public function index()
     {
-        list($items, $links) = paginate($this->repository->findAll());
+        list($items, $links) = paginate($this->{{ repository.name }}->findAll());
 
         return view('{{ plural }}/index', compact('items', 'links'));
     }
@@ -86,7 +86,7 @@ class {{ plural | title }}Controller extends BaseController
 
         validate({{ singular | title }}Validator::class, $parameters);
 
-        ${{ singular }} = $this->repository->create($parameters);
+        ${{ singular }} = $this->{{ repository.name }}->create($parameters);
 
         $message = '{{ singular | title }} created successfully!';
 
@@ -105,7 +105,7 @@ class {{ plural | title }}Controller extends BaseController
 
         validate({{ singular | title }}Validator::class, $parameters);
 
-        $this->repository->update($id, $parameters);
+        $this->{{ repository.name }}->update($id, $parameters);
 
         $message = '{{ singular | title }} updated successfully!';
 

@@ -113,6 +113,7 @@ class CreateCommand extends AbstractCommand
                 $generator = new ControllerGenerator($this->describe);
                 $routes    = $this->filesystem->read($config->files->routes);
 
+                $generator->concat($data);
                 $generator->generateRoute($routes, $input->getArgument('name'));
 
                 if ( ! $this->filesystem->has($fileName)) {
