@@ -101,11 +101,17 @@ class ViewGenerator extends BaseGenerator
                 $template = str_replace('session.old.{name}', 'item.{value}', $template);
             }
 
+            $columnBody  = Inflector::camelize($column->getField());
             $columnTitle = ucwords(str_replace('_', ' ', Inflector::tableize($column->getField())));
+
+            if ($column->isForeignKey()) {
+                $columnTitle = ucwords(str_replace('_', ' ', Inflector::tableize($referencedTable)));
+                $columnBody  = Inflector::singularize($referencedTable) . '.' . $description;
+            }
 
             if ($column->getField() != 'password') {
                 array_push($tableHeading, '<td>' . $columnTitle . '</td>');
-                array_push($tableBody, '<td>{{ item.' . Inflector::camelize($column->getField()) . ' }}</td>');
+                array_push($tableBody, '<td>{{ item.' . $columnBody . ' }}</td>');
             }
 
             $keywords = [
