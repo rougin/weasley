@@ -6,12 +6,12 @@ use {{ application.name }}\{{ namespaces.validators }}\{{ singular | title }}Val
 use {{ application.name }}\{{ namespaces.repositories }}\{{ singular | title }}Repository;{{ repository.namespaces }}
 
 /**
- * {{ plural | title }} Controller
+ * {{ plural | title | replace({'_': ' '}) }} Controller
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class {{ plural | title }}Controller extends BaseController
+class {{ pluralTitle }}Controller extends BaseController
 {
     /**
      * @var \{{ application.name }}\Repositories\{{ singular | title }}Repository

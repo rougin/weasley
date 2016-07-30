@@ -5,12 +5,12 @@ namespace {{ application.name }}\{{ namespaces.validators }};
 use Valitron\Validator;
 
 /**
- * {{ singular | title }} Validator
+ * {{ singular | title | replace({'_': ' '}) }} Validator
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class {{ singular | title }}Validator extends BaseValidator
+class {{ singularTitle }}Validator extends BaseValidator
 {
     /**
      * Sets the labels in the validator.

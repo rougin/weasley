@@ -4,25 +4,25 @@ namespace {{ application.name }}\{{ namespaces.repositories }};
 
 use Doctrine\ORM\EntityRepository;
 
-use {{ application.name }}\{{ namespaces.models }}\{{ singular | title }};{{ foreignClasses }}
+use {{ application.name }}\{{ namespaces.models }}\{{ singularTitle }};{{ foreignClasses }}
 
 /**
- * {{ singular | title }} Repository
+ * {{ singular | title | replace({'_': ' '}) }} Repository
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class {{ singular | title }}Repository extends EntityRepository
+class {{ singularTitle }}Repository extends EntityRepository
 {
     /**
      * Creates a new item.
      * 
      * @param  array $data
-     * @return \{{ application.name }}\Models\{{ singular | title }}
+     * @return \{{ application.name }}\Models\{{ singularTitle }}
      */
     public function create(array $data = [])
     {
-        ${{ singular }} = new {{ singular | title }};
+        ${{ singular }} = new {{ singularTitle }};
 
         {{ createColumns | raw }}
 
@@ -51,7 +51,7 @@ class {{ singular | title }}Repository extends EntityRepository
      *
      * @param  integer $id
      * @param  array   $data
-     * @return \{{ application.name }}\Models\{{ singular | title }}
+     * @return \{{ application.name }}\Models\{{ singularTitle }}
      */
     public function update($id, array $data = [])
     {

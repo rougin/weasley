@@ -9,10 +9,15 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;{{ foreignClasses }}
 
 /**
+ * {{ singular | title | replace({'_': ' '}) }} Model
+ *
+ * @package {{ application.name }}
+ * @author  {{ author.name }} <{{ author.email }}>
+ * 
  * @Entity(repositoryClass="{{ application.name }}\Repositories\{{ plural | title }}Repository")
  * @Table(name="{{ singular }}")
  */
-class {{ singular | title }}
+class {{ singularTitle }}
 {
     {{ columns | raw }}
 

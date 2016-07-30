@@ -78,11 +78,14 @@ class CreateCommand extends AbstractCommand
         $data = [
             'application'    => $config->application,
             'author'         => $config->author,
-            'name'           => $input->getArgument('name'),
-            'plural'         => Inflector::pluralize($name),
-            'singular'       => Inflector::singularize($name),
-            'namespaces'     => $config->namespaces,
             'foreignClasses' => '',
+            'name'           => $input->getArgument('name'),
+            'namespaces'     => $config->namespaces,
+            'nameTitle'      => Inflector::classify($name),
+            'plural'         => Inflector::pluralize($name),
+            'pluralTitle'    => Inflector::classify(Inflector::pluralize($name)),
+            'singular'       => Inflector::singularize($name),
+            'singularTitle'  => Inflector::classify(Inflector::singularize($name)),
         ];
 
         $directory = $config->folders->$type;
@@ -106,7 +109,7 @@ class CreateCommand extends AbstractCommand
                 break;
         }
 
-        $fileName  = $directory . '/' . $item . '.php';
+        $fileName  = $directory . '/' . Inflector::classify($item) . '.php';
 
         switch ($this->type) {
             case 'controller':

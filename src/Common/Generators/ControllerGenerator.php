@@ -46,7 +46,7 @@ class ControllerGenerator extends BaseGenerator
      * @var string
      */
     protected $routesTemplate = '' .
-        "\n    " . '// Routes for {pluralTitle} Controller' . "\n    " .
+        "\n    " . '// Routes for {pluralTitleDescription} Controller' . "\n    " .
         '[ \'GET\', \'/{plural}\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'index\' ], config(\'middlewares\') ],' . "\n    " .
         '[ \'GET\', \'/{plural}/create\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'create\' ], config(\'middlewares\') ],' . "\n    " .
         '[ \'POST\', \'/{plural}\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'store\' ], config(\'middlewares\') ],' . "\n    " .
@@ -160,8 +160,8 @@ class ControllerGenerator extends BaseGenerator
 
         $keywords = [];
 
-        $keywords['{pluralTitle}'] = Inflector::tableize(Inflector::pluralize($tableName));
-        $keywords['{pluralTitle}'] = str_replace('_', ' ', Inflector::ucwords($keywords['{pluralTitle}']));
+        $keywords['{pluralTitle}'] = Inflector::classify(Inflector::pluralize($tableName));
+        $keywords['{pluralTitleDescription}'] = Inflector::ucwords(str_replace('_', ' ', Inflector::pluralize($tableName)));
         $keywords['{plural}']      = Inflector::pluralize($tableName);
         $keywords['{application}'] = $config->application->name;
         $keywords['{namespace}']   = $config->namespaces->controllers;

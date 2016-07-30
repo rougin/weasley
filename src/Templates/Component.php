@@ -5,12 +5,12 @@ namespace {{ application.name }}\{{ namespaces.components }};
 use Rougin\Slytherin\Component\AbstractComponent;
 
 /**
- * {{ name | title }} Component
+ * {{ name | title | replace({'_': ' '}) }} Component
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class {{ name | title }}Component extends AbstractComponent
+class {{ nameTitle }}Component extends AbstractComponent
 {
     /**
      * Types of components:
