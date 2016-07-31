@@ -113,7 +113,7 @@ class ModelGenerator extends BaseGenerator
 
             $keywords = [
                 '{name}'         => $column->getField(),
-                '{datatype}'     => $column->getDataType(),
+                '{datatype}'     => (strpos($column->getDataType(), 'blob') !== false) ? 'blob' : $column->getDataType(),
                 '{length}'       => $column->getLength(),
                 '{variable}'     => Inflector::camelize($column->getField()),
                 '{description}'  => str_replace('_', ' ', Inflector::tableize($column->getField())),

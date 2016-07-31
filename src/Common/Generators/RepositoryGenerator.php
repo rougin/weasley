@@ -173,7 +173,7 @@ class RepositoryGenerator extends BaseGenerator
                 $code = "\n\n        " .
                     'if ( ! $data[\'' . $column->getField() . '\']->getError()) {' . "\n            " .
                         '$' . $column->getField() . ' = $data[\'' . $column->getField() . '\']->getStream()->getContents();' . "\n\n            " . 
-                        '$' . $table . '->' . $mutator . '(' . $column->getField() . ');' . "\n        " .
+                        '$' . $table . '->' . $mutator . '($' . $column->getField() . ');' . "\n        " .
                     '}';
 
                 $data['createColumns'] .= $code;

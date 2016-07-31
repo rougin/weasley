@@ -116,7 +116,7 @@ class ViewGenerator extends BaseGenerator
                 if (strpos($column->getDataType(), 'blob') !== false) {
                     $image = '<img src="data:image/png;base64,{{ item.' . $columnBody . ' }}" height="50" width="50" />';
 
-                    array_push($tableBody, $image);
+                    array_push($tableBody, '<td>' . $image . '</td>');
                 } else {
                     array_push($tableBody, '<td>{{ item.' . $columnBody . ' }}</td>');
                 }
