@@ -3,7 +3,7 @@
 {% block content %}
   <h1><i class="icon ion-person-stalker"></i> {pluralTitle}</h1>
 
-  <form action="{{ ('/{plural}/' ~ item.id) | url }}" method="POST">
+  <form action="{{ ('/{plural}/' ~ item.id) | url }}" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="_method" value="PUT" />
 
     <div class="container-btn">

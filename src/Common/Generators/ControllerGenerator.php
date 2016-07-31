@@ -86,6 +86,14 @@ class ControllerGenerator extends BaseGenerator
             'variables'    => '',
         ];
 
+        $data['parameters'] = '';
+
+        foreach ($columns as $column) {
+            if (strpos($column->getDataType(), 'blob') !== false) {
+                $data['parameters'] = "\n\n        " . '$files = request()->getUploadedFiles();';
+            }
+        }
+
         foreach ($columns as $column) {
             if ($column->isForeignKey()) {
                 $referencedTable = $this->stripTableSchema($column->getReferencedTable());
@@ -95,10 +103,10 @@ class ControllerGenerator extends BaseGenerator
                     '{namespace}'     => $config->namespaces->repositories,
                     '{plural}'        => Inflector::pluralize($referencedTable),
                     '{singularTitle}' => ucfirst(Inflector::singularize($referencedTable)),
-                    '{singular}'      => Inflector::singularize($referencedTable),
+                    '{singular}'      => lcfirst(Inflector::classify(Inflector::singularize($referencedTable))),
                 ];
 
-                $data['repository']->name = $data['singular'] . 'Repository';
+                $data['repository']->name = lcfirst(Inflector::classify($data['singular'])) . 'Repository';
 
                 $compact     = ', \'{plural}\'';
                 $constructor = $this->repositoryTemplate['constructor'];
@@ -125,6 +133,10 @@ class ControllerGenerator extends BaseGenerator
                 $data['repository']->variables      .= $variable;
 
                 array_push($data['repository']->compacts->create, "'" . $keywords['{plural}'] . "'");
+            }
+
+            if (strpos($column->getDataType(), 'blob') !== false) {
+                $data['parameters'] .= "\n        " . '$parameters[\'' . $column->getField() . '\'] = $files[\'' . $column->getField() . '\']->getStream()->getContents();';
             }
         }
 

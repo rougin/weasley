@@ -46,7 +46,7 @@ class {{ pluralTitle }}Controller extends BaseController
     {
         $this->{{ repository.name }}->delete($id);
 
-        $message = '{{ singularTitle }} deleted successfully!';
+        $message = '{{ singular | capitalize | replace({'_': ' '}) }} deleted successfully!';
 
         return redirect('{{ plural }}', compact('message'));
     }
@@ -82,13 +82,13 @@ class {{ pluralTitle }}Controller extends BaseController
      */
     public function store()
     {
-        $parameters = request()->getParsedBody();
+        $parameters = request()->getParsedBody();{{ parameters | raw }}
 
         validate({{ singularTitle }}Validator::class, $parameters);
 
         ${{ singular }} = $this->{{ repository.name }}->create($parameters);
 
-        $message = '{{ singularTitle }} created successfully!';
+        $message = '{{ singular | capitalize | replace({'_': ' '}) }} created successfully!';
 
         return redirect('{{ plural }}', compact('message'));
     }
@@ -101,13 +101,13 @@ class {{ pluralTitle }}Controller extends BaseController
      */
     public function update($id)
     {
-        $parameters = request()->getParsedBody();
+        $parameters = request()->getParsedBody();{{ parameters | raw }}
 
         validate({{ singularTitle }}Validator::class, $parameters);
 
         $this->{{ repository.name }}->update($id, $parameters);
 
-        $message = '{{ singularTitle }} updated successfully!';
+        $message = '{{ singular | capitalize | replace({'_': ' '}) }} updated successfully!';
 
         return redirect('{{ plural }}', compact('message'));
     }

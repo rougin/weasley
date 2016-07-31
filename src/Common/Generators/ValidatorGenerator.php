@@ -48,7 +48,7 @@ class ValidatorGenerator extends BaseGenerator
         foreach ($columns as $column) {
             $isBoolean = ($column->getDataType() == 'integer' && $column->getLength() == 1);
 
-            if ($column->isPrimaryKey() || $column->isNull() || $isBoolean) {
+            if ($column->isPrimaryKey() || $column->isNull() || $isBoolean || $column->getDataType() == 'blob') {
                 continue;
             }
 

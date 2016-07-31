@@ -105,7 +105,7 @@ class RepositoryGenerator extends BaseGenerator
             $keywords = [
                 '{name}'        => $column->getField(),
                 '{mutatorName}' => Inflector::camelize('set_' . $column->getField()),
-                '{singular}'    => strtolower($data['singular']),
+                '{singular}'    => lcfirst($data['singularTitle']),
             ];
 
             $template = $this->mutatorMethodTemplate;

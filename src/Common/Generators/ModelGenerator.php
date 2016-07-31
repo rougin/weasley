@@ -132,6 +132,8 @@ class ModelGenerator extends BaseGenerator
                 $data['methods'] = str_replace('@param  {datatype}', '@param  \DateTime', $data['methods']);
                 $data['methods'] = str_replace('@return {datatype}', '@return \DateTime', $data['methods']);
                 $data['methods'] = str_replace('= ${variable};', '= new DateTime(${variable});', $data['methods']);
+            } else if (strpos($column->getDataType(), 'blob') !== false) {
+                $data['methods'] = str_replace('return $this->{variable};', 'return base64_encode(stream_get_contents($this->{variable}));', $data['methods']);
             }
 
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);

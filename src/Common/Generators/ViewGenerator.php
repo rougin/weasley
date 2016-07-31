@@ -112,7 +112,14 @@ class ViewGenerator extends BaseGenerator
 
             if ($column->getField() != 'password') {
                 array_push($tableHeading, '<td>' . $columnTitle . '</td>');
-                array_push($tableBody, '<td>{{ item.' . $columnBody . ' }}</td>');
+
+                if (strpos($column->getDataType(), 'blob') !== false) {
+                    $image = '<img src="data:image/png;base64,{{ item.' . $columnBody . ' }}" height="50" width="50" />';
+
+                    array_push($tableBody, $image);
+                } else {
+                    array_push($tableBody, '<td>{{ item.' . $columnBody . ' }}</td>');
+                }
             }
 
             $keywords = [
@@ -144,6 +151,10 @@ class ViewGenerator extends BaseGenerator
                 }
             } else if ($column->getDataType() == 'date') {
                 $template = str_replace('type="text"', 'type="date"', $template);
+            } else if (strpos($column->getDataType(), 'blob') !== false) {
+                $template = str_replace('type="text"', 'type="file"', $template);
+                $template = str_replace(' value="{{ session.old.{name} }}"', '', $template);
+                $template = str_replace(' value="{{ item.{value} }}"', '', $template);
             } else if ($column->getField() == 'password') {
                 if ($type == 'edit') {
                     $template = str_replace(' value="{{ item.{value} }}"', '', $template);
