@@ -153,8 +153,8 @@ class ViewGenerator extends BaseGenerator
                 $template = str_replace('type="text"', 'type="date"', $template);
             } else if (strpos($column->getDataType(), 'blob') !== false) {
                 $template = str_replace('type="text"', 'type="file"', $template);
-                $template = str_replace(' value="{{ session.old.{name} }}"', '', $template);
-                $template = str_replace(' value="{{ item.{value} }}"', '', $template);
+                $template = str_replace(' class="form-control" value="{{ session.old.{name} }}"', '', $template);
+                $template = str_replace(' class="form-control" value="{{ item.{value} }}"', '', $template);
             } else if ($column->getField() == 'password') {
                 if ($type == 'edit') {
                     $template = str_replace(' value="{{ item.{value} }}"', '', $template);
