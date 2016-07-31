@@ -136,7 +136,7 @@ class ControllerGenerator extends BaseGenerator
             }
 
             if (strpos($column->getDataType(), 'blob') !== false) {
-                $data['parameters'] .= "\n        " . '$parameters[\'' . $column->getField() . '\'] = $files[\'' . $column->getField() . '\']->getStream()->getContents();';
+                $data['parameters'] .= "\n        " . '$parameters[\'' . $column->getField() . '\'] = $files[\'' . $column->getField() . '\'];';
             }
         }
 

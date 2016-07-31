@@ -57,6 +57,7 @@ class RepositoryGenerator extends BaseGenerator
         $columns = $this->describe->getTable($data['name']);
         $counter = 0;
 
+        $data['singular'] = lcfirst(Inflector::classify($data['singular']));
         $data['createColumns'] = '';
         $data['updateColumns'] = '';
 
@@ -114,7 +115,7 @@ class RepositoryGenerator extends BaseGenerator
                 $referencedTable = $this->stripTableSchema($column->getReferencedTable());
                 $template = $this->foreignMutatorMethodTemplate;
 
-                $keywords['{table}'] = $referencedTable;
+                $keywords['{table}'] = lcfirst(Inflector::classify($referencedTable));
                 $keywords['{mutatorName}'] = Inflector::camelize('set_' . $referencedTable);
             }
 
@@ -126,20 +127,20 @@ class RepositoryGenerator extends BaseGenerator
 
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);
 
-            if ($column->getField() != 'datetime_updated' && $column->getField() != 'password') {
+            if ($column->getField() != 'datetime_updated' && $column->getField() != 'password' && strpos($column->getDataType(), 'blob') === false) {
                 $data['createColumns'] .= $template;
             }
 
-            if ($column->getField() != 'datetime_created' && $column->getField() != 'password') {
+            if ($column->getField() != 'datetime_created' && $column->getField() != 'password' && strpos($column->getDataType(), 'blob') === false) {
                 $data['updateColumns'] .= $template;
             }
 
             if ($counter < (count($columns) - 1)) {
-                if ($column->getField() != 'datetime_updated' && $column->getField() != 'password') {
+                if ($column->getField() != 'datetime_updated' && $column->getField() != 'password' && strpos($column->getDataType(), 'blob') === false) {
                     $data['createColumns'] .= '        ';
                 }
 
-                if ($column->getField() != 'datetime_created' && $column->getField() != 'password') {
+                if ($column->getField() != 'datetime_created' && $column->getField() != 'password' && strpos($column->getDataType(), 'blob') === false) {
                     $data['updateColumns'] .= '        ';
                 }
             }
@@ -151,17 +152,30 @@ class RepositoryGenerator extends BaseGenerator
         $data['updateColumns'] = trim($data['updateColumns']);
 
         foreach ($columns as $column) {
-            if ($column->getField() != 'password') {
+            if ($column->getField() != 'password' && strpos($column->getDataType(), 'blob') === false) {
                 continue;
             }
 
-            $table = strtolower($data['singular']);
-            $mutator = Inflector::camelize('set_' . $column->getField());
+            if ($column->getField() == 'password') {
+                $table = lcfirst(Inflector::classify($data['singular']));
+                $mutator = Inflector::camelize('set_' . $column->getField());
 
-            $data['updateColumns'] .= "\n\n        " .
-                'if ($data[\'' . $column->getField() . '\']) {' . "\n            " .
-                    '$' . $table . '->' . $mutator . '(md5($data[\'' . $column->getField() . '\']));' . "\n        " .
-                '}';
+                $data['updateColumns'] .= "\n\n        " .
+                    'if ($data[\'' . $column->getField() . '\']) {' . "\n            " .
+                        '$' . $table . '->' . $mutator . '(md5($data[\'' . $column->getField() . '\']));' . "\n        " .
+                    '}';
+            }
+
+            if (strpos($column->getDataType(), 'blob') !== false) {
+                $table = lcfirst(Inflector::classify($data['singular']));
+                $mutator = Inflector::camelize('set_' . $column->getField());
+
+                $data['updateColumns'] .= "\n\n        " .
+                    'if ( ! $data[\'' . $column->getField() . '\']->getError()) {' . "\n            " .
+                        '$' . $column->getField() . ' = $data[\'' . $column->getField() . '\']->getStream()->getContents();' . "\n\n            " . 
+                        '$' . $table . '->' . $mutator . '(' . $column->getField() . ');' . "\n        " .
+                    '}';
+            }
         }
     }
 }
