@@ -170,11 +170,14 @@ class RepositoryGenerator extends BaseGenerator
                 $table = lcfirst(Inflector::classify($data['singular']));
                 $mutator = Inflector::camelize('set_' . $column->getField());
 
-                $data['updateColumns'] .= "\n\n        " .
+                $code = "\n\n        " .
                     'if ( ! $data[\'' . $column->getField() . '\']->getError()) {' . "\n            " .
                         '$' . $column->getField() . ' = $data[\'' . $column->getField() . '\']->getStream()->getContents();' . "\n\n            " . 
                         '$' . $table . '->' . $mutator . '(' . $column->getField() . ');' . "\n        " .
                     '}';
+
+                $data['createColumns'] .= $code;
+                $data['updateColumns'] .= $code;
             }
         }
     }
