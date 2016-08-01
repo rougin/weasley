@@ -24,12 +24,14 @@ database:
     charset: utf8
 
 files:
+    middlewares: app/config/middlewares.php
     routes: src/Http/routes.php
 
 folders:
     components: src/Components
     controllers: src/Http/Controllers
     http: src/Http
+    middlewares: src/Http/Middlewares
     migrations: app/database/migrations
     models: src/Models
     repositories: src/Repositories

@@ -79,7 +79,7 @@ class CreateApplicationCommand extends AbstractCommand
 
         Helpers::render($this->filesystem, $this->renderer, $templates, $data);
 
-        system('composer update');
+        // system('composer update');
 
         $text = 'Application created successfully.';
 

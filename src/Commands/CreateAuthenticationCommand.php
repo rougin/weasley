@@ -19,6 +19,15 @@ use Rougin\Weasley\Common\Commands\AbstractCommand;
  */
 class CreateAuthenticationCommand extends AbstractCommand
 {
+    /**
+     * @var string
+     */
+    protected $middlewaresTemplate = "\n    " . '// Middleware for authentication' . "\n    " .
+        '{application}\{namespace}\AuthenticateMiddleware::class,' . "\n";
+
+    /**
+     * @var string
+     */
     protected $routesTemplate = "\n    " . '// Routes for authentication' . "\n    " .
         '[\'GET\', \'/sign-in\', [ {application}\{namespace}\AuthenticationController::class, \'index\' ] ],' . "\n    " .
         '[\'POST\', \'/sign-in\', [ {application}\{namespace}\AuthenticationController::class, \'authenticate\' ] ],' . "\n    " .
@@ -93,32 +102,54 @@ class CreateAuthenticationCommand extends AbstractCommand
         ];
 
         $controller = $this->renderer->render('Authentication/AuthenticationController.php', $data);
+        $middleware = $this->renderer->render('Authentication/AuthenticateMiddleware.php', $data);
         $validator  = $this->renderer->render('Authentication/SignInValidator.php', $data);
-        $routes     = $this->generateRoute($config);
+
+        $middlewares = $this->generateFile($config, 'middleware');
+        $routes      = $this->generateFile($config, 'route');
 
         $controllerFile = $config->folders->controllers . '/AuthenticationController.php';
+        $middlewareFile = $config->folders->middlewares . '/AuthenticateMiddleware.php';
         $validatorFile  = $config->folders->validators . '/SignInValidator.php';
 
-        if ($this->filesystem->has($controllerFile) && ! $input->getOption('overwrite')) {
-            $text = 'AuthenticationController.php already exists.';
+        if ($this->filesystem->has($controllerFile)) {
+            if ($input->getOption('overwrite')) {
+                $this->filesystem->delete($controllerFile);
+            } else {
+                $text = 'AuthenticationController.php already exists.';
 
-            return $output->writeln('<error>' . $text . '</error>');
+                return $output->writeln('<error>' . $text . '</error>');
+            }
         }
 
-        if ($this->filesystem->has($validatorFile) && ! $input->getOption('overwrite')) {
-            $text = 'SignInValidator.php already exists.';
+        if ($this->filesystem->has($middlewareFile)) {
+            if ($input->getOption('overwrite')) {
+                $this->filesystem->delete($middlewareFile);
+            } else {
+                $text = 'AuthenticateMiddleware.php already exists.';
 
-            return $output->writeln('<error>' . $text . '</error>');
+                return $output->writeln('<error>' . $text . '</error>');
+            }
         }
 
-        if ($input->getOption('overwrite')) {
-            $this->filesystem->delete($controllerFile);
-            $this->filesystem->delete($validatorFile);
+        if ($this->filesystem->has($validatorFile)) {
+            if ($input->getOption('overwrite')) {
+                $this->filesystem->delete($validatorFile);
+            } else {
+                $text = 'SignInValidator.php already exists.';
+
+                return $output->writeln('<error>' . $text . '</error>');
+            }
         }
 
         $this->filesystem->write($controllerFile, $controller);
+        $this->filesystem->write($middlewareFile, $middleware);
         $this->filesystem->write($validatorFile, $validator);
-        $this->filesystem->update($config->files->routes, $routes);
+
+        if ($this->filesystem->has($validatorFile) && $input->getOption('overwrite')) {
+            $this->filesystem->update($config->files->routes, $routes);
+            $this->filesystem->update($config->files->middlewares, $middlewares);
+        }
 
         $text = 'Basic authentication created successfully.';
 
@@ -126,27 +157,37 @@ class CreateAuthenticationCommand extends AbstractCommand
     }
 
     /**
-     * Generates route contents.
+     * Generates file contents.
      * 
      * @param  object $config
+     * @param  string $type
      * @return string
      */
-    protected function generateRoute($config)
+    protected function generateFile($config, $type)
     {
-        $contents   = file_get_contents($config->output . '/' . $config->files->routes);
-        $lines      = preg_split("/\\r\\n|\\r|\\n/", $contents);
-        $endBracket = $lines[count($lines) - 2];
+        $types = [
+            'middleware' => [
+                'filePath'  => $config->files->middlewares,
+                'template'  => $this->middlewaresTemplate,
+                'namespace' => $config->namespaces->middlewares,
+            ],
+            'route' => [
+                'filePath'  => $config->files->routes,
+                'template'  => $this->routesTemplate,
+                'namespace' => $config->namespaces->controllers,
+            ]
+        ];
 
-        if ($endBracket != '];') {
-            $endBracket = $lines[count($lines) - 1];
-        }
+        $contents = file_get_contents($config->output . '/' . $types[$type]['filePath']);
+        $lines    = preg_split("/\\r\\n|\\r|\\n/", $contents);
+        $return   = array_search('return [', $lines);
 
-        $template = $this->routesTemplate . $endBracket;
-        $contents = str_replace($endBracket, $template, $contents);
+        $template = $return . $types[$type]['template'];
+        $contents = str_replace($return, $template, $contents);
 
         $keywords = [
             '{application}' => $config->application->name,
-            '{namespace}'   => $config->namespaces->controllers,
+            '{namespace}'   => $types[$type]['namespace'],
         ];
 
         return str_replace(array_keys($keywords), array_values($keywords), $contents);
