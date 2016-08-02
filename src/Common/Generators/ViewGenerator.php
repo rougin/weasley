@@ -200,7 +200,7 @@ class ViewGenerator extends BaseGenerator
                 '</form>' . "\n            " .
             '</td>';
 
-        array_push($tableHeading, '<td>Action</td>');
+        array_push($tableHeading, '<td width="200px">Action</td>');
         array_push($tableBody, $actions);
 
         $data['{columnForm}']   = trim($data['{columnForm}']);
