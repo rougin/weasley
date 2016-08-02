@@ -190,12 +190,12 @@ class ViewGenerator extends BaseGenerator
         $actions = '' .
             '<td>' . "\n              " .
                 '<a href="{{ (\'/' . Inflector::pluralize($data['{name}']) . '/\' ~ item.id ~ \'/edit\') | url }}" class="btn btn-xs btn-info">' . "\n                " .
-                    '<i class="icon ion-edit"></i> Update' . "\n              " .
+                    '<i class="fa fa-pencil fa-fw"></i> Update' . "\n              " .
                 '</a>' . "\n               " .
                 '<form action="{{ (\'/' . Inflector::pluralize($data['{name}']) . '/\' ~ item.id) | url }}" style="display: inline-block" method="POST" onsubmit="return confirm(\'Are you sure that you want to delete the selected item?\');">' . "\n                 " .
                     '<input type="hidden" name="_method" value="DELETE" />' . "\n                " .
                     '<button type="submit" class="btn btn-xs btn-danger">' . "\n                   " .
-                        '<i class="icon ion-trash-b"></i> Delete' . "\n                 " .
+                        '<i class="fa fa-trash fa-fw"></i> Delete' . "\n                 " .
                     '</button>' . "\n              " .
                 '</form>' . "\n            " .
             '</td>';
