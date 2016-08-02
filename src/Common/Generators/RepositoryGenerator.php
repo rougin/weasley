@@ -53,13 +53,20 @@ class RepositoryGenerator extends BaseGenerator
      */
     public function concat(array &$data)
     {
-        $config = Configuration::get();
-        $columns = $this->describe->getTable($data['name']);
-        $counter = 0;
+        $config      = Configuration::get();
+        $columns     = $this->describe->getTable($data['name']);
+        $counter     = 0;
+        $foreignKeys = 0;
 
-        $data['singular'] = lcfirst(Inflector::classify($data['singular']));
+        $data['singular']      = lcfirst(Inflector::classify($data['singular']));
         $data['createColumns'] = '';
         $data['updateColumns'] = '';
+
+        foreach ($columns as $column) {
+            if ($column->isForeignKey()) {
+                $foreignKeys++;
+            }
+        }
 
         foreach ($columns as $column) {
             if ( ! $column->isForeignKey()) {
@@ -83,7 +90,7 @@ class RepositoryGenerator extends BaseGenerator
             $data['createColumns'] .= $template;
             $data['updateColumns'] .= $template;
 
-            if ($counter < (count($columns) - 1)) {
+            if ($counter < $foreignKeys - 1) {
                 $data['createColumns'] .= '        ';
                 $data['updateColumns'] .= '        ';
             }
@@ -125,6 +132,8 @@ class RepositoryGenerator extends BaseGenerator
                 $template = str_replace('$data[\'{name}\']', 'isset($data[\'{name}\'])', $template);
             } else if ($column->getField() == 'password') {
                 $template = str_replace('$data[\'{name}\']', 'md5($data[\'{name}\'])', $template);
+            } else if ($column->isNull()) {
+                $template = str_replace('$data[\'{name}\']', 'isset($data[\'{name}\']) ? $data[\'{name}\'] : null', $template);
             }
 
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);
