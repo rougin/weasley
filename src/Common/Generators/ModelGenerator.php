@@ -107,6 +107,10 @@ class ModelGenerator extends BaseGenerator
                     $data['foreignClasses'] = "\nuse Doctrine\ORM\Mapping\ManyToOne;\n" .
                         "use Doctrine\ORM\Mapping\JoinColumn;";
                 }
+
+                if (strpos($column->getDataType(), 'date') !== false) {
+                    $template = str_replace(', length={length}', '', $template);
+                }
             }
 
             $data['methods'] .= $this->accessorMethodTemplate;
@@ -122,9 +126,7 @@ class ModelGenerator extends BaseGenerator
                 '{class}'        => '',
             ];
 
-            if ($column->getField() == 'datetime_created' || $column->getField() == 'datetime_updated') {
-                // $keywords['{datatype}'] = '\DateTime';
-
+            if (strpos($column->getDataType(), 'date') !== false) {
                 if (strpos($data['foreignClasses'], "\nuse DateTime;") === false) {
                     $data['foreignClasses'] .= "\nuse DateTime;";
                 }
