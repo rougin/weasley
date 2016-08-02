@@ -113,6 +113,10 @@ class ModelGenerator extends BaseGenerator
                 }
             }
 
+            if ($column->isNull()) {
+                $data['methods'] = str_replace('{class}${variable}', '{class}${variable} = null', $data['methods']);
+            }
+
             $data['methods'] .= $this->accessorMethodTemplate;
 
             $keywords = [
