@@ -104,7 +104,7 @@ class ValidatorGenerator extends BaseGenerator
             }
 
             $data['rules']  .= "\n\n        " .
-                'if ($data[\'password\'] != null || ! isset($data[\'_method\'])) { ' . "\n            " .
+                'if (isset($data[\'password\']) && $data[\'password\'] != null || ! isset($data[\'_method\'])) { ' . "\n            " .
                     '$validator->rule(\'required\', \'password\');' . "\n            " .
                     '$validator->rule(\'equals\', \'password\', \'password_confirmation\');' . "\n        " .
                 '}';
