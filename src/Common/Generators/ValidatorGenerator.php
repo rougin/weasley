@@ -67,11 +67,6 @@ class ValidatorGenerator extends BaseGenerator
                 $label = ucfirst(str_replace('_', ' ', Inflector::tableize($referencedTable)));
             }
 
-            // if ($column->getField() == 'username') {
-            //     $unique = str_replace('\'required\'', '\'unique\'', $template);
-            //     $template .= "        " . $unique;
-            // }
-
             if ($column->getField() != 'datetime_created' && $column->getField() != 'datetime_updated' && $column->getField() != 'password') {
                 $data['labels'] .= '\'' . $column->getField() . '\' => \'' . $label . '\',';
                 $data['rules'] .= $template;
