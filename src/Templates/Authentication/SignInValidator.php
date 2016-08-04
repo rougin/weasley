@@ -4,7 +4,7 @@ namespace {{ application.name }}\{{ namespaces.validators }};
 
 use Valitron\Validator;
 
-use {{ application.name }}\{{ namespaces.repositories }}\{{ plural | capitalize }}Repository;
+use {{ application.name }}\{{ namespaces.repositories }}\{{ singular | capitalize }}Repository;
 
 /**
  * Sign In Validator
@@ -15,14 +15,14 @@ use {{ application.name }}\{{ namespaces.repositories }}\{{ plural | capitalize 
 class SignInValidator extends BaseValidator
 {
     /**
-     * @var \{{ application.name }}\{{ namespaces.repositories }}\{{ plural | capitalize }}Repository
+     * @var \{{ application.name }}\{{ namespaces.repositories }}\{{ singular | capitalize }}Repository
      */
     protected ${{ singular }}Repository;
 
     /**
-     * @param \{{ application.name }}\{{ namespaces.repositories }}\{{ plural | capitalize }}Repository ${{ singular }}Repository
+     * @param \{{ application.name }}\{{ namespaces.repositories }}\{{ singular | capitalize }}Repository ${{ singular }}Repository
      */
-    public function __construct({{ plural | capitalize }}Repository ${{ singular }}Repository)
+    public function __construct({{ singular | capitalize }}Repository ${{ singular }}Repository)
     {
         $this->{{ singular }}Repository = ${{ singular }}Repository;
     }
