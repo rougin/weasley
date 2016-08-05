@@ -95,8 +95,8 @@ class CreateAuthenticationCommand extends AbstractCommand
             'model'       => $input->getOption('model'),
             'namespaces'  => $config->namespaces,
             'password'    => $input->getOption('password'),
-            'plural'      => Inflector::pluralize($input->getOption('model')),
-            'singular'    => Inflector::singularize($input->getOption('model')),
+            'plural'      => lcfirst(Inflector::classify(Inflector::pluralize($input->getOption('model')))),
+            'singular'    => lcfirst(Inflector::classify(Inflector::singularize($input->getOption('model')))),
             'username'    => $input->getOption('username'),
         ];
 
@@ -145,8 +145,11 @@ class CreateAuthenticationCommand extends AbstractCommand
         $this->filesystem->write($middlewareFile, $middleware);
         $this->filesystem->write($validatorFile, $validator);
 
-        if ($this->filesystem->has($validatorFile) && $input->getOption('overwrite')) {
+        if ($this->filesystem->has($config->files->routes)) {
             $this->filesystem->update($config->files->routes, $routes);
+        }
+
+        if ($this->filesystem->has($config->files->middlewares)) {
             $this->filesystem->update($config->files->middlewares, $middlewares);
         }
 
@@ -181,8 +184,8 @@ class CreateAuthenticationCommand extends AbstractCommand
         $lines    = preg_split("/\\r\\n|\\r|\\n/", $contents);
         $return   = array_search('return [', $lines);
 
-        $template = $return . $types[$type]['template'];
-        $contents = str_replace($return, $template, $contents);
+        $template = $lines[$return] . $types[$type]['template'];
+        $contents = str_replace($lines[$return], $template, $contents);
 
         $keywords = [
             '{application}' => $config->application->name,
