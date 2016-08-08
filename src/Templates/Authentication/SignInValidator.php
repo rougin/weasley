@@ -69,7 +69,7 @@ class SignInValidator extends BaseValidator
         ${{ singular }} = $this->{{ singular }}Repository->findOneBy($parameters);
 
         if ( ! ${{ singular }}) {
-            ${{ password }} = [ 'Invalid {{ username | lower | replace({'_': ' '}) }} or {{ password | lower | replace({'_': ' '}) }}!' ];
+            ${{ password }} = [ 'Invalid {{ username | lower | replace({ '_': ' ' }) }} or {{ password | lower | replace({ '_': ' ' }) }}!' ];
 
             $this->errors = compact('{{ password }}');
 

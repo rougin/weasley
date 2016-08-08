@@ -29,9 +29,9 @@ class CreateAuthenticationCommand extends AbstractCommand
      * @var string
      */
     protected $routesTemplate = "\n    " . '// Routes for authentication' . "\n    " .
-        '[\'GET\', \'/sign-in\', [ {application}\{namespace}\AuthenticationController::class, \'index\' ] ],' . "\n    " .
-        '[\'POST\', \'/sign-in\', [ {application}\{namespace}\AuthenticationController::class, \'authenticate\' ] ],' . "\n    " .
-        '[\'GET\', \'/sign-out\', [ {application}\{namespace}\AuthenticationController::class, \'destroy\' ] ],' . "\n";
+        '[\'GET\', \'/auth/sign-in\', [ {application}\{namespace}\AuthenticationController::class, \'index\' ] ],' . "\n    " .
+        '[\'POST\', \'/auth/sign-in\', [ {application}\{namespace}\AuthenticationController::class, \'authenticate\' ] ],' . "\n    " .
+        '[\'GET\', \'/auth/sign-out\', [ {application}\{namespace}\AuthenticationController::class, \'destroy\' ] ],' . "\n";
 
     /**
      * Configures the current command.

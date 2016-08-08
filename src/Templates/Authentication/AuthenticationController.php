@@ -13,6 +13,11 @@ use {{ application.name }}\{{ namespaces.validators }}\SignInValidator;
 class AuthenticationController extends BaseController
 {
     /**
+     * @var string
+     */
+    protected $redirectTo = '/';
+
+    /**
      * Authenticates the user to the application.
      * 
      * @return redirect
@@ -23,7 +28,7 @@ class AuthenticationController extends BaseController
 
         validate(SignInValidator::class, $parameters);
 
-        return redirect('/');
+        return redirect($this->redirectTo);
     }
 
     /**
@@ -35,7 +40,7 @@ class AuthenticationController extends BaseController
     {
         session_destroy();
 
-        return redirect('sign-in');
+        return redirect('auth/sign-in');
     }
 
     /**
@@ -45,6 +50,6 @@ class AuthenticationController extends BaseController
      */
     public function index()
     {
-        return view('auth/signin');
+        return view('auth/sign-in');
     }
 }
