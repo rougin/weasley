@@ -6,7 +6,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 /**
- * {{ name | title | replace({'_': ' '}) }} Middleware
+ * {{ name | title | replace({ '_': ' ' }) }} Middleware
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>

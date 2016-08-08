@@ -6,7 +6,7 @@ use {{ application.name }}\{{ namespaces.validators }}\{{ singularTitle }}Valida
 use {{ application.name }}\{{ namespaces.repositories }}\{{ singularTitle }}Repository;{{ repository.namespaces }}
 
 /**
- * {{ plural | title | replace({'_': ' '}) }} Controller
+ * {{ plural | title | replace({ '_': ' ' }) }} Controller
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
@@ -46,7 +46,7 @@ class {{ pluralTitle }}Controller extends BaseController
     {
         $this->{{ repository.name }}->delete($id);
 
-        $message = '{{ singular | capitalize | replace({'_': ' '}) }} deleted successfully!';
+        $message = '{{ singular | capitalize | replace({ '_': ' ' }) }} deleted successfully!';
 
         return redirect('{{ plural }}', compact('message'));
     }
@@ -86,9 +86,9 @@ class {{ pluralTitle }}Controller extends BaseController
 
         validate({{ singularTitle }}Validator::class, $parameters);
 
-        ${{ singular }} = $this->{{ repository.name }}->create($parameters);
+        $item = $this->{{ repository.name }}->create($parameters);
 
-        $message = '{{ singular | capitalize | replace({'_': ' '}) }} created successfully!';
+        $message = '{{ singular | capitalize | replace({ '_': ' ' }) }} created successfully!';
 
         return redirect('{{ plural }}', compact('message'));
     }
@@ -107,7 +107,7 @@ class {{ pluralTitle }}Controller extends BaseController
 
         $this->{{ repository.name }}->update($id, $parameters);
 
-        $message = '{{ singular | capitalize | replace({'_': ' '}) }} updated successfully!';
+        $message = '{{ singular | capitalize | replace({ '_': ' ' }) }} updated successfully!';
 
         return redirect('{{ plural }}', compact('message'));
     }

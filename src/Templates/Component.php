@@ -5,7 +5,7 @@ namespace {{ application.name }}\{{ namespaces.components }};
 use Rougin\Slytherin\Component\AbstractComponent;
 
 /**
- * {{ name | title | replace({'_': ' '}) }} Component
+ * {{ name | title | replace({ '_': ' ' }) }} Component
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>

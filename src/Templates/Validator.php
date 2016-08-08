@@ -5,7 +5,7 @@ namespace {{ application.name }}\{{ namespaces.validators }};
 use Valitron\Validator;
 
 /**
- * {{ singular | title | replace({'_': ' '}) }} Validator
+ * {{ singular | title | replace({ '_': ' ' }) }} Validator
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>

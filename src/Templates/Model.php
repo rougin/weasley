@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;{{ foreignClasses }}
 
 /**
- * {{ singular | title | replace({'_': ' '}) }} Model
+ * {{ singular | title | replace({ '_': ' ' }) }} Model
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>

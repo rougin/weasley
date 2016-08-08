@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
 use {{ application.name }}\{{ namespaces.models }}\{{ singularTitle }};{{ foreignClasses }}
 
 /**
- * {{ singular | title | replace({'_': ' '}) }} Repository
+ * {{ singular | title | replace({ '_': ' ' }) }} Repository
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
