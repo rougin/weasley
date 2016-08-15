@@ -36,23 +36,10 @@ class CreateMvcCommand extends AbstractCommand
                 InputArgument::REQUIRED,
                 'Base table name for the files'
             )->addOption(
-                'application',
+                'overwrite',
                 null,
-                InputOption::VALUE_OPTIONAL,
-                'Name of the application',
-                $config->application->name
-            )->addOption(
-                'author',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'Author of the MVC',
-                $config->author->name
-            )->addOption(
-                'email',
-                null,
-                InputOption::VALUE_OPTIONAL,
-                'Email of the author',
-                $config->author->email
+                InputOption::VALUE_NONE,
+                'Overwrite the specified files'
             );
     }
 
@@ -75,8 +62,9 @@ class CreateMvcCommand extends AbstractCommand
 
         foreach ($commands as $command) {
             $arguments = [
-                'command' => $command,
-                'name'    => $input->getArgument('name'),
+                'command'     => $command,
+                'name'        => $input->getArgument('name'),
+                '--overwrite' => $input->getOption('overwrite'),
             ];
 
             $input = new ArrayInput($arguments);
