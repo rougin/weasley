@@ -23,15 +23,15 @@ class CreateAuthenticationCommand extends AbstractCommand
      * @var string
      */
     protected $middlewaresTemplate = "\n    " . '// Middleware for authentication' . "\n    " .
-        '{application}\{namespace}\AuthenticateMiddleware::class,' . "\n";
+        '\'{application}\{namespace}\AuthenticateMiddleware\',' . "\n";
 
     /**
      * @var string
      */
     protected $routesTemplate = "\n    " . '// Routes for authentication' . "\n    " .
-        '[ \'GET\', \'/auth/sign-in\', [ {application}\{namespace}\AuthenticationController::class, \'index\' ] ],' . "\n    " .
-        '[ \'POST\', \'/auth/sign-in\', [ {application}\{namespace}\AuthenticationController::class, \'authenticate\' ] ],' . "\n    " .
-        '[ \'GET\', \'/auth/sign-out\', [ {application}\{namespace}\AuthenticationController::class, \'destroy\' ] ],' . "\n";
+        '[ \'GET\', \'/auth/sign-in\', [ \'{application}\{namespace}\AuthenticationController\', \'index\' ] ],' . "\n    " .
+        '[ \'POST\', \'/auth/sign-in\', [ \'{application}\{namespace}\AuthenticationController\', \'authenticate\' ] ],' . "\n    " .
+        '[ \'GET\', \'/auth/sign-out\', [ \'{application}\{namespace}\AuthenticationController\', \'destroy\' ] ],' . "\n";
 
     /**
      * Configures the current command.
@@ -102,14 +102,12 @@ class CreateAuthenticationCommand extends AbstractCommand
 
         $controller = $this->renderer->render('Authentication/AuthenticationController.php', $data);
         $middleware = $this->renderer->render('Authentication/AuthenticateMiddleware.php', $data);
-        $validator  = $this->renderer->render('Authentication/SignInValidator.php', $data);
 
         $middlewares = $this->generateFile($config, 'middleware');
         $routes      = $this->generateFile($config, 'route');
 
         $controllerFile = $config->folders->controllers . '/AuthenticationController.php';
         $middlewareFile = $config->folders->middlewares . '/AuthenticateMiddleware.php';
-        $validatorFile  = $config->folders->validators . '/SignInValidator.php';
 
         if ($this->filesystem->has($controllerFile)) {
             if ($input->getOption('overwrite')) {
@@ -131,19 +129,8 @@ class CreateAuthenticationCommand extends AbstractCommand
             }
         }
 
-        if ($this->filesystem->has($validatorFile)) {
-            if ($input->getOption('overwrite')) {
-                $this->filesystem->delete($validatorFile);
-            } else {
-                $text = 'SignInValidator.php already exists.';
-
-                return $output->writeln('<error>' . $text . '</error>');
-            }
-        }
-
         $this->filesystem->write($controllerFile, $controller);
         $this->filesystem->write($middlewareFile, $middleware);
-        $this->filesystem->write($validatorFile, $validator);
 
         if ($this->filesystem->has($config->files->routes)) {
             $this->filesystem->update($config->files->routes, $routes);
