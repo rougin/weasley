@@ -55,15 +55,8 @@ class CreateApplicationCommand extends AbstractCommand
         $appDirectory = $directory . $slash;
         $result = [];
 
-        array_push($templates, $appDirectory . '.editorconfig');
         array_push($templates, $appDirectory . '.env');
-        array_push($templates, $appDirectory . '.gitignore');
-        array_push($templates, $appDirectory . '.htaccess');
         array_push($templates, $appDirectory . 'public' . $slash . '.htaccess');
-        array_push($templates, $appDirectory . 'app' . $slash . '.htaccess');
-        array_push($templates, $appDirectory . 'src' . $slash . '.htaccess');
-        array_push($templates, $appDirectory . 'app' . $slash . 'database' . $slash . 'migrations' . $slash . '.gitignore');
-        array_push($templates, $appDirectory . 'app' . $slash . 'database' . $slash . 'seeds' . $slash . '.gitignore');
 
         $data = [
             'application' => $config->application,

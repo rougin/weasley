@@ -2,8 +2,8 @@
 
 namespace {{ application.name }}\{{ namespaces.middlewares }};
 
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * {{ name | title | replace({ '_': ' ' }) }} Middleware
@@ -19,7 +19,7 @@ class {{ nameTitle }}Middleware
      * @param  callable|null $next
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function __invoke(Request $request, Response $response, callable $next = null)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         //
     }

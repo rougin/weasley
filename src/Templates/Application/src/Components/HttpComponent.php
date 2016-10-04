@@ -2,21 +2,13 @@
 
 namespace {{ application.name }}\{{ namespaces.components }};
 
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequestFactory;
-use Interop\Container\ContainerInterface;
-
-use Rougin\Slytherin\Http\BaseUriGuesser;
-use Rougin\Slytherin\IoC\Vanilla\Container;
-use Rougin\Slytherin\Component\AbstractComponent;
-
 /**
  * HTTP Component
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class HttpComponent extends AbstractComponent
+class HttpComponent extends \Rougin\Slytherin\Component\AbstractComponent
 {
     /**
      * Type of the component:
@@ -43,12 +35,12 @@ class HttpComponent extends AbstractComponent
      */
     public function get()
     {
-        $request  = ServerRequestFactory::fromGlobals();
-        $response = new Response;
+        $request  = \Zend\Diactoros\ServerRequestFactory::fromGlobals();
+        $response = new \Zend\Diactoros\Response;
 
         // Guess the protocol and the root URI
         if ($request->getUri() && ! config('app.base_url')) {
-            $request = BaseUriGuesser::guess($request);
+            $request = \Rougin\Slytherin\Http\BaseUriGuesser::guess($request);
         }
 
         $this->request  = $request;
@@ -63,9 +55,9 @@ class HttpComponent extends AbstractComponent
      * @param  \Interop\Container\ContainerInterface $container
      * @return void
      */
-    public function set(ContainerInterface &$container)
+    public function set(\Interop\Container\ContainerInterface &$container)
     {
-        if ($container instanceof Container) {
+        if ($container instanceof \Rougin\Slytherin\IoC\Vanilla\Container) {
             $container->add('Psr\Http\Message\ServerRequestInterface', $this->request);
             $container->add('Psr\Http\Message\ResponseInterface', $this->response);
         }

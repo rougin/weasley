@@ -2,18 +2,13 @@
 
 namespace {{ application.name }}\{{ namespaces.components }};
 
-use Whoops\Run;
-
-use Rougin\Slytherin\Debug\Whoops\Debugger;
-use Rougin\Slytherin\Component\AbstractComponent;
-
 /**
  * Debugger Component
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class DebuggerComponent extends AbstractComponent
+class DebuggerComponent extends \Rougin\Slytherin\Component\AbstractComponent
 {
     /**
      * Type of the component:
@@ -30,7 +25,8 @@ class DebuggerComponent extends AbstractComponent
      */
     public function get()
     {
-        $debugger = new Debugger(new Run);
+        $whoops   = new \Whoops\Run;
+        $debugger = new \Rougin\Slytherin\Debug\Whoops\Debugger($whoops);
 
         $debugger->setEnvironment(config('app.environment'));
 

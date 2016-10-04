@@ -2,17 +2,13 @@
 
 namespace {{ application.name }}\{{ namespaces.components }};
 
-use Rougin\Slytherin\Dispatching\Vanilla\Router;
-use Rougin\Slytherin\Component\AbstractComponent;
-use Rougin\Slytherin\Dispatching\Vanilla\Dispatcher;
-
 /**
  * Dispatcher Component
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class DispatcherComponent extends AbstractComponent
+class DispatcherComponent extends \Rougin\Slytherin\Component\AbstractComponent
 {
     /**
      * Type of the component:
@@ -30,8 +26,8 @@ class DispatcherComponent extends AbstractComponent
     public function get()
     {
         $routes = require base('{{ files.routes }}');
-        $router = new Router($routes);
+        $router = new \Rougin\Slytherin\Dispatching\Vanilla\Router($routes);
 
-        return new Dispatcher($router);
+        return new \Rougin\Slytherin\Dispatching\Vanilla\Dispatcher($router);
     }
 }

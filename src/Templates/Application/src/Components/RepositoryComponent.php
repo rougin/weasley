@@ -2,18 +2,13 @@
 
 namespace {{ application.name }}\{{ namespaces.components }};
 
-use Interop\Container\ContainerInterface;
-
-use Rougin\Slytherin\IoC\Vanilla\Container;
-use Rougin\Slytherin\Component\AbstractComponent;
-
 /**
  * Repository Component
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class RepositoryComponent extends AbstractComponent
+class RepositoryComponent extends \Rougin\Slytherin\Component\AbstractComponent
 {
     /**
      * Sets the component.
@@ -21,7 +16,7 @@ class RepositoryComponent extends AbstractComponent
      * @param  \Interop\Container\ContainerInterface $container
      * @return void
      */
-    public function set(ContainerInterface &$container)
+    public function set(\Interop\Container\ContainerInterface &$container)
     {
         $entityManager = $container->get('Doctrine\ORM\EntityManager');
 
@@ -35,7 +30,7 @@ class RepositoryComponent extends AbstractComponent
 
             $metadata = $entityManager->getClassMetadata($model);
 
-            if ($container instanceof Container) {
+            if ($container instanceof \Rougin\Slytherin\IoC\Vanilla\Container) {
                 $container->add($name, new $name($entityManager, $metadata));
             }
         }

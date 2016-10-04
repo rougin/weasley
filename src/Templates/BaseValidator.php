@@ -2,8 +2,6 @@
 
 namespace {{ application.name }}\{{ namespaces.validators }};
 
-use Valitron\Validator;
-
 /**
  * Base Validator
  *
@@ -18,6 +16,11 @@ class BaseValidator
      * @var array
      */
     protected $errors = [];
+
+    /**
+     * @var \Valitron\Validator
+     */
+    protected $validator;
 
     /**
      * Returns a listing of error, if any.
@@ -37,13 +40,13 @@ class BaseValidator
      */
     public function validate(array $data)
     {
-        $validator = new Validator($data);
+        $this->validator = new \Valitron\Validator($data);
 
-        $this->setLabels($validator);
-        $this->setRules($validator, $data);
+        $this->setLabels();
+        $this->setRules($data);
 
-        if ( ! $validator->validate()) {
-            $this->errors = $validator->errors();
+        if ( ! $this->validator->validate()) {
+            $this->errors = $this->validator->errors();
 
             return false;
         }

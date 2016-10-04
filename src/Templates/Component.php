@@ -2,15 +2,13 @@
 
 namespace {{ application.name }}\{{ namespaces.components }};
 
-use Rougin\Slytherin\Component\AbstractComponent;
-
 /**
  * {{ name | title | replace({ '_': ' ' }) }} Component
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class {{ nameTitle }}Component extends AbstractComponent
+class {{ nameTitle }}Component extends \Rougin\Slytherin\Component\AbstractComponent
 {
     /**
      * Types of components:
@@ -21,11 +19,12 @@ class {{ nameTitle }}Component extends AbstractComponent
     protected $type = '';
 
     /**
-     * Returns an instance from the named class.
-     * 
-     * @return mixed
+     * Sets the component.
+     *
+     * @param  \Interop\Container\ContainerInterface $container
+     * @return void
      */
-    public function get()
+    public function set(\Interop\Container\ContainerInterface &$container)
     {
         //
     }

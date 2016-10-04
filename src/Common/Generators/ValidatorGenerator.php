@@ -19,12 +19,6 @@ class ValidatorGenerator extends BaseGenerator
     protected $describe;
 
     /**
-     * @var string
-     */
-    protected $validatorTemplate = '' .
-        '$validator->rule(\'required\', \'{name}\');' . "\n"; 
-
-    /**
      * @param \Rougin\Describe\Describe $describe
      */
     public function __construct(Describe $describe)
@@ -52,7 +46,7 @@ class ValidatorGenerator extends BaseGenerator
                 continue;
             }
 
-            $template = $this->validatorTemplate;
+            $template = '$this->validator->rule(\'required\', \'{name}\');' . "\n";
 
             $keywords = [
                 '{name}'        => $column->getField(),
@@ -94,15 +88,13 @@ class ValidatorGenerator extends BaseGenerator
         $data['rules']  = trim($data['rules']);
 
         foreach ($columns as $column) {
-            if ($column->getField() != 'password') {
-                continue;
+            if ($column->getField() == 'password') {
+                $data['rules']  .= "\n\n        " .
+                    'if (isset($data[\'password\']) && $data[\'password\'] != null || ! isset($data[\'_method\'])) { ' . "\n            " .
+                        '$this->validator->rule(\'required\', \'password\');' . "\n            " .
+                        '$this->validator->rule(\'equals\', \'password\', \'password_confirmation\');' . "\n        " .
+                    '}';
             }
-
-            $data['rules']  .= "\n\n        " .
-                'if (isset($data[\'password\']) && $data[\'password\'] != null || ! isset($data[\'_method\'])) { ' . "\n            " .
-                    '$validator->rule(\'required\', \'password\');' . "\n            " .
-                    '$validator->rule(\'equals\', \'password\', \'password_confirmation\');' . "\n        " .
-                '}';
         }
     }
 }

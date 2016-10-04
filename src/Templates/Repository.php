@@ -2,8 +2,6 @@
 
 namespace {{ application.name }}\{{ namespaces.repositories }};
 
-use Doctrine\ORM\EntityRepository;
-
 use {{ application.name }}\{{ namespaces.models }}\{{ singularTitle }};{{ foreignClasses }}
 
 /**
@@ -12,7 +10,7 @@ use {{ application.name }}\{{ namespaces.models }}\{{ singularTitle }};{{ foreig
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class {{ singularTitle }}Repository extends EntityRepository
+class {{ singularTitle }}Repository extends \Doctrine\ORM\EntityRepository
 {
     /**
      * Creates a new item.

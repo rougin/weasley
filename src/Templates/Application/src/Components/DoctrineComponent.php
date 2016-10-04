@@ -4,10 +4,6 @@ namespace {{ application.name }}\{{ namespaces.components }};
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
-use Interop\Container\ContainerInterface;
-
-use Rougin\Slytherin\IoC\Vanilla\Container;
-use Rougin\Slytherin\Component\AbstractComponent;
 
 /**
  * Doctrine Component
@@ -15,7 +11,7 @@ use Rougin\Slytherin\Component\AbstractComponent;
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
  */
-class DoctrineComponent extends AbstractComponent
+class DoctrineComponent extends \Rougin\Slytherin\Component\AbstractComponent
 {
     /**
      * Sets the component and add it to the container of your choice.
@@ -23,7 +19,7 @@ class DoctrineComponent extends AbstractComponent
      * @param  \Interop\Container\ContainerInterface $container
      * @return void
      */
-    public function set(ContainerInterface &$container)
+    public function set(\Interop\Container\ContainerInterface &$container)
     {
         $config = Setup::createAnnotationMetadataConfiguration(
             config('doctrine.model_paths'),
@@ -35,7 +31,7 @@ class DoctrineComponent extends AbstractComponent
 
         $entityManager = EntityManager::create(config('database.mysql'), $config);
 
-        if ($container instanceof Container) {
+        if ($container instanceof \Rougin\Slytherin\IoC\Vanilla\Container) {
             $container->add('Doctrine\ORM\EntityManager', $entityManager);
         }
     }

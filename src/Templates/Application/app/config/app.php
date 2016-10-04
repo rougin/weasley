@@ -41,6 +41,5 @@ return [
         '{{ application.name }}\{{ namespaces.components }}\HttpComponent',
         '{{ application.name }}\{{ namespaces.components }}\MiddlewareComponent',
         '{{ application.name }}\{{ namespaces.components }}\RepositoryComponent',
-        '{{ application.name }}\{{ namespaces.components }}\SerializerComponent',
     ]
 ];
