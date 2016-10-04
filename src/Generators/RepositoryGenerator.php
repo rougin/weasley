@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Common\Generators;
+namespace Rougin\Weasley\Generators;
 
 use Rougin\Describe\Describe;
 use Doctrine\Common\Inflector\Inflector;
@@ -69,7 +69,7 @@ class RepositoryGenerator extends BaseGenerator
         }
 
         foreach ($columns as $column) {
-            if ( ! $column->isForeignKey()) {
+            if (! $column->isForeignKey()) {
                 continue;
             }
 
@@ -182,7 +182,7 @@ class RepositoryGenerator extends BaseGenerator
                 $mutator = Inflector::camelize('set_' . $column->getField());
 
                 $code = "\n\n        " .
-                    'if ( ! $data[\'' . $column->getField() . '\']->getError()) {' . "\n            " .
+                    'if (! $data[\'' . $column->getField() . '\']->getError()) {' . "\n            " .
                         '$' . $column->getField() . ' = $data[\'' . $column->getField() . '\']->getStream()->getContents();' . "\n\n            " . 
                         '$' . $table . '->' . $mutator . '($' . $column->getField() . ');' . "\n        " .
                     '}';

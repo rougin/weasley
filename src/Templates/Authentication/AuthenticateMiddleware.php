@@ -21,7 +21,7 @@ class AuthenticateMiddleware
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        if ( ! isset($_SESSION['{{ model }}'])) {
+        if (! isset($_SESSION['{{ model }}'])) {
             return redirect('auth/sign-in?url=' . $request->getUri()->getPath());
         }
 

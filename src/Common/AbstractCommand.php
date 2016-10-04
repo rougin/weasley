@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Common\Commands;
+namespace Rougin\Weasley\Common;
 
 use Twig_Environment;
 use Rougin\Describe\Describe;

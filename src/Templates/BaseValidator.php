@@ -45,7 +45,7 @@ class BaseValidator
         $this->setLabels();
         $this->setRules($data);
 
-        if ( ! $this->validator->validate()) {
+        if (! $this->validator->validate()) {
             $this->errors = $this->validator->errors();
 
             return false;

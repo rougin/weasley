@@ -2,7 +2,7 @@
 
 namespace Rougin\Weasley\Commands;
 
-use Rougin\Weasley\Common\Commands\CreateCommand;
+use Rougin\Weasley\Common\CreateCommand;
 
 /**
  * Create Validator Command

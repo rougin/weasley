@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Common\Commands;
+namespace Rougin\Weasley\Common;
 
 use Doctrine\Common\Inflector\Inflector;
 use Symfony\Component\Console\Input\InputOption;
@@ -8,11 +8,10 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use Rougin\Weasley\Common\Configuration;
-use Rougin\Weasley\Common\Generators\ModelGenerator;
-use Rougin\Weasley\Common\Generators\ValidatorGenerator;
-use Rougin\Weasley\Common\Generators\ControllerGenerator;
-use Rougin\Weasley\Common\Generators\RepositoryGenerator;
+use Rougin\Weasley\Generators\ModelGenerator;
+use Rougin\Weasley\Generators\ValidatorGenerator;
+use Rougin\Weasley\Generators\ControllerGenerator;
+use Rougin\Weasley\Generators\RepositoryGenerator;
 
 /**
  * Create Controller Command
@@ -119,7 +118,7 @@ class CreateCommand extends AbstractCommand
                 $generator->concat($data);
                 $generator->generateRoute($routes, $input->getArgument('name'));
 
-                if ( ! $this->filesystem->has($fileName)) {
+                if (! $this->filesystem->has($fileName)) {
                     if ($this->filesystem->has($config->files->routes)) {
                         $this->filesystem->update($config->files->routes, $routes);
                     } else {
@@ -147,7 +146,7 @@ class CreateCommand extends AbstractCommand
 
                 $validator = str_replace(Inflector::classify($item), 'BaseValidator', $fileName);
 
-                if ( ! $this->filesystem->has($validator)) {
+                if (! $this->filesystem->has($validator)) {
                     $content = $this->renderer->render('BaseValidator.php', $data);
 
                     $this->filesystem->write($validator, $content);
@@ -159,7 +158,7 @@ class CreateCommand extends AbstractCommand
         $content = $this->renderer->render($this->type . '.php', $data);
 
         if ($this->filesystem->has($fileName)) {
-            if ( ! $input->getOption('overwrite')) {
+            if (! $input->getOption('overwrite')) {
                 $text = ucfirst($this->type) . ' already exists.';
 
                 return $output->writeln('<error>' . $text . '</error>');

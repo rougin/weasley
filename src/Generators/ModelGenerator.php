@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Common\Generators;
+namespace Rougin\Weasley\Generators;
 
 use Rougin\Describe\Column;
 use Rougin\Describe\Describe;
@@ -95,13 +95,13 @@ class ModelGenerator extends BaseGenerator
         foreach ($columns as $column) {
             $template = $this->columnTemplate;
 
-            if ( ! $column->isPrimaryKey()) {
+            if (! $column->isPrimaryKey()) {
                 $search = "     * @Id @GeneratedValue\n";
                 $replace = '';
 
                 $template = str_replace($search, $replace, $template);
 
-                if ( ! $column->isForeignKey()) {
+                if (! $column->isForeignKey()) {
                     $data['methods'] .= $this->mutatorMethodTemplate . "\n    ";
                 } else {
                     $data['foreignClasses'] = "\nuse Doctrine\ORM\Mapping\ManyToOne;\n" .
@@ -140,7 +140,7 @@ class ModelGenerator extends BaseGenerator
                 $data['methods'] = str_replace('= ${variable};', '= new DateTime(${variable});', $data['methods']);
             } else if (strpos($column->getDataType(), 'blob') !== false) {
                 $accesor = '' .
-                    'if ( ! $this->{variable}) {' . "\n            " .
+                    'if (! $this->{variable}) {' . "\n            " .
                         'return null;' . "\n        " .
                     '}' . "\n\n        " .
                     'return base64_encode(stream_get_contents($this->{variable}));';
@@ -173,7 +173,7 @@ class ModelGenerator extends BaseGenerator
      */
     public function setForeignKey(Column $column, array &$data, array &$keywords)
     {
-        if ( ! $column->isForeignKey()) {
+        if (! $column->isForeignKey()) {
             return;
         }
 

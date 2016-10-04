@@ -11,14 +11,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Rougin\Blueprint\Common\File;
 
 /**
- * Initialization Command
+ * Initialize Command
  *
  * Creates a blueprint.yml or a defined file name in the specified directory.
  * 
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class InitializationCommand extends Command
+class InitializeCommand extends Command
 {
     /**
      * Sets the configurations of the current command.

@@ -9,8 +9,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use Rougin\Weasley\Common\Configuration;
-use Rougin\Weasley\Common\Commands\AbstractCommand;
-use Rougin\Weasley\Common\Generators\ViewGenerator;
+use Rougin\Weasley\Generators\ViewGenerator;
+use Rougin\Weasley\Common\AbstractCommand;
 
 /**
  * Create View Command
@@ -74,7 +74,7 @@ class CreateViewCommand extends AbstractCommand
         $fileName = $config->folders->views . '/' . $data['{plural}'] . '/';
         $layout = $config->folders->views . '/layouts/master.twig';
 
-        if ( ! $this->filesystem->has($layout)) {
+        if (! $this->filesystem->has($layout)) {
             $template = file_get_contents($templates . '/Views/layout.twig');
             $keywords = [ '{application}' => $config->application->name ];
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);
@@ -86,7 +86,7 @@ class CreateViewCommand extends AbstractCommand
             $view = $fileName . $type . '.twig';
 
             if ($this->filesystem->has($view)) {
-                if ( ! $input->getOption('overwrite')) {
+                if (! $input->getOption('overwrite')) {
                     return $output->writeln('<error>View already exists.</error>');
                 } else {
                     $this->filesystem->delete($view);

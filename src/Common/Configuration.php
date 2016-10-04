@@ -2,8 +2,6 @@
 
 namespace Rougin\Weasley\Common;
 
-use Symfony\Component\Yaml\Yaml;
-
 /**
  * Configuration
  *
@@ -24,6 +22,6 @@ class Configuration
         $file = file_get_contents(BLUEPRINT_FILENAME);
         $file = str_replace('%%CURRENT_DIRECTORY%%', getcwd(), $file);
         
-        return Yaml::parse($file, false, false, true);
+        return \Symfony\Component\Yaml\Yaml::parse($file, false, false, true);
     }
 }

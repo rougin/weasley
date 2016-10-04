@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Common\Generators;
+namespace Rougin\Weasley\Generators;
 
 use Rougin\Describe\Describe;
 use Doctrine\Common\Inflector\Inflector;

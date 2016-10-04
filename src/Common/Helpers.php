@@ -2,7 +2,6 @@
 
 namespace Rougin\Weasley\Common;
 
-use Twig_Environment;
 use League\Flysystem\Filesystem;
 
 /**
@@ -45,7 +44,7 @@ class Helpers
      * @param  array $data
      * @return void
      */
-    public static function render(Filesystem $filesystem, Twig_Environment $renderer, array $templates = [], array $data = [])
+    public static function render(Filesystem $filesystem, \Twig_Environment $renderer, array $templates = [], array $data = [])
     {
         $slash = DIRECTORY_SEPARATOR;
 

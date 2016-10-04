@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use Rougin\Weasley\Common\Configuration;
-use Rougin\Weasley\Common\Commands\AbstractCommand;
+use Rougin\Weasley\Common\AbstractCommand;
 
 /**
  * Create Authentication Command

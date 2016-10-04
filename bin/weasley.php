@@ -18,7 +18,7 @@ $app->console->setVersion('0.2.0');
 
 // Adds a "init" command if the file does not exists
 if ( ! file_exists(BLUEPRINT_FILENAME)) {
-    $command = new Rougin\Weasley\Commands\InitializationCommand;
+    $command = new Rougin\Weasley\Commands\InitializeCommand;
 
     $app->console->add($command);
 
@@ -29,7 +29,7 @@ if ( ! file_exists(BLUEPRINT_FILENAME)) {
 $config = Rougin\Weasley\Common\Configuration::get();
 
 // Instantiate League\Filesystem
-$adapter = new League\Flysystem\Adapter\Local($config->output);
+$adapter    = new League\Flysystem\Adapter\Local($config->output);
 $filesystem = new League\Flysystem\Filesystem($adapter);
 
 $app->injector->share($filesystem);
@@ -56,7 +56,7 @@ $app->injector->delegate('Rougin\Describe\Describe', function () use ($config)
         case 'pdo':
         case 'sqlite':
         case 'sqlite3':
-            $pdo = new PDO($config->database->hostname);
+            $pdo    = new PDO($config->database->hostname);
             $driver = new Rougin\Describe\Driver\SQLiteDriver($pdo);
 
             break;

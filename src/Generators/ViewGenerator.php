@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Common\Generators;
+namespace Rougin\Weasley\Generators;
 
 use Doctrine\Common\Inflector\Inflector;
 
@@ -90,7 +90,7 @@ class ViewGenerator extends BaseGenerator
                 $template        = $this->foreignColumnFormTemplate;
 
                 foreach ($foreignColumns as $foreignColumn) {
-                    if ( ! $foreignColumn->isPrimaryKey() && ! $foreignColumn->isForeignKey()) {
+                    if (! $foreignColumn->isPrimaryKey() && ! $foreignColumn->isForeignKey()) {
                         $description = $foreignColumn->getField();
 
                         break;
