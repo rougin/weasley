@@ -17,20 +17,21 @@ class DispatcherComponent extends AbstractComponent
     /**
      * Type of the component:
      * dispatcher, debugger, http, middleware
-     * 
+     *
      * @var string
      */
     protected $type = 'dispatcher';
 
     /**
      * Returns an instance from the named class.
-     * 
+     *
      * @return mixed
      */
     public function get()
     {
-        $routes = require __DIR__ . '/../../{{ files.routes }}';
+        $routes = require base('{{ files.routes }}');
+        $router = new Router($routes);
 
-        return new Dispatcher(new Router($routes));
+        return new Dispatcher($router);
     }
 }

@@ -1,29 +1,35 @@
 <?php
 
-if ( ! function_exists('validate')) {
-	/**
-	 * Validates the data from a specified validator.
-	 * 
-	 * @param  string $validatorName
-	 * @param  mixed  $data
-	 * @return void|redirect
-	 */
-    function validate($validatorName, $data)
+if (! function_exists('validate')) {
+    /**
+     * Validates the data from a specified validator.
+     *
+     * @param  string  $validatorName
+     * @param  mixed   $data
+     * @param  boolean $debugMode
+     * @return void|redirect
+     */
+    function validate($validatorName, $data, $debugMode = false)
     {
-        container()->add($validatorName);
+        $server = request()->getServerParams();
 
-        $validator = container()->get($validatorName);
+        $validator = new $validatorName;
 
-        if ( ! $validator->validate($data)) {
+        if (! $validator->validate($data)) {
             $flash = [];
 
             $flash['validation'] = $validator->getErrors();
             $flash['old'] = $data;
 
-            // var_dump($flash);
-            // exit;
+            if ($debugMode) {
+                echo '<pre>';
+                print_r($flash);
+                echo '</pre>';
 
-            return redirect($_SERVER['HTTP_REFERER'], $flash);
+                return;
+            }
+
+            return redirect($server['HTTP_REFERER'], $flash);
         }
     }
 }

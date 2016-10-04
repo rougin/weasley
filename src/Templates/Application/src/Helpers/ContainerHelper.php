@@ -1,10 +1,10 @@
 <?php
 
-if ( ! function_exists('container')) {
+if (! function_exists('container')) {
     /**
      * Returns an instance of the used Container.
-     * 
-     * @return Rougin\Slytherin\IoC\ContainerInterface;
+     *
+     * @return \Interop\Container\ContainerInterface
      */
     function container()
     {

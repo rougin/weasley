@@ -2,9 +2,6 @@
 
 namespace {{ application.name }}\{{ namespaces.controllers }};
 
-use {{ application.name }}\{{ namespaces.validators }}\{{ singularTitle }}Validator;
-use {{ application.name }}\{{ namespaces.repositories }}\{{ singularTitle }}Repository;{{ repository.namespaces }}
-
 /**
  * {{ plural | title | replace({ '_': ' ' }) }} Controller
  *
@@ -13,19 +10,6 @@ use {{ application.name }}\{{ namespaces.repositories }}\{{ singularTitle }}Repo
  */
 class {{ pluralTitle }}Controller extends BaseController
 {
-    /**
-     * @var \{{ application.name }}\Repositories\{{ singularTitle }}Repository
-     */
-    protected ${{ repository.name }};{{ repository.variables }}
-
-    /**
-     * @param \{{ application.name }}\Repositories\{{ singularTitle }}Repository ${{ repository.name }}{{ repository.parameters }}
-     */
-    public function __construct({{ singularTitle }}Repository ${{ repository.name }}{{ repository.constructors }})
-    {
-        $this->{{ repository.name }} = ${{ repository.name }};{{ repository.definitions | raw }}
-    }
-
     /**
      * Displays a page for creating a new item.
      * 
@@ -84,7 +68,7 @@ class {{ pluralTitle }}Controller extends BaseController
     {
         $parameters = request()->getParsedBody();{{ parameters | raw }}
 
-        validate({{ singularTitle }}Validator::class, $parameters);
+        validate('{{ application.name }}\{{ namespaces.validators }}\{{ singularTitle }}Validator', $parameters);
 
         $item = $this->{{ repository.name }}->create($parameters);
 
@@ -103,7 +87,7 @@ class {{ pluralTitle }}Controller extends BaseController
     {
         $parameters = request()->getParsedBody();{{ parameters | raw }}
 
-        validate({{ singularTitle }}Validator::class, $parameters);
+        validate('{{ application.name }}\{{ namespaces.validators }}\{{ singularTitle }}Validator', $parameters);
 
         $this->{{ repository.name }}->update($id, $parameters);
 

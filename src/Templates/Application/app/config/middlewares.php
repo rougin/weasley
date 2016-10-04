@@ -6,5 +6,5 @@
  * @var array
  */
 return [
-    {{ application.name }}\{{ namespaces.middlewares }}\LastMiddleware::class,
+    '{{ application.name }}\{{ namespaces.middlewares }}\LastMiddleware',
 ];

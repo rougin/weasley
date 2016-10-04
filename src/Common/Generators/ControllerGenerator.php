@@ -22,37 +22,16 @@ class ControllerGenerator extends BaseGenerator
     protected $describe;
 
     /**
-     * @var array
-     */
-    protected $repositoryTemplate = [
-        'constructor' => ', {singularTitle}Repository ${singular}Repository',
-        'definition'  => "\n        " . '$this->{singular}Repository = ${singular}Repository;',
-        'dropdown'    => '${plural} = $this->{singular}Repository->findAll();' . "\n        ",
-        'namespace'   => "\n" . 'use {application}\{namespace}\{singularTitle}Repository;',
-        'parameter'   => "\n    " . ' * @param \{application}\{namespace}\{singularTitle}Repository ${singular}Repository',
-        'variable'    => "\n\n    " .
-            '/**' . "\n    " .
-             ' * @var \{application}\{namespace}\{singularTitle}Repository' . "\n    " .
-             ' */' . "\n    " .
-             'protected ${singular}Repository;',
-    ];
-
-    /**
-     * @var \App\Repositories\UserRepository
-     */
-    protected $userRepository;
-
-    /**
      * @var string
      */
     protected $routesTemplate = '' .
         "\n    " . '// Routes for {pluralTitleDescription} Controller' . "\n    " .
-        '[ \'GET\', \'/{plural}\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'index\' ], config(\'middlewares\') ],' . "\n    " .
-        '[ \'GET\', \'/{plural}/create\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'create\' ], config(\'middlewares\') ],' . "\n    " .
-        '[ \'POST\', \'/{plural}\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'store\' ], config(\'middlewares\') ],' . "\n    " .
-        '[ \'GET\', \'/{plural}/:id/edit\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'edit\' ], config(\'middlewares\') ],' . "\n    " .
-        '[ \'PUT\', \'/{plural}/:id\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'update\' ], config(\'middlewares\') ],' . "\n    " .
-        '[ \'DELETE\', \'/{plural}/:id\', [ {application}\{namespace}\{pluralTitle}Controller::class, \'delete\' ], config(\'middlewares\') ],' . "\n";
+        '[ \'GET\', \'/{plural}\', [ \'{application}\{namespace}\{pluralTitle}Controller\', \'index\' ], config(\'middlewares\') ],' . "\n    " .
+        '[ \'GET\', \'/{plural}/create\', [ \'{application}\{namespace}\{pluralTitle}Controller\', \'create\' ], config(\'middlewares\') ],' . "\n    " .
+        '[ \'POST\', \'/{plural}\', [ \'{application}\{namespace}\{pluralTitle}Controller\', \'store\' ], config(\'middlewares\') ],' . "\n    " .
+        '[ \'GET\', \'/{plural}/:id/edit\', [ \'{application}\{namespace}\{pluralTitle}Controller\', \'edit\' ], config(\'middlewares\') ],' . "\n    " .
+        '[ \'PUT\', \'/{plural}/:id\', [ \'{application}\{namespace}\{pluralTitle}Controller\', \'update\' ], config(\'middlewares\') ],' . "\n    " .
+        '[ \'DELETE\', \'/{plural}/:id\', [ \'{application}\{namespace}\{pluralTitle}Controller\', \'delete\' ], config(\'middlewares\') ],' . "\n";
 
     /**
      * @param \Rougin\Describe\Describe $describe
@@ -77,13 +56,8 @@ class ControllerGenerator extends BaseGenerator
                 'create' => [],
                 'edit'   => '',
             ],
-            'constructors' => '',
-            'definitions'  => '',
             'dropdowns'    => '',
             'name'         => 'repository',
-            'namespaces'   => '',
-            'parameters'   => '',
-            'variables'    => '',
         ];
 
         $data['parameters'] = '';
@@ -108,29 +82,13 @@ class ControllerGenerator extends BaseGenerator
 
                 $data['repository']->name = lcfirst(Inflector::classify($data['singular'])) . 'Repository';
 
-                $compact     = ', \'{plural}\'';
-                $constructor = $this->repositoryTemplate['constructor'];
-                $definition  = $this->repositoryTemplate['definition'];
-                $dropdown    = $this->repositoryTemplate['dropdown'];
-                $namespace   = $this->repositoryTemplate['namespace'];
-                $parameter   = $this->repositoryTemplate['parameter'];
-                $variable    = $this->repositoryTemplate['variable'];
+                $dropdownTemplate = '${plural} = $this->{singular}Repository->findAll();' . "\n        ";
 
-                $compact     = str_replace(array_keys($keywords), array_values($keywords), $compact);
-                $constructor = str_replace(array_keys($keywords), array_values($keywords), $constructor);
-                $definition  = str_replace(array_keys($keywords), array_values($keywords), $definition);
-                $dropdown    = str_replace(array_keys($keywords), array_values($keywords), $dropdown);
-                $namespace   = str_replace(array_keys($keywords), array_values($keywords), $namespace);
-                $parameter   = str_replace(array_keys($keywords), array_values($keywords), $parameter);
-                $variable    = str_replace(array_keys($keywords), array_values($keywords), $variable);
+                $compact  = str_replace(array_keys($keywords), array_values($keywords), ', \'{plural}\'');
+                $dropdown = str_replace(array_keys($keywords), array_values($keywords), $dropdownTemplate);
 
                 $data['repository']->compacts->edit .= $compact;
-                $data['repository']->constructors   .= $constructor;
-                $data['repository']->definitions    .= $definition;
                 $data['repository']->dropdowns      .= $dropdown;
-                $data['repository']->namespaces     .= $namespace;
-                $data['repository']->parameters     .= $parameter;
-                $data['repository']->variables      .= $variable;
 
                 array_push($data['repository']->compacts->create, "'" . $keywords['{plural}'] . "'");
             }
@@ -140,11 +98,11 @@ class ControllerGenerator extends BaseGenerator
             }
         }
 
-        if ( ! empty($data['repository']->compacts->create)) {
+        if (! empty($data['repository']->compacts->create)) {
             $data['repository']->compacts->create = ', compact(' . implode(', ', $data['repository']->compacts->create) . ')';
         }
 
-        if ( ! empty($data['repository']->dropdowns)) {
+        if (! empty($data['repository']->dropdowns)) {
             $data['repository']->dropdowns = substr($data['repository']->dropdowns, 0, count($data['repository']->dropdowns) - 9);
             $data['repository']->dropdowns .= "\n        ";
         }

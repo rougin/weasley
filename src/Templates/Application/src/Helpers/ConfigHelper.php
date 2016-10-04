@@ -1,32 +1,28 @@
 <?php
 
-if ( ! function_exists('config')) {
+if (! function_exists('config')) {
     /**
      * Gets the configuration from the specified file.
-     * 
+     *
      * @param  string $key
-     * @param  string $default
-     * @return string
+     * @param  string $defaultValue
+     * @return mixed
      */
-    function config($key = null, $default = null)
+    function config($key = null, $defaultValue = null)
     {
-        $directory = __DIR__ . '/../../app';
+        $arrayKeys = explode('.', $key);
+        $filePath  = base('app/config/' . $arrayKeys[0] . '.php');
 
-        $data = explode('.', $key);
-
-        $file = $directory . '/config/' . $data[0] . '.php';
-
-        if ( ! file_exists($file)) {
+        if (! file_exists($filePath)) {
             throw new InvalidArgumentException('File not found.');
         }
 
-        if ($data[0] == $key) {
-            return include $file;
+        if ($arrayKeys[0] == $key) {
+            return include $filePath;
         }
 
-        $config = new Noodlehaus\Config($file);
-        $key = str_replace($data[0] . '.', '', $key);
+        $newKey = str_replace($arrayKeys[0] . '.', '', $key);
 
-        return $config->get($key, $default);
+        return (new Noodlehaus\Config($filePath))->get($newKey, $defaultValue);
     }
 }

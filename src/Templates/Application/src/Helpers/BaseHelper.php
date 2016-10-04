@@ -1,6 +1,6 @@
 <?php
 
-if ( ! function_exists('base')) {
+if (! function_exists('base')) {
     /**
      * Returns the base path of the application.
      *
@@ -12,6 +12,6 @@ if ( ! function_exists('base')) {
         $slash = DIRECTORY_SEPARATOR;
         $base  = str_replace('src' . $slash . 'Helpers', '', __DIR__);
 
-        return $base . $item;
+        return $base . str_replace([ '\\', '/' ], $slash, $item);
     }
 }

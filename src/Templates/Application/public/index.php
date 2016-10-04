@@ -1,28 +1,18 @@
 <?php
 
-session_start();
+use Rougin\Slytherin\Application\Application;
+use Rougin\Slytherin\Component\Collector;
+use Rougin\Slytherin\IoC\Vanilla\Container;
 
-$base = str_replace('\public', '', __DIR__);
-
-require $base . '/vendor/autoload.php';
-
-// Loads the environment variables from an .env file.
-$dotenv = new Dotenv\Dotenv($base);
-$dotenv->load();
-
-date_default_timezone_set($_ENV['TIMEZONE']);
+require __DIR__ . '/../vendor/autoload.php';
 
 // Loads the helpers
-$helpers = glob($base . '/src/Helpers/*.php');
-array_map(function ($helper) { require $helper; }, $helpers);
+$helpers = glob(__DIR__ . '/../src/Helpers/*.php');
+foreach ($helpers as $helper): require $helper; endforeach;
 
 // Loads the specified components
-$components = Rougin\Slytherin\Component\Collector::get(
-    new Rougin\Slytherin\IoC\Vanilla\Container,
-    config('app.components'),
-    $GLOBALS
-);
+$components = Collector::get(new Container, config('app.components'));
+$GLOBALS['container'] = $components->getContainer();
 
-$application = new Rougin\Slytherin\Application($components);
-
-$application->run();
+// Starts the Slytherin application
+(new Rougin\Slytherin\Application($components))->run();

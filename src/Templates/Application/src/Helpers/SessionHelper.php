@@ -1,25 +1,36 @@
 <?php
 
-if ( ! function_exists('session')) {
+if (! function_exists('session')) {
     /**
      * Returns a value from $_SESSION variable.
-     * 
-     * @param  string|null $variable
-     * @param  mixed|null  $defaultValue
+     *
+     * @param  array|string|null $variable
+     * @param  mixed|null        $defaultValue
      * @return mixed
      */
-    function session($variable = null, $defaultValue = null, $deleteAfter = false)
+    function session($variable = null, $defaultValue = null)
     {
-        if ( ! $variable) {
+        $multiArray  = new Tebru\MultiArray($_SESSION);
+        $returnValue = $defaultValue;
+
+        if ($variable === null) {
             return $_SESSION;
         }
 
-        $value = (isset($_SESSION[$variable])) ? $_SESSION[$variable] : $defaultValue;
-
-        if ($deleteAfter) {
-            unset($_SESSION[$variable]);
+        if (is_string($variable) && $multiArray->exists($variable)) {
+            return $multiArray->get($variable);
         }
 
-        return $value;
+        foreach ($variable as $key => $returnValue) {
+            if ($returnValue !== null) {
+                unset($_SESSION[$key]);
+
+                continue;
+            }
+
+            $_SESSION[$key] = $returnValue;
+        }
+
+        return $returnValue;
     }
 }

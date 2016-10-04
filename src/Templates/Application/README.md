@@ -6,7 +6,7 @@
 
 ``` bash
 $ composer install
-$ php vendor/bin/phinx migrate && php vendor/bin/phinx seed:run
+$ vendor/bin/phinx migrate && vendor/bin/phinx seed:run
 $ php -S localhost:8000 -t public/
 ```
 

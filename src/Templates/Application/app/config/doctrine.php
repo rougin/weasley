@@ -6,7 +6,7 @@
  * @var array
  */
 return [
-    'developer_mode' => env('ENVIRONMENT') == 'development',
+    'developer_mode' => config('environment') == 'development',
     'model_paths'    => [ base('src/Models') ],
     'proxy_path'     => base('src/Proxies'),
 ];

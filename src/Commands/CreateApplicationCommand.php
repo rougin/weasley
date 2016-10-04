@@ -56,8 +56,8 @@ class CreateApplicationCommand extends AbstractCommand
         $result = [];
 
         array_push($templates, $appDirectory . '.editorconfig');
-        array_push($templates, $appDirectory . '.env.file');
-        array_push($templates, $appDirectory . '.gitignore.file');
+        array_push($templates, $appDirectory . '.env');
+        array_push($templates, $appDirectory . '.gitignore');
         array_push($templates, $appDirectory . '.htaccess');
         array_push($templates, $appDirectory . 'public' . $slash . '.htaccess');
         array_push($templates, $appDirectory . 'app' . $slash . '.htaccess');
@@ -70,7 +70,7 @@ class CreateApplicationCommand extends AbstractCommand
             'author'      => $config->author,
             'database'    => $config->database,
             'directory'   => $directory,
-            'files'     => $config->files,
+            'files'       => $config->files,
             'folders'     => $config->folders,
             'namespaces'  => (object) $config->namespaces,
         ];

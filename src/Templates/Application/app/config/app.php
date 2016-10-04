@@ -11,7 +11,7 @@ return [
      *
      * @var string
      */
-    'base_url' => env('BASE_URL'),
+    'base_url' => env('BASE_URL', 'http://localhost:8000'),
 
     /**
      * Environment used in the application.
@@ -19,14 +19,14 @@ return [
      *
      * @var string
      */
-    'environment' => env('ENVIRONMENT'),
+    'environment' => env('ENVIRONMENT', 'production'),
 
     /**
      * The default timezone for the application.
      *
      * @var string
      */
-    'timezone' => env('TIMEZONE'),
+    'timezone' => env('TIMEZONE', 'Asia/Manila'),
 
     /**
      * The list of components to be integrated in Slytherin.
@@ -34,12 +34,13 @@ return [
      * @var array
      */
     'components' => [
-        {{ application.name }}\{{ namespaces.components }}\DebuggerComponent::class,
-        {{ application.name }}\{{ namespaces.components }}\DispatcherComponent::class,
-        {{ application.name }}\{{ namespaces.components }}\DoctrineComponent::class,
-        {{ application.name }}\{{ namespaces.components }}\HttpComponent::class,
-        {{ application.name }}\{{ namespaces.components }}\MiddlewareComponent::class,
-        {{ application.name }}\{{ namespaces.components }}\RepositoryComponent::class,
-        {{ application.name }}\{{ namespaces.components }}\SerializerComponent::class,
+        '{{ application.name }}\{{ namespaces.components }}\BootstrapComponent',
+        '{{ application.name }}\{{ namespaces.components }}\DebuggerComponent',
+        '{{ application.name }}\{{ namespaces.components }}\DispatcherComponent',
+        '{{ application.name }}\{{ namespaces.components }}\DoctrineComponent',
+        '{{ application.name }}\{{ namespaces.components }}\HttpComponent',
+        '{{ application.name }}\{{ namespaces.components }}\MiddlewareComponent',
+        '{{ application.name }}\{{ namespaces.components }}\RepositoryComponent',
+        '{{ application.name }}\{{ namespaces.components }}\SerializerComponent',
     ]
 ];
