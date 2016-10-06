@@ -33,17 +33,16 @@ abstract class AbstractCommand extends Command
     protected $renderer;
 
     /**
-     * @param \Rougin\Describe\Describe $describe
+     * @param \Rougin\Describe\Describe    $describe
      * @param \League\Flysystem\Filesystem $filesystem
-     * @param \Twig_Environment $renderer
-     * @param object $yml
+     * @param \Twig_Environment            $renderer
      */
     public function __construct(Describe $describe, Filesystem $filesystem, Twig_Environment $renderer)
     {
         parent::__construct();
 
-        $this->describe = $describe;
+        $this->describe   = $describe;
         $this->filesystem = $filesystem;
-        $this->renderer = $renderer;
+        $this->renderer   = $renderer;
     }
 }

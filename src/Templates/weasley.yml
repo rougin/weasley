@@ -1,6 +1,6 @@
 application:
     name: App
-    description: Yet another application on top of Slytherin
+    description: 'Yet another application on top of Slytherin'
     homepage: https://bitbucket.org/acme/app
     license: Proprietary
     repository: rougin/app
