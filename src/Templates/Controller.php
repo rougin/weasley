@@ -12,7 +12,7 @@ class {{ pluralTitle }}Controller extends BaseController
 {
     /**
      * Displays a page for creating a new item.
-     * 
+     *
      * @return view
      */
     public function create()
@@ -22,13 +22,13 @@ class {{ pluralTitle }}Controller extends BaseController
 
     /**
      * Deletes the selected item.
-     * 
+     *
      * @param  integer $id
      * @return redirect
      */
     public function delete($id)
     {
-        $this->{{ repository.name }}->delete($id);
+        repository('{{ application.name }}\{{ namespaces.repositories }}\{{ singularTitle }}Repository')->delete($id);
 
         $message = '{{ singular | capitalize | replace({ '_': ' ' }) }} deleted successfully!';
 
@@ -37,31 +37,31 @@ class {{ pluralTitle }}Controller extends BaseController
 
     /**
      * Displays a page for updating the selected item.
-     * 
+     *
      * @return view
      */
     public function edit($id)
     {
-        {{ repository.dropdowns | raw }}$item = $this->{{ repository.name }}->find($id);
+        {{ repository.dropdowns | raw }}$item = repository('{{ application.name }}\{{ namespaces.repositories }}\{{ singularTitle }}Repository')->find($id);
 
         return view('{{ plural }}/edit', compact('item'{{ repository.compacts.edit | raw }}));
     }
 
     /**
      * Returns a listing of items.
-     * 
+     *
      * @return view
      */
     public function index()
     {
-        list($items, $links) = paginate($this->{{ repository.name }}->findAll());
+        list($items, $links) = paginate(repository('{{ application.name }}\{{ namespaces.repositories }}\{{ singularTitle }}Repository')->findAll());
 
         return view('{{ plural }}/index', compact('items', 'links'));
     }
 
     /**
      * Stores the new item to the database.
-     * 
+     *
      * @return redirect
      */
     public function store()
@@ -70,7 +70,7 @@ class {{ pluralTitle }}Controller extends BaseController
 
         validate('{{ application.name }}\{{ namespaces.validators }}\{{ singularTitle }}Validator', $parameters);
 
-        $item = $this->{{ repository.name }}->create($parameters);
+        $item = repository('{{ application.name }}\{{ namespaces.repositories }}\{{ singularTitle }}Repository')->create($parameters);
 
         $message = '{{ singular | capitalize | replace({ '_': ' ' }) }} created successfully!';
 
@@ -79,7 +79,7 @@ class {{ pluralTitle }}Controller extends BaseController
 
     /**
      * Updates the selected item.
-     * 
+     *
      * @param  integer $id
      * @return redirect
      */
@@ -89,7 +89,7 @@ class {{ pluralTitle }}Controller extends BaseController
 
         validate('{{ application.name }}\{{ namespaces.validators }}\{{ singularTitle }}Validator', $parameters);
 
-        $this->{{ repository.name }}->update($id, $parameters);
+        repository('{{ application.name }}\{{ namespaces.repositories }}\{{ singularTitle }}Repository')->update($id, $parameters);
 
         $message = '{{ singular | capitalize | replace({ '_': ' ' }) }} updated successfully!';
 

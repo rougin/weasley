@@ -55,9 +55,8 @@ class CreateCommand extends AbstractCommand
             )->addOption(
                 'overwrite',
                 null,
-                InputOption::VALUE_REQUIRED,
-                'Overwrite the specified files',
-                false
+                InputOption::VALUE_NONE,
+                'Overwrite the specified files'
             );
     }
 

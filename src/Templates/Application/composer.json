@@ -17,7 +17,6 @@
         "filp/whoops": "~2.0",
         "pagerfanta/pagerfanta": "~1.0",
         "robmorgan/phinx": "~0.6",
-        "rougin/loream-authsum": "dev-master",
         "rougin/slytherin": "dev-master",
         "twig/twig": "~1.2",
         "vlucas/phpdotenv": "~2.2",

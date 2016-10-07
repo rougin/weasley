@@ -2,8 +2,6 @@
 
 namespace {{ application.name }}\{{ namespaces.repositories }};
 
-use {{ application.name }}\{{ namespaces.models }}\{{ singularTitle }};{{ foreignClasses }}
-
 /**
  * {{ singular | title | replace({ '_': ' ' }) }} Repository
  *
@@ -20,7 +18,7 @@ class {{ singularTitle }}Repository extends \Doctrine\ORM\EntityRepository
      */
     public function create(array $data = [])
     {
-        ${{ singular }} = new {{ singularTitle }};
+        ${{ singular }} = new \{{ application.name }}\{{ namespaces.models }}\{{ singularTitle }};
 
         {{ createColumns | raw }}
 

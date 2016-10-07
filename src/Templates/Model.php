@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\GeneratedValue;{{ foreignClasses }}
  *
  * @package {{ application.name }}
  * @author  {{ author.name }} <{{ author.email }}>
- * 
+ *
  * @Entity(repositoryClass="{{ application.name }}\Repositories\{{ plural | title }}Repository")
  * @Table(name="{{ singular }}")
  */

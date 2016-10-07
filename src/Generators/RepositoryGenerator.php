@@ -24,7 +24,7 @@ class RepositoryGenerator extends BaseGenerator
      * @var string
      */
     protected $foreignVariableTemplate = '' .
-        '${referencedTable} = $this->_em->getReference({table}::class, $data[\'{name}\']);' . "\n"; 
+        '${referencedTable} = $this->_em->getReference(\'{application}\{models}\{table}\', $data[\'{name}\']);' . "\n"; 
 
     /**
      * @var string
@@ -77,15 +77,14 @@ class RepositoryGenerator extends BaseGenerator
             $template = $this->foreignVariableTemplate;
 
             $keywords = [
+                '{application}' => $config->application->name,
+                '{models}' => $config->namespaces->models,
                 '{name}'            => $column->getField(),
                 '{referencedTable}' => $referencedTable,
                 '{table}'           => ucfirst($referencedTable),
             ];
 
             $template = str_replace(array_keys($keywords), array_values($keywords), $template);
-
-            $data['foreignClasses'] .= "\nuse " . $config->application->name . '\\' .
-                $config->namespaces->models . '\\' . ucfirst($referencedTable) . ';';
 
             $data['createColumns'] .= $template;
             $data['updateColumns'] .= $template;

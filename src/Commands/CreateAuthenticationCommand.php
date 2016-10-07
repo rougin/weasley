@@ -22,12 +22,6 @@ class CreateAuthenticationCommand extends AbstractCommand
     /**
      * @var string
      */
-    protected $middlewaresTemplate = "\n    " . '// Middleware for authentication' . "\n    " .
-        '\'{application}\{namespace}\AuthenticateMiddleware\',' . "\n";
-
-    /**
-     * @var string
-     */
     protected $routesTemplate = "\n    " . '// Routes for authentication' . "\n    " .
         '[ \'GET\', \'/auth/sign-in\', [ \'{application}\{namespace}\AuthenticationController\', \'index\' ] ],' . "\n    " .
         '[ \'POST\', \'/auth/sign-in\', [ \'{application}\{namespace}\AuthenticationController\', \'authenticate\' ] ],' . "\n    " .
@@ -157,7 +151,7 @@ class CreateAuthenticationCommand extends AbstractCommand
         $types = [
             'middleware' => [
                 'filePath'  => $config->files->middlewares,
-                'template'  => $this->middlewaresTemplate,
+                'template'  => "\n    " . '\'{application}\{namespace}\AuthenticateMiddleware\',',
                 'namespace' => $config->namespaces->middlewares,
             ],
             'route' => [

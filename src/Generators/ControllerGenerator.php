@@ -52,12 +52,12 @@ class ControllerGenerator extends BaseGenerator
         $columns = $this->describe->getTable($data['name']);
 
         $data['repository'] = (object) [
-            'compacts'     => (object) [
+            'compacts'  => (object) [
                 'create' => [],
                 'edit'   => '',
             ],
-            'dropdowns'    => '',
-            'name'         => 'repository',
+            'dropdowns' => '',
+            'name'      => 'repository',
         ];
 
         $data['parameters'] = '';
@@ -82,10 +82,11 @@ class ControllerGenerator extends BaseGenerator
 
                 $data['repository']->name = lcfirst(Inflector::classify($data['singular'])) . 'Repository';
 
-                $dropdownTemplate = '${plural} = $this->{singular}Repository->findAll();' . "\n        ";
+                $compact  = ', \'{plural}\'';
+                $dropdown = '${plural} = repository(\'{application}\{namespace}\{singularTitle}Repository\')->findAll();' . "\n        ";
 
-                $compact  = str_replace(array_keys($keywords), array_values($keywords), ', \'{plural}\'');
-                $dropdown = str_replace(array_keys($keywords), array_values($keywords), $dropdownTemplate);
+                $compact  = str_replace(array_keys($keywords), array_values($keywords), $compact);
+                $dropdown = str_replace(array_keys($keywords), array_values($keywords), $dropdown);
 
                 $data['repository']->compacts->edit .= $compact;
                 $data['repository']->dropdowns      .= $dropdown;
@@ -100,6 +101,8 @@ class ControllerGenerator extends BaseGenerator
 
         if (! empty($data['repository']->compacts->create)) {
             $data['repository']->compacts->create = ', compact(' . implode(', ', $data['repository']->compacts->create) . ')';
+        } else {
+            $data['repository']->compacts->create = '';
         }
 
         if (! empty($data['repository']->dropdowns)) {
