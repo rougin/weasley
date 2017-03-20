@@ -1,0 +1,16 @@
+<?php
+
+namespace Rougin\Weasley;
+
+class ExampleTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * Test that true does in fact equal true.
+     *
+     * @return void
+     */
+    public function testTrueIsTrue()
+    {
+        $this->assertTrue(true);
+    }
+}

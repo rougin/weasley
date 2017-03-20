@@ -1,19 +1,13 @@
 # Weasley
 
-A code generator for [Slytherin](https://github.com/rougin/slytherin).
+Yet another helper extension for [Slytherin](https://github.com/rougin/slytherin).
 
 ## Install
 
 Via Composer
 
 ``` bash
-$ composer require rougin/weasley:dev-master
-```
-
-## Usage
-
-``` bash
-$ php vendor/bin/weasley init
+$ composer require rougin/weasley
 ```
 
 ## Credits
