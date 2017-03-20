@@ -18,7 +18,7 @@ class MakeIntegrationCommand extends \Symfony\Component\Console\Command\Command
 
     /**
      * Executes the current command.
-     * 
+     *
      * @param  \Symfony\Component\Console\Input\InputInterface  $input
      * @param  \Symfony\Component\Console\Input\OutputInterface $output
      * @return void
