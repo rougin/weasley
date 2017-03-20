@@ -69,7 +69,9 @@ class RestfulController
      */
     public function delete($id)
     {
-        $this->model->delete($id);
+        $item = $this->model->find($id);
+
+        $item->delete();
 
         return $this->toJson(null, 204);
     }
@@ -106,6 +108,7 @@ class RestfulController
     public function store()
     {
         $parameters = $this->request->getParsedBody();
+        $parameters = (is_null($parameters)) ? array() : $parameters;
 
         if (! $this->validator->validate($parameters)) {
             $errors = $this->validator->errors;
@@ -113,7 +116,7 @@ class RestfulController
             return $this->toJson($errors, 400);
         }
 
-        $id = $this->model->insert($parameters);
+        $id = $this->model->fill($parameters)->save();
 
         return $this->show($id);
     }
@@ -127,6 +130,7 @@ class RestfulController
     public function update($id)
     {
         $parameters = $this->request->getParsedBody();
+        $parameters = (is_null($parameters)) ? array() : $parameters;
 
         if (! $this->validator->validate($parameters)) {
             $errors = $this->validator->errors;
@@ -134,7 +138,7 @@ class RestfulController
             return $this->toJson($errors, 400);
         }
 
-        $this->model->update($id, $parameters);
+        $this->model->find($id)->update($parameters);
 
         return $this->toJson(null, 204);
     }

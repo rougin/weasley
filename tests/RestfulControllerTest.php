@@ -21,6 +21,10 @@ class RestfulControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (! class_exists('Illuminate\Database\Capsule\Manager')) {
+            $this->markTestSkipped('Illuminate\Database is not installed');
+        }
+
         $server = array();
 
         $server['REQUEST_METHOD']  = 'GET';
