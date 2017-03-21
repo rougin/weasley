@@ -11,7 +11,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class RestfulController
+class RestfulController extends BaseController
 {
     /**
      * @var \Illuminate\Database\Eloquent\Model|string
@@ -58,7 +58,7 @@ class RestfulController
             throw new \UnexpectedValueException($message);
         }
 
-        $this->validator = new $this->model;
+        $this->validator = new $this->validator;
     }
 
     /**
@@ -116,9 +116,7 @@ class RestfulController
             return $this->toJson($errors, 400);
         }
 
-        $id = $this->model->fill($parameters)->save();
-
-        return $this->show($id);
+        return $this->show($this->model->create($parameters));
     }
 
     /**
@@ -141,23 +139,5 @@ class RestfulController
         $this->model->find($id)->update($parameters);
 
         return $this->toJson(null, 204);
-    }
-
-    /**
-     * Returns the specified data to JSON.
-     *
-     * @param  mixed   $data
-     * @param  integer $code
-     * @return string
-     */
-    protected function toJson($data, $code = 200)
-    {
-        $data = (is_string($data)) ? $data : json_encode($data);
-
-        $response = $this->response->withStatus($code);
-
-        $response->getBody()->write($data);
-
-        return $response->withHeader('Content-Type', 'application/json');
     }
 }
