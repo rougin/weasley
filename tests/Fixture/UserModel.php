@@ -10,7 +10,7 @@ namespace Rougin\Weasley\Fixture;
  */
 class UserModel extends \Illuminate\Database\Eloquent\Model
 {
-	/**
+    /**
      * The table associated with the model.
      *
      * @var string

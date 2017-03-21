@@ -2,6 +2,8 @@
 
 namespace Rougin\Weasley\Http\Controllers;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Base Controller
  *
@@ -10,6 +12,19 @@ namespace Rougin\Weasley\Http\Controllers;
  */
 class BaseController
 {
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    protected $response;
+
+    /**
+     * @param \Psr\Http\Message\ResponseInterface $response
+     */
+    public function __construct(ResponseInterface $response)
+    {
+        $this->response = $response;
+    }
+
     /**
      * Returns the specified data to JSON.
      *

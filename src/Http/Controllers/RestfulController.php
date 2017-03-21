@@ -24,11 +24,6 @@ class RestfulController extends BaseController
     protected $request;
 
     /**
-     * @var \Psr\Http\Message\ResponseInterface
-     */
-    protected $response;
-
-    /**
      * @var \Rougin\Weasley\Validators\AbstractValidator|string
      */
     protected $validator;
@@ -39,8 +34,9 @@ class RestfulController extends BaseController
      */
     public function __construct(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $this->request  = $request;
-        $this->response = $response;
+        parent::__construct($response);
+
+        $this->request = $request;
 
         $controller = get_class($this);
 
