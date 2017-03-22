@@ -14,6 +14,8 @@ class MakeValidatorCommand extends \Symfony\Component\Console\Command\Command
      */
     protected function configure()
     {
+        $this->setName('make:validator');
+        $this->setDescription('Creates a new validator.');
     }
 
     /**
@@ -25,5 +27,6 @@ class MakeValidatorCommand extends \Symfony\Component\Console\Command\Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->write('Validator created successfully!');
     }
 }

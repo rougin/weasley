@@ -14,6 +14,8 @@ class MakeIntegrationCommand extends \Symfony\Component\Console\Command\Command
      */
     protected function configure()
     {
+        $this->setName('make:integration');
+        $this->setDescription('Creates a new integration.');
     }
 
     /**
@@ -25,5 +27,6 @@ class MakeIntegrationCommand extends \Symfony\Component\Console\Command\Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->write('Integration created successfully!');
     }
 }

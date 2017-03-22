@@ -14,6 +14,8 @@ class MakeViewCommand extends \Symfony\Component\Console\Command\Command
      */
     protected function configure()
     {
+        $this->setName('make:view');
+        $this->setDescription('Creates a new view template.');
     }
 
     /**
@@ -25,5 +27,6 @@ class MakeViewCommand extends \Symfony\Component\Console\Command\Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->write('Views created successfully!');
     }
 }

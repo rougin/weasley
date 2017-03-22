@@ -14,6 +14,8 @@ class MakeControllerCommand extends \Symfony\Component\Console\Command\Command
      */
     protected function configure()
     {
+        $this->setName('make:controller');
+        $this->setDescription('Creates a new HTTP controller.');
     }
 
     /**
@@ -25,5 +27,6 @@ class MakeControllerCommand extends \Symfony\Component\Console\Command\Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->write('Controller created successfully!');
     }
 }
