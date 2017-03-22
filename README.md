@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Yet another helper extension for [Slytherin](https://github.com/rougin/slytherin).
+Weasley provides generators and helpers that will speed up your [Slytherin](https://github.com/rougin/slytherin) workflow. This package is based and built on top of [Slytherin Skeleton](https://github.com/rougin/slytherin) project. It can also be used on non-Slytherin projects since they are not tightly coupled from Slytherin.
 
 ## Install
 
@@ -16,6 +16,29 @@ Via Composer
 ``` bash
 $ composer require rougin/weasley
 ```
+
+## Features
+
+### Generators
+
+You can access the generators through `vendor/bin/weasley` in your terminal/command line.
+
+* `make:controller` - Creates a new HTTP controller
+* `make:integration` - Creates an empty Slytherin Integration template
+* `make:validator` - Creates an empty validator based on [Valitron](https://github.com/vlucas/valitron)
+* `make:view` - Create a list of view templates
+
+### HTTP Controllers
+
+* [`RestfulController`](https://github.com/rougin/weasley/blob/master/src/Http/Controllers/RestfulController.php) - based on [PSR-7](http://www.php-fig.org/psr/psr-7), this controller provides methods for creating RESTful APIs
+
+### Integrations
+
+Coming soon
+
+### Middlewares
+
+Coming soon
 
 ## Credits
 
