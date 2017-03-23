@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Weasley provides generators and helpers that will speed up your [Slytherin](https://github.com/rougin/slytherin) workflow. This package is based and built on top of [Slytherin Skeleton](https://github.com/rougin/slytherin) project. It can also be used on non-Slytherin projects since they are not tightly coupled from Slytherin.
+Weasley provides generators and helpers that will speed up your [Slytherin](https://github.com/rougin/slytherin) workflow.
 
 ## Install
 
