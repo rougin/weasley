@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+use Rougin\Weasley\Validators\AbstractValidator;
+
 /**
  * Base Controller
  *
@@ -15,15 +17,22 @@ use Psr\Http\Message\ServerRequestInterface;
 class BaseController
 {
     /**
+     * @var \Psr\Http\Message\ServerRequestInterface
+     */
+    protected $request;
+
+    /**
      * @var \Psr\Http\Message\ResponseInterface
      */
     protected $response;
 
     /**
-     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface      $response
      */
-    public function __construct(ResponseInterface $response)
+    public function __construct(ServerRequestInterface $request, ResponseInterface $response)
     {
+        $this->request  = $request;
         $this->response = $response;
     }
 
@@ -57,18 +66,18 @@ class BaseController
     /**
      * Creates/updates the data to storage.
      *
-     * @param  \Psr\Http\Message\ServerRequestInterface $request
-     * @param  \Illuminate\Database\Eloquent\Model      $model
-     * @param  integer                                  $id
+     * @param  \Illuminate\Database\Eloquent\Model          $model
+     * @param  \Rougin\Weasley\Validators\AbstractValidator $validator
+     * @param  integer                                      $id
      * @return \Psr\Http\Message\ResponseInterface|\Illuminate\Database\Eloquent\Model
      */
-    protected function save(ServerRequestInterface $request, Model $model, $id = null)
+    protected function save(Model $model, AbstractValidator $validator, $id = null)
     {
-        $parameters = $request->getParsedBody();
+        $parameters = $this->request->getParsedBody();
         $parameters = (is_null($parameters)) ? array() : $parameters;
 
-        if (! $this->validator->validate((array) $parameters)) {
-            $errors = $this->validator->errors;
+        if (! $validator->validate((array) $parameters)) {
+            $errors = $validator->errors;
 
             return $this->toJson($errors, 400);
         }

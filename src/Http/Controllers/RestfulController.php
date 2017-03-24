@@ -14,17 +14,22 @@ use Psr\Http\Message\ServerRequestInterface;
 class RestfulController extends BaseController
 {
     /**
-     * @var \Illuminate\Database\Eloquent\Model|string
+     * @var \Illuminate\Database\Eloquent\Model
+     */
+    protected $eloquent;
+
+    /**
+     * @var string
      */
     protected $model;
 
     /**
-     * @var \Psr\Http\Message\ServerRequestInterface
+     * @var \Rougin\Weasley\Validators\AbstractValidator
      */
-    protected $request;
+    protected $validation;
 
     /**
-     * @var \Rougin\Weasley\Validators\AbstractValidator|string
+     * @var string
      */
     protected $validator;
 
@@ -34,19 +39,15 @@ class RestfulController extends BaseController
      */
     public function __construct(ServerRequestInterface $request, ResponseInterface $response)
     {
-        parent::__construct($response);
-
-        $this->request = $request;
-
-        $controller = get_class($this);
+        parent::__construct($request, $response);
 
         $this->checkProperty('model');
 
-        $this->model = new $this->model;
+        $this->eloquent = new $this->model;
 
         $this->checkProperty('validator');
 
-        $this->validator = new $this->validator;
+        $this->validation = new $this->validator;
     }
 
     /**
@@ -57,7 +58,7 @@ class RestfulController extends BaseController
      */
     public function delete($id)
     {
-        $item = $this->model->find($id);
+        $item = $this->eloquent->find($id);
 
         $item->delete();
 
@@ -71,7 +72,7 @@ class RestfulController extends BaseController
      */
     public function index()
     {
-        $items = $this->model->all();
+        $items = $this->eloquent->all();
 
         return $this->toJson($items);
     }
@@ -83,7 +84,7 @@ class RestfulController extends BaseController
      */
     public function show($id)
     {
-        $item = $this->model->find($id);
+        $item = $this->eloquent->find($id);
 
         return $this->toJson($item);
     }
@@ -95,7 +96,7 @@ class RestfulController extends BaseController
      */
     public function store()
     {
-        return $this->save($this->request, $this->model);
+        return $this->save($this->eloquent, $this->validation);
     }
 
     /**
@@ -106,6 +107,6 @@ class RestfulController extends BaseController
      */
     public function update($id)
     {
-        return $this->save($this->request, $this->model, $id);
+        return $this->save($this->eloquent, $this->validation, $id);
     }
 }
