@@ -1,12 +1,12 @@
 <?php
 
-namespace Skeleton\Http\Controllers;
+namespace $NAMESPACE;
 
 /**
- * @package Skeleton
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @package $PACKAGE
+ * @author  $AUTHOR
  */
-class {{ controller }}
+class $CONTROLLER
 {
     //
 }

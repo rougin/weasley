@@ -2,6 +2,7 @@
 
 namespace Rougin\Weasley\Commands;
 
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -14,8 +15,13 @@ class MakeControllerCommand extends \Symfony\Component\Console\Command\Command
      */
     protected function configure()
     {
-        $this->setName('make:controller');
-        $this->setDescription('Creates a new HTTP controller.');
+        $this
+            ->setName('make:controller')
+            ->setDescription('Creates a new HTTP controller.')
+            ->addArgument('name', InputArgument::REQUIRED, 'Name of the class.')
+            ->addArgument('namespace', InputArgument::OPTIONAL, 'Namespace of the class.', 'Skeleton\Http\Controllers')
+            ->addArgument('package', InputArgument::OPTIONAL, 'Namespace of the class.', 'Skeleton')
+            ->addArgument('author', InputArgument::OPTIONAL, 'Namespace of the class.', 'Rougin Royce Gutib <rougingutib@gmail.com>');
     }
 
     /**
@@ -27,6 +33,8 @@ class MakeControllerCommand extends \Symfony\Component\Console\Command\Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $stub = file_get_contents(__DIR__ . '/../Templates/Controller.stub');
+
         $output->write('Controller created successfully!');
     }
 }

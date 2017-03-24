@@ -39,7 +39,7 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
 
         $command = new CommandTester($this->application->find('make:controller'));
 
-        $command->execute(array());
+        $command->execute(array('name' => 'TestController'));
 
         $output = $command->getDisplay();
 
