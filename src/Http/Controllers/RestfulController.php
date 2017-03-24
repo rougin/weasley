@@ -40,19 +40,11 @@ class RestfulController extends BaseController
 
         $controller = get_class($this);
 
-        if (empty($this->model) || $this->model == '') {
-            $message = 'Eloquent model ($model) must be defined in "' . $controller . '"';
-
-            throw new \UnexpectedValueException($message);
-        }
+        $this->checkProperty('model');
 
         $this->model = new $this->model;
 
-        if (empty($this->validator) || $this->validator == '') {
-            $message = '"$validator" must be defined in "' . $controller . '"';
-
-            throw new \UnexpectedValueException($message);
-        }
+        $this->checkProperty('validator');
 
         $this->validator = new $this->validator;
     }
@@ -103,16 +95,7 @@ class RestfulController extends BaseController
      */
     public function store()
     {
-        $parameters = $this->request->getParsedBody();
-        $parameters = (is_null($parameters)) ? array() : $parameters;
-
-        if (! $this->validator->validate($parameters)) {
-            $errors = $this->validator->errors;
-
-            return $this->toJson($errors, 400);
-        }
-
-        return $this->show($this->model->create($parameters));
+        return $this->save($this->request, $this->model);
     }
 
     /**
@@ -123,17 +106,6 @@ class RestfulController extends BaseController
      */
     public function update($id)
     {
-        $parameters = $this->request->getParsedBody();
-        $parameters = (is_null($parameters)) ? array() : $parameters;
-
-        if (! $this->validator->validate($parameters)) {
-            $errors = $this->validator->errors;
-
-            return $this->toJson($errors, 400);
-        }
-
-        $this->model->find($id)->update($parameters);
-
-        return $this->toJson(null, 204);
+        return $this->save($this->request, $this->model, $id);
     }
 }

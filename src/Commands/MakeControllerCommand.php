@@ -35,6 +35,11 @@ class MakeControllerCommand extends \Symfony\Component\Console\Command\Command
     {
         $stub = file_get_contents(__DIR__ . '/../Templates/Controller.stub');
 
+        $stub = str_replace('$CONTROLLER', $input->getArgument('name'), $stub);
+        $stub = str_replace('$NAMESPACE', $input->getArgument('namespace'), $stub);
+        $stub = str_replace('$PACKAGE', $input->getArgument('package'), $stub);
+        $stub = str_replace('$AUTHOR', $input->getArgument('author'), $stub);
+
         $output->write('Controller created successfully!');
     }
 }
