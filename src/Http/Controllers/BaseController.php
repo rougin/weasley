@@ -47,18 +47,11 @@ class BaseController
     {
         $controller = get_class($this);
 
-        switch ($name) {
-            case 'model':
-                $message = 'Eloquent model ($model) must be defined in "' . $controller . '"';
+        $message = ($name == 'validator') ? '"$validator"' : 'Eloquent model ($model)';
 
-                break;
-            case 'validator':
-                $message = '"$validator" must be defined in "' . $controller . '"';
+        if ($this->{$name} == '') {
+            $message .= ' must be defined in "' . $controller . '"';
 
-                break;
-        }
-
-        if (empty($this->{$name}) || $this->{$name} == '') {
             throw new \UnexpectedValueException($message);
         }
     }
