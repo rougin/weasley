@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Fixture;
+namespace Rougin\Weasley\Fixture\Http\Controllers;
 
 /**
  * Users Controller
@@ -13,10 +13,10 @@ class UsersController extends \Rougin\Weasley\Http\Controllers\RestfulController
     /**
      * @var string
      */
-    protected $model = 'Rougin\Weasley\Fixture\UserModel';
+    protected $model = 'Rougin\Weasley\Fixture\Models\User';
 
     /**
      * @var string
      */
-    protected $validator = 'Rougin\Weasley\Fixture\UserValidator';
+    protected $validator = 'Rougin\Weasley\Fixture\Validators\UserValidator';
 }

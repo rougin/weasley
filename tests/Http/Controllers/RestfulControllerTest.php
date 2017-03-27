@@ -1,53 +1,13 @@
 <?php
 
-namespace Rougin\Weasley;
+namespace Rougin\Weasley\Http\Controllers;
 
-class RestfulControllerTest extends \PHPUnit_Framework_TestCase
+use Rougin\Weasley\Fixture\Http\Controllers\UsersController;
+use Rougin\Weasley\Fixture\Http\Controllers\NoModelController;
+use Rougin\Weasley\Fixture\Http\Controllers\NoValidatorController;
+
+class RestfulControllerTest extends TestCase
 {
-    /**
-     * @var \Psr\Http\Message\ServerRequestInterface
-     */
-    protected $request;
-
-    /**
-     * @var \Psr\Http\Message\ResponseInterface
-     */
-    protected $response;
-
-    /**
-     * Sets up the application.
-     *
-     * @return void
-     */
-    public function setUp()
-    {
-        if (! class_exists('Illuminate\Database\Capsule\Manager')) {
-            $this->markTestSkipped('Illuminate\Database is not installed');
-        }
-
-        $server = array();
-
-        $server['REQUEST_METHOD']  = 'GET';
-        $server['REQUEST_URI']     = '/';
-        $server['SERVER_NAME']     = 'localhost';
-        $server['SERVER_PORT']     = '8000';
-
-        $this->request  = new \Rougin\Slytherin\Http\ServerRequest($server);
-        $this->response = new \Rougin\Slytherin\Http\Response;
-
-        $capsule = new \Illuminate\Database\Capsule\Manager;
-
-        $properties = array();
-
-        $properties['database'] = __DIR__ . '/Fixture/Database.sqlite';
-        $properties['driver']   = 'sqlite';
-        $properties['prefix']   = '';
-
-        $capsule->addConnection($properties);
-        $capsule->setAsGlobal();
-        $capsule->bootEloquent();
-    }
-
     /**
      * Tests if RestfulController returns an exception if model is not specified.
      *
@@ -57,7 +17,7 @@ class RestfulControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('UnexpectedValueException');
 
-        $controller = new Fixture\NoModelController($this->request, $this->response);
+        $controller = new NoModelController($this->request, $this->response);
     }
 
     /**
@@ -69,7 +29,7 @@ class RestfulControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('UnexpectedValueException');
 
-        $controller = new Fixture\NoValidatorController($this->request, $this->response);
+        $controller = new NoValidatorController($this->request, $this->response);
     }
 
     /**
@@ -79,7 +39,7 @@ class RestfulControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testIndex()
     {
-        $controller = new Fixture\UsersController($this->request, $this->response);
+        $controller = new UsersController($this->request, $this->response);
 
         $items = (string) $controller->index()->getBody();
 
@@ -93,7 +53,7 @@ class RestfulControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testShow()
     {
-        $controller = new Fixture\UsersController($this->request, $this->response);
+        $controller = new UsersController($this->request, $this->response);
 
         $expected = new \stdClass;
 
@@ -122,7 +82,7 @@ class RestfulControllerTest extends \PHPUnit_Framework_TestCase
 
         $request = $this->request->withParsedBody($data);
 
-        $controller = new Fixture\UsersController($request, $this->response);
+        $controller = new UsersController($request, $this->response);
 
         $expected = new \stdClass;
 
@@ -143,7 +103,7 @@ class RestfulControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateWithErrors()
     {
-        $controller = new Fixture\UsersController($this->request, $this->response);
+        $controller = new UsersController($this->request, $this->response);
 
         $result = $controller->update(1);
 
@@ -173,7 +133,7 @@ class RestfulControllerTest extends \PHPUnit_Framework_TestCase
 
         $request = $this->request->withParsedBody($data);
 
-        $controller = new Fixture\UsersController($request, $this->response);
+        $controller = new UsersController($request, $this->response);
 
         $result = (string) $controller->store()->getBody();
 
@@ -194,7 +154,7 @@ class RestfulControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testStoreWithErrors()
     {
-        $controller = new Fixture\UsersController($this->request, $this->response);
+        $controller = new UsersController($this->request, $this->response);
 
         $result = $controller->store();
 
@@ -216,7 +176,7 @@ class RestfulControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-        $controller = new Fixture\UsersController($this->request, $this->response);
+        $controller = new UsersController($this->request, $this->response);
 
         $result = $controller->delete(1);
 

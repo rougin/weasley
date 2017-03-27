@@ -37,6 +37,24 @@ class BaseController
     }
 
     /**
+     * Returns the specified data to JSON.
+     *
+     * @param  mixed   $data
+     * @param  integer $code
+     * @return string
+     */
+    public function toJson($data, $code = 200)
+    {
+        $data = (is_string($data)) ? $data : json_encode($data);
+
+        $response = $this->response->withStatus($code);
+
+        $response->getBody()->write($data);
+
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    /**
      * Checks the property of the class if it has a value.
      *
      * @param  string $name
@@ -84,23 +102,5 @@ class BaseController
         $model->find($id)->update($parameters);
 
         return $this->toJson(null, 204);
-    }
-
-    /**
-     * Returns the specified data to JSON.
-     *
-     * @param  mixed   $data
-     * @param  integer $code
-     * @return string
-     */
-    protected function toJson($data, $code = 200)
-    {
-        $data = (is_string($data)) ? $data : json_encode($data);
-
-        $response = $this->response->withStatus($code);
-
-        $response->getBody()->write($data);
-
-        return $response->withHeader('Content-Type', 'application/json');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Fixture;
+namespace Rougin\Weasley\Fixture\Http\Controllers;
 
 /**
  * No Model Controller
@@ -13,5 +13,5 @@ class NoModelController extends \Rougin\Weasley\Http\Controllers\RestfulControll
     /**
      * @var string
      */
-    protected $validator = 'Rougin\Weasley\Fixture\UserValidator';
+    protected $validator = 'Rougin\Weasley\Fixture\Validators\UserValidator';
 }

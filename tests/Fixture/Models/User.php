@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Fixture;
+namespace Rougin\Weasley\Fixture\Models;
 
 /**
  * User Model
@@ -8,7 +8,7 @@ namespace Rougin\Weasley\Fixture;
  * @package Skeleton
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class UserModel extends \Illuminate\Database\Eloquent\Model
+class User extends \Illuminate\Database\Eloquent\Model
 {
     /**
      * The table associated with the model.

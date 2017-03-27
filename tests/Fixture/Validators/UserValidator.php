@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Fixture;
+namespace Rougin\Weasley\Fixture\Validators;
 
 /**
  * User Validator
@@ -20,8 +20,8 @@ class UserValidator extends \Rougin\Weasley\Validators\AbstractValidator
         $labels = array();
 
         $labels['name']     = 'Name';
-        $labels['password'] = 'Password';
         $labels['username'] = 'Username';
+        $labels['password'] = 'Password';
 
         return $labels;
     }
@@ -35,7 +35,7 @@ class UserValidator extends \Rougin\Weasley\Validators\AbstractValidator
     protected function rules(array $data = array())
     {
         $this->validator->rule('required', 'name');
-        $this->validator->rule('required', 'password');
         $this->validator->rule('required', 'username');
+        $this->validator->rule('required', 'password');
     }
 }
