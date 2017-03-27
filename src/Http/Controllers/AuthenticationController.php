@@ -56,7 +56,7 @@ class AuthenticationController extends \Rougin\LoreamAuthsum\Authentication
 
     /**
      * Authenticates the user to the application.
-     * 
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function login()
