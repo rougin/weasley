@@ -18,8 +18,8 @@
         "vlucas/valitron": "~1.4"
     },
     "require-dev": {
-        "phpunit/phpunit" : "4.*",
-        "rougin/loream-authsum": "~0.2",
+        "phpunit/phpunit": "4.*",
+        "rougin/loream-authsum": "dev-master",
         "rougin/slytherin": "dev-master",
         "scrutinizer/ocular": "~1.1"
     },
