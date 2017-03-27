@@ -21,7 +21,7 @@ class RestfulController extends BaseController
     /**
      * @var string
      */
-    protected $model;
+    protected $model = '';
 
     /**
      * @var \Rougin\Weasley\Validators\AbstractValidator
@@ -31,7 +31,7 @@ class RestfulController extends BaseController
     /**
      * @var string
      */
-    protected $validator;
+    protected $validator = '';
 
     /**
      * @param \Psr\Http\Message\ServerRequestInterface $request

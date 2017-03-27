@@ -7,7 +7,7 @@ use Rougin\LoreamAuthsum\Checker\EloquentChecker;
 class AuthenticationControllerTest extends TestCase
 {
     /**
-     * Tests AuthenticationController::validate
+     * Tests AuthenticationController::login
      *
      * @return void
      */
@@ -38,7 +38,7 @@ class AuthenticationControllerTest extends TestCase
      */
     public function testValidate()
     {
-        $checker = new EloquentChecker('Rougin\Weasley\Fixture\UserModel');
+        $checker = new EloquentChecker('Rougin\Weasley\Fixture\Models\User');
 
         $controller = new AuthenticationController($checker, $this->request, $this->response);
 

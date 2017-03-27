@@ -36,6 +36,11 @@ class AuthenticationController extends \Rougin\LoreamAuthsum\Authentication
     protected $request;
 
     /**
+     * @var string
+     */
+    protected $validator = 'Rougin\Weasley\Validators\AuthenticationValidator';
+
+    /**
      * @param \Rougin\LoreamAuthsum\Checker\CheckerInterface $checker
      * @param \Psr\Http\Message\ServerRequestInterface       $request
      * @param \Psr\Http\Message\ResponseInterface            $response
@@ -99,12 +104,10 @@ class AuthenticationController extends \Rougin\LoreamAuthsum\Authentication
      */
     protected function validate(array $credentials)
     {
-        $validator = new \Valitron\Validator($credentials);
+        $validator = new $this->validator;
 
-        $validator->rule('required', array('username', 'password'));
-
-        if (! $validated = $validator->validate()) {
-            $this->errors['validation'] = $validator->errors();
+        if (! $validated = $validator->validate($credentials)) {
+            $this->errors['validation'] = $validator->errors;
 
             $this->errors['old'] = $credentials;
         }
