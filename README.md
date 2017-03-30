@@ -39,7 +39,8 @@ Coming soon
 
 ### Middlewares
 
-Coming soon
+* [`CORS`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Cors.php) - add additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+* [`JSON`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Json.php) - changes `Content-Type` of response to `application/json`
 
 ## Credits
 
