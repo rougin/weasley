@@ -74,7 +74,7 @@ class RestfulController extends BaseController
     {
         $items = $this->eloquent->all();
 
-        return $this->toJson($items);
+        return $this->toJson($items->toArray());
     }
 
     /**
@@ -86,7 +86,7 @@ class RestfulController extends BaseController
     {
         $item = $this->eloquent->find($id);
 
-        return $this->toJson($item);
+        return $this->toJson($item->toArray());
     }
 
     /**

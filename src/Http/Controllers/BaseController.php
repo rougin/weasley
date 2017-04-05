@@ -96,7 +96,7 @@ class BaseController
         if (is_null($id)) {
             $item = $model->create($parameters);
 
-            return $this->toJson($item);
+            return $this->toJson($item->toArray());
         }
 
         $model->find($id)->update($parameters);
