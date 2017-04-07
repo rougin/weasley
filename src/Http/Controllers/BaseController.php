@@ -32,7 +32,8 @@ class BaseController
      */
     public function __construct(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $this->request  = $request;
+        $this->request = $request;
+
         $this->response = $response;
     }
 
@@ -45,11 +46,9 @@ class BaseController
      */
     public function toJson($data, $code = 200)
     {
-        $data = (is_string($data)) ? $data : json_encode($data);
-
         $response = $this->response->withStatus($code);
 
-        $response->getBody()->write($data);
+        $response->getBody()->write(json_encode($data));
 
         return $response->withHeader('Content-Type', 'application/json');
     }

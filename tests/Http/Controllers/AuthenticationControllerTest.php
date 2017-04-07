@@ -17,18 +17,13 @@ class AuthenticationControllerTest extends TestCase
 
         $checker->setHashing(false);
 
-        $data = array();
-
-        $data['username'] = 'rougin';
-        $data['password'] = 'rougin';
+        $data = array('username' => 'rougin', 'password' => 'rougin');
 
         $request = $this->request->withParsedBody($data);
 
         $controller = new AuthenticationController($checker, $request, $this->response);
 
-        $result = $controller->login();
-
-        $this->assertEquals(200, $result->getStatusCode());
+        $this->assertEquals(200, $controller->login()->getStatusCode());
     }
 
     /**
@@ -42,8 +37,7 @@ class AuthenticationControllerTest extends TestCase
 
         $controller = new AuthenticationController($checker, $this->request, $this->response);
 
-        $result = $controller->login()->getBody();
-        $result = json_decode((string) $result);
+        $result = json_decode((string) $controller->login()->getBody());
 
         $this->assertEquals('Username is required', $result->validation->username[0]);
     }
