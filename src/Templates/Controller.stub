@@ -6,7 +6,7 @@ namespace $NAMESPACE;
  * @package $PACKAGE
  * @author  $AUTHOR
  */
-class $CONTROLLER
+class $CLASS
 {
     //
 }

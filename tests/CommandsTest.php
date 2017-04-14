@@ -23,7 +23,6 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
         $application->add(new \Rougin\Weasley\Commands\MakeControllerCommand);
         $application->add(new \Rougin\Weasley\Commands\MakeIntegrationCommand);
         $application->add(new \Rougin\Weasley\Commands\MakeValidatorCommand);
-        $application->add(new \Rougin\Weasley\Commands\MakeViewCommand);
 
         $this->application = $application;
     }
@@ -57,7 +56,7 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
 
         $command = new CommandTester($this->application->find('make:integration'));
 
-        $command->execute(array());
+        $command->execute(array('name' => 'TestIntegration'));
 
         $output = $command->getDisplay();
 
@@ -75,25 +74,7 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
 
         $command = new CommandTester($this->application->find('make:validator'));
 
-        $command->execute(array());
-
-        $output = $command->getDisplay();
-
-        $this->assertContains($expected, $output);
-    }
-
-    /**
-     * Tests MakeViewCommand.
-     *
-     * @return void
-     */
-    public function testViewCommand()
-    {
-        $expected = 'Views created successfully!';
-
-        $command = new CommandTester($this->application->find('make:view'));
-
-        $command->execute(array());
+        $command->execute(array('name' => 'TestValidator'));
 
         $output = $command->getDisplay();
 

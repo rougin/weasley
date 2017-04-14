@@ -26,7 +26,6 @@ You can access the generators through `vendor/bin/weasley` in your terminal/comm
 * `make:controller` - Creates a new HTTP controller
 * `make:integration` - Creates an empty Slytherin Integration template
 * `make:validator` - Creates an empty validator based on [Valitron](https://github.com/vlucas/valitron)
-* `make:view` - Create a list of view templates
 
 ### HTTP Controllers
 

@@ -2,12 +2,14 @@
 
 namespace Rougin\Weasley\Commands;
 
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class MakeControllerCommand extends \Symfony\Component\Console\Command\Command
 {
+
     /**
      * Sets the configurations of the current command.
      *
@@ -15,13 +17,11 @@ class MakeControllerCommand extends \Symfony\Component\Console\Command\Command
      */
     protected function configure()
     {
-        $this
-            ->setName('make:controller')
-            ->setDescription('Creates a new HTTP controller.')
-            ->addArgument('name', InputArgument::REQUIRED, 'Name of the class.')
-            ->addArgument('namespace', InputArgument::OPTIONAL, 'Namespace of the class.', 'Skeleton\Http\Controllers')
-            ->addArgument('package', InputArgument::OPTIONAL, 'Namespace of the class.', 'Skeleton')
-            ->addArgument('author', InputArgument::OPTIONAL, 'Namespace of the class.', 'Rougin Royce Gutib <rougingutib@gmail.com>');
+        $this->setName('make:controller')->setDescription('Creates a new HTTP controller.');
+        $this->addArgument('name', InputArgument::REQUIRED, 'Name of the class.');
+        $this->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace of the class.', 'Skeleton\Http\Controllers');
+        $this->addOption('package', null, InputOption::VALUE_OPTIONAL, 'Name of the package.', 'Skeleton');
+        $this->addOption('author', null, InputOption::VALUE_OPTIONAL, 'Name of the author.', 'Rougin Royce Gutib <rougingutib@gmail.com>');
     }
 
     /**
@@ -33,13 +33,34 @@ class MakeControllerCommand extends \Symfony\Component\Console\Command\Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $stub = file_get_contents(__DIR__ . '/../Templates/Controller.stub');
+        $path = getcwd() . '/Http/Controllers';
 
-        $stub = str_replace('$CONTROLLER', $input->getArgument('name'), $stub);
-        $stub = str_replace('$NAMESPACE', $input->getArgument('namespace'), $stub);
-        $stub = str_replace('$PACKAGE', $input->getArgument('package'), $stub);
-        $stub = str_replace('$AUTHOR', $input->getArgument('author'), $stub);
+        $stub = $this->generate($input);
+
+        file_exists($path) || mkdir($path, 0777, true);
+
+        $file = $path . '/' . $input->getArgument('name') . '.php';
+
+        file_put_contents($file, $stub);
 
         $output->write('Controller created successfully!');
+    }
+
+    /**
+     * Generates a new stub based on the input.
+     *
+     * @param  \Symfony\Component\Console\Input\InputInterface $input
+     * @return string
+     */
+    public function generate(InputInterface $input)
+    {
+        $stub = file_get_contents(__DIR__ . '/../Templates/Controller.stub');
+
+        $stub = str_replace('$CLASS', $input->getArgument('name'), $stub);
+        $stub = str_replace('$NAMESPACE', $input->getOption('namespace'), $stub);
+        $stub = str_replace('$PACKAGE', $input->getOption('package'), $stub);
+        $stub = str_replace('$AUTHOR', $input->getOption('author'), $stub);
+
+        return $stub;
     }
 }

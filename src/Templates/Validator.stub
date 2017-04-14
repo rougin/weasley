@@ -1,12 +1,12 @@
 <?php
 
-namespace Skeleton\Validators;
+namespace $NAMESPACE;
 
 /**
- * @package Skeleton
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @package $PACKAGE
+ * @author  $AUTHOR
  */
-class {{ validator }} extends AbstractValidator
+class $CLASS extends \Rougin\Weasley\Validators\AbstractValidator
 {
     /**
      * Sets the labels in the validator.
@@ -16,6 +16,8 @@ class {{ validator }} extends AbstractValidator
     protected function labels()
     {
         $labels = array();
+
+        //
 
         return $labels;
     }

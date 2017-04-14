@@ -1,15 +1,15 @@
 <?php
 
-namespace Skeleton\Integrations;
+namespace $NAMESPACE;
 
 use Rougin\Slytherin\Integration\Configuration;
 use Rougin\Slytherin\Container\ContainerInterface;
 
 /**
- * @package Skeleton
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @package $PACKAGE
+ * @author  $AUTHOR
  */
-class {{ integration }} implements \Rougin\Slytherin\Integration\IntegrationInterface
+class $CLASS implements \Rougin\Slytherin\Integration\IntegrationInterface
 {
     /**
      * Defines the specified integration.
