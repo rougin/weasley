@@ -1,7 +1,7 @@
 {
     "name": "rougin/weasley",
-    "description": "Yet another helper extension for Slytherin",
-    "keywords": [ "code", "helper", "generator", "slytherin", "weasley" ],
+    "description": "Generators and helpers for improving your Slytherin workflow",
+    "keywords": [ "helper", "generators", "slytherin", "workflow", "weasley" ],
     "homepage": "https://github.com/rougin/weasley",
     "license": "MIT",
     "authors": [
