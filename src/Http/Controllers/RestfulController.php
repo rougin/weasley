@@ -41,11 +41,11 @@ class RestfulController extends BaseController
     {
         parent::__construct($request, $response);
 
-        $this->checkProperty('model');
+        $this->check('model');
 
         $this->eloquent = new $this->model;
 
-        $this->checkProperty('validator');
+        $this->check('validator');
 
         $this->validation = new $this->validator;
     }

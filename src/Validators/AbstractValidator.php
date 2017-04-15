@@ -41,9 +41,9 @@ abstract class AbstractValidator
     abstract protected function rules(array $data = array());
 
     /**
-     * Validates the data from the registration page.
+     * Validates the data from the based rules.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return boolean
      */
     public function validate(array $data)

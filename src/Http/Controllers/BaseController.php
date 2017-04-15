@@ -3,6 +3,7 @@
 namespace Rougin\Weasley\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
+
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -42,7 +43,7 @@ class BaseController
      *
      * @param  mixed   $data
      * @param  integer $code
-     * @return string
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function toJson($data, $code = 200)
     {
@@ -56,11 +57,12 @@ class BaseController
     /**
      * Checks the property of the class if it has a value.
      *
+     * @throws \UnexpectedValueException
+     *
      * @param  string $name
      * @return void
-     * @throws \UnexpectedValueException
      */
-    protected function checkProperty($name)
+    protected function check($name)
     {
         $controller = get_class($this);
 

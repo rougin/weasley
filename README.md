@@ -34,12 +34,18 @@ You can access the generators through `vendor/bin/weasley` in your terminal/comm
 
 ### Integrations
 
-Coming soon
+#### Illuminate
+
+* [`DatabaseIntegration`](https://github.com/rougin/weasley/blob/master/src/Integration/Illuminate/DatabaseIntegration.php) - based on [illuminate/database](https://github.com/illuminate/database), also known as [Eloquent](https://laravel.com/docs/5.4/eloquent)
 
 ### Middlewares
 
 * [`CORS`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Cors.php) - add additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 * [`JSON`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Json.php) - changes `Content-Type` of response to `application/json`
+
+### Validators
+
+* [`AuthenticationValidator`](https://github.com/rougin/weasley/blob/master/src/Validators/AuthenticationValidator.php) - a simple validator (username and password) for [Loream Authsum](https://github.com/rougin/loream-authsum), already integrated in `AuthenticationController`
 
 ## Credits
 
