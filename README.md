@@ -47,6 +47,10 @@ You can access the generators through `vendor/bin/weasley` in your terminal/comm
 
 * [`AuthenticationValidator`](https://github.com/rougin/weasley/blob/master/src/Validators/AuthenticationValidator.php) - a simple validator (username and password) for [Loream Authsum](https://github.com/rougin/loream-authsum)
 
+## Change log
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
 ## Credits
 
 - [Rougin Royce Gutib][link-author]
