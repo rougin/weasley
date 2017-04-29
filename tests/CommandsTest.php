@@ -64,6 +64,24 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests MakeMiddlewareCommand.
+     *
+     * @return void
+     */
+    public function testMiddlewareCommand()
+    {
+        $expected = 'Middleware created successfully!';
+
+        $command = new CommandTester($this->application->find('make:middleware'));
+
+        $command->execute(array('name' => 'TestMiddleware'));
+
+        $output = $command->getDisplay();
+
+        $this->assertContains($expected, $output);
+    }
+
+    /**
      * Tests MakeValidatorCommand.
      *
      * @return void
