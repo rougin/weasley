@@ -26,7 +26,8 @@ class DatabaseIntegration implements \Rougin\Slytherin\Integration\IntegrationIn
     {
         $capsule = new \Illuminate\Database\Capsule\Manager;
 
-        $database = $config->get('database');
+        $database = $config->get('database.default');
+        $database = $config->get('database.' . $database);
 
         $database['charset'] = 'utf8';
         $database['collation'] = 'utf8_unicode_ci';

@@ -36,7 +36,7 @@ You can access the generators through `vendor/bin/weasley` in your terminal/comm
 
 #### Illuminate
 
-* [`DatabaseIntegration`](https://github.com/rougin/weasley/blob/master/src/Integration/Illuminate/DatabaseIntegration.php) - based on [illuminate/database](https://github.com/illuminate/database), also known as [Eloquent](https://laravel.com/docs/5.4/eloquent)
+* [`DatabaseIntegration`](https://github.com/rougin/weasley/blob/master/src/Integrations/Illuminate/DatabaseIntegration.php) - based on [illuminate/database](https://github.com/illuminate/database), also known as [Eloquent](https://laravel.com/docs/5.4/eloquent)
 
 ### Middlewares
 

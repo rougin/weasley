@@ -25,6 +25,7 @@
         "rougin/loream-authsum": "~0.4",
         "scrutinizer/ocular": "~1.1"
     },
+    "bin": [ "bin/weasley", "bin/weasley.php" ],
     "autoload": { "psr-4": { "Rougin\\Weasley\\": "src" } },
     "autoload-dev": { "psr-4": { "Rougin\\Weasley\\": "tests" } }
 }

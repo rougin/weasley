@@ -20,6 +20,9 @@ abstract class AbstractValidator
      */
     protected $validator;
 
+    /**
+     * Creates a new class instance.
+     */
     public function __construct()
     {
         $this->validator = new \Valitron\Validator;
