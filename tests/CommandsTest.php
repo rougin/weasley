@@ -22,6 +22,7 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
 
         $application->add(new \Rougin\Weasley\Commands\MakeControllerCommand);
         $application->add(new \Rougin\Weasley\Commands\MakeIntegrationCommand);
+        $application->add(new \Rougin\Weasley\Commands\MakeMiddlewareCommand);
         $application->add(new \Rougin\Weasley\Commands\MakeValidatorCommand);
 
         $this->application = $application;
