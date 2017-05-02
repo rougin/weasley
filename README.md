@@ -23,10 +23,12 @@ $ composer require rougin/weasley
 
 You can access the generators through `vendor/bin/weasley` in your terminal/command line.
 
-* `make:controller` - Creates a new HTTP controller
-* `make:integration` - Creates an empty [Integration](https://github.com/rougin/slytherin/blob/master/src/Integration/IntegrationInterface.php)
-* `make:middleware` - Creates an empty [PSR-15](https://github.com/php-fig/fig-standards/blob/master/proposed/http-middleware/middleware-meta.md) compliant HTTP middleware
-* `make:validator` - Creates an empty validator based on [Valitron](https://github.com/vlucas/valitron)
+* `make:controller` - Create a new HTTP controller class
+* `make:integration` - Create a new [integration](https://github.com/rougin/slytherin/blob/master/src/Integration/IntegrationInterface.php) class
+* `make:middleware` - Create a new [PSR-15](https://github.com/php-fig/fig-standards/blob/master/proposed/http-middleware/middleware-meta.md) middleware class
+* `make:validator` - Create a new validator class
+
+Include `--help` if you want to know the options for each command.
 
 ### HTTP Controllers
 

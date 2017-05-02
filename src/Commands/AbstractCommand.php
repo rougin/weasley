@@ -24,11 +24,6 @@ abstract class AbstractCommand extends \Symfony\Component\Console\Command\Comman
     protected $message = '';
 
     /**
-     * @var string
-     */
-    protected $path = '';
-
-    /**
      * Executes the current command.
      *
      * @param  \Symfony\Component\Console\Input\InputInterface  $input
@@ -37,15 +32,13 @@ abstract class AbstractCommand extends \Symfony\Component\Console\Command\Comman
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $path = getcwd() . '/' . $this->path;
-
-        $stub = $this->generate($input);
+        $path = getcwd() . '/' . $input->getOption('path');
 
         file_exists($path) || mkdir($path, 0777, true);
 
         $file = $path . '/' . $input->getArgument('name') . '.php';
 
-        file_put_contents($file, $stub);
+        file_put_contents($file, $this->stub($input));
 
         $output->write($this->message);
     }
@@ -56,7 +49,7 @@ abstract class AbstractCommand extends \Symfony\Component\Console\Command\Comman
      * @param  \Symfony\Component\Console\Input\InputInterface $input
      * @return string
      */
-    protected function generate(InputInterface $input)
+    protected function stub(InputInterface $input)
     {
         $stub = file_get_contents(__DIR__ . '/../Templates/' . $this->filename);
 

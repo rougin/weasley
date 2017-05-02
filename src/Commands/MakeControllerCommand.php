@@ -24,21 +24,17 @@ class MakeControllerCommand extends AbstractCommand
     protected $message = 'Controller created successfully!';
 
     /**
-     * @var string
-     */
-    protected $path = 'Http/Controllers';
-
-    /**
      * Sets the configurations of the current command.
      *
      * @return void
      */
     protected function configure()
     {
-        $this->setName('make:controller')->setDescription('Creates a new HTTP controller.');
-        $this->addArgument('name', InputArgument::REQUIRED, 'Name of the class.');
-        $this->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace of the class.', 'Skeleton\Http\Controllers');
-        $this->addOption('package', null, InputOption::VALUE_OPTIONAL, 'Name of the package.', 'Skeleton');
-        $this->addOption('author', null, InputOption::VALUE_OPTIONAL, 'Name of the author.', 'Rougin Royce Gutib <rougingutib@gmail.com>');
+        $this->setName('make:controller')->setDescription('Create a new HTTP controller class');
+        $this->addArgument('name', InputArgument::REQUIRED, 'Name of the class');
+        $this->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path for the file to be created', 'src/Http/Controllers');
+        $this->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace of the class', 'Skeleton\Http\Controllers');
+        $this->addOption('package', null, InputOption::VALUE_OPTIONAL, 'Name of the package', 'Skeleton');
+        $this->addOption('author', null, InputOption::VALUE_OPTIONAL, 'Name of the author', 'Rougin Royce Gutib <rougingutib@gmail.com>');
     }
 }
