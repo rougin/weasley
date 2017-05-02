@@ -24,11 +24,6 @@ class MakeValidatorCommand extends AbstractCommand
     protected $message = 'Validator created successfully!';
 
     /**
-     * @var string
-     */
-    protected $path = 'src/Validators';
-
-    /**
      * Sets the configurations of the current command.
      *
      * @return void

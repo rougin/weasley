@@ -24,11 +24,6 @@ class MakeMiddlewareCommand extends AbstractCommand
     protected $message = 'Middleware created successfully!';
 
     /**
-     * @var string
-     */
-    protected $path = 'src/Http/Middleware';
-
-    /**
      * Sets the configurations of the current command.
      *
      * @return void
