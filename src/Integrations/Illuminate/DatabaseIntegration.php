@@ -32,12 +32,10 @@ class DatabaseIntegration implements \Rougin\Slytherin\Integration\IntegrationIn
             if (is_array($value) === true) {
                 $key = ($key === $default) ? 'default' : $key;
 
-                $database = $value;
+                $value['collation'] = 'utf8_unicode_ci';
+                $value['prefix'] = '';
 
-                $database['collation'] = 'utf8_unicode_ci';
-                $database['prefix'] = '';
-
-                $capsule->addConnection($database, $key);
+                $capsule->addConnection($value, $key);
             }
         }
 
