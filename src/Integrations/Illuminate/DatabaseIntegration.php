@@ -26,11 +26,9 @@ class DatabaseIntegration implements \Rougin\Slytherin\Integration\IntegrationIn
     {
         $capsule = new \Illuminate\Database\Capsule\Manager;
 
-        $default = $config->get('database.default');
-
         foreach ($config->get('database', array()) as $key => $value) {
             if (is_array($value) === true) {
-                $key = ($key === $default) ? 'default' : $key;
+                $key = ($key === $config->get('database.default')) ? 'default' : $key;
 
                 $value['collation'] = 'utf8_unicode_ci';
                 $value['prefix'] = '';
