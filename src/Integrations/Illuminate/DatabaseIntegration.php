@@ -29,15 +29,16 @@ class DatabaseIntegration implements \Rougin\Slytherin\Integration\IntegrationIn
         $default = $config->get('database.default');
 
         foreach ($config->get('database', array()) as $key => $value) {
-            $key = ($key === $default) ? 'default' : $key;
+            if (is_array($value) === true) {
+                $key = ($key === $default) ? 'default' : $key;
 
-            $database = $value;
+                $database = $value;
 
-            $database['charset'] = 'utf8';
-            $database['collation'] = 'utf8_unicode_ci';
-            $database['prefix'] = '';
+                $database['collation'] = 'utf8_unicode_ci';
+                $database['prefix'] = '';
 
-            $capsule->addConnection($database, $key);
+                $capsule->addConnection($database, $key);
+            }
         }
 
         $capsule->setAsGlobal();
