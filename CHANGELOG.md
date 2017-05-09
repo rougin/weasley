@@ -2,7 +2,7 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
-## [0.1.2](https://github.com/rougin/weasley/compare/v0.1.1...v0.1.2) - Unreleased
+## [0.1.2](https://github.com/rougin/weasley/compare/v0.1.1...v0.1.2) - 2017-05-09
 
 ### Added
 - Set `Illuminate\Database\Capsule\Manager` to container in [`DatabaseIntegration`](https://github.com/rougin/weasley/blob/master/src/Integrations/Illuminate/DatabaseIntegration.php)
