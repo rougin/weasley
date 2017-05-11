@@ -54,7 +54,7 @@ class RestfulController extends BaseController
      * Deletes the specified item from storage.
      *
      * @param  integer $id
-     * @return json
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function delete($id)
     {
@@ -68,7 +68,7 @@ class RestfulController extends BaseController
     /**
      * Returns a listing of items.
      *
-     * @return json
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function index()
     {
@@ -80,7 +80,7 @@ class RestfulController extends BaseController
     /**
      * Shows the specified item.
      *
-     * @return json
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function show($id)
     {
@@ -92,7 +92,7 @@ class RestfulController extends BaseController
     /**
      * Stores the specified item to storage.
      *
-     * @return json
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function store()
     {
@@ -103,7 +103,7 @@ class RestfulController extends BaseController
      * Updates the specified item from storage.
      *
      * @param  integer $id
-     * @return json
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function update($id)
     {
