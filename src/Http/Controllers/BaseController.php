@@ -45,13 +45,26 @@ class BaseController
      * @param  integer $code
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function toJson($data, $code = 200)
+    public function json($data, $code = 200)
     {
         $response = $this->response->withStatus($code);
 
         $response->getBody()->write(json_encode($data, JSON_PARTIAL_OUTPUT_ON_ERROR));
 
         return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * Returns the specified data to JSON.
+     * NOTE: To be removed in v1.0.0. Use "json" method instead.
+     *
+     * @param  mixed   $data
+     * @param  integer $code
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function toJson($data, $code = 200)
+    {
+        return $this->json($data, $code);
     }
 
     /**
@@ -64,12 +77,10 @@ class BaseController
      */
     protected function check($name)
     {
-        $controller = get_class($this);
-
         $message = ($name == 'validator') ? '"$validator"' : 'Eloquent model ($model)';
 
         if ($this->{$name} == '') {
-            $message .= ' must be defined in "' . $controller . '"';
+            $message .= ' must be defined in "' . get_class($this) . '"';
 
             throw new \UnexpectedValueException($message);
         }
@@ -81,7 +92,7 @@ class BaseController
      * @param  \Illuminate\Database\Eloquent\Model          $model
      * @param  \Rougin\Weasley\Validators\AbstractValidator $validator
      * @param  integer                                      $id
-     * @return \Psr\Http\Message\ResponseInterface|\Illuminate\Database\Eloquent\Model
+     * @return \Psr\Http\Message\ResponseInterface
      */
     protected function save(Model $model, AbstractValidator $validator, $id = null)
     {
