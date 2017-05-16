@@ -2,7 +2,7 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
-## [0.2.0](https://github.com/rougin/weasley/compare/v0.1.2...v0.2.0) - Unreleased
+## [0.2.0](https://github.com/rougin/weasley/compare/v0.1.2...v0.2.0) - 2017-05-16
 
 ### Changed
 - `BaseController::toJson` to `BaseController::json`
