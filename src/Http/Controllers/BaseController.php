@@ -49,7 +49,7 @@ class BaseController
     {
         $response = $this->response->withStatus($code);
 
-        $response->getBody()->write(json_encode($data));
+        $response->getBody()->write(json_encode($data, JSON_PARTIAL_OUTPUT_ON_ERROR));
 
         return $response->withHeader('Content-Type', 'application/json');
     }
