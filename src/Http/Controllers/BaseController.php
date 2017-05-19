@@ -18,6 +18,11 @@ use Rougin\Weasley\Validators\AbstractValidator;
 class BaseController
 {
     /**
+     * @var array
+     */
+    protected $errors = array();
+
+    /**
      * @var \Psr\Http\Message\ServerRequestInterface
      */
     protected $request;
@@ -36,6 +41,18 @@ class BaseController
         $this->request = $request;
 
         $this->response = $response;
+
+        array_push($this->errors, 'No errors');
+        array_push($this->errors, 'Maximum stack depth exceeded');
+        array_push($this->errors, 'Underflow or the modes mismatch');
+        array_push($this->errors, 'Unexpected control character found');
+        array_push($this->errors, 'Syntax error, malformed JSON');
+        array_push($this->errors, 'Malformed UTF-8 characters, possibly incorrectly encoded');
+        array_push($this->errors, 'One or more recursive references in the value to be encoded');
+        array_push($this->errors, 'One or more NAN or INF values in the value to be encoded');
+        array_push($this->errors, 'A value of a type that cannot be encoded was given');
+        array_push($this->errors, 'A property name that cannot be encoded was given');
+        array_push($this->errors, 'Malformed UTF-16 characters, possibly incorrectly encoded');
     }
 
     /**
@@ -49,7 +66,15 @@ class BaseController
     {
         $response = $this->response->withStatus($code);
 
-        $response->getBody()->write(json_encode($data, JSON_PARTIAL_OUTPUT_ON_ERROR));
+        $stream = json_encode($data);
+
+        if (json_last_error() != JSON_ERROR_NONE) {
+            $stream = $this->errors[json_last_error()];
+
+            $response = $response->withStatus(400);
+        }
+
+        $response->getBody()->write($stream);
 
         return $response->withHeader('Content-Type', 'application/json');
     }
