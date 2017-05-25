@@ -2,7 +2,7 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
-## [0.2.0](https://github.com/rougin/weasley/compare/v0.1.2...v0.2.0) - Unreleased
+## [0.2.0](https://github.com/rougin/weasley/compare/v0.1.2...v0.2.0) - 2017-05-25
 
 ### Added
 - `JSON_PARTIAL_OUTPUT_ON_ERROR` on `json_encode` in `BaseController::json`
@@ -10,6 +10,9 @@ All notable changes to `Weasley` will be documented in this file.
 ### Changed
 - `BaseController::toJson` to `BaseController::json`
 - DocBlocks documentation on `RestfulController`
+
+### Fixed
+- Issue if the HTTP method is `OPTIONS` in `Http\Middleware\Cors`
 
 ## [0.1.2](https://github.com/rougin/weasley/compare/v0.1.1...v0.1.2) - 2017-05-09
 

@@ -16,6 +16,11 @@ class Cors implements \Interop\Http\ServerMiddleware\MiddlewareInterface
     /**
      * @var array
      */
+    protected $allowed = array('*');
+
+    /**
+     * @var array
+     */
     protected $methods = array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS');
 
     /**
@@ -28,12 +33,11 @@ class Cors implements \Interop\Http\ServerMiddleware\MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $methods = implode(',', $this->methods);
+        $response = $request->getMethod() === 'OPTIONS' ? new Response : $delegate->process($request);
 
-        $response = $delegate->process($request);
+        $response = $response->withHeader('Access-Control-Allow-Origin', $this->allowed);
+        $response = $response->withHeader('Access-Control-Allow-Methods', $this->methods);
 
-        $response = $response->withHeader('Access-Control-Allow-Origin', '*');
-
-        return $response->withHeader('Access-Control-Allow-Methods', $methods);
+        return $response;
     }
 }
