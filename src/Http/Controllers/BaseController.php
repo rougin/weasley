@@ -60,13 +60,14 @@ class BaseController
      *
      * @param  mixed   $data
      * @param  integer $code
+     * @param  integer $options
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function json($data, $code = 200)
+    public function json($data, $code = 200, $options = 0)
     {
         $response = $this->response->withStatus($code);
 
-        $stream = json_encode($data);
+        $stream = json_encode($data, $options);
 
         if (json_last_error() != JSON_ERROR_NONE) {
             $stream = $this->errors[json_last_error()];
@@ -85,9 +86,10 @@ class BaseController
      *
      * @param  mixed   $data
      * @param  integer $code
+     * @param  integer $options
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function toJson($data, $code = 200)
+    public function toJson($data, $code = 200, $options = 0)
     {
         return $this->json($data, $code);
     }

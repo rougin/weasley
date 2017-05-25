@@ -5,7 +5,7 @@ All notable changes to `Weasley` will be documented in this file.
 ## [0.2.0](https://github.com/rougin/weasley/compare/v0.1.2...v0.2.0) - 2017-05-25
 
 ### Added
-- `JSON_PARTIAL_OUTPUT_ON_ERROR` on `json_encode` in `BaseController::json`
+- `$options` parameter in `BaseController::json`
 
 ### Changed
 - `BaseController::toJson` to `BaseController::json`
