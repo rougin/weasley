@@ -5,6 +5,8 @@ namespace Rougin\Weasley\Http\Middleware;
 use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 
+use Rougin\Slytherin\Http\Response;
+
 /**
  * CORS Middleware
  *
