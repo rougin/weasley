@@ -2,6 +2,11 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
+## [0.2.1](https://github.com/rougin/weasley/compare/v0.2.0...v0.2.1) - 2017-06-07
+
+### Fixed
+- Overriding `Content-Type` even if it exists in `Http\Middleware\Json`
+
 ## [0.2.0](https://github.com/rougin/weasley/compare/v0.1.2...v0.2.0) - 2017-05-25
 
 ### Added

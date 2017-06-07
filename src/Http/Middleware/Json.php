@@ -25,6 +25,8 @@ class Json implements \Interop\Http\ServerMiddleware\MiddlewareInterface
     {
         $response = $delegate->process($request);
 
-        return $response->withHeader('Content-Type', 'application/json');
+        $new = $response->withHeader('Content-Type', 'application/json');
+
+        return $response->hasHeader('Content-Type') ? $response : $new;
     }
 }
