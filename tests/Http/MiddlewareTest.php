@@ -59,14 +59,4 @@ class MiddlewareTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($result);
     }
-
-    /**
-     * Tests Rougin\Weasley\Http\Middleware\FormMethodSpoofing.
-     *
-     * @return void
-     */
-    public function testFormMethodSpoofing()
-    {
-        $this->assertEquals('PUT', $this->response->getMethod());
-    }
 }
