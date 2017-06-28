@@ -2,6 +2,11 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
+## [0.3.0](https://github.com/rougin/weasley/compare/v0.2.1...v0.3.0) - Unreleased
+
+### Added
+- `Http\Middleware\FormMethodSpoofing`
+
 ## [0.2.1](https://github.com/rougin/weasley/compare/v0.2.0...v0.2.1) - 2017-06-07
 
 ### Fixed

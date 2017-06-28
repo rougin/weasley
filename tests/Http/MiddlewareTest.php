@@ -22,8 +22,10 @@ class MiddlewareTest extends \PHPUnit_Framework_TestCase
         $_SERVER['SERVER_PORT']    = '8000';
 
         $middleware = new \Rougin\Slytherin\Middleware\Middleware;
-        $request    = new \Rougin\Slytherin\Http\ServerRequest($_SERVER);
-        $response   = new \Rougin\Slytherin\Http\Response;
+        $request = new \Rougin\Slytherin\Http\ServerRequest($_SERVER);
+        $response = new \Rougin\Slytherin\Http\Response;
+
+        $request = $request->withParsedBody(array('_method' => 'PUT'));
 
         $stack = array();
 
@@ -56,5 +58,15 @@ class MiddlewareTest extends \PHPUnit_Framework_TestCase
         $result = $this->response->hasHeader('Access-Control-Allow-Origin');
 
         $this->assertTrue($result);
+    }
+
+    /**
+     * Tests Rougin\Weasley\Http\Middleware\FormMethodSpoofing.
+     *
+     * @return void
+     */
+    public function testFormMethodSpoofing()
+    {
+        $this->assertEquals('PUT', $this->response->getMethod());
     }
 }
