@@ -1,6 +1,6 @@
 <?php
 
-namespace Support\Manager\Http\Middleware;
+namespace Rougin\Weasley\Http\Middleware;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
@@ -28,10 +28,10 @@ class FormMethodSpoofing implements \Interop\Http\ServerMiddleware\MiddlewareInt
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $parsed = $request->getParsedBody();
+        $parameters = $request->getParsedBody();
 
-        if (isset($parsed[$this->identifier])) {
-            $method = $parsed[$this->identifier];
+        if (isset($parameters[$this->identifier])) {
+            $method = $parameters[$this->identifier];
 
             $request = $request->withMethod($method);
         }
