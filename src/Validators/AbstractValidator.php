@@ -21,7 +21,7 @@ abstract class AbstractValidator
     protected $validator;
 
     /**
-     * Creates a new class instance.
+     * Creates a new validator instance.
      */
     public function __construct()
     {
@@ -56,6 +56,7 @@ abstract class AbstractValidator
         $this->rules($data);
 
         $validator = $this->validator->withData($data);
+
         $validated = $validator->validate();
 
         if (! $validated && is_array($validator->errors())) {
