@@ -43,8 +43,9 @@ Include `--help` if you want to know the options for each command.
 
 ### Middlewares
 
-* [`CORS`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Cors.php) - add additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+* [`CORS`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Cors.php) - adds additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 * [`JSON`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Json.php) - changes `Content-Type` of response to `application/json`
+* [`FormMethodSpoofing`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/FormMethodSpoofing.php) - changes the HTTP method of the request if it founds a `_method` attribute from a `<form>` tag
 
 ### Validators
 
