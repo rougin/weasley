@@ -8,7 +8,7 @@ use Interop\Http\ServerMiddleware\DelegateInterface;
 /**
  * Form Method Spoofing Middleware
  *
- * @package Manager
+ * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
 class FormMethodSpoofing implements \Interop\Http\ServerMiddleware\MiddlewareInterface
@@ -28,10 +28,10 @@ class FormMethodSpoofing implements \Interop\Http\ServerMiddleware\MiddlewareInt
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $parameters = $request->getParsedBody();
+        $parsed = $request->getParsedBody();
 
-        if (isset($parameters[$this->identifier])) {
-            $method = $parameters[$this->identifier];
+        if (isset($parsed[$this->identifier]) === true) {
+            $method = strtoupper($parsed[$this->identifier]);
 
             $request = $request->withMethod($method);
         }

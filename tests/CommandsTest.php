@@ -44,6 +44,8 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
         $output = $command->getDisplay();
 
         $this->assertContains($expected, $output);
+
+        unlink(__DIR__ . '/../src/Http/Controllers/TestController.php');
     }
 
     /**
@@ -62,6 +64,8 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
         $output = $command->getDisplay();
 
         $this->assertContains($expected, $output);
+
+        unlink(__DIR__ . '/../src/Integrations/TestIntegration.php');
     }
 
     /**
@@ -80,6 +84,8 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
         $output = $command->getDisplay();
 
         $this->assertContains($expected, $output);
+
+        unlink(__DIR__ . '/../src/Http/Middleware/TestMiddleware.php');
     }
 
     /**
@@ -98,5 +104,7 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
         $output = $command->getDisplay();
 
         $this->assertContains($expected, $output);
+
+        unlink(__DIR__ . '/../src/Validators/TestValidator.php');
     }
 }

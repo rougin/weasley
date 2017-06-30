@@ -80,6 +80,7 @@ class RestfulController extends BaseController
     /**
      * Shows the specified item.
      *
+     * @param  integer $id
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function show($id)
