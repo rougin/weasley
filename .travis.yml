@@ -24,7 +24,7 @@ matrix:
 before_script:
   - travis_retry composer self-update
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
-  - composer require illuminate/pagination illuminate/view --dev
+  - composer require illuminate/events:"~4.1 || ~5.0" illuminate/pagination:"~4.1 || ~5.0" illuminate/view:"~4.1 || ~5.0" --dev
 
 script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
