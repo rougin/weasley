@@ -10,7 +10,7 @@ use Rougin\Slytherin\Container\ContainerInterface;
  *
  * An integration for Laravel's Eloquent package (illuminate/database).
  *
- * @package Skeleton
+ * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
 class DatabaseIntegration implements \Rougin\Slytherin\Integration\IntegrationInterface
@@ -36,12 +36,9 @@ class DatabaseIntegration implements \Rougin\Slytherin\Integration\IntegrationIn
             }
         }
 
-        $capsule->setAsGlobal();
-        $capsule->bootEloquent();
+        $capsule->setAsGlobal() && $capsule->bootEloquent();
 
-        $container->set('Illuminate\Database\Capsule\Manager', $capsule);
-
-        return $container;
+        return $container->set('Illuminate\Database\Capsule\Manager', $capsule);
     }
 
     /**

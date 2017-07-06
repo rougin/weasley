@@ -72,6 +72,7 @@ class RestfulController extends BaseController
      */
     public function index()
     {
+        // TODO: Use Builder::paginate if illuminate/pagination is available
         $items = $this->eloquent->all();
 
         return $this->toJson($items->toArray());

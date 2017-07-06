@@ -5,7 +5,7 @@ require 'vendor/autoload.php';
 $application = new Symfony\Component\Console\Application;
 
 $application->setName('Weasley');
-$application->setVersion('v0.1.2');
+$application->setVersion('v0.3.0');
 
 $application->add(new Rougin\Weasley\Commands\MakeControllerCommand);
 $application->add(new Rougin\Weasley\Commands\MakeIntegrationCommand);

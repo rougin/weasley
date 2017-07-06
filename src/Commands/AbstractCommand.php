@@ -40,7 +40,7 @@ abstract class AbstractCommand extends \Symfony\Component\Console\Command\Comman
 
         file_put_contents($file, $this->stub($input));
 
-        $output->write($this->message);
+        $output->writeln('<info>' . $this->message . '</info>');
     }
 
     /**

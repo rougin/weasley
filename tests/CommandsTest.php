@@ -9,10 +9,10 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
     /**
      * @var \Symfony\Component\Console\Application
      */
-    protected $application;
+    protected $console;
 
     /**
-     * Sets up the application.
+     * Sets up the console application.
      *
      * @return void
      */
@@ -25,7 +25,7 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
         $application->add(new \Rougin\Weasley\Commands\MakeMiddlewareCommand);
         $application->add(new \Rougin\Weasley\Commands\MakeValidatorCommand);
 
-        $this->application = $application;
+        $this->console = $application;
     }
 
     /**
@@ -35,17 +35,17 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
      */
     public function testControllerCommand()
     {
-        $expected = 'Controller created successfully!';
-
-        $command = new CommandTester($this->application->find('make:controller'));
+        $command = new CommandTester($this->console->find('make:controller'));
 
         $command->execute(array('name' => 'TestController'));
 
-        $output = $command->getDisplay();
+        $expected = __DIR__ . '/../src/Http/Controllers/TestController.php';
 
-        $this->assertContains($expected, $output);
+        $original = __DIR__ . '/Fixture/Templates/TestController.php';
 
-        unlink(__DIR__ . '/../src/Http/Controllers/TestController.php');
+        $this->assertFileEquals($expected, $original);
+
+        unlink($expected);
     }
 
     /**
@@ -55,17 +55,17 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
      */
     public function testIntegrationCommand()
     {
-        $expected = 'Integration created successfully!';
-
-        $command = new CommandTester($this->application->find('make:integration'));
+        $command = new CommandTester($this->console->find('make:integration'));
 
         $command->execute(array('name' => 'TestIntegration'));
 
-        $output = $command->getDisplay();
+        $expected = __DIR__ . '/../src/Integrations/TestIntegration.php';
 
-        $this->assertContains($expected, $output);
+        $original = __DIR__ . '/Fixture/Templates/TestIntegration.php';
 
-        unlink(__DIR__ . '/../src/Integrations/TestIntegration.php');
+        $this->assertFileEquals($expected, $original);
+
+        unlink($expected);
     }
 
     /**
@@ -75,17 +75,17 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
      */
     public function testMiddlewareCommand()
     {
-        $expected = 'Middleware created successfully!';
-
-        $command = new CommandTester($this->application->find('make:middleware'));
+        $command = new CommandTester($this->console->find('make:middleware'));
 
         $command->execute(array('name' => 'TestMiddleware'));
 
-        $output = $command->getDisplay();
+        $expected = __DIR__ . '/../src/Http/Middleware/TestMiddleware.php';
 
-        $this->assertContains($expected, $output);
+        $original = __DIR__ . '/Fixture/Templates/TestMiddleware.php';
 
-        unlink(__DIR__ . '/../src/Http/Middleware/TestMiddleware.php');
+        $this->assertFileEquals($expected, $original);
+
+        unlink($expected);
     }
 
     /**
@@ -95,16 +95,16 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidatorCommand()
     {
-        $expected = 'Validator created successfully!';
-
-        $command = new CommandTester($this->application->find('make:validator'));
+        $command = new CommandTester($this->console->find('make:validator'));
 
         $command->execute(array('name' => 'TestValidator'));
 
-        $output = $command->getDisplay();
+        $expected = __DIR__ . '/../src/Validators/TestValidator.php';
 
-        $this->assertContains($expected, $output);
+        $original = __DIR__ . '/Fixture/Templates/TestValidator.php';
 
-        unlink(__DIR__ . '/../src/Validators/TestValidator.php');
+        $this->assertFileEquals($expected, $original);
+
+        unlink($expected);
     }
 }

@@ -3,6 +3,8 @@
 namespace $NAMESPACE;
 
 /**
+ * $CLASS
+ *
  * @package $PACKAGE
  * @author  $AUTHOR
  */

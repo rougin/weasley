@@ -5,38 +5,92 @@ namespace Rougin\Weasley;
 class IntegrationsTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var \Rougin\Slytherin\Integration\Configuration
+     */
+    protected $config;
+
+    /**
+     * @var \Psr\Container\ContainerInterface
+     */
+    protected $container;
+
+    /**
+     * @var string
+     */
+    protected $interface = 'Psr\Container\ContainerInterface';
+
+    /**
+     * Sets up the test case.
+     */
+    public function setUp()
+    {
+        $this->container = new \Rougin\Slytherin\Container\Container;
+
+        $this->config = new \Rougin\Slytherin\Integration\Configuration;
+    }
+
+    /**
      * Tests Illuminate\DatabaseIntegration.
      *
      * @return void
      */
     public function testIlluminateDatabase()
     {
-        $config = array('database' => array());
-
-        $config['database'] = array('default' => 'mysql');
-
-        $config['database']['sqlite'] = array();
-
-        $config['database']['sqlite']['driver'] = 'sqlite';
-        $config['database']['sqlite']['database'] = '/path/to/sqlite/database';
-
-        $config['database']['mysql'] = array();
-
-        $config['database']['mysql']['driver'] = 'mysql';
-        $config['database']['mysql']['host'] = 'localhost';
-        $config['database']['mysql']['username'] = 'root';
-        $config['database']['mysql']['password'] = '';
-        $config['database']['mysql']['database'] = 'test';
-        $config['database']['mysql']['charset'] = 'utf8';
-
-        $container = new \Rougin\Slytherin\Container\Container;
-
-        $config = new \Rougin\Slytherin\Integration\Configuration($config);
-
         $integration = new Integrations\Illuminate\DatabaseIntegration;
 
-        $interface = 'Psr\Container\ContainerInterface';
+        $this->config->set('database.sqlite.driver', 'sqlite');
+        $this->config->set('database.sqlite.database', '/path/to/sqlite/database');
 
-        $this->assertInstanceOf($interface, $integration->define($container, $config));
+        $this->config->set('database.mysql.driver', 'mysql');
+        $this->config->set('database.mysql.host', 'localhost');
+        $this->config->set('database.mysql.username', 'root');
+        $this->config->set('database.mysql.password', '');
+        $this->config->set('database.mysql.database', 'test');
+        $this->config->set('database.mysql.charset', 'utf8');
+
+        $container = $integration->define($this->container, $this->config);
+
+        $this->assertInstanceOf($this->interface, $container);
+    }
+
+    /**
+     * Tests Illuminate\PaginationIntegration.
+     *
+     * @return void
+     */
+    public function testIlluminatePagination()
+    {
+        $integration = new \Rougin\Slytherin\Http\HttpIntegration;
+
+        $container = $integration->define($this->container, $this->config);
+
+        $integration = new Integrations\Illuminate\PaginationIntegration;
+
+        $container = $integration->define($container, $this->config);
+
+        $paginator = Fixture\Models\User::paginate();
+
+        $this->assertInstanceOf('Illuminate\Pagination\LengthAwarePaginator', $paginator);
+    }
+
+    /**
+     * Tests Illuminate\ViewIntegration.
+     *
+     * @return void
+     */
+    public function testIlluminateView()
+    {
+        $integration = new Integrations\Illuminate\ViewIntegration;
+
+        $this->config->set('illuminate.view.compiled', __DIR__ . '/Fixture/Compiled');
+        $this->config->set('illuminate.view.templates', __DIR__ . '/Fixture/Templates');
+
+        $container = $integration->define($this->container, $this->config);
+
+        $factory = $container->get('Illuminate\Contracts\View\Factory');
+        $renderer = $container->get('Rougin\Slytherin\Template\RendererInterface');
+
+        $this->assertInstanceOf('Illuminate\Contracts\View\Factory', $factory);
+        $this->assertEquals('Hello world!', $renderer->render('Hello'));
     }
 }

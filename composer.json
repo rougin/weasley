@@ -1,9 +1,15 @@
 {
     "name": "rougin/weasley",
     "description": "Generators and helpers for improving your Slytherin workflow",
-    "keywords": [ "helper", "generators", "slytherin", "workflow", "weasley" ],
     "homepage": "https://github.com/rougin/weasley",
     "license": "MIT",
+    "keywords": [
+        "helper",
+        "generators",
+        "slytherin",
+        "workflow",
+        "weasley"
+    ],
     "authors": [
         {
             "name": "Rougin Royce Gutib",
@@ -24,7 +30,18 @@
         "phpunit/phpunit": "~4.0",
         "scrutinizer/ocular": "~1.1"
     },
-    "bin": [ "bin/weasley", "bin/weasley.php" ],
-    "autoload": { "psr-4": { "Rougin\\Weasley\\": "src" } },
-    "autoload-dev": { "psr-4": { "Rougin\\Weasley\\": "tests" } }
+    "bin": [
+        "bin/weasley",
+        "bin/weasley.php"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rougin\\Weasley\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rougin\\Weasley\\": "tests"
+        }
+    }
 }

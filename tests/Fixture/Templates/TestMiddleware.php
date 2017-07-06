@@ -1,17 +1,17 @@
 <?php
 
-namespace $NAMESPACE;
+namespace Skeleton\Http\Middleware;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 
 /**
- * $CLASS
+ * TestMiddleware
  *
- * @package $PACKAGE
- * @author  $AUTHOR
+ * @package Skeleton
+ * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class $CLASS implements \Interop\Http\ServerMiddleware\MiddlewareInterface
+class TestMiddleware implements \Interop\Http\ServerMiddleware\MiddlewareInterface
 {
     /**
      * Process an incoming server request and return a response, optionally delegating

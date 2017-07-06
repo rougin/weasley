@@ -6,6 +6,8 @@ All notable changes to `Weasley` will be documented in this file.
 
 ### Added
 - `Http\Middleware\FormMethodSpoofing`
+- `Integrations\Illuminate\PaginationIntegration`
+- `Integrations\Illuminate\ViewIntegration`
 
 ## [0.2.1](https://github.com/rougin/weasley/compare/v0.2.0...v0.2.1) - 2017-06-07
 

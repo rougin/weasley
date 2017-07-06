@@ -57,8 +57,8 @@ class RestfulControllerTest extends TestCase
 
         $expected = new \stdClass;
 
-        $expected->id       = 1;
-        $expected->name     = 'Rougin';
+        $expected->id = 1;
+        $expected->name = 'Rougin';
         $expected->password = 'rougin';
         $expected->username = 'rougin';
 
@@ -76,7 +76,7 @@ class RestfulControllerTest extends TestCase
     {
         $data = array();
 
-        $data['name']     = 'Test';
+        $data['name'] = 'Test';
         $data['password'] = 'test';
         $data['username'] = 'test';
 
@@ -86,8 +86,8 @@ class RestfulControllerTest extends TestCase
 
         $expected = new \stdClass;
 
-        $expected->id       = 4;
-        $expected->name     = 'Test';
+        $expected->id = 4;
+        $expected->name = 'Test';
         $expected->password = 'test';
         $expected->username = 'test';
 
@@ -127,7 +127,7 @@ class RestfulControllerTest extends TestCase
     {
         $data = array();
 
-        $data['name']     = 'Weasley';
+        $data['name'] = 'Weasley';
         $data['password'] = 'weasley';
         $data['username'] = 'weasley';
 
@@ -139,8 +139,8 @@ class RestfulControllerTest extends TestCase
 
         $expected = new \stdClass;
 
-        $expected->id       = 5;
-        $expected->name     = 'Weasley';
+        $expected->id = 5;
+        $expected->name = 'Weasley';
         $expected->password = 'weasley';
         $expected->username = 'weasley';
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace $NAMESPACE;
+namespace Skeleton\Validators;
 
 /**
- * $CLASS
+ * TestValidator
  *
- * @package $PACKAGE
- * @author  $AUTHOR
+ * @package Skeleton
+ * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class $CLASS extends \Rougin\Weasley\Validators\AbstractValidator
+class TestValidator extends \Rougin\Weasley\Validators\AbstractValidator
 {
     /**
      * Sets the labels in the validator.
