@@ -34,38 +34,28 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests Illuminate\DatabaseIntegration.
      *
-     * @return \Rougin\Slytherin\Container\ContainerInterface
+     * @return void
      */
     public function testIlluminateDatabase()
     {
         $integration = new Integrations\Illuminate\DatabaseIntegration;
 
-        $this->config->set('database.sqlite.driver', 'sqlite');
-        $this->config->set('database.sqlite.database', '/path/to/sqlite/database');
+        $this->config->set('database.default', 'sqlite');
 
-        $this->config->set('database.mysql.driver', 'mysql');
-        $this->config->set('database.mysql.host', 'localhost');
-        $this->config->set('database.mysql.username', 'root');
-        $this->config->set('database.mysql.password', '');
-        $this->config->set('database.mysql.database', 'test');
-        $this->config->set('database.mysql.charset', 'utf8');
+        $this->config->set('database.sqlite.driver', 'sqlite');
+        $this->config->set('database.sqlite.database', __DIR__ . '/Fixture/Database.sqlite');
 
         $container = $integration->define($this->container, $this->config);
 
         $this->assertInstanceOf($this->interface, $container);
-
-        return $container;
     }
 
     /**
      * Tests Illuminate\PaginationIntegration.
      *
-     * @depends testIlluminateDatabase
-     *
-     * @param  \Rougin\Slytherin\Container\ContainerInterface $cantainer
      * @return void
      */
-    public function testIlluminatePagination(ContainerInterface $container)
+    public function testIlluminatePagination()
     {
         $class = 'Illuminate\Pagination\LengthAwarePaginator';
 
@@ -75,7 +65,7 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
 
         $integration = new \Rougin\Slytherin\Http\HttpIntegration;
 
-        $container = $integration->define($container, $this->config);
+        $container = $integration->define($this->container, $this->config);
 
         $integration = new Integrations\Illuminate\PaginationIntegration;
 
