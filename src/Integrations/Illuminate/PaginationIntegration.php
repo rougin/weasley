@@ -28,8 +28,6 @@ class PaginationIntegration implements \Rougin\Slytherin\Integration\Integration
     {
         $request = $container->get('Psr\Http\Message\ServerRequestInterface');
 
-        $response = $container->get('Psr\Http\Message\ResponseInterface');
-
         Paginator::currentPathResolver(function () use ($request) {
             $uri = $request->getAttribute('REQUEST_URI');
 

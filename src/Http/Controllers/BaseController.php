@@ -91,7 +91,7 @@ class BaseController
      */
     public function toJson($data, $code = 200, $options = 0)
     {
-        return $this->json($data, $code);
+        return $this->json($data, $code, $options);
     }
 
     /**

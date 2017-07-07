@@ -36,7 +36,9 @@ class DatabaseIntegration implements \Rougin\Slytherin\Integration\IntegrationIn
             }
         }
 
-        $capsule->setAsGlobal() && $capsule->bootEloquent();
+        $capsule->setAsGlobal();
+
+        $capsule->bootEloquent();
 
         return $container->set('Illuminate\Database\Capsule\Manager', $capsule);
     }
