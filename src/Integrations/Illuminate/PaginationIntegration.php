@@ -30,21 +30,17 @@ class PaginationIntegration implements \Rougin\Slytherin\Integration\Integration
 
         $response = $container->get('Psr\Http\Message\ResponseInterface');
 
-        if (method_exists('Illuminate\Pagination\Paginator', 'currentPathResolver')) {
-            Paginator::currentPathResolver(function () use ($request) {
-                $uri = $request->getAttribute('REQUEST_URI');
+        Paginator::currentPathResolver(function () use ($request) {
+            $uri = $request->getAttribute('REQUEST_URI');
 
-                return isset($uri) ? strtok($uri, '?') : '/';
-            });
-        }
+            return isset($uri) ? strtok($uri, '?') : '/';
+        });
 
-        if (method_exists('Illuminate\Pagination\Paginator', 'currentPathResolver')) {
-            Paginator::currentPageResolver(function ($name = null) use ($request) {
-                list($page, $parameters) = array($name ?: 'page', $request->getQueryParams());
+        Paginator::currentPageResolver(function ($name = null) use ($request) {
+            list($page, $parameters) = array($name ?: 'page', $request->getQueryParams());
 
-                return isset($parameters[$name]) ? $parameters[$name] : 1;
-            });
-        }
+            return isset($parameters[$name]) ? $parameters[$name] : 1;
+        });
 
         return $container;
     }
