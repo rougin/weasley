@@ -84,6 +84,10 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
      */
     public function testIlluminateView()
     {
+        $message = 'Illuminate View is not yet installed';
+
+        class_exists('Illuminate\View\Factory') || $this->markTestSkipped($message);
+
         $integration = new Integrations\Illuminate\ViewIntegration;
 
         $this->config->set('illuminate.view.compiled', __DIR__ . '/Fixture/Compiled');
