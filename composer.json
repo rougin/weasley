@@ -23,7 +23,6 @@
         "http-interop/http-middleware": "~0.4",
         "illuminate/database": "~4.1 || ~5.0",
         "rougin/slytherin": "dev-master",
-        "symfony/console": "~2.8 || ~3.0",
         "vlucas/valitron": "~1.4"
     },
     "require-dev": {

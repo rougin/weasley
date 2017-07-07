@@ -60,6 +60,10 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
      */
     public function testIlluminatePagination()
     {
+        $message = 'Illuminate Pagination is not yet installed.';
+
+        class_exists('Illuminate\Pagination\Paginator') || $this->markTestSkipped($message);
+
         $integration = new \Rougin\Slytherin\Http\HttpIntegration;
 
         $container = $integration->define($this->container, $this->config);
