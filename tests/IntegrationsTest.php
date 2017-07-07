@@ -2,6 +2,8 @@
 
 namespace Rougin\Weasley;
 
+use Rougin\Slytherin\Container\ContainerInterface;
+
 class IntegrationsTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -32,7 +34,7 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests Illuminate\DatabaseIntegration.
      *
-     * @return void
+     * @return \Rougin\Slytherin\Container\ContainerInterface
      */
     public function testIlluminateDatabase()
     {
@@ -51,14 +53,19 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
         $container = $integration->define($this->container, $this->config);
 
         $this->assertInstanceOf($this->interface, $container);
+
+        return $container;
     }
 
     /**
      * Tests Illuminate\PaginationIntegration.
      *
+     * @depends testIlluminateDatabase
+     *
+     * @param  \Rougin\Slytherin\Container\ContainerInterface $cantainer
      * @return void
      */
-    public function testIlluminatePagination()
+    public function testIlluminatePagination(ContainerInterface $container)
     {
         $class = 'Illuminate\Pagination\LengthAwarePaginator';
 
@@ -68,7 +75,7 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
 
         $integration = new \Rougin\Slytherin\Http\HttpIntegration;
 
-        $container = $integration->define($this->container, $this->config);
+        $container = $integration->define($container, $this->config);
 
         $integration = new Integrations\Illuminate\PaginationIntegration;
 
@@ -98,9 +105,11 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
         $container = $integration->define($this->container, $this->config);
 
         $factory = $container->get('Illuminate\Contracts\View\Factory');
+
         $renderer = $container->get('Rougin\Slytherin\Template\RendererInterface');
 
         $this->assertInstanceOf('Illuminate\Contracts\View\Factory', $factory);
+
         $this->assertEquals('Hello world!', $renderer->render('Hello'));
     }
 }
