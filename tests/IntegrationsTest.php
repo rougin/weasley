@@ -60,9 +60,11 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
      */
     public function testIlluminatePagination()
     {
+        $class = 'Illuminate\Pagination\LengthAwarePaginator';
+
         $message = 'Illuminate Pagination is not yet installed.';
 
-        class_exists('Illuminate\Pagination\Paginator') || $this->markTestSkipped($message);
+        class_exists($class) || $this->markTestSkipped($message);
 
         $integration = new \Rougin\Slytherin\Http\HttpIntegration;
 
@@ -74,7 +76,7 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
 
         $paginator = Fixture\Models\User::paginate();
 
-        $this->assertInstanceOf('Illuminate\Pagination\LengthAwarePaginator', $paginator);
+        $this->assertInstanceOf($class, $paginator);
     }
 
     /**
