@@ -61,7 +61,7 @@ class ViewIntegration implements \Rougin\Slytherin\Integration\IntegrationInterf
         return function () use ($compiled, $filesystem) {
             $compiler = new BladeCompiler($filesystem, $compiled);
 
-            return new CompilerEngine($compiler, $filesystem);
+            return new CompilerEngine($compiler);
         };
     }
 
