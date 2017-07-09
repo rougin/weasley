@@ -9,6 +9,9 @@ All notable changes to `Weasley` will be documented in this file.
 - `Integrations\Illuminate\PaginationIntegration`
 - `Integrations\Illuminate\ViewIntegration`
 
+### Changed
+- Version of `rougin/slytherin` to `v0.9.0`
+
 ## [0.2.1](https://github.com/rougin/weasley/compare/v0.2.0...v0.2.1) - 2017-06-07
 
 ### Fixed
