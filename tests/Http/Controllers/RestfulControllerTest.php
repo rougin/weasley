@@ -41,7 +41,7 @@ class RestfulControllerTest extends TestCase
     {
         $controller = new UsersController($this->request, $this->response);
 
-        $exists = class_exists('Illuminate\Pagination\Paginator');
+        $exists = class_exists('Illuminate\Pagination\LengthAwarePaginator');
 
         $items = json_decode((string) $controller->index()->getBody(), true);
 
