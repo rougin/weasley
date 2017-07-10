@@ -41,9 +41,11 @@ class RestfulControllerTest extends TestCase
     {
         $controller = new UsersController($this->request, $this->response);
 
-        $items = (string) $controller->index()->getBody();
+        $exists = interface_exists('Illuminate\Contracts\Pagination\LengthAwarePaginator');
 
-        $this->assertCount(4, json_decode($items));
+        $items = json_decode((string) $controller->index()->getBody(), true);
+
+        $this->assertCount(4, ($exists) ? $items['data'] : $items);
     }
 
     /**
