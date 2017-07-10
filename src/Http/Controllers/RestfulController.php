@@ -72,7 +72,7 @@ class RestfulController extends BaseController
      */
     public function index()
     {
-        $exists = interface_exists('Illuminate\Contracts\Pagination\LengthAwarePaginator');
+        $exists = class_exists('Illuminate\Pagination\Paginator');
 
         $items = $exists ? $this->eloquent->paginate() : $this->eloquent->all();
 

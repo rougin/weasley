@@ -2,6 +2,11 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
+## [0.3.1](https://github.com/rougin/weasley/compare/v0.3.0...v0.3.1) - 2017-07-10
+
+### Fixed
+- Checking of `illuminate/pagination` package in `RestfulController::index`
+
 ## [0.3.0](https://github.com/rougin/weasley/compare/v0.2.1...v0.3.0) - 2017-07-10
 
 ### Added
