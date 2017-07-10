@@ -41,7 +41,7 @@ Include `--help` if you want to know the options for each command.
 
 * [`DatabaseIntegration`](https://github.com/rougin/weasley/blob/master/src/Integrations/Illuminate/DatabaseIntegration.php) - based on [illuminate/database](https://github.com/illuminate/database), also known as [Eloquent](https://laravel.com/docs/5.4/eloquent)
 * [`PaginationIntegration`](https://github.com/rougin/weasley/blob/master/src/Integrations/Illuminate/PaginationIntegration.php) - based on [illuminate/pagination](https://github.com/illuminate/pagination)
-* [`ViewIntegration`](https://github.com/rougin/weasley/blob/master/src/Integrations/Illuminate/ViewIntegration.php) - based on [illuminate/view](https://github.com/illuminate/view), also known as [Eloquent](https://laravel.com/docs/5.4/blade)
+* [`ViewIntegration`](https://github.com/rougin/weasley/blob/master/src/Integrations/Illuminate/ViewIntegration.php) - based on [illuminate/view](https://github.com/illuminate/view), also known as [Blade](https://laravel.com/docs/5.4/blade)
 
 ### Middlewares
 
