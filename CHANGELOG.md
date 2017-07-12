@@ -5,7 +5,15 @@ All notable changes to `Weasley` will be documented in this file.
 ## [0.4.0](https://github.com/rougin/weasley/compare/v0.3.1...v0.4.0) - Unreleased
 
 ### Added
+- `TransformerInterface` for creating classes that transforms results
+- `JsonTransformer` for transforming result in JSON format
 - Exception when the specified item does not exists in `RestfulController::show`
+
+### Changed
+- Moved `BaseController::save` and `BaseController::check` in `RestfulController`
+
+### Fixed
+- HTTP Code `201` for creating a new item in `RestfulController::store` 
 
 ## [0.3.1](https://github.com/rougin/weasley/compare/v0.3.0...v0.3.1) - 2017-07-10
 

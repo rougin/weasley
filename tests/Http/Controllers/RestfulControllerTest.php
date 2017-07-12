@@ -152,7 +152,9 @@ class RestfulControllerTest extends TestCase
 
         $controller = new UsersController($request, $this->response);
 
-        $result = (string) $controller->store()->getBody();
+        $response = $controller->store();
+
+        $result = (string) $response->getBody();
 
         $expected = new \stdClass;
 
@@ -162,6 +164,7 @@ class RestfulControllerTest extends TestCase
         $expected->username = 'weasley';
 
         $this->assertEquals($expected, json_decode($result));
+        $this->assertEquals(201, $response->getStatusCode());
     }
 
     /**

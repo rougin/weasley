@@ -5,7 +5,10 @@ namespace Rougin\Weasley\Http\Controllers;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+use Rougin\Weasley\Validators\AbstractValidator;
 
 /**
  * RESTful Controller
@@ -64,7 +67,7 @@ class RestfulController extends BaseController
 
         $item->delete();
 
-        return $this->toJson(null, 204);
+        return $this->json(null, 204);
     }
 
     /**
@@ -78,7 +81,7 @@ class RestfulController extends BaseController
 
         $items = $exists ? $this->eloquent->paginate() : $this->eloquent->all();
 
-        return $this->toJson($items->toArray());
+        return $this->json($items->toArray());
     }
 
     /**
@@ -111,7 +114,9 @@ class RestfulController extends BaseController
      */
     public function store()
     {
-        return $this->save($this->eloquent, $this->validation);
+        list($item, $code) = $this->save($this->eloquent, $this->validation);
+
+        return $this->json($item, $code);
     }
 
     /**
@@ -122,6 +127,56 @@ class RestfulController extends BaseController
      */
     public function update($id)
     {
-        return $this->save($this->eloquent, $this->validation, $id);
+        list($item, $code) = $this->save($this->eloquent, $this->validation, $id);
+
+        return $this->json($item, $code);
+    }
+
+    /**
+     * Checks the property of the class if it has a value.
+     *
+     * @throws \UnexpectedValueException
+     *
+     * @param  string $name
+     * @return void
+     */
+    protected function check($name)
+    {
+        $message = ($name == 'validator') ? '"$validator"' : 'Eloquent model ($model)';
+
+        if ($this->{$name} == '') {
+            $message .= ' must be defined in "' . get_class($this) . '"';
+
+            throw new \UnexpectedValueException($message);
+        }
+    }
+
+    /**
+     * Creates/updates the data to storage.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model          $model
+     * @param  \Rougin\Weasley\Validators\AbstractValidator $validator
+     * @param  integer                                      $id
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    protected function save(Model $model, AbstractValidator $validator, $id = null)
+    {
+        $parameters = $this->request->getParsedBody();
+
+        if (! $validator->validate((array) $parameters)) {
+            $errors = $validator->errors;
+
+            return array($errors, 400);
+        }
+
+        if (is_null($id)) {
+            $item = $model->create($parameters);
+
+            return array($item->toArray(), 201);
+        }
+
+        $model->find($id)->update($parameters);
+
+        return array(null, 204);
     }
 }

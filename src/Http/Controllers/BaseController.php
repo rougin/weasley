@@ -2,12 +2,10 @@
 
 namespace Rougin\Weasley\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Model;
-
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-use Rougin\Weasley\Validators\AbstractValidator;
+use Rougin\Weasley\Transformer\JsonTransformer;
 
 /**
  * Base Controller
@@ -17,11 +15,6 @@ use Rougin\Weasley\Validators\AbstractValidator;
  */
 class BaseController
 {
-    /**
-     * @var array
-     */
-    protected $errors = array();
-
     /**
      * @var \Psr\Http\Message\ServerRequestInterface
      */
@@ -38,21 +31,13 @@ class BaseController
      */
     public function __construct(ServerRequestInterface $request, ResponseInterface $response)
     {
+        $parameters = $request->getParsedBody();
+
+        $request = $request->withParsedBody(is_null($parameters) ? array() : $parameters);
+
         $this->request = $request;
 
         $this->response = $response;
-
-        array_push($this->errors, 'No errors');
-        array_push($this->errors, 'Maximum stack depth exceeded');
-        array_push($this->errors, 'Underflow or the modes mismatch');
-        array_push($this->errors, 'Unexpected control character found');
-        array_push($this->errors, 'Syntax error, malformed JSON');
-        array_push($this->errors, 'Malformed UTF-8 characters, possibly incorrectly encoded');
-        array_push($this->errors, 'One or more recursive references in the value to be encoded');
-        array_push($this->errors, 'One or more NAN or INF values in the value to be encoded');
-        array_push($this->errors, 'A value of a type that cannot be encoded was given');
-        array_push($this->errors, 'A property name that cannot be encoded was given');
-        array_push($this->errors, 'Malformed UTF-16 characters, possibly incorrectly encoded');
     }
 
     /**
@@ -65,19 +50,9 @@ class BaseController
      */
     public function json($data, $code = 200, $options = 0)
     {
-        $response = $this->response->withStatus($code);
+        $transformer = new JsonTransformer($this->response, $options);
 
-        $stream = json_encode($data, $options);
-
-        if (json_last_error() != JSON_ERROR_NONE) {
-            $stream = $this->errors[json_last_error()];
-
-            $response = $response->withStatus(400);
-        }
-
-        $response->getBody()->write($stream);
-
-        return $response->withHeader('Content-Type', 'application/json');
+        return $transformer->transform($data, $code);
     }
 
     /**
@@ -92,54 +67,5 @@ class BaseController
     public function toJson($data, $code = 200, $options = 0)
     {
         return $this->json($data, $code, $options);
-    }
-
-    /**
-     * Checks the property of the class if it has a value.
-     *
-     * @throws \UnexpectedValueException
-     *
-     * @param  string $name
-     * @return void
-     */
-    protected function check($name)
-    {
-        $message = ($name == 'validator') ? '"$validator"' : 'Eloquent model ($model)';
-
-        if ($this->{$name} == '') {
-            $message .= ' must be defined in "' . get_class($this) . '"';
-
-            throw new \UnexpectedValueException($message);
-        }
-    }
-
-    /**
-     * Creates/updates the data to storage.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model          $model
-     * @param  \Rougin\Weasley\Validators\AbstractValidator $validator
-     * @param  integer                                      $id
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    protected function save(Model $model, AbstractValidator $validator, $id = null)
-    {
-        $parameters = $this->request->getParsedBody();
-        $parameters = (is_null($parameters)) ? array() : $parameters;
-
-        if (! $validator->validate((array) $parameters)) {
-            $errors = $validator->errors;
-
-            return $this->toJson($errors, 400);
-        }
-
-        if (is_null($id)) {
-            $item = $model->create($parameters);
-
-            return $this->toJson($item->toArray());
-        }
-
-        $model->find($id)->update($parameters);
-
-        return $this->toJson(null, 204);
     }
 }
