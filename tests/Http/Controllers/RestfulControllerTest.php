@@ -70,6 +70,21 @@ class RestfulControllerTest extends TestCase
     }
 
     /**
+     * Tests RestfulController::show with an error.
+     *
+     * @return void
+     */
+    public function testShowWithError()
+    {
+        $controller = new UsersController($this->request, $this->response);
+
+        $response = $controller->show(99);
+
+        $this->assertEquals('"Specified item not found"', (string) $response->getBody());
+        $this->assertEquals(404, $response->getStatusCode());
+    }
+
+    /**
      * Tests RestfulController::update.
      *
      * @return void

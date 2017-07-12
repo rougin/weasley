@@ -5,6 +5,8 @@ namespace Rougin\Weasley\Http\Controllers;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 /**
  * RESTful Controller
  *
@@ -87,9 +89,19 @@ class RestfulController extends BaseController
      */
     public function show($id)
     {
-        $item = $this->eloquent->find($id);
+        list($code, $result) = array(200, array());
 
-        return $this->toJson($item->toArray());
+        try {
+            $item = $this->eloquent->findOrFail($id);
+
+            list($code, $result) = array(200, $item->toArray());
+        } catch (ModelNotFoundException $e) {
+            $message = 'Specified item not found';
+
+            list($code, $result) = array(404, $message);
+        }
+
+        return $this->json($result, $code);
     }
 
     /**

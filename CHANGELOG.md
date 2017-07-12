@@ -2,6 +2,11 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
+## [0.4.0](https://github.com/rougin/weasley/compare/v0.3.1...v0.4.0) - Unreleased
+
+### Added
+- Exception when the specified item does not exists in `RestfulController::show`
+
 ## [0.3.1](https://github.com/rougin/weasley/compare/v0.3.0...v0.3.1) - 2017-07-10
 
 ### Fixed
