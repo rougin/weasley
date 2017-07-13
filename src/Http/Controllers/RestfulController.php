@@ -29,6 +29,11 @@ class RestfulController extends BaseController
     protected $model = '';
 
     /**
+     * @var string
+     */
+    protected $transformer = 'Rougin\Weasley\Transformer\ApiTransformer';
+
+    /**
      * @var \Rougin\Weasley\Validators\AbstractValidator
      */
     protected $validation;
@@ -79,9 +84,13 @@ class RestfulController extends BaseController
     {
         $exists = class_exists('Illuminate\Pagination\LengthAwarePaginator');
 
-        $items = $exists ? $this->eloquent->paginate() : $this->eloquent->all();
+        list($columns, $current, $filter) = $this->pagination();
 
-        return $this->json($items->toArray());
+        $items = $exists ? $this->eloquent->paginate($filter, $columns, 'page', $current) : $this->eloquent->all();
+
+        $transformer = new $this->transformer;
+
+        return $this->json($transformer->transform($items));
     }
 
     /**
@@ -149,6 +158,24 @@ class RestfulController extends BaseController
 
             throw new \UnexpectedValueException($message);
         }
+    }
+
+    /**
+     * Define the variables needed for pagination, if available.
+     *
+     * @return array
+     */
+    protected function pagination()
+    {
+        $parameters = $this->request->getQueryParams();
+
+        $columns = (isset($parameters['columns'])) ? explode(',', $parameters['columns']) : array('*');
+
+        $current = (isset($parameters['page'])) ? $parameters['page'] : null;
+
+        $filter = (isset($parameters['limit'])) ? $parameters['limit'] : null;
+
+        return array($columns, $current, $filter);
     }
 
     /**

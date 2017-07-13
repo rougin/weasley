@@ -13,9 +13,8 @@ interface TransformerInterface
     /**
      * Transforms the contents of the result.
      *
-     * @param  mixed   $data
-     * @param  integer $code
-     * @return \Psr\Http\Message\ResponseInterface
+     * @param  mixed $data
+     * @return mixed
      */
-    public function transform($data, $code = 200);
+    public function transform($data);
 }

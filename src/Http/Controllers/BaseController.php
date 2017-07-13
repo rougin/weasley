@@ -50,9 +50,11 @@ class BaseController
      */
     public function json($data, $code = 200, $options = 0)
     {
-        $transformer = new JsonTransformer($this->response, $options);
+        $response = $this->response->withStatus($code);
 
-        return $transformer->transform($data, $code);
+        $transformer = new JsonTransformer($response, $options);
+
+        return $transformer->transform($data);
     }
 
     /**

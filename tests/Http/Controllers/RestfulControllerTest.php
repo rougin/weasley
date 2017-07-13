@@ -45,7 +45,7 @@ class RestfulControllerTest extends TestCase
 
         $items = json_decode((string) $controller->index()->getBody(), true);
 
-        $this->assertCount(4, ($exists) ? $items['data'] : $items);
+        $this->assertCount(4, ($exists) ? $items['items'] : $items);
     }
 
     /**

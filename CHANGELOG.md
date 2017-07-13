@@ -7,7 +7,9 @@ All notable changes to `Weasley` will be documented in this file.
 ### Added
 - `TransformerInterface` for creating classes that transforms results
 - `JsonTransformer` for transforming result in JSON format
+- `ApiTransformer` for transforming result based on [Paypal's API Style Guide](https://github.com/paypal/api-standards/blob/master/api-style-guide.md)
 - Exception when the specified item does not exists in `RestfulController::show`
+- `RestfulController::transformer` for defining the transformer to be used in `RestfulController::index`
 
 ### Changed
 - Moved `BaseController::save` and `BaseController::check` in `RestfulController`

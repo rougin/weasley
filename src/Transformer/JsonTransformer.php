@@ -2,8 +2,10 @@
 
 namespace Rougin\Weasley\Transformer;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
- * Transformer Interface
+ * JSON Transformer
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
@@ -29,7 +31,7 @@ class JsonTransformer implements TransformerInterface
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param integer                             $options
      */
-    public function __construct(\Psr\Http\Message\ResponseInterface $response, $options = 0)
+    public function __construct(ResponseInterface $response, $options = 0)
     {
         $this->options = $options;
 
@@ -51,13 +53,12 @@ class JsonTransformer implements TransformerInterface
     /**
      * Transforms the contents of the result.
      *
-     * @param  mixed   $data
-     * @param  integer $code
-     * @return \Psr\Http\Message\ResponseInterface
+     * @param  mixed $data
+     * @return mixed
      */
-    public function transform($data, $code = 200)
+    public function transform($data)
     {
-        $response = $this->response->withStatus($code);
+        $response = $this->response;
 
         $stream = json_encode($data, $this->options);
 
