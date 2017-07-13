@@ -2,7 +2,7 @@
 
 namespace Rougin\Weasley\Transformer;
 
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Support\Arrayable;
 
 /**
  * API Transformer
@@ -28,10 +28,10 @@ class ApiTransformer implements TransformerInterface
     /**
      * Converts the paginator into Paypal API standards.
      *
-     * @param  \Illuminate\Contracts\Pagination\LengthAwarePaginator $paginator
+     * @param  \Illuminate\Contracts\Support\Arrayable $paginator
      * @return array
      */
-    protected function paginator(LengthAwarePaginator $paginator)
+    protected function paginator(Arrayable $paginator)
     {
         list($response, $result) = array(array(), $paginator->toArray());
 
