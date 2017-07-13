@@ -35,10 +35,8 @@ class ApiTransformer implements TransformerInterface
     {
         list($response, $result) = array(array(), $data->toArray());
 
-        $pages = ($result['total'] != 0 && $result['per_page'] > $result['total']) ? 1 : round($total / $result['per_page']);
-
         $response['total_items'] = $result['total'];
-        $response['total_pages'] = $pages;
+        $response['total_pages'] = round($result['total'] / $result['per_page']) ?: 1;
         $response['items'] = $result['data'];
 
         return $response;
