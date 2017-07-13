@@ -167,15 +167,13 @@ class RestfulController extends BaseController
      */
     protected function pagination()
     {
-        $parameters = $this->request->getQueryParams();
+        $query = $this->request->getQueryParams();
 
-        $columns = (isset($parameters['columns'])) ? explode(',', $parameters['columns']) : array('*');
+        $columns = isset($query['columns']) ? explode(',', $query['columns']) : array('*');
 
-        $current = (isset($parameters['page'])) ? $parameters['page'] : null;
+        $current = isset($query['page']) ? $query['page'] : null;
 
-        $filter = (isset($parameters['limit'])) ? $parameters['limit'] : null;
-
-        return array($columns, $current, $filter);
+        return array($columns, $current, isset($query['limit']) ? $query['limit'] : null);
     }
 
     /**
@@ -188,21 +186,21 @@ class RestfulController extends BaseController
      */
     protected function save(Model $model, AbstractValidator $validator, $id = null)
     {
-        $parameters = $this->request->getParsedBody();
+        $parsed = $this->request->getParsedBody();
 
-        if (! $validator->validate((array) $parameters)) {
+        if (! $validator->validate((array) $parsed)) {
             $errors = $validator->errors;
 
             return array($errors, 400);
         }
 
         if (is_null($id)) {
-            $item = $model->create($parameters);
+            $item = $model->create($parsed);
 
             return array($item->toArray(), 201);
         }
 
-        $model->find($id)->update($parameters);
+        $model->find($id)->update($parsed);
 
         return array(null, 204);
     }

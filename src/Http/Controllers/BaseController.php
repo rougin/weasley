@@ -31,9 +31,9 @@ class BaseController
      */
     public function __construct(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $parameters = $request->getParsedBody();
+        $parsed = $request->getParsedBody();
 
-        $request = $request->withParsedBody(is_null($parameters) ? array() : $parameters);
+        $request = $request->withParsedBody(is_null($parsed) ? array() : $parsed);
 
         $this->request = $request;
 
