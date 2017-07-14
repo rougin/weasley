@@ -188,7 +188,7 @@ class RestfulController extends BaseController
     {
         $parsed = $this->request->getParsedBody();
 
-        if (! $validator->validate($parsed)) {
+        if (! $validator->validate((array) $parsed)) {
             return array($validator->errors, 400);
         }
 
