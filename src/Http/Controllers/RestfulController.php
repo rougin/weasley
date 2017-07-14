@@ -125,7 +125,7 @@ class RestfulController extends BaseController
     {
         list($item, $code) = $this->save($this->eloquent, $this->validation);
 
-        return $this->json($item, $code);
+        return $this->json($item instanceof Model ? $item->toArray() : $item, $code);
     }
 
     /**
@@ -138,7 +138,7 @@ class RestfulController extends BaseController
     {
         list($item, $code) = $this->save($this->eloquent, $this->validation, $id);
 
-        return $this->json($item, $code);
+        return $this->json($item instanceof Model ? null : $item, $code);
     }
 
     /**
@@ -182,26 +182,26 @@ class RestfulController extends BaseController
      * @param  \Illuminate\Database\Eloquent\Model          $model
      * @param  \Rougin\Weasley\Validators\AbstractValidator $validator
      * @param  integer                                      $id
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return array
      */
     protected function save(Model $model, AbstractValidator $validator, $id = null)
     {
         $parsed = $this->request->getParsedBody();
 
-        if (! $validator->validate((array) $parsed)) {
-            $errors = $validator->errors;
-
-            return array($errors, 400);
+        if (! $validator->validate($parsed)) {
+            return array($validator->errors, 400);
         }
 
-        if (is_null($id)) {
+        if (is_null($id) === true) {
             $item = $model->create($parsed);
 
-            return array($item->toArray(), 201);
+            return array($item, 201);
         }
 
-        $model->find($id)->update($parsed);
+        $item = $model->find($id);
 
-        return array(null, 204);
+        $item->update($parsed);
+
+        return array($item, 204);
     }
 }

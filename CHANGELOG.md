@@ -2,6 +2,11 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
+## [0.4.2](https://github.com/rougin/weasley/compare/v0.4.1...v0.4.2) - 2017-07-14
+
+### Fixed
+- Returning Eloquent model in `RestfulController::save`
+
 ## [0.4.1](https://github.com/rougin/weasley/compare/v0.4.0...v0.4.1) - 2017-07-13
 
 ### Fixed
