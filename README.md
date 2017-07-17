@@ -33,7 +33,7 @@ Include `--help` if you want to know the options for each command.
 ### HTTP Controllers
 
 * [`AuthenticationController`](https://github.com/rougin/weasley/blob/master/src/Http/Controllers/AuthenticationController.php) - based on [Loream Authsum](https://github.com/rougin/loream-authsum), this controller provides methods for authenticating credentials
-* [`RestfulController`](https://github.com/rougin/weasley/blob/master/src/Http/Controllers/RestfulController.php) - based on [PSR-7](http://www.php-fig.org/psr/psr-7), this controller provides methods for creating RESTful APIs
+* [`RestfulController`](https://github.com/rougin/weasley/blob/master/src/Http/Controllers/RestfulController.php) - based on [PSR-7](http://www.php-fig.org/psr/psr-7), this controller provides class methods for creating RESTful APIs
 
 ### Integrations
 
