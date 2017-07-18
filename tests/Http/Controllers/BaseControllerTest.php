@@ -15,7 +15,7 @@ class BaseControllerTest extends TestCase
 
         $controller = new BaseController($this->request, $this->response);
 
-        $response = $controller->json($data);
+        $response = $controller->toJson($data);
 
         $this->assertEquals(json_encode($data), (string) $response->getBody());
     }
