@@ -28,7 +28,7 @@ You can access the generators through `vendor/bin/weasley` in your terminal/comm
 * `make:middleware` - Create a new [PSR-15](https://github.com/php-fig/fig-standards/blob/master/proposed/http-middleware/middleware-meta.md) middleware class
 * `make:validator` - Create a new validator class
 
-Include `--help` if you want to know the options for each command.
+You can also include `--help` if you want to know the available options for each command.
 
 ### HTTP Controllers
 
