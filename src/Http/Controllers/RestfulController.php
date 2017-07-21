@@ -19,7 +19,7 @@ use Rougin\Weasley\Validators\AbstractValidator;
 class RestfulController extends BaseController
 {
     /**
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder
      */
     protected $eloquent;
 
@@ -179,12 +179,12 @@ class RestfulController extends BaseController
     /**
      * Creates/updates the data to storage.
      *
-     * @param  \Illuminate\Database\Eloquent\Model          $model
-     * @param  \Rougin\Weasley\Validators\AbstractValidator $validator
-     * @param  integer                                      $id
+     * @param  \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder $model
+     * @param  \Rougin\Weasley\Validators\AbstractValidator                              $validator
+     * @param  integer                                                                   $id
      * @return array
      */
-    protected function save(Model $model, AbstractValidator $validator, $id = null)
+    protected function save($model, AbstractValidator $validator, $id = null)
     {
         $parsed = $this->request->getParsedBody();
 
