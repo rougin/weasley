@@ -19,7 +19,7 @@ use Rougin\Weasley\Validators\AbstractValidator;
 class RestfulController extends BaseController
 {
     /**
-     * @var \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder
+     * @var \Illuminate\Database\Eloquent\Model
      */
     protected $eloquent;
 
