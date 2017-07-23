@@ -179,9 +179,9 @@ class RestfulController extends BaseController
     /**
      * Creates/updates the data to storage.
      *
-     * @param  \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder $model
-     * @param  \Rougin\Weasley\Validators\AbstractValidator                              $validator
-     * @param  integer                                                                   $id
+     * @param  \Illuminate\Database\Eloquent\Model          $model
+     * @param  \Rougin\Weasley\Validators\AbstractValidator $validator
+     * @param  integer                                      $id
      * @return array
      */
     protected function save($model, AbstractValidator $validator, $id = null)
