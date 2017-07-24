@@ -2,7 +2,7 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
-## [0.4.3](https://github.com/rougin/weasley/compare/v0.4.2...v0.4.3) - Unreleased
+## [0.4.3](https://github.com/rougin/weasley/compare/v0.4.2...v0.4.3) - 2017-07-24
 
 ### Removed
 - Typehinting of model in `RestfulController::save`

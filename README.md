@@ -45,7 +45,7 @@ You can also include `--help` if you want to know the available options for each
 
 ### Middlewares
 
-All of the middlewares below is implemented in [PSR-15](https://github.com/http-interop/http-middleware).
+All of the middlewares below are implemented in [PSR-15](https://github.com/http-interop/http-middleware).
 
 * [`CORS`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Cors.php) - adds additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 * [`JSON`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Json.php) - changes `Content-Type` of response to `application/json`
