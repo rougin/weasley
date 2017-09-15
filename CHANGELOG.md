@@ -2,11 +2,6 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
-## [0.4.4](https://github.com/rougin/weasley/compare/v0.4.3...v0.4.4) - 2017-09-15
-
-### Removed
-- `rougin/loream-authsum` in `composer.json`
-
 ## [0.4.3](https://github.com/rougin/weasley/compare/v0.4.2...v0.4.3) - 2017-07-24
 
 ### Removed
