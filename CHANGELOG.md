@@ -2,6 +2,11 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
+## [0.4.4](https://github.com/rougin/weasley/compare/v0.4.3...v0.4.4) - 2017-09-19
+
+### Fixed
+- Version of `http-interop/http-middleware` to `v0.4.1` due to BC break on `v0.5.0`
+
 ## [0.4.3](https://github.com/rougin/weasley/compare/v0.4.2...v0.4.3) - 2017-07-24
 
 ### Removed
