@@ -1,11 +1,11 @@
 <?php
 
-namespace Skeleton\Http\Controllers;
+namespace App\Http\Controllers;
 
 /**
  * TestController
  *
- * @package Skeleton
+ * @package App
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
 class TestController

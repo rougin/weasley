@@ -23,6 +23,8 @@ class $CLASS implements \Interop\Http\ServerMiddleware\MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
+        //
+
         return $delegate->process($request);
     }
 }

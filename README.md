@@ -32,7 +32,6 @@ You can also include `--help` if you want to know the available options for each
 
 ### HTTP Controllers
 
-* [`AuthenticationController`](https://github.com/rougin/weasley/blob/master/src/Http/Controllers/AuthenticationController.php) - based on [Loream Authsum](https://github.com/rougin/loream-authsum), this controller provides methods for authenticating credentials
 * [`RestfulController`](https://github.com/rougin/weasley/blob/master/src/Http/Controllers/RestfulController.php) - based on [PSR-7](http://www.php-fig.org/psr/psr-7), this controller provides class methods for creating RESTful APIs
 
 ### Integrations
@@ -45,15 +44,11 @@ You can also include `--help` if you want to know the available options for each
 
 ### Middlewares
 
-All of the middlewares below are implemented in [PSR-15](https://github.com/http-interop/http-middleware).
+All of the middlewares below are implemented in [PSR-15 v0.4.1](https://github.com/http-interop/http-middleware).
 
 * [`CORS`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Cors.php) - adds additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 * [`JSON`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Json.php) - changes `Content-Type` of response to `application/json`
 * [`FormMethodSpoofing`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/FormMethodSpoofing.php) - changes the HTTP method of the request if it founds a `_method` attribute from a `<form>` tag
-
-### Validators
-
-* [`AuthenticationValidator`](https://github.com/rougin/weasley/blob/master/src/Validators/AuthenticationValidator.php) - a simple validator (username and password) for [Loream Authsum](https://github.com/rougin/loream-authsum)
 
 ## Change log
 

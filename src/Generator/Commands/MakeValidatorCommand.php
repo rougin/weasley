@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Commands;
+namespace Rougin\Weasley\Generator\Commands;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -33,8 +33,8 @@ class MakeValidatorCommand extends AbstractCommand
         $this->setName('make:validator')->setDescription('Create a new validator class');
         $this->addArgument('name', InputArgument::REQUIRED, 'Name of the class');
         $this->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path for the file to be created', 'src/Validators');
-        $this->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace of the class', 'Skeleton\Validators');
-        $this->addOption('package', null, InputOption::VALUE_OPTIONAL, 'Name of the package', 'Skeleton');
+        $this->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace of the class', 'App\Validators');
+        $this->addOption('package', null, InputOption::VALUE_OPTIONAL, 'Name of the package', 'App');
         $this->addOption('author', null, InputOption::VALUE_OPTIONAL, 'Name of the author', 'Rougin Royce Gutib <rougingutib@gmail.com>');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Skeleton\Validators;
+namespace App\Validators;
 
 /**
  * TestValidator
  *
- * @package Skeleton
+ * @package App
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
 class TestValidator extends \Rougin\Weasley\Validators\AbstractValidator

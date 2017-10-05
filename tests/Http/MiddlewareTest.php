@@ -17,9 +17,9 @@ class MiddlewareTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
-        $_SERVER['REQUEST_URI']    = '/';
-        $_SERVER['SERVER_NAME']    = 'localhost';
-        $_SERVER['SERVER_PORT']    = '8000';
+        $_SERVER['REQUEST_URI'] = '/';
+        $_SERVER['SERVER_NAME'] = 'localhost';
+        $_SERVER['SERVER_PORT'] = '8000';
 
         $middleware = new \Rougin\Slytherin\Middleware\Middleware;
         $request = new \Rougin\Slytherin\Http\ServerRequest($_SERVER);
