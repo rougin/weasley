@@ -2,7 +2,7 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
-## [0.5.0](https://github.com/rougin/weasley/compare/v0.4.4...v0.5.0) - Unreleased
+## [0.5.0](https://github.com/rougin/weasley/compare/v0.4.4...v0.5.0) - 2017-10-06
 
 ### Changed
 - Renamed `Skeleton` to `App` in the default namespace of the command generators
