@@ -19,7 +19,7 @@ class UserValidator extends \Rougin\Weasley\Validators\AbstractValidator
     {
         $labels = array();
 
-        $labels['name']     = 'Name';
+        $labels['name'] = 'Name';
         $labels['username'] = 'Username';
         $labels['password'] = 'Password';
 

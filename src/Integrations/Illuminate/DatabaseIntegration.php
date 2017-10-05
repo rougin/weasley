@@ -26,13 +26,14 @@ class DatabaseIntegration implements \Rougin\Slytherin\Integration\IntegrationIn
     {
         $capsule = new \Illuminate\Database\Capsule\Manager;
 
-        $default = $config->get('database.default');
-
         foreach ($config->get('database', array()) as $key => $value) {
             if (is_array($value) === true) {
-                $key = ($key === $default) ? 'default' : $key;
+                $value['collation'] = $config->get('database.' . $key . '.collation', 'utf8_unicode_ci');
+                $value['prefix'] = $config->get('database.' . $key . '.prefix', '');
 
-                $capsule->addConnection($this->prepare($value), $key);
+                $key = ($key === $config->get('database.default')) ? 'default' : $key;
+
+                $capsule->addConnection($value, $key);
             }
         }
 
@@ -40,20 +41,6 @@ class DatabaseIntegration implements \Rougin\Slytherin\Integration\IntegrationIn
 
         $capsule->bootEloquent();
 
-        return $container->set('Illuminate\Database\Capsule\Manager', $capsule);
-    }
-
-    /**
-     * Prepares the database with additional fields.
-     *
-     * @param  array $database
-     * @return array
-     */
-    protected function prepare(array $database)
-    {
-        $database['collation'] = 'utf8_unicode_ci';
-        $database['prefix'] = '';
-
-        return $database;
+        return $container->set(get_class($capsule), $capsule);
     }
 }

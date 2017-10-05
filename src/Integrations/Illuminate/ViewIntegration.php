@@ -5,9 +5,6 @@ namespace Rougin\Weasley\Integrations\Illuminate;
 use Rougin\Slytherin\Integration\Configuration;
 use Rougin\Slytherin\Container\ContainerInterface;
 
-use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\View\Engines\CompilerEngine;
-
 /**
  * Illuminate's View Integration
  *
@@ -42,7 +39,7 @@ class ViewIntegration implements \Rougin\Slytherin\Integration\IntegrationInterf
 
         $factory = $this->factory($filesystem, $resolver, $templates);
 
-        $renderer = new \Rougin\Weasley\Template\BladeRenderer($factory);
+        $renderer = new \Rougin\Weasley\Renderers\BladeRenderer($factory);
 
         $container->set('Illuminate\Contracts\View\Factory', $factory);
 
@@ -59,9 +56,9 @@ class ViewIntegration implements \Rougin\Slytherin\Integration\IntegrationInterf
     protected function blade($compiled, $filesystem)
     {
         return function () use ($compiled, $filesystem) {
-            $compiler = new BladeCompiler($filesystem, $compiled);
+            $compiler = new \Illuminate\View\Compilers\BladeCompiler($filesystem, $compiled);
 
-            return new CompilerEngine($compiler);
+            return new \Illuminate\View\Engines\CompilerEngine($compiler);
         };
     }
 

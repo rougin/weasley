@@ -1,6 +1,6 @@
 <?php
 
-namespace Skeleton\Http\Middleware;
+namespace App\Http\Middleware;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
@@ -8,7 +8,7 @@ use Interop\Http\ServerMiddleware\DelegateInterface;
 /**
  * TestMiddleware
  *
- * @package Skeleton
+ * @package App
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
 class TestMiddleware implements \Interop\Http\ServerMiddleware\MiddlewareInterface
@@ -23,6 +23,8 @@ class TestMiddleware implements \Interop\Http\ServerMiddleware\MiddlewareInterfa
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
+        //
+
         return $delegate->process($request);
     }
 }

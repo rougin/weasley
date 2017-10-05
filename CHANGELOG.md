@@ -2,6 +2,17 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
+## [0.5.0](https://github.com/rougin/weasley/compare/v0.4.4...v0.5.0) - Unreleased
+
+### Changed
+- Renamed `Skeleton` to `App` in the default namespace of the command generators
+- Renamed `Template` directory to `Renderers`
+- Moved `Commands` and `Templates` directory to `Generator` directory
+
+### Removed
+- `rougin/loream-authsum` package
+- `DatabaseIntegration::prepare` method
+
 ## [0.4.4](https://github.com/rougin/weasley/compare/v0.4.3...v0.4.4) - 2017-09-19
 
 ### Fixed

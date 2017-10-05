@@ -1,11 +1,11 @@
 <?php
 
-namespace Rougin\Weasley\Template;
+namespace Rougin\Weasley\Renderers;
 
 /**
  * Illuminate's View (Blade) Renderer
  *
- * A simple implementation of a renderer using Laravel Blade.
+ * A simple wrapper of Laravel Blade to Slytherin's RendererInterface.
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
@@ -30,10 +30,11 @@ class BladeRenderer implements \Rougin\Slytherin\Template\RendererInterface
      *
      * @param  string $template
      * @param  array  $data
+     * @param  array  $merge
      * @return string
      */
-    public function render($template, array $data = array())
+    public function render($template, array $data = array(), $merge = array())
     {
-        return $this->factory->make($template, $data)->render();
+        return $this->factory->make($template, $data, $merge)->render();
     }
 }

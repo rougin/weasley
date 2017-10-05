@@ -40,8 +40,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $properties = array();
 
         $properties['database'] = __DIR__ . '/../../Fixture/Database.sqlite';
-        $properties['driver']   = 'sqlite';
-        $properties['prefix']   = '';
+        $properties['driver'] = 'sqlite';
+        $properties['prefix'] = '';
 
         $capsule->addConnection($properties);
         $capsule->setAsGlobal();
