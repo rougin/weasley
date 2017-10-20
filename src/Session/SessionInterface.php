@@ -10,7 +10,7 @@ namespace Rougin\Weasley\Session;
  */
 interface SessionInterface
 {
-	/**
+    /**
      * Returns the value from the specified key.
      *
      * @param  string $key

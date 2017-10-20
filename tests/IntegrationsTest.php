@@ -112,6 +112,10 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
      */
     public function testSession()
     {
+        $message = 'SessionHandlerInterface is not yet available';
+
+        interface_exists('SessionHandlerInterface') || $this->markTestSkipped($message);
+
         $integration = new Integrations\SessionIntegration;
 
         $this->config->set('session.path', __DIR__ . '/Fixture/Storage/Sessions');

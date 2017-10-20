@@ -16,7 +16,7 @@ class Session implements SessionInterface
     protected $data = array();
 
     /**
-     * @var integer
+     * @var string
      */
     protected $id;
 
