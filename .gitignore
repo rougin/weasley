@@ -1,5 +1,6 @@
 build
 composer.lock
 docs
-tests/Fixture/Compiled
+tests/Fixture/Storage/Compiled
+tests/Fixture/Storage/Sessions
 vendor

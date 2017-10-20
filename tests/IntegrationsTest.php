@@ -89,7 +89,7 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
 
         $integration = new Integrations\Illuminate\ViewIntegration;
 
-        $this->config->set('illuminate.view.compiled', __DIR__ . '/Fixture/Compiled');
+        $this->config->set('illuminate.view.compiled', __DIR__ . '/Fixture/Storage/Compiled');
         $this->config->set('illuminate.view.templates', __DIR__ . '/Fixture/Templates');
 
         $container = $integration->define($this->container, $this->config);
@@ -101,5 +101,41 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Illuminate\Contracts\View\Factory', $factory);
 
         $this->assertEquals('Hello world!', $renderer->render('Hello'));
+    }
+
+    /**
+     * Tests SessionIntegration.
+     *
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function testSession()
+    {
+        $integration = new Integrations\SessionIntegration;
+
+        $this->config->set('session.path', __DIR__ . '/Fixture/Storage/Sessions');
+
+        $container = $integration->define($this->container, $this->config);
+
+        $session = $container->get('Rougin\Weasley\Session\SessionInterface');
+
+        $expected = 'Ron Weasley';
+
+        $session->set('user.name', $expected);
+
+        $this->assertEquals($session->get('user.name'), $expected);
+
+        $session->delete('user.name');
+
+        $this->assertEmpty($session->get('user.name'));
+
+        $session->regenerate(true);
+
+        $expected = 'Harry Potter';
+
+        $session->set('user.name', 'Harry Potter');
+
+        $this->assertEquals($session->get('user.name'), $expected);
     }
 }

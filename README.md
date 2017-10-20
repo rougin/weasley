@@ -32,23 +32,25 @@ You can also include `--help` if you want to know the available options for each
 
 ### HTTP Controllers
 
-* [`RestfulController`](https://github.com/rougin/weasley/blob/master/src/Http/Controllers/RestfulController.php) - based on [PSR-7](http://www.php-fig.org/psr/psr-7), this controller provides class methods for creating RESTful APIs
+* [`RestfulController`](src/Http/Controllers/RestfulController.php) - based on [PSR-7](http://www.php-fig.org/psr/psr-7), this controller provides class methods for creating RESTful APIs
 
 ### Integrations
 
+* [`SessionIntegration`](src/Integrations/SessionIntegration.php) - an implementation of `SessionHandlerInterface`
+
 #### Illuminate (Laravel's individual components)
 
-* [`DatabaseIntegration`](https://github.com/rougin/weasley/blob/master/src/Integrations/Illuminate/DatabaseIntegration.php) - based on [illuminate/database](https://github.com/illuminate/database), also known as [Eloquent](https://laravel.com/docs/5.4/eloquent)
-* [`PaginationIntegration`](https://github.com/rougin/weasley/blob/master/src/Integrations/Illuminate/PaginationIntegration.php) - based on [illuminate/pagination](https://github.com/illuminate/pagination)
-* [`ViewIntegration`](https://github.com/rougin/weasley/blob/master/src/Integrations/Illuminate/ViewIntegration.php) - based on [illuminate/view](https://github.com/illuminate/view), also known as [Blade](https://laravel.com/docs/5.4/blade)
+* [`DatabaseIntegration`](src/Integrations/Illuminate/DatabaseIntegration.php) - based on [illuminate/database](https://github.com/illuminate/database), also known as [Eloquent](https://laravel.com/docs/5.4/eloquent)
+* [`PaginationIntegration`](src/Integrations/Illuminate/PaginationIntegration.php) - based on [illuminate/pagination](https://github.com/illuminate/pagination)
+* [`ViewIntegration`](src/Integrations/Illuminate/ViewIntegration.php) - based on [illuminate/view](https://github.com/illuminate/view), also known as [Blade](https://laravel.com/docs/5.4/blade)
 
 ### Middlewares
 
 All of the middlewares below are implemented in [PSR-15 v0.4.1](https://github.com/http-interop/http-middleware).
 
-* [`CORS`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Cors.php) - adds additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
-* [`JSON`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/Json.php) - changes `Content-Type` of response to `application/json`
-* [`FormMethodSpoofing`](https://github.com/rougin/weasley/blob/master/src/Http/Middleware/FormMethodSpoofing.php) - changes the HTTP method of the request if it founds a `_method` attribute from a `<form>` tag
+* [`CORS`](src/Http/Middleware/Cors.php) - adds additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+* [`JSON`](src/Http/Middleware/Json.php) - changes `Content-Type` of response to `application/json`
+* [`FormMethodSpoofing`](src/Http/Middleware/FormMethodSpoofing.php) - changes the HTTP method of the request if it founds a `_method` attribute from a `<form>` tag
 
 ## Change log
 
