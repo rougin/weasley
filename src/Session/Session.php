@@ -27,7 +27,7 @@ class Session implements SessionInterface
 
     /**
      * @param \SessionHandlerInterface $handler
-     * @param integer|null             $id
+     * @param string|null              $id
      */
     public function __construct(\SessionHandlerInterface $handler, $id = null)
     {
