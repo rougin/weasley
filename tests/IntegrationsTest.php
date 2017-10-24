@@ -43,6 +43,7 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
         $this->config->set('database.default', 'sqlite');
 
         $this->config->set('database.sqlite.driver', 'sqlite');
+
         $this->config->set('database.sqlite.database', __DIR__ . '/Fixture/Database.sqlite');
 
         $container = $integration->define($this->container, $this->config);
@@ -90,6 +91,7 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
         $integration = new Integrations\Illuminate\ViewIntegration;
 
         $this->config->set('illuminate.view.compiled', __DIR__ . '/Fixture/Storage/Compiled');
+
         $this->config->set('illuminate.view.templates', __DIR__ . '/Fixture/Templates');
 
         $container = $integration->define($this->container, $this->config);
@@ -139,6 +141,10 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
         $expected = 'Harry Potter';
 
         $session->set('user.name', 'Harry Potter');
+
+        $handler = $container->get('Rougin\Weasley\Session\SessionHandlerInterface');
+
+        $handler->close();
 
         $this->assertEquals($session->get('user.name'), $expected);
     }

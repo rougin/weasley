@@ -112,8 +112,6 @@ class FileSessionHandler implements \SessionHandlerInterface
 
         $result = file_put_contents($file, $data);
 
-        $this->close();
-
         return $result !== false;
     }
 }

@@ -30,6 +30,8 @@ class SessionIntegration implements \Rougin\Slytherin\Integration\IntegrationInt
 
         $handler = $this->handler($config->get('session.driver', 'file'));
 
+        $container->set('Rougin\Weasley\Session\SessionHandlerInterface', $handler);
+
         if ($cookie === null) {
             $expiration = $config->get('session.expiration', time() + 7200);
 
