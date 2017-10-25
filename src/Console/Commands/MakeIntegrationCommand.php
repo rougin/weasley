@@ -32,6 +32,7 @@ class MakeIntegrationCommand extends AbstractCommand
     {
         $this->setName('make:integration')->setDescription('Create a new integration class');
         $this->addArgument('name', InputArgument::REQUIRED, 'Name of the class');
+
         $this->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path for the file to be created', 'src/Integrations');
         $this->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace of the class', 'App\Integrations');
         $this->addOption('package', null, InputOption::VALUE_OPTIONAL, 'Name of the package', 'App');

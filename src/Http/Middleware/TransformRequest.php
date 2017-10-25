@@ -41,7 +41,7 @@ class TransformRequest implements \Interop\Http\ServerMiddleware\MiddlewareInter
     protected function map(array $items)
     {
         foreach ($items as $key => $value) {
-            $transformed = $this->transform($key, $value);
+            $transformed = $this->transform($value);
 
             $items[$key] = $transformed;
         }

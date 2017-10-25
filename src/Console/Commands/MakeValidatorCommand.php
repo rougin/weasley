@@ -32,6 +32,7 @@ class MakeValidatorCommand extends AbstractCommand
     {
         $this->setName('make:validator')->setDescription('Create a new validator class');
         $this->addArgument('name', InputArgument::REQUIRED, 'Name of the class');
+
         $this->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path for the file to be created', 'src/Validators');
         $this->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace of the class', 'App\Validators');
         $this->addOption('package', null, InputOption::VALUE_OPTIONAL, 'Name of the package', 'App');

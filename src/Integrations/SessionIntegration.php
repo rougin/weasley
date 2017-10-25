@@ -24,22 +24,21 @@ class SessionIntegration implements \Rougin\Slytherin\Integration\IntegrationInt
      */
     public function define(ContainerInterface $container, Configuration $config)
     {
-        $lifetime = (integer) $config->get('session.lifetime', 60);
         $name = $config->get('session.cookies', 'weasley_session');
-        $cookie = $config->get('app.http.cookies.' . $name, null);
 
-        $handler = $this->handler($config->get('session.driver', 'file'));
+        $handlers = $config->get('session.handlers', $this->handlers());
+        $handler = $container->get($handlers[$config->get('session.driver', 'file')]);
 
         $container->set('Rougin\Weasley\Session\SessionHandlerInterface', $handler);
 
-        if ($cookie === null) {
+        if (($cookie = $config->get('app.http.cookies.' . $name, null)) === null) {
             $expiration = $config->get('session.expiration', time() + 7200);
 
             setcookie($name, $cookie = str_random(40), $expiration);
         }
 
         $handler->open($config->get('session.path'), $cookie);
-        $handler->gc($lifetime * 60);
+        $handler->gc(((integer) $config->get('session.lifetime', 60)) * 60);
 
         $session = new \Rougin\Weasley\Session\Session($handler, $cookie);
 
@@ -47,17 +46,16 @@ class SessionIntegration implements \Rougin\Slytherin\Integration\IntegrationInt
     }
 
     /**
-     * Returns the specified session handlers.
+     * Returns a listing of session handlers.
      *
-     * @param  string $type
      * @return array
      */
-    protected function handler($type = 'file')
+    protected function handlers()
     {
         $items = array();
 
-        $items['file'] = new \Rougin\Weasley\Session\FileSessionHandler;
+        $items['file'] = 'Rougin\Weasley\Session\FileSessionHandler';
 
-        return $items[$type];
+        return $items;
     }
 }

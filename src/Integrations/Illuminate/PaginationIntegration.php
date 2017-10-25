@@ -35,7 +35,9 @@ class PaginationIntegration implements \Rougin\Slytherin\Integration\Integration
         });
 
         Paginator::currentPageResolver(function ($name = null) use ($request) {
-            list($name, $parameters) = array($name ?: 'page', $request->getQueryParams());
+            $parameters = $request->getQueryParams();
+
+            $name = $name ?: 'page';
 
             return isset($parameters[$name]) ? $parameters[$name] : 1;
         });

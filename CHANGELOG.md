@@ -6,7 +6,7 @@ All notable changes to `Weasley` will be documented in this file.
 
 ### Added
 - `EmptyStringsToNull` middleware
-- `Session` library
+- `Session` library (with `FileSessionHandler`)
 - `TrimStrings` middleware
 
 ### Changed

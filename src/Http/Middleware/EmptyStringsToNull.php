@@ -13,11 +13,10 @@ class EmptyStringsToNull extends TransformRequest
     /**
      * Transforms the specified value.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param  mixed $value
      * @return mixed
      */
-    protected function transform($key, $value)
+    protected function transform($value)
     {
         return is_string($value) && $value === '' ? null : $value;
     }

@@ -32,6 +32,7 @@ class MakeControllerCommand extends AbstractCommand
     {
         $this->setName('make:controller')->setDescription('Create a new HTTP controller class');
         $this->addArgument('name', InputArgument::REQUIRED, 'Name of the class');
+
         $this->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path for the file to be created', 'src/Http/Controllers');
         $this->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace of the class', 'App\Http\Controllers');
         $this->addOption('package', null, InputOption::VALUE_OPTIONAL, 'Name of the package', 'App');

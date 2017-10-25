@@ -10,12 +10,14 @@ namespace Rougin\Weasley\Console;
  */
 class Application extends \Symfony\Component\Console\Application
 {
+    const VERSION = '0.6.0';
+
     /**
      * Instantiates the console application.
      *
      * @param string $version
      */
-    public function __construct($version = '0.6.0')
+    public function __construct($version = self::VERSION)
     {
         parent::__construct('Weasley', $version);
 
