@@ -19,9 +19,9 @@ class Application extends \Symfony\Component\Console\Application
     {
         parent::__construct('Weasley', $version);
 
-        $application->add(new Commands\MakeControllerCommand);
-        $application->add(new Commands\MakeIntegrationCommand);
-        $application->add(new Commands\MakeMiddlewareCommand);
-        $application->add(new Commands\MakeValidatorCommand);
+        $this->add(new Commands\MakeControllerCommand);
+        $this->add(new Commands\MakeIntegrationCommand);
+        $this->add(new Commands\MakeMiddlewareCommand);
+        $this->add(new Commands\MakeValidatorCommand);
     }
 }
