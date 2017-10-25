@@ -25,13 +25,17 @@ class MiddlewareTest extends \PHPUnit_Framework_TestCase
         $request = new \Rougin\Slytherin\Http\ServerRequest($_SERVER);
         $response = new \Rougin\Slytherin\Http\Response;
 
-        $request = $request->withParsedBody(array('_method' => 'PUT'));
+        $request = $request->withParsedBody(array('_method' => 'PUT', 'name' => ''));
+
+        $request = $request->withQueryParams(array('age' => '', 'address' => 'Far-away      '));
 
         $stack = array();
 
         array_push($stack, 'Rougin\Weasley\Http\Middleware\Json');
         array_push($stack, 'Rougin\Weasley\Http\Middleware\Cors');
         array_push($stack, 'Rougin\Weasley\Http\Middleware\FormMethodSpoofing');
+        array_push($stack, 'Rougin\Weasley\Http\Middleware\EmptyStringsToNull');
+        array_push($stack, 'Rougin\Weasley\Http\Middleware\TrimStrings');
         array_push($stack, 'Rougin\Slytherin\Middleware\FinalResponse');
 
         $this->response = $middleware($request, $response, $stack);
