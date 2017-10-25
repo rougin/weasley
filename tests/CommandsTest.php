@@ -7,7 +7,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 class CommandsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Symfony\Component\Console\Application
+     * @var \Rougin\Weasley\Console\Application
      */
     protected $console;
 
@@ -18,14 +18,7 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $application = new \Symfony\Component\Console\Application;
-
-        $application->add(new \Rougin\Weasley\Generator\Commands\MakeControllerCommand);
-        $application->add(new \Rougin\Weasley\Generator\Commands\MakeIntegrationCommand);
-        $application->add(new \Rougin\Weasley\Generator\Commands\MakeMiddlewareCommand);
-        $application->add(new \Rougin\Weasley\Generator\Commands\MakeValidatorCommand);
-
-        $this->console = $application;
+        $this->console = new \Rougin\Weasley\Console\Application;
     }
 
     /**

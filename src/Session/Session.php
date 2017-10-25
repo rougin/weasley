@@ -50,7 +50,9 @@ class Session implements SessionInterface
     {
         array_forget($this->data, $key);
 
-        $this->handler->write($this->id, serialize($this->data));
+        $serialized = serialize($this->data);
+
+        $this->handler->write($this->id, $serialized);
 
         return true;
     }
@@ -77,9 +79,11 @@ class Session implements SessionInterface
     {
         ! $delete || $this->handler->destroy($this->id);
 
+        $serialized = serialize($this->data);
+
         $this->id = str_random(40);
 
-        $this->handler->write($this->id, serialize($this->data));
+        $this->handler->write($this->id, $serialized);
 
         return true;
     }
@@ -95,7 +99,9 @@ class Session implements SessionInterface
     {
         $this->data = array_add($this->data, $key, $value);
 
-        $this->handler->write($this->id, serialize($this->data));
+        $serialized = serialize($this->data);
+
+        $this->handler->write($this->id, $serialized);
 
         return $this;
     }

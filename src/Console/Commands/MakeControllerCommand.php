@@ -1,27 +1,27 @@
 <?php
 
-namespace Rougin\Weasley\Generator\Commands;
+namespace Rougin\Weasley\Console\Commands;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Make Integration Command
+ * Make Controller Command
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class MakeIntegrationCommand extends AbstractCommand
+class MakeControllerCommand extends AbstractCommand
 {
     /**
      * @var string
      */
-    protected $filename = 'Integration.stub';
+    protected $filename = 'Controller.stub';
 
     /**
      * @var string
      */
-    protected $message = 'Integration created successfully!';
+    protected $message = 'Controller created successfully!';
 
     /**
      * Sets the configurations of the current command.
@@ -30,10 +30,10 @@ class MakeIntegrationCommand extends AbstractCommand
      */
     protected function configure()
     {
-        $this->setName('make:integration')->setDescription('Create a new integration class');
+        $this->setName('make:controller')->setDescription('Create a new HTTP controller class');
         $this->addArgument('name', InputArgument::REQUIRED, 'Name of the class');
-        $this->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path for the file to be created', 'src/Integrations');
-        $this->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace of the class', 'App\Integrations');
+        $this->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path for the file to be created', 'src/Http/Controllers');
+        $this->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace of the class', 'App\Http\Controllers');
         $this->addOption('package', null, InputOption::VALUE_OPTIONAL, 'Name of the package', 'App');
         $this->addOption('author', null, InputOption::VALUE_OPTIONAL, 'Name of the author', 'Rougin Royce Gutib <rougingutib@gmail.com>');
     }

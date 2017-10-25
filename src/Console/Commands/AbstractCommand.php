@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Generator\Commands;
+namespace Rougin\Weasley\Console\Commands;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

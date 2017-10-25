@@ -1,27 +1,27 @@
 <?php
 
-namespace Rougin\Weasley\Generator\Commands;
+namespace Rougin\Weasley\Console\Commands;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Make Controller Command
+ * Make Validator Command
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class MakeControllerCommand extends AbstractCommand
+class MakeValidatorCommand extends AbstractCommand
 {
     /**
      * @var string
      */
-    protected $filename = 'Controller.stub';
+    protected $filename = 'Validator.stub';
 
     /**
      * @var string
      */
-    protected $message = 'Controller created successfully!';
+    protected $message = 'Validator created successfully!';
 
     /**
      * Sets the configurations of the current command.
@@ -30,10 +30,10 @@ class MakeControllerCommand extends AbstractCommand
      */
     protected function configure()
     {
-        $this->setName('make:controller')->setDescription('Create a new HTTP controller class');
+        $this->setName('make:validator')->setDescription('Create a new validator class');
         $this->addArgument('name', InputArgument::REQUIRED, 'Name of the class');
-        $this->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path for the file to be created', 'src/Http/Controllers');
-        $this->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace of the class', 'App\Http\Controllers');
+        $this->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path for the file to be created', 'src/Validators');
+        $this->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace of the class', 'App\Validators');
         $this->addOption('package', null, InputOption::VALUE_OPTIONAL, 'Name of the package', 'App');
         $this->addOption('author', null, InputOption::VALUE_OPTIONAL, 'Name of the author', 'Rougin Royce Gutib <rougingutib@gmail.com>');
     }
