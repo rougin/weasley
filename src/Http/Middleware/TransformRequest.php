@@ -25,13 +25,15 @@ class TransformRequest implements \Interop\Http\ServerMiddleware\MiddlewareInter
     {
         $get = $this->map($request->getQueryParams());
 
-        $post = $request->getParsedBody();
-
-        $post = $this->map(is_null($post) ? array() : $post);
-
         $request = $request->withQueryParams($get);
 
-        return $delegate->process($request->withParsedBody($post));
+        $post = $request->getParsedBody();
+
+        $post = $this->map(is_array($post) ? $post : array());
+
+        $post = $request->withParsedBody($post);
+
+        return $delegate->process($post);
     }
 
     /**

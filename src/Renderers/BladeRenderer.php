@@ -35,8 +35,6 @@ class BladeRenderer implements \Rougin\Slytherin\Template\RendererInterface
      */
     public function render($template, array $data = array(), $merge = array())
     {
-        $view = $this->factory->make($template, $data, $merge);
-
-        return $view->render();
+        return $this->factory->make($template, $data, $merge)->render();
     }
 }
