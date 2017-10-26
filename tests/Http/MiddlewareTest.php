@@ -34,6 +34,7 @@ class MiddlewareTest extends \PHPUnit_Framework_TestCase
         array_push($stack, 'Rougin\Weasley\Http\Middleware\Json');
         array_push($stack, 'Rougin\Weasley\Http\Middleware\Cors');
         array_push($stack, 'Rougin\Weasley\Http\Middleware\FormMethodSpoofing');
+        array_push($stack, 'Rougin\Weasley\Http\Middleware\TransformRequest');
         array_push($stack, 'Rougin\Weasley\Http\Middleware\EmptyStringsToNull');
         array_push($stack, 'Rougin\Weasley\Http\Middleware\TrimStrings');
         array_push($stack, 'Rougin\Slytherin\Middleware\FinalResponse');

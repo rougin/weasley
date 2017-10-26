@@ -25,7 +25,9 @@ class TransformRequest implements \Interop\Http\ServerMiddleware\MiddlewareInter
     {
         $get = $this->map($request->getQueryParams());
 
-        $post = $this->map($request->getParsedBody() ?: array());
+        $post = $request->getParsedBody();
+
+        $post = $this->map(is_null($post) ? array() : $post);
 
         $request = $request->withQueryParams($get);
 
@@ -47,5 +49,16 @@ class TransformRequest implements \Interop\Http\ServerMiddleware\MiddlewareInter
         }
 
         return $items;
+    }
+
+    /**
+     * Transforms the specified value.
+     *
+     * @param  mixed $value
+     * @return mixed
+     */
+    protected function transform($value)
+    {
+        return $value;
     }
 }

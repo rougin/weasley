@@ -28,9 +28,9 @@ class DatabaseIntegration implements \Rougin\Slytherin\Integration\IntegrationIn
 
         foreach ($config->get('database', array()) as $key => $value) {
             if (is_array($value) === true) {
-                $value['collation'] = $config->get('database.' . $key . '.collation', 'utf8_unicode_ci');
+                $value['collation'] = $config->get("database.$key.collation", 'utf8_unicode_ci');
 
-                $value['prefix'] = $config->get('database.' . $key . '.prefix', '');
+                $value['prefix'] = $config->get("database.$key.prefix", '');
 
                 $key = ($key === $config->get('database.default')) ? 'default' : $key;
 
@@ -39,6 +39,7 @@ class DatabaseIntegration implements \Rougin\Slytherin\Integration\IntegrationIn
         }
 
         $capsule->setAsGlobal();
+
         $capsule->bootEloquent();
 
         return $container->set(get_class($capsule), $capsule);
