@@ -27,11 +27,11 @@ class DatabaseIntegration implements \Rougin\Slytherin\Integration\IntegrationIn
         $capsule = new \Illuminate\Database\Capsule\Manager;
 
         foreach ($config->get('database', array()) as $key => $value) {
-            $value['collation'] = $config->get('database.' . $key . '.collation', 'utf8_unicode_ci');
-
-            $value['prefix'] = $config->get('database.' . $key . '.prefix', '');
-
             if (is_array($value) === true) {
+                $value['collation'] = $config->get('database.' . $key . '.collation', 'utf8_unicode_ci');
+
+                $value['prefix'] = $config->get('database.' . $key . '.prefix', '');
+
                 $key = ($key === $config->get('database.default')) ? 'default' : $key;
 
                 $capsule->addConnection($value, $key);
