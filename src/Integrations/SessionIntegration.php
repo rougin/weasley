@@ -34,7 +34,7 @@ class SessionIntegration implements \Rougin\Slytherin\Integration\IntegrationInt
         if (($cookie = $config->get('app.http.cookies.' . $name, null)) === null) {
             $expiration = $config->get('session.expiration', time() + 7200);
 
-            setcookie($name, $cookie = str_random(40), $expiration);
+            setcookie($name, $cookie = str_random(40), $expiration, '/');
         }
 
         $handler->open($config->get('session.path'), $cookie);

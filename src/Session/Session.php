@@ -48,7 +48,7 @@ class Session implements SessionInterface
      */
     public function delete($key)
     {
-        array_forget($this->data, $key);
+        ! array_get($this->data, $key) || array_forget($this->data, $key);
 
         $serialized = serialize($this->data);
 
