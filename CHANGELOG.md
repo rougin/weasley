@@ -4,6 +4,8 @@ All notable changes to `Weasley` will be documented in this file.
 
 ## [0.6.0](https://github.com/rougin/weasley/compare/v0.5.0...v0.6.0) - Unreleased
 
+**NOTE**: This release may break your application if upgrading from `v0.5.0` release.
+
 ### Added
 - `EmptyStringsToNull` middleware
 - `Session` library (with `FileSessionHandler`)
@@ -12,7 +14,14 @@ All notable changes to `Weasley` will be documented in this file.
 ### Changed
 - `Generator` directory to `Console` directory
 
+### Removed
+- `http-interop/http-middleware`
+- `illuminate/database`
+- `vlucas/valitron`
+
 ## [0.5.0](https://github.com/rougin/weasley/compare/v0.4.4...v0.5.0) - 2017-10-06
+
+**NOTE**: This release may break your application if upgrading from `v0.4.0` release.
 
 ### Changed
 - Renamed `Skeleton` to `App` in the default namespace of the command generators

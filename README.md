@@ -52,6 +52,24 @@ All of the middlewares below are implemented in [PSR-15 v0.4.1](https://github.c
 * [`JSON`](src/Http/Middleware/Json.php) - changes `Content-Type` of response to `application/json`
 * [`FormMethodSpoofing`](src/Http/Middleware/FormMethodSpoofing.php) - changes the HTTP method of the request if it founds a `_method` attribute from a `<form>` tag
 
+## Third-party packages
+
+In the `v0.6.0` release, the following packages which are required from the previous versions are removed as they could not be used always with each feature. An example for this is that you may only use `ViewIntegration` without `DatabaseIntegration` or only the `AbstractValidator` instead of `PSR-15 middlewares`:
+
+* `http-interop/http-middleware` - being required in `make:middleware` command and the defined HTTP middlewares
+* `illuminate/database` - being required in `make:controller` command, `RestfulController`, and `DatabaseIntegration`
+* `vlucas/valitron` - being required in `make:validator` command, and in `AbstractValidator`
+
+To install the specified package use the following commands below:
+
+``` bash
+$ composer require http-interop/http-middleware:0.4.1
+$ composer require illuminate/database
+$ composer require vlucas/valitron
+```
+
+**NOTE**:  The HTTP middlewares defined in the current release is using the `v0.4.1` version of `http-middleware` and it is not compatible to the latest releases.
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
