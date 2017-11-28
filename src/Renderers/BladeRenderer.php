@@ -2,6 +2,8 @@
 
 namespace Rougin\Weasley\Renderers;
 
+use Rougin\Slytherin\Template\RendererInterface;
+
 /**
  * Illuminate's View (Blade) Renderer
  *
@@ -10,7 +12,7 @@ namespace Rougin\Weasley\Renderers;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class BladeRenderer implements \Rougin\Slytherin\Template\RendererInterface
+class BladeRenderer implements RendererInterface
 {
     /**
      * @var \Illuminate\Contracts\View\Factory

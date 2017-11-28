@@ -44,31 +44,17 @@ You can also include `--help` if you want to know the available options for each
 * [`PaginationIntegration`](src/Integrations/Illuminate/PaginationIntegration.php) - based on [illuminate/pagination](https://github.com/illuminate/pagination)
 * [`ViewIntegration`](src/Integrations/Illuminate/ViewIntegration.php) - based on [illuminate/view](https://github.com/illuminate/view), also known as [Blade](https://laravel.com/docs/5.4/blade)
 
-### Middlewares
+**NOTE**: The said integrations above needs to include their required packages first.
 
-All of the middlewares below are implemented in [PSR-15 v0.4.1](https://github.com/http-interop/http-middleware).
+### HTTP Middlewares
+
+All of the HTTP middlewares below are implemented in the `v0.4.1` of [PSR-15](https://github.com/http-interop/http-middleware/tree/0.4.1).
 
 * [`CORS`](src/Http/Middleware/Cors.php) - adds additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
-* [`JSON`](src/Http/Middleware/Json.php) - changes `Content-Type` of response to `application/json`
+* [`EmptyStringsToNull`](src/Http/Middleware/EmptyStringsToNull.php) - converts the empty strings from the incoming HTTP request values as null
 * [`FormMethodSpoofing`](src/Http/Middleware/FormMethodSpoofing.php) - changes the HTTP method of the request if it founds a `_method` attribute from a `<form>` tag
-
-## Third-party packages
-
-In the `v0.6.0` release, the following packages which are required from the previous versions are removed as they could not be used always with each feature. An example for this is that you may only use `ViewIntegration` without `DatabaseIntegration` or only the `AbstractValidator` instead of `PSR-15 middlewares`:
-
-* `http-interop/http-middleware` - being required in `make:middleware` command and the defined HTTP middlewares
-* `illuminate/database` - being required in `make:controller` command, `RestfulController`, and `DatabaseIntegration`
-* `vlucas/valitron` - being required in `make:validator` command, and in `AbstractValidator`
-
-To install the specified package use the following commands below:
-
-``` bash
-$ composer require http-interop/http-middleware:0.4.1
-$ composer require illuminate/database
-$ composer require vlucas/valitron
-```
-
-**NOTE**:  The HTTP middlewares defined in the current release is using the `v0.4.1` version of `http-middleware` and it is not compatible to the latest releases.
+* [`JSON`](src/Http/Middleware/Json.php) - changes `Content-Type` of response to `application/json`
+* [`TrimStrings`](src/Http/Middleware/TrimStrings.php) - trims the available strings from the incoming HTTP request
 
 ## Change log
 

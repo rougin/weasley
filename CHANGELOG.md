@@ -15,9 +15,7 @@ All notable changes to `Weasley` will be documented in this file.
 - `Generator` directory to `Console` directory
 
 ### Removed
-- `http-interop/http-middleware`
-- `illuminate/database`
-- `vlucas/valitron`
+- `illuminate/database` package as required
 
 ## [0.5.0](https://github.com/rougin/weasley/compare/v0.4.4...v0.5.0) - 2017-10-06
 
@@ -29,7 +27,7 @@ All notable changes to `Weasley` will be documented in this file.
 - Moved `Commands` and `Templates` directory to `Generator` directory
 
 ### Removed
-- `rougin/loream-authsum` package
+- `rougin/loream-authsum` package as required
 - `DatabaseIntegration::prepare` method
 
 ## [0.4.4](https://github.com/rougin/weasley/compare/v0.4.3...v0.4.4) - 2017-09-19

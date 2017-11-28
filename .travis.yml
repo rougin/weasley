@@ -22,9 +22,9 @@ matrix:
 before_script:
   - travis_retry composer self-update
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
-  - if [[ $TRAVIS_PHP_VERSION == '5.3' ]]; then composer require http-interop/http-middleware:0.4.1 illuminate/database:"~4.1 || ~5.0" illuminate/events:"~4.1 || ~5.0" illuminate/view:"~4.1 || ~5.0" vlucas/valitron --dev; fi
-  - if [[ $TRAVIS_PHP_VERSION == '5.4' ]]; then composer require http-interop/http-middleware:0.4.1 illuminate/database:"~4.1 || ~5.0" illuminate/events:"~4.1 || ~5.0" symfony/yaml vlucas/valitron --dev; fi
-  - if [[ $TRAVIS_PHP_VERSION != '5.3' ]]; then composer require http-interop/http-middleware:0.4.1 illuminate/database:"~4.1 || ~5.0" illuminate/pagination:"~4.1 || ~5.0" illuminate/view:"~4.1 || ~5.0" vlucas/valitron --dev; fi
+  - if [[ $TRAVIS_PHP_VERSION == '5.3' ]]; then composer require illuminate/database:"~4.1 || ~5.0" illuminate/events:"~4.1 || ~5.0" illuminate/view:"~4.1 || ~5.0" --dev; fi
+  - if [[ $TRAVIS_PHP_VERSION == '5.4' ]]; then composer require illuminate/database:"~4.1 || ~5.0" illuminate/events:"~4.1 || ~5.0" symfony/yaml --dev; fi
+  - if [[ $TRAVIS_PHP_VERSION != '5.3' ]]; then composer require illuminate/database:"~4.1 || ~5.0" illuminate/pagination:"~4.1 || ~5.0" illuminate/view:"~4.1 || ~5.0" --dev; fi
 
 script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover

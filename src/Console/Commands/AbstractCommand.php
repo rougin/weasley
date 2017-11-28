@@ -2,6 +2,7 @@
 
 namespace Rougin\Weasley\Console\Commands;
 
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -11,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-abstract class AbstractCommand extends \Symfony\Component\Console\Command\Command
+abstract class AbstractCommand extends Command
 {
     /**
      * @var string

@@ -2,9 +2,9 @@
 
 namespace Rougin\Weasley\Http\Middleware;
 
-use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
-
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Rougin\Slytherin\Http\Response;
 
 /**
@@ -13,7 +13,7 @@ use Rougin\Slytherin\Http\Response;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class Cors implements \Interop\Http\ServerMiddleware\MiddlewareInterface
+class Cors implements MiddlewareInterface
 {
     /**
      * @var array

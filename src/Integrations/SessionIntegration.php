@@ -2,8 +2,9 @@
 
 namespace Rougin\Weasley\Integrations;
 
-use Rougin\Slytherin\Integration\Configuration;
 use Rougin\Slytherin\Container\ContainerInterface;
+use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Slytherin\Integration\IntegrationInterface;
 
 /**
  * Session Integration
@@ -13,7 +14,7 @@ use Rougin\Slytherin\Container\ContainerInterface;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class SessionIntegration implements \Rougin\Slytherin\Integration\IntegrationInterface
+class SessionIntegration implements IntegrationInterface
 {
     /**
      * Defines the specified integration.
@@ -26,18 +27,16 @@ class SessionIntegration implements \Rougin\Slytherin\Integration\IntegrationInt
     {
         $name = $config->get('session.cookies', 'weasley_session');
 
-        $handlers = $config->get('session.handlers', $this->handlers());
-        $handler = $container->get($handlers[$config->get('session.driver', 'file')]);
+        $container = $this->handler($container, $config);
 
-        $container->set('Rougin\Weasley\Session\SessionHandlerInterface', $handler);
-
-        if (($cookie = $config->get('app.http.cookies.' . $name, null)) === null) {
+        if ($cookie = $config->get('app.http.cookies.' . $name, null)) {
             $expiration = $config->get('session.expiration', time() + 7200);
 
             setcookie($name, $cookie = str_random(40), $expiration, '/');
         }
 
         $handler->open($config->get('session.path'), $cookie);
+
         $handler->gc(((integer) $config->get('session.lifetime', 60)) * 60);
 
         $session = new \Rougin\Weasley\Session\Session($handler, $cookie);
@@ -46,16 +45,24 @@ class SessionIntegration implements \Rougin\Slytherin\Integration\IntegrationInt
     }
 
     /**
-     * Returns a listing of session handlers.
+     * Returns the specified SessionHandlerInterface.
      *
-     * @return array
+     * @param  \Rougin\Slytherin\Container\ContainerInterface $container
+     * @param  \Rougin\Slytherin\Integration\Configuration    $config
+     * @return \SessionHandlerInterface
      */
-    protected function handlers()
+    protected function handler(ContainerInterface $container, Configuration $config)
     {
-        $items = array();
+        $interface = 'Rougin\Weasley\Session\SessionHandlerInterface';
 
-        $items['file'] = 'Rougin\Weasley\Session\FileSessionHandler';
+        $default = array('file' => 'Rougin\Weasley\Session\FileSessionHandler');
 
-        return $items;
+        $handlers = $config->get('session.handlers', $default);
+
+        $handler = $handlers[$config->get('session.driver', 'file')];
+
+        $instance = $container->get($handler);
+
+        return $container->set($interface, $instance);
     }
 }

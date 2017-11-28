@@ -19,7 +19,7 @@ class WeasleyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns the version from CHANGELOG.md.
+     * Returns the latest version from CHANGELOG.md.
      *
      * @return string
      */

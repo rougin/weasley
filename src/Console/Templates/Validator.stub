@@ -2,13 +2,15 @@
 
 namespace $NAMESPACE;
 
+use Rougin\Weasley\Validators\AbstractValidator;
+
 /**
  * $CLASS
  *
  * @package $PACKAGE
  * @author  $AUTHOR
  */
-class $CLASS extends \Rougin\Weasley\Validators\AbstractValidator
+class $CLASS extends AbstractValidator
 {
     /**
      * Sets the labels in the validator.

@@ -33,21 +33,21 @@ class JsonTransformer implements TransformerInterface
      */
     public function __construct(ResponseInterface $response, $options = 0)
     {
+        $this->errors[] = 'No errors';
+        $this->errors[] = 'Maximum stack depth exceeded';
+        $this->errors[] = 'Underflow or the modes mismatch';
+        $this->errors[] = 'Unexpected control character found';
+        $this->errors[] = 'Syntax error, malformed JSON';
+        $this->errors[] = 'Malformed UTF-8 characters, possibly incorrectly encoded';
+        $this->errors[] = 'One or more recursive references in the value to be encoded';
+        $this->errors[] = 'One or more NAN or INF values in the value to be encoded';
+        $this->errors[] = 'A value of a type that cannot be encoded was given';
+        $this->errors[] = 'A property name that cannot be encoded was given';
+        $this->errors[] = 'Malformed UTF-16 characters, possibly incorrectly encoded';
+
         $this->options = $options;
 
         $this->response = $response;
-
-        array_push($this->errors, 'No errors');
-        array_push($this->errors, 'Maximum stack depth exceeded');
-        array_push($this->errors, 'Underflow or the modes mismatch');
-        array_push($this->errors, 'Unexpected control character found');
-        array_push($this->errors, 'Syntax error, malformed JSON');
-        array_push($this->errors, 'Malformed UTF-8 characters, possibly incorrectly encoded');
-        array_push($this->errors, 'One or more recursive references in the value to be encoded');
-        array_push($this->errors, 'One or more NAN or INF values in the value to be encoded');
-        array_push($this->errors, 'A value of a type that cannot be encoded was given');
-        array_push($this->errors, 'A property name that cannot be encoded was given');
-        array_push($this->errors, 'Malformed UTF-16 characters, possibly incorrectly encoded');
     }
 
     /**

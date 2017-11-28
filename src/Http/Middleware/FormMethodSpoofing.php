@@ -2,8 +2,9 @@
 
 namespace Rougin\Weasley\Http\Middleware;
 
-use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Form Method Spoofing Middleware
@@ -11,7 +12,7 @@ use Interop\Http\ServerMiddleware\DelegateInterface;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class FormMethodSpoofing implements \Interop\Http\ServerMiddleware\MiddlewareInterface
+class FormMethodSpoofing implements MiddlewareInterface
 {
     /**
      * @var string

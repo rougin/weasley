@@ -2,8 +2,9 @@
 
 namespace $NAMESPACE;
 
-use Rougin\Slytherin\Integration\Configuration;
 use Rougin\Slytherin\Container\ContainerInterface;
+use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Slytherin\Integration\IntegrationInterface;
 
 /**
  * $CLASS
@@ -11,7 +12,7 @@ use Rougin\Slytherin\Container\ContainerInterface;
  * @package $PACKAGE
  * @author  $AUTHOR
  */
-class $CLASS implements \Rougin\Slytherin\Integration\IntegrationInterface
+class $CLASS implements IntegrationInterface
 {
     /**
      * Defines the specified integration.

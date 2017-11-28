@@ -2,10 +2,10 @@
 
 namespace Rougin\Weasley\Integrations\Illuminate;
 
-use Rougin\Slytherin\Integration\Configuration;
-use Rougin\Slytherin\Container\ContainerInterface;
-
 use Illuminate\Pagination\Paginator;
+use Rougin\Slytherin\Container\ContainerInterface;
+use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Slytherin\Integration\IntegrationInterface;
 
 /**
  * Illuminate's Pagination Integration
@@ -15,7 +15,7 @@ use Illuminate\Pagination\Paginator;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class PaginationIntegration implements \Rougin\Slytherin\Integration\IntegrationInterface
+class PaginationIntegration implements IntegrationInterface
 {
     /**
      * Defines the specified integration.

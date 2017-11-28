@@ -2,8 +2,9 @@
 
 namespace Rougin\Weasley\Integrations\Illuminate;
 
-use Rougin\Slytherin\Integration\Configuration;
 use Rougin\Slytherin\Container\ContainerInterface;
+use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Slytherin\Integration\IntegrationInterface;
 
 /**
  * Illuminate's View Integration
@@ -13,7 +14,7 @@ use Rougin\Slytherin\Container\ContainerInterface;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class ViewIntegration implements \Rougin\Slytherin\Integration\IntegrationInterface
+class ViewIntegration implements IntegrationInterface
 {
     /**
      * @var string
