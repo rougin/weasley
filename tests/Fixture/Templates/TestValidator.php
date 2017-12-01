@@ -2,13 +2,15 @@
 
 namespace App\Validators;
 
+use Rougin\Weasley\Validators\AbstractValidator;
+
 /**
  * TestValidator
  *
  * @package App
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class TestValidator extends \Rougin\Weasley\Validators\AbstractValidator
+class TestValidator extends AbstractValidator
 {
     /**
      * Sets the labels in the validator.

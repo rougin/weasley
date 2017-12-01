@@ -40,7 +40,7 @@ class FileSessionHandler implements \SessionHandlerInterface
     {
         $file = $this->path . '/' . $id;
 
-        ! file_exists($file) || unlink($file);
+        file_exists($file) && unlink($file);
 
         return true;
     }
@@ -53,12 +53,12 @@ class FileSessionHandler implements \SessionHandlerInterface
      */
     public function gc($lifetime)
     {
-        foreach (glob($this->path) as $file) {
+        foreach ((array) glob($this->path) as $file) {
             $time = filemtime($file) + $lifetime;
 
             $valid = $time > time() && file_exists($file);
 
-            $valid || unlink($file);
+            $valid === false && unlink($file);
         }
 
         return true;

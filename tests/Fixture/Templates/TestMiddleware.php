@@ -2,8 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Psr\Http\Message\ServerRequestInterface;
 use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * TestMiddleware
@@ -11,7 +12,7 @@ use Interop\Http\ServerMiddleware\DelegateInterface;
  * @package App
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class TestMiddleware implements \Interop\Http\ServerMiddleware\MiddlewareInterface
+class TestMiddleware implements MiddlewareInterface
 {
     /**
      * Process an incoming server request and return a response, optionally delegating

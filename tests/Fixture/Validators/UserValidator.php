@@ -2,13 +2,15 @@
 
 namespace Rougin\Weasley\Fixture\Validators;
 
+use Rougin\Weasley\Validators\AbstractValidator;
+
 /**
  * User Validator
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class UserValidator extends \Rougin\Weasley\Validators\AbstractValidator
+class UserValidator extends AbstractValidator
 {
     /**
      * Sets the labels in the validator.

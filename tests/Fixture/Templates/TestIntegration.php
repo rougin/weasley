@@ -2,8 +2,9 @@
 
 namespace App\Integrations;
 
-use Rougin\Slytherin\Integration\Configuration;
 use Rougin\Slytherin\Container\ContainerInterface;
+use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Slytherin\Integration\IntegrationInterface;
 
 /**
  * TestIntegration
@@ -11,7 +12,7 @@ use Rougin\Slytherin\Container\ContainerInterface;
  * @package App
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class TestIntegration implements \Rougin\Slytherin\Integration\IntegrationInterface
+class TestIntegration implements IntegrationInterface
 {
     /**
      * Defines the specified integration.

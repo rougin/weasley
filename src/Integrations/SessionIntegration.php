@@ -34,7 +34,7 @@ class SessionIntegration implements IntegrationInterface
 
         list($container, $handler) = $this->handler($container, $config);
 
-        if ($cookie = $config->get('app.http.cookies.' . $name, null)) {
+        if (! $cookie = $config->get('app.http.cookies.' . $name, null)) {
             $expiration = $config->get('session.expiration', time() + 7200);
 
             setcookie($name, $cookie = str_random(40), $expiration, '/');

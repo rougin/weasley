@@ -35,7 +35,7 @@ class Session implements SessionInterface
 
         $this->id = $id;
 
-        $id !== null || $this->regenerate(true);
+        is_null($id) && $this->regenerate(true);
 
         $this->data = unserialize($handler->read($id));
     }
@@ -77,7 +77,7 @@ class Session implements SessionInterface
      */
     public function regenerate($delete = false)
     {
-        ! $delete || $this->handler->destroy($this->id);
+        $delete && $this->handler->destroy($this->id);
 
         $serialized = serialize($this->data);
 
