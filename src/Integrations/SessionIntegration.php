@@ -17,6 +17,11 @@ use Rougin\Slytherin\Integration\IntegrationInterface;
 class SessionIntegration implements IntegrationInterface
 {
     /**
+     * @var string
+     */
+    protected $interface = 'Rougin\Weasley\Session\SessionInterface';
+
+    /**
      * Defines the specified integration.
      *
      * @param  \Rougin\Slytherin\Container\ContainerInterface $container
@@ -27,7 +32,7 @@ class SessionIntegration implements IntegrationInterface
     {
         $name = $config->get('session.cookies', 'weasley_session');
 
-        $container = $this->handler($container, $config);
+        list($container, $handler) = $this->handler($container, $config);
 
         if ($cookie = $config->get('app.http.cookies.' . $name, null)) {
             $expiration = $config->get('session.expiration', time() + 7200);
@@ -41,7 +46,7 @@ class SessionIntegration implements IntegrationInterface
 
         $session = new \Rougin\Weasley\Session\Session($handler, $cookie);
 
-        return $container->set('Rougin\Weasley\Session\SessionInterface', $session);
+        return $container->set($this->interface, $session);
     }
 
     /**
@@ -63,6 +68,6 @@ class SessionIntegration implements IntegrationInterface
 
         $instance = $container->get($handler);
 
-        return $container->set($interface, $instance);
+        return array($container->set($interface, $instance), $instance);
     }
 }
