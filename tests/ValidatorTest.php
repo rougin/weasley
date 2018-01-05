@@ -11,7 +11,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidate()
     {
-        $validator = new Validators\AuthenticationValidator;
+        $validator = new Fixture\Validators\UserValidator;
 
         $this->assertFalse($validator->validate(array()));
     }

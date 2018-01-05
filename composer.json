@@ -22,7 +22,6 @@
     "require-dev": {
         "illuminate/database": "~4.1 || ~5.0",
         "phpunit/phpunit": "~4.0",
-        "rougin/loream-authsum": "~0.4",
         "scrutinizer/ocular": "~1.1"
     },
     "bin": [ "bin/weasley", "bin/weasley.php" ],
