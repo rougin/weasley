@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Weasley provides generators and helpers that will speed up your [Slytherin](https://github.com/rougin/slytherin) workflow.
+Weasley provides generators and helpers for the [Slytherin](https://github.com/rougin/slytherin) framework.
 
 ## Install
 
@@ -51,10 +51,10 @@ You can also include `--help` if you want to know the available options for each
 All of the HTTP middlewares below are implemented in the `v0.4.1` of [PSR-15](https://github.com/http-interop/http-middleware/tree/0.4.1).
 
 * [`CORS`](src/Http/Middleware/Cors.php) - adds additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
-* [`EmptyStringsToNull`](src/Http/Middleware/EmptyStringsToNull.php) - converts the empty strings from the incoming HTTP request values as null
-* [`FormMethodSpoofing`](src/Http/Middleware/FormMethodSpoofing.php) - changes the HTTP method of the request if it founds a `_method` attribute from a `<form>` tag
-* [`JSON`](src/Http/Middleware/Json.php) - changes `Content-Type` of response to `application/json`
-* [`TrimStrings`](src/Http/Middleware/TrimStrings.php) - trims the available strings from the incoming HTTP request
+* [`EmptyStringToNull`](src/Http/Middleware/EmptyStringToNull.php) - converts the empty strings from the incoming HTTP request values as `null`
+* [`FormMethodSpoofing`](src/Http/Middleware/FormMethodSpoofing.php) - changes the HTTP method of the request based on the `_method` input value from a `<form>` tag
+* [`JSON`](src/Http/Middleware/Json.php) - changes the `Content-Type` value of the response to `application/json`
+* [`TrimString`](src/Http/Middleware/TrimString.php) - trims the available strings from the incoming HTTP request
 
 ## Change log
 

@@ -12,6 +12,8 @@ use Illuminate\Contracts\Support\Arrayable;
  */
 class ApiTransformer implements TransformerInterface
 {
+    const PAGINATOR = 'Illuminate\Contracts\Pagination\LengthAwarePaginator';
+
     /**
      * Transforms the contents of the result.
      *
@@ -20,9 +22,13 @@ class ApiTransformer implements TransformerInterface
      */
     public function transform($data)
     {
-        $paginator = 'Illuminate\Contracts\Pagination\LengthAwarePaginator';
+        $exists = is_a($data, self::PAGINATOR);
 
-        return is_a($data, $paginator) ? $this->paginator($data) : $data->toArray();
+        $result = $data->toArray();
+
+        $exists && $result = $this->paginator($data);
+
+        return $result;
     }
 
     /**
@@ -35,8 +41,12 @@ class ApiTransformer implements TransformerInterface
     {
         list($response, $result) = array(array(), $data->toArray());
 
+        $rounded = round($result['total'] / $result['per_page']);
+
         $response['total_items'] = $result['total'];
-        $response['total_pages'] = round($result['total'] / $result['per_page']) ?: 1;
+
+        $response['total_pages'] = $rounded ?: 1;
+
         $response['items'] = $result['data'];
 
         return $response;

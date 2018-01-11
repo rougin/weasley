@@ -17,11 +17,11 @@ class FormMethodSpoofing implements MiddlewareInterface
     /**
      * @var string
      */
-    protected $identifier = '_method';
+    protected $key = '_method';
 
     /**
-     * Process an incoming server request and return a response, optionally delegating
-     * to the next middleware component to create the response.
+     * Process an incoming server request and return a response, optionally
+     * delegating to the next middleware component to create the response.
      *
      * @param  \Psr\Http\Message\ServerRequestInterface         $request
      * @param  \Interop\Http\ServerMiddleware\DelegateInterface $delegate
@@ -31,12 +31,25 @@ class FormMethodSpoofing implements MiddlewareInterface
     {
         $parsed = $request->getParsedBody();
 
-        if (isset($parsed[$this->identifier]) === true) {
-            $method = strtoupper($parsed[$this->identifier]);
+        if (isset($parsed[$this->key]) === true) {
+            $method = strtoupper($parsed[$this->key]);
 
             $request = $request->withMethod($method);
         }
 
         return $delegate->process($request);
+    }
+
+    /**
+     * Sets the key for the HTTP method.
+     *
+     * @param  string $key
+     * @return self
+     */
+    public function key($key)
+    {
+        $this->key = $key;
+
+        return $this;
     }
 }

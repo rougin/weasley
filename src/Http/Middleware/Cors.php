@@ -5,7 +5,6 @@ namespace Rougin\Weasley\Http\Middleware;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Rougin\Slytherin\Http\Response;
 
 /**
  * CORS Middleware
@@ -15,6 +14,10 @@ use Rougin\Slytherin\Http\Response;
  */
 class Cors implements MiddlewareInterface
 {
+    const ALLOW_ORIGIN = 'Access-Control-Allow-Origin';
+
+    const ALLOW_METHODS = 'Access-Control-Allow-Methods';
+
     /**
      * @var array
      */
@@ -26,8 +29,8 @@ class Cors implements MiddlewareInterface
     protected $methods = array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS');
 
     /**
-     * Process an incoming server request and return a response, optionally delegating
-     * to the next middleware component to create the response.
+     * Process an incoming server request and return a response, optionally
+     * delegating to the next middleware component to create the response.
      *
      * @param  \Psr\Http\Message\ServerRequestInterface         $request
      * @param  \Interop\Http\ServerMiddleware\DelegateInterface $delegate
@@ -35,11 +38,40 @@ class Cors implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $response = $request->getMethod() === 'OPTIONS' ? new Response : $delegate->process($request);
+        $response = new \Rougin\Slytherin\Http\Response;
 
-        $response = $response->withHeader('Access-Control-Allow-Origin', $this->allowed);
-        $response = $response->withHeader('Access-Control-Allow-Methods', $this->methods);
+        $options = (boolean) $request->getMethod() === 'OPTIONS';
 
-        return $response;
+        $options && $response = $delegate->process($request);
+
+        $response = $response->withHeader(self::ALLOW_ORIGIN, $this->allowed);
+
+        return $response->withHeader(self::ALLOW_METHODS, $this->methods);
+    }
+
+    /**
+     * Sets the allowed URLS.
+     *
+     * @param  array $allowed
+     * @return self
+     */
+    public function allowed($allowed)
+    {
+        $this->allowed = $allowed;
+
+        return $this;
+    }
+
+    /**
+     * Sets the allowed HTTP methods.
+     *
+     * @param  array $methods
+     * @return self
+     */
+    public function methods($methods)
+    {
+        $this->methods = $methods;
+
+        return $this;
     }
 }

@@ -15,8 +15,8 @@ use Psr\Http\Message\ServerRequestInterface;
 class TransformRequest implements MiddlewareInterface
 {
     /**
-     * Process an incoming server request and return a response, optionally delegating
-     * to the next middleware component to create the response.
+     * Process an incoming server request and return a response, optionally
+     * delegating to the next middleware component to create the response.
      *
      * @param  \Psr\Http\Message\ServerRequestInterface         $request
      * @param  \Interop\Http\ServerMiddleware\DelegateInterface $delegate
@@ -45,10 +45,10 @@ class TransformRequest implements MiddlewareInterface
      */
     protected function map(array $items)
     {
-        foreach ($items as $key => $value) {
+        foreach ((array) $items as $key => $value) {
             $new = $this->transform($value);
 
-            ! is_array($value) || $new = $this->map($value);
+            is_array($value) && $new = $this->map($value);
 
             $items[$key] = $new;
         }

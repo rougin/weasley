@@ -62,7 +62,7 @@ class JsonTransformer implements TransformerInterface
 
         $stream = json_encode($data, $this->options);
 
-        if (json_last_error() != JSON_ERROR_NONE) {
+        if (json_last_error() !== JSON_ERROR_NONE) {
             $stream = $this->errors[json_last_error()];
 
             $response = $response->withStatus(400);

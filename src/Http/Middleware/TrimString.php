@@ -3,12 +3,12 @@
 namespace Rougin\Weasley\Http\Middleware;
 
 /**
- * "Empty Strings To Null" Middleware
+ * "Trim String" Middleware
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class EmptyStringsToNull extends TransformRequest
+class TrimString extends TransformRequest
 {
     /**
      * Transforms the specified value.
@@ -18,6 +18,6 @@ class EmptyStringsToNull extends TransformRequest
      */
     protected function transform($value)
     {
-        return is_string($value) && $value === '' ? null : $value;
+        return is_string($value) ? trim($value) : $value;
     }
 }

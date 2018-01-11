@@ -2,6 +2,7 @@
 
 namespace Rougin\Weasley\Renderers;
 
+use Illuminate\Contracts\View\Factory;
 use Rougin\Slytherin\Template\RendererInterface;
 
 /**
@@ -22,7 +23,7 @@ class BladeRenderer implements RendererInterface
     /**
      * @param \Illuminate\Contracts\View\Factory $factory
      */
-    public function __construct(\Illuminate\Contracts\View\Factory $factory)
+    public function __construct(Factory $factory)
     {
         $this->factory = $factory;
     }

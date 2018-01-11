@@ -2,6 +2,8 @@
 
 namespace Rougin\Weasley\Validators;
 
+use Valitron\Validator;
+
 /**
  * Abstract Validator
  *
@@ -25,7 +27,7 @@ abstract class AbstractValidator
      */
     public function __construct()
     {
-        $this->validator = new \Valitron\Validator;
+        $this->validator = new Validator;
     }
 
     /**
@@ -59,8 +61,12 @@ abstract class AbstractValidator
 
         $validated = $validator->validate();
 
-        if (! $validated && is_array($validator->errors())) {
-            $this->errors = $validator->errors();
+        $errors = $validator->errors();
+
+        if (! $validated && is_array($errors)) {
+            $items = $validator->errors();
+
+            $this->errors = (array) $items;
         }
 
         return $validated;

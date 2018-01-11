@@ -7,12 +7,14 @@ All notable changes to `Weasley` will be documented in this file.
 **NOTE**: This release may break your application if upgrading from `v0.5.0` release.
 
 ### Added
-- `EmptyStringsToNull` middleware
+- `EmptyStringToNull` middleware
 - `Session` library (with `FileSessionHandler`)
 - `TrimStrings` middleware
+- `Cors::allowed` and `Cors::methods` methods
 
 ### Changed
 - `Generator` directory to `Console` directory
+- `FormMethodSpoofing` to `SpoofFormMethod`
 
 ### Removed
 - `illuminate/database` package as required

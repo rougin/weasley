@@ -4,7 +4,6 @@ namespace Rougin\Weasley\Http\Controllers;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-
 use Rougin\Weasley\Transformer\JsonTransformer;
 
 /**
@@ -26,6 +25,8 @@ class BaseController
     protected $response;
 
     /**
+     * Initializes the controller instance.
+     *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface      $response
      */
@@ -33,9 +34,9 @@ class BaseController
     {
         $parsed = $request->getParsedBody();
 
-        $request = $request->withParsedBody(is_null($parsed) ? array() : $parsed);
+        is_null($parsed) && $parsed = array();
 
-        $this->request = $request;
+        $this->request = $request->withParsedBody($parsed);
 
         $this->response = $response;
     }

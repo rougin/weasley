@@ -1,6 +1,6 @@
 {
     "name": "rougin/weasley",
-    "description": "Generators and helpers for improving your Slytherin workflow",
+    "description": "Generators and helpers for the Slytherin framework.",
     "keywords": ["helper", "generators", "slytherin", "workflow", "weasley"],
     "homepage": "https://github.com/rougin/weasley",
     "license": "MIT",
@@ -8,7 +8,7 @@
         {
             "name": "Rougin Royce Gutib",
             "email": "rougingutib@gmail.com",
-            "homepage": "http://rougin.github.io",
+            "homepage": "https://rougin.github.io",
             "role": "Developer"
         }
     ],
@@ -20,7 +20,7 @@
         "vlucas/valitron": "~1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0",
+        "phpunit/phpunit": "~4.2",
         "scrutinizer/ocular": "~1.1"
     },
     "bin": ["bin/weasley", "bin/weasley.php"],

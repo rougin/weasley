@@ -2,6 +2,8 @@
 
 require 'vendor/autoload.php';
 
-$weasley = new Rougin\Weasley\Console\Application;
+use Rougin\Weasley\Console\Application;
+
+$weasley = new Application;
 
 $weasley->run();
