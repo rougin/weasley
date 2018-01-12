@@ -63,11 +63,7 @@ abstract class AbstractValidator
 
         $errors = $validator->errors();
 
-        if (! $validated && is_array($errors)) {
-            $items = $validator->errors();
-
-            $this->errors = (array) $items;
-        }
+        is_array($errors) && $this->errors = $errors;
 
         return $validated;
     }

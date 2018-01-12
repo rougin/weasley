@@ -1,6 +1,6 @@
 <?php
 
-namespace Rougin\Weasley\Integrations;
+namespace Rougin\Weasley\Session;
 
 use Rougin\Slytherin\Container\ContainerInterface;
 use Rougin\Slytherin\Integration\Configuration;
@@ -16,10 +16,9 @@ use Rougin\Slytherin\Integration\IntegrationInterface;
  */
 class SessionIntegration implements IntegrationInterface
 {
-    /**
-     * @var string
-     */
-    protected $interface = 'Rougin\Weasley\Session\SessionInterface';
+    const HANDLER = 'Rougin\Weasley\Session\SessionHandlerInterface';
+
+    const SESSION = 'Rougin\Weasley\Session\SessionInterface';
 
     /**
      * Defines the specified integration.
@@ -44,9 +43,7 @@ class SessionIntegration implements IntegrationInterface
 
         $handler->gc(((integer) $config->get('session.lifetime', 60)) * 60);
 
-        $session = new \Rougin\Weasley\Session\Session($handler, $cookie);
-
-        return $container->set($this->interface, $session);
+        return $container->set(self::SESSION, new Session($handler, $cookie));
     }
 
     /**
@@ -58,8 +55,6 @@ class SessionIntegration implements IntegrationInterface
      */
     protected function handler(ContainerInterface $container, Configuration $config)
     {
-        $interface = 'Rougin\Weasley\Session\SessionHandlerInterface';
-
         $default = array('file' => 'Rougin\Weasley\Session\FileSessionHandler');
 
         $handlers = $config->get('session.handlers', $default);
@@ -68,6 +63,6 @@ class SessionIntegration implements IntegrationInterface
 
         $instance = $container->get($handler);
 
-        return array($container->set($interface, $instance), $instance);
+        return array($container->set(self::HANDLER, $instance), $instance);
     }
 }

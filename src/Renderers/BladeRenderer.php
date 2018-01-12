@@ -38,6 +38,8 @@ class BladeRenderer implements RendererInterface
      */
     public function render($template, array $data = array(), $merge = array())
     {
-        return $this->factory->make($template, $data, $merge)->render();
+        $view = $this->factory->make($template, $data, $merge);
+
+        return $view->render();
     }
 }

@@ -1,7 +1,7 @@
 {
     "name": "rougin/weasley",
     "description": "Generators and helpers for the Slytherin framework.",
-    "keywords": ["helper", "generators", "slytherin", "workflow", "weasley"],
+    "keywords": ["helper", "generator", "slytherin", "workflow", "weasley"],
     "homepage": "https://github.com/rougin/weasley",
     "license": "MIT",
     "authors": [

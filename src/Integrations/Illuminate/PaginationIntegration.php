@@ -2,46 +2,17 @@
 
 namespace Rougin\Weasley\Integrations\Illuminate;
 
-use Illuminate\Pagination\Paginator;
-use Rougin\Slytherin\Container\ContainerInterface;
-use Rougin\Slytherin\Integration\Configuration;
-use Rougin\Slytherin\Integration\IntegrationInterface;
+use Rougin\Weasley\Illuminate\PaginationIntegration as Integration;
 
 /**
  * Illuminate's Pagination Integration
  *
  * An integration for Laravel's Pagination package (illuminate/pagination).
+ * NOTE: To be removed in v1.0.0. Use Rougin\Weasley\Illuminate instead.
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class PaginationIntegration implements IntegrationInterface
+class PaginationIntegration extends Integration
 {
-    /**
-     * Defines the specified integration.
-     *
-     * @param  \Rougin\Slytherin\Container\ContainerInterface $container
-     * @param  \Rougin\Slytherin\Integration\Configuration    $config
-     * @return \Rougin\Slytherin\Container\ContainerInterface
-     */
-    public function define(ContainerInterface $container, Configuration $config)
-    {
-        $request = $container->get('Psr\Http\Message\ServerRequestInterface');
-
-        Paginator::currentPathResolver(function () use ($request) {
-            $uri = $request->getAttribute('REQUEST_URI');
-
-            return isset($uri) ? strtok($uri, '?') : '/';
-        });
-
-        Paginator::currentPageResolver(function ($name = null) use ($request) {
-            $parameters = $request->getQueryParams();
-
-            $name = $name ?: 'page';
-
-            return isset($parameters[$name]) ? $parameters[$name] : 1;
-        });
-
-        return $container;
-    }
 }

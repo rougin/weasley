@@ -118,7 +118,7 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
 
         interface_exists('SessionHandlerInterface') || $this->markTestSkipped($message);
 
-        $integration = new Integrations\SessionIntegration;
+        $integration = new Session\SessionIntegration;
 
         $this->config->set('session.path', __DIR__ . '/Fixture/Storage/Sessions');
 
