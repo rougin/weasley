@@ -19,6 +19,7 @@ All notable changes to `Weasley` will be documented in this file.
 - `Generator` directory to `Console` directory
 - Moved `Integrations\Illuminate` to `Illuminate`
 - Moved `Commands` and `Templates` directory to `Console` directory
+- Moved contents of `Http` directory to root directory
 
 ### Removed
 - `illuminate/database` package as required

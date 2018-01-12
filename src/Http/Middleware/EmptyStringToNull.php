@@ -2,22 +2,15 @@
 
 namespace Rougin\Weasley\Http\Middleware;
 
+use Rougin\Weasley\Middleware\EmptyStringToNull as Middleware;
+
 /**
  * "Empty String To Null" Middleware
+ * NOTE: To be removed in v1.0.0. Use Middleware instead.
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class EmptyStringToNull extends TransformRequest
+class EmptyStringToNull extends Middleware
 {
-    /**
-     * Transforms the specified value.
-     *
-     * @param  mixed $value
-     * @return mixed
-     */
-    protected function transform($value)
-    {
-        return is_string($value) && $value === '' ? null : $value;
-    }
 }
