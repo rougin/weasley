@@ -112,40 +112,40 @@ class IntegrationsTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function testSession()
-    {
-        $message = 'SessionHandlerInterface is not yet available';
+    // public function testSession()
+    // {
+    //     $message = 'SessionHandlerInterface is not yet available';
 
-        interface_exists('SessionHandlerInterface') || $this->markTestSkipped($message);
+    //     interface_exists('SessionHandlerInterface') || $this->markTestSkipped($message);
 
-        $integration = new Session\SessionIntegration;
+    //     $integration = new Session\SessionIntegration;
 
-        $this->config->set('session.path', __DIR__ . '/Fixture/Storage/Sessions');
+    //     $this->config->set('session.path', __DIR__ . '/Fixture/Storage/Sessions');
 
-        $container = $integration->define($this->container, $this->config);
+    //     $container = $integration->define($this->container, $this->config);
 
-        $session = $container->get('Rougin\Weasley\Session\SessionInterface');
+    //     $session = $container->get('Rougin\Weasley\Session\SessionInterface');
 
-        $expected = 'Ron Weasley';
+    //     $expected = 'Ron Weasley';
 
-        $session->set('user.name', $expected);
+    //     $session->set('user.name', $expected);
 
-        $this->assertEquals($session->get('user.name'), $expected);
+    //     $this->assertEquals($session->get('user.name'), $expected);
 
-        $session->delete('user.name');
+    //     $session->delete('user.name');
 
-        $this->assertEmpty($session->get('user.name'));
+    //     $this->assertEmpty($session->get('user.name'));
 
-        $session->regenerate(true);
+    //     $session->regenerate(true);
 
-        $expected = 'Harry Potter';
+    //     $expected = 'Harry Potter';
 
-        $session->set('user.name', 'Harry Potter');
+    //     $session->set('user.name', 'Harry Potter');
 
-        $handler = $container->get('Rougin\Weasley\Session\SessionHandlerInterface');
+    //     $handler = $container->get('Rougin\Weasley\Session\SessionHandlerInterface');
 
-        $handler->close();
+    //     $handler->close();
 
-        $this->assertEquals($session->get('user.name'), $expected);
-    }
+    //     $this->assertEquals($session->get('user.name'), $expected);
+    // }
 }

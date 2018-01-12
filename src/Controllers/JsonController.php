@@ -217,6 +217,6 @@ class JsonController extends BaseController
 
         $item = $this->eloquent->create($parsed);
 
-        return array($item, 201);
+        return array($item->toArray(), 201);
     }
 }
