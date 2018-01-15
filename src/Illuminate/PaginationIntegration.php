@@ -42,9 +42,7 @@ class PaginationIntegration implements IntegrationInterface
             return isset($uri) ? strtok($uri, '?') : '/';
         };
 
-        Paginator::currentPageResolver($page);
-
-        Paginator::currentPathResolver($path);
+        $this->resolve($page, $path);
 
         return $container;
     }
@@ -60,5 +58,19 @@ class PaginationIntegration implements IntegrationInterface
         $request = $container->get(self::SERVER_REQUEST);
 
         return array($request->getQueryParams(), $request);
+    }
+
+    /**
+     * Sets current page and path resolvers.
+     *
+     * @param  callable $page
+     * @param  callable $path
+     * @return void
+     */
+    protected function resolve($page, $path)
+    {
+        Paginator::currentPageResolver($page);
+
+        Paginator::currentPathResolver($path);
     }
 }

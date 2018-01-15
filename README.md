@@ -36,13 +36,13 @@ You can also include `--help` if you want to know the available options for each
 
 ### Integrations
 
-* [`SessionIntegration`](src/Integrations/SessionIntegration.php) - an implementation of `SessionHandlerInterface`
+* [`SessionIntegration`](src/Session/SessionIntegration.php) - an implementation of `SessionHandlerInterface`
 
 #### Illuminate (Laravel's individual components)
 
-* [`DatabaseIntegration`](src/Integrations/Illuminate/DatabaseIntegration.php) - based on [illuminate/database](https://github.com/illuminate/database), also known as [Eloquent](https://laravel.com/docs/5.4/eloquent)
-* [`PaginationIntegration`](src/Integrations/Illuminate/PaginationIntegration.php) - based on [illuminate/pagination](https://github.com/illuminate/pagination)
-* [`ViewIntegration`](src/Integrations/Illuminate/ViewIntegration.php) - based on [illuminate/view](https://github.com/illuminate/view), also known as [Blade](https://laravel.com/docs/5.4/blade)
+* [`DatabaseIntegration`](src/Illuminate/DatabaseIntegration.php) - based on [illuminate/database](https://github.com/illuminate/database), also known as [Eloquent](https://laravel.com/docs/5.4/eloquent)
+* [`PaginationIntegration`](src/Illuminate/PaginationIntegration.php) - based on [illuminate/pagination](https://github.com/illuminate/pagination)
+* [`ViewIntegration`](src/Illuminate/ViewIntegration.php) - based on [illuminate/view](https://github.com/illuminate/view), also known as [Blade](https://laravel.com/docs/5.4/blade)
 
 **NOTE**: The said integrations above needs to include their required packages first.
 
@@ -50,15 +50,25 @@ You can also include `--help` if you want to know the available options for each
 
 All of the HTTP middlewares below are implemented in the `v0.4.1` of [PSR-15](https://github.com/http-interop/http-middleware/tree/0.4.1).
 
-* [`CORS`](src/Http/Middleware/Cors.php) - adds additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
-* [`EmptyStringToNull`](src/Http/Middleware/EmptyStringToNull.php) - converts the empty strings from the incoming HTTP request values as `null`
-* [`FormMethodSpoofing`](src/Http/Middleware/FormMethodSpoofing.php) - changes the HTTP method of the request based on the `_method` input value from a `<form>` tag
-* [`JSON`](src/Http/Middleware/Json.php) - changes the `Content-Type` value of the response to `application/json`
-* [`TrimString`](src/Http/Middleware/TrimString.php) - trims the available strings from the incoming HTTP request
+* [`CORS`](src/Middleware/Cors.php) - adds additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+* [`EmptyStringToNull`](src/Middleware/EmptyStringToNull.php) - converts the empty strings from the incoming HTTP request values as `null`
+* [`FormMethodSpoofing`](src/Middleware/FormMethodSpoofing.php) - changes the HTTP method of the request based on the `_method` input value from a `<form>` tag
+* [`JSON`](src/Middleware/Json.php) - changes the `Content-Type` value of the response to `application/json`
+* [`TrimString`](src/Middleware/TrimString.php) - trims the available strings from the incoming HTTP request
 
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+## Testing
+
+``` bash
+$ composer test
+```
+
+## Security
+
+If you discover any security related issues, please email rougingutib@gmail.com instead of using the issue tracker.
 
 ## Credits
 
