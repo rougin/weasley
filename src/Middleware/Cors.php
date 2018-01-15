@@ -40,7 +40,7 @@ class Cors implements MiddlewareInterface
 
         $this->allowed($allowed === null ? array('*') : $allowed);
 
-        $this->methods($methods === null ? $methods : $methods);
+        $this->methods($methods === null ? $methods : $defaults);
     }
 
     /**
@@ -55,13 +55,13 @@ class Cors implements MiddlewareInterface
     {
         $response = new \Rougin\Slytherin\Http\Response;
 
-        $options = (boolean) $request->getMethod() === 'OPTIONS';
+        $options = $request->getMethod() === 'OPTIONS';
 
         $options && $response = $delegate->process($request);
 
-        $response = $response->withHeader(self::ALLOW_ORIGIN, $this->allowed);
+        $result = $response->withHeader(self::ALLOW_ORIGIN, $this->allowed);
 
-        return $response->withHeader(self::ALLOW_METHODS, $this->methods);
+        return $result->withHeader(self::ALLOW_METHODS, $this->methods);
     }
 
     /**

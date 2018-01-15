@@ -199,7 +199,7 @@ class JsonController extends BaseController
      */
     protected function save($id = null)
     {
-        $parsed = $this->request->getParsedBody();
+        $parsed = (array) $this->request->getParsedBody();
 
         if (! $this->validation->validate($parsed)) {
             $errors = $this->validation->errors;
