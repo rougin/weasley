@@ -74,7 +74,9 @@ class Session implements SessionInterface
      */
     public function get($key, $default = null)
     {
-        return array_get($this->data, $key, $default);
+        $exists = isset($this->data[$key]);
+
+        return $exists ? $this->data[$key] : $default;
     }
 
     /**
@@ -105,11 +107,11 @@ class Session implements SessionInterface
      */
     public function set($key, $value)
     {
-        $this->data = array_add($this->data, $key, $value);
+        $this->data[$key] = $value;
 
-        $serialized = serialize($this->data);
+        $data = serialize($this->data);
 
-        $this->handler->write($this->id, $serialized);
+        $this->handler->write($this->id, $data);
 
         return $this;
     }
