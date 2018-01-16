@@ -7,7 +7,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 class CommandsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Rougin\Weasley\Console\Application
+     * @var \Rougin\Weasley\Console
      */
     protected $console;
 
@@ -18,7 +18,7 @@ class CommandsTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->console = new \Rougin\Weasley\Console\Application;
+        $this->console = new \Rougin\Weasley\Console;
     }
 
     /**

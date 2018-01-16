@@ -11,7 +11,7 @@ class WeasleyTest extends \PHPUnit_Framework_TestCase
      */
     public function testVersion()
     {
-        $app = new Console\Application;
+        $app = new Console;
 
         $version = $this->changelog();
 

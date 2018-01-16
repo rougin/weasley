@@ -1,6 +1,8 @@
 <?php
 
-namespace Rougin\Weasley\Console;
+namespace Rougin\Weasley;
+
+use Symfony\Component\Console\Application;
 
 /**
  * Console Application
@@ -8,7 +10,7 @@ namespace Rougin\Weasley\Console;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class Application extends \Symfony\Component\Console\Application
+class Console extends Application
 {
     const VERSION = '0.6.0';
 

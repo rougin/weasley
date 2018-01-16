@@ -43,6 +43,8 @@ class BaseController
 
     /**
      * Returns the specified data to JSON.
+     * NOTE: Must be moved to JsonController in v1.0.0.
+     * The visibility of this method must also be "protected".
      *
      * @param  mixed   $data
      * @param  integer $code

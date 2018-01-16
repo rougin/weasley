@@ -32,7 +32,7 @@ You can also include `--help` if you want to know the available options for each
 
 ### HTTP Controllers
 
-* [`RestfulController`](src/Http/Controllers/RestfulController.php) - based on [PSR-7](http://www.php-fig.org/psr/psr-7), this controller provides class methods for creating RESTful APIs
+* [`JsonController`](src/Http/Controllers/JsonController.php) - provides class methods for creating RESTful APIs in JSON format
 
 ### Integrations
 

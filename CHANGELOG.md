@@ -16,9 +16,8 @@ All notable changes to `Weasley` will be documented in this file.
 - `TrimStrings` middleware
 
 ### Changed
-- `Generator` directory to `Console` directory
 - Moved `Integrations\Illuminate` to `Illuminate`
-- Moved `Commands` and `Templates` directory to `Console` directory
+- Moved `Commands` and `Templates` directory to root directory
 - Moved contents of `Http` directory to root directory
 
 ### Removed
