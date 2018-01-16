@@ -8,7 +8,7 @@ namespace Rougin\Weasley\Commands;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class MakeMiddlewareCommand extends AbstractCommand
+class MakeMiddlewareCommand extends MakeControllerCommand
 {
     /**
      * @var string

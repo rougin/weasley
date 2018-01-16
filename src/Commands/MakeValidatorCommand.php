@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputArgument;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class MakeValidatorCommand extends AbstractCommand
+class MakeValidatorCommand extends MakeControllerCommand
 {
     /**
      * @var string
