@@ -26,6 +26,8 @@ class Session implements SessionInterface
     protected $handler;
 
     /**
+     * Initializes the session instance.
+     *
      * @param \SessionHandlerInterface $handler
      * @param string|null              $id
      */
@@ -35,26 +37,32 @@ class Session implements SessionInterface
 
         $this->id = $id;
 
-        is_null($id) && $this->regenerate(true);
+        $this->id === null && $this->regenerate(true);
 
         $this->data = unserialize($handler->read($id));
     }
 
     /**
-     * Returns the value from the specified key.
+     * Removes the value from the specified key.
      *
      * @param  string $key
      * @return boolean
      */
     public function delete($key)
     {
-        ! array_get($this->data, $key) || array_forget($this->data, $key);
+        $result = false;
 
-        $serialized = serialize($this->data);
+        if (isset($this->data[$key]) === true) {
+            unset($this->data[$key]);
 
-        $this->handler->write($this->id, $serialized);
+            $serialized = serialize($this->data);
 
-        return true;
+            $this->handler->write($this->id, $serialized);
+
+            $result = true;
+        }
+
+        return $result;
     }
 
     /**
