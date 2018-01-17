@@ -80,6 +80,16 @@ class Session implements SessionInterface
     }
 
     /**
+     * Returns the session ID.
+     *
+     * @return string
+     */
+    public function id()
+    {
+        return $this->id;
+    }
+
+    /**
      * Updates the current session ID with a newly generated one.
      *
      * @param  boolean $delete

@@ -42,7 +42,7 @@ class FileSessionHandler implements \SessionHandlerInterface
 
         file_exists($file) && unlink($file);
 
-        return true;
+        return $this->close();
     }
 
     /**

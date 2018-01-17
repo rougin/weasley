@@ -3,10 +3,9 @@
 namespace Rougin\Weasley\Session;
 
 use Rougin\Slytherin\Container\Container;
-use Rougin\Slytherin\Integration\Configuration;
 
 /**
- * Session View Integration Test
+ * Session Integration Test
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
@@ -22,15 +21,7 @@ class SessionIntegrationTest extends AbstractTestCase
      */
     public function testDefineMethod()
     {
-        $path = __DIR__ . '/../Fixture/Storage/Sessions';
-
-        $data = array('session' => array('path' => $path));
-
-        $config = new Configuration($data);
-
-        $integration = new SessionIntegration;
-
-        $container = $integration->define(new Container, $config);
+        $container = $this->integration->define(new Container, $this->config);
 
         $session = $container->get(self::SESSION);
 

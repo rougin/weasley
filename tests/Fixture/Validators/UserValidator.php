@@ -19,10 +19,10 @@ class UserValidator extends AbstractValidator
      */
     protected function labels()
     {
-        $labels = array();
+        $labels = array('name' => 'Name');
 
-        $labels['name'] = 'Name';
         $labels['username'] = 'Username';
+
         $labels['password'] = 'Password';
 
         return $labels;
@@ -37,7 +37,9 @@ class UserValidator extends AbstractValidator
     protected function rules(array $data = array())
     {
         $this->validator->rule('required', 'name');
+
         $this->validator->rule('required', 'username');
+
         $this->validator->rule('required', 'password');
     }
 }

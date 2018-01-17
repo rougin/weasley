@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-Weasley provides generators and helpers for the [Slytherin](https://github.com/rougin/slytherin) framework.
+Provides generators and helpers for the [Slytherin](https://github.com/rougin/slytherin) framework.
 
 ## Install
 
