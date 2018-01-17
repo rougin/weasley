@@ -2,9 +2,9 @@
 
 namespace Rougin\Weasley\Http\Controllers;
 
-use Rougin\Weasley\Fixture\Http\Controllers\UsersController;
-use Rougin\Weasley\Fixture\Http\Controllers\NoModelController;
-use Rougin\Weasley\Fixture\Http\Controllers\NoValidatorController;
+use Rougin\Weasley\Fixture\Controllers\UsersController;
+use Rougin\Weasley\Fixture\Controllers\NoModelController;
+use Rougin\Weasley\Fixture\Controllers\NoValidatorController;
 
 class RestfulControllerTest extends TestCase
 {
@@ -158,7 +158,7 @@ class RestfulControllerTest extends TestCase
 
         $expected = new \stdClass;
 
-        $expected->id = 5;
+        $expected->id = 6;
         $expected->name = 'Weasley';
         $expected->password = 'weasley';
         $expected->username = 'weasley';

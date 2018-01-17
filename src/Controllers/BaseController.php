@@ -42,6 +42,19 @@ class BaseController
     }
 
     /**
+     * Sets the server request instance.
+     *
+     * @param  \Psr\Http\Message\ServerRequestInterface $request
+     * @return self
+     */
+    public function request(ServerRequestInterface $request)
+    {
+        $this->request = $request;
+
+        return $this;
+    }
+
+    /**
      * Returns the specified data to JSON.
      * NOTE: Must be moved to JsonController in v1.0.0.
      * The visibility of this method must also be "protected".

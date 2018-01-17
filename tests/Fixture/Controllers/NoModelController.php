@@ -1,6 +1,8 @@
 <?php
 
-namespace Rougin\Weasley\Fixture\Http\Controllers;
+namespace Rougin\Weasley\Fixture\Controllers;
+
+use Rougin\Weasley\Http\Controllers\RestfulController;
 
 /**
  * No Model Controller
@@ -8,7 +10,7 @@ namespace Rougin\Weasley\Fixture\Http\Controllers;
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class NoModelController extends \Rougin\Weasley\Http\Controllers\RestfulController
+class NoModelController extends RestfulController
 {
     /**
      * @var string
