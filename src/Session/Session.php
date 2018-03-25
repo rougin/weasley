@@ -55,7 +55,7 @@ class Session implements SessionInterface
         if (isset($this->data[$key]) === true) {
             unset($this->data[$key]);
 
-            $serialized = serialize($this->data);
+            $serialized = (string) serialize($this->data);
 
             $this->handler->write($this->id, $serialized);
 
@@ -74,7 +74,7 @@ class Session implements SessionInterface
      */
     public function get($key, $default = null)
     {
-        $exists = isset($this->data[$key]);
+        $exists = isset($this->data[$key]) === true;
 
         return $exists ? $this->data[$key] : $default;
     }
@@ -101,7 +101,8 @@ class Session implements SessionInterface
 
         $serialized = serialize($this->data);
 
-        $this->id = str_random(40);
+        // TODO: Remove dependency from Str::random
+        $this->id = (string) str_random(40);
 
         $this->handler->write($this->id, $serialized);
 

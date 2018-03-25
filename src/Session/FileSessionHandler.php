@@ -73,9 +73,9 @@ class FileSessionHandler implements \SessionHandlerInterface
      */
     public function open($path, $id)
     {
-        $file = $path . '/' . $id;
+        $file = (string) $path . '/' . $id;
 
-        $this->path = $path;
+        $this->path = (string) $path;
 
         is_dir($path) || mkdir($path, 777);
 
@@ -94,7 +94,7 @@ class FileSessionHandler implements \SessionHandlerInterface
     {
         $file = $this->path . '/' . $id;
 
-        ! file_exists($file) || $this->data = file_get_contents($file);
+        file_exists($file) && $this->data = file_get_contents($file);
 
         return $this->data;
     }
@@ -108,7 +108,7 @@ class FileSessionHandler implements \SessionHandlerInterface
      */
     public function write($id, $data)
     {
-        $file = $this->path . '/' . $id;
+        $file = (string) $this->path . '/' . $id;
 
         $result = file_put_contents($file, $data);
 
