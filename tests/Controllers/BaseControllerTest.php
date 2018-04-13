@@ -64,4 +64,21 @@ class BaseControllerTest extends AbstractTestCase
 
         $this->assertEquals($expected, $result);
     }
+
+    /**
+     * Tests BaseController::toJson.
+     * NOTE: Must be removed in v1.0.0. Use "json" instead.
+     *
+     * @return void
+     */
+    public function testToJsonMethod()
+    {
+        $expected = array('name' => 'Rougin', 'project' => 'Weasley');
+
+        $response = $this->controller->toJson($expected);
+
+        $result = json_decode((string) $response->getBody(), true);
+
+        $this->assertEquals($expected, $result);
+    }
 }
