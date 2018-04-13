@@ -41,5 +41,5 @@ class MakeValidatorCommand extends MakeControllerCommand
     /**
      * @var string
      */
-    protected $text = 'Create a new validator class';
+    protected $text = 'Create a new validator class based on Valitron';
 }

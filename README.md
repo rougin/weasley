@@ -23,16 +23,16 @@ $ composer require rougin/weasley
 
 You can access the generators through `vendor/bin/weasley` in your terminal/command line.
 
-* `make:controller` - Create a new HTTP controller class
-* `make:integration` - Create a new [integration](https://github.com/rougin/slytherin/blob/master/src/Integration/IntegrationInterface.php) class
-* `make:middleware` - Create a new [PSR-15](https://github.com/php-fig/fig-standards/blob/master/proposed/http-middleware/middleware-meta.md) middleware class
-* `make:validator` - Create a new validator class
+* `make:controller` - Creates a new HTTP controller class
+* `make:integration` - Creates a new [Slytherin Integration](https://github.com/rougin/slytherin/blob/master/src/Integration/IntegrationInterface.php) class
+* `make:middleware` - Creates a new `v0.4.1` of [PSR-15](https://github.com/http-interop/http-middleware/tree/0.4.1) middleware class
+* `make:validator` - Creates a new validator class based on [Valitron](https://github.com/vlucas/valitron)
 
-You can also include `--help` if you want to know the available options for each command.
+To know the more the arguments and options, include the option `--help` to the chosen command.
 
 ### HTTP Controllers
 
-* [`JsonController`](src/Http/Controllers/JsonController.php) - provides class methods for creating RESTful APIs in JSON format
+* [`JsonController`](src/Http/Controllers/JsonController.php) - provides class methods for creating RESTful APIs in [JSON](https://en.wikipedia.org/wiki/JSON) format
 
 ### Integrations
 
@@ -44,16 +44,16 @@ You can also include `--help` if you want to know the available options for each
 * [`PaginationIntegration`](src/Illuminate/PaginationIntegration.php) - based on [illuminate/pagination](https://github.com/illuminate/pagination)
 * [`ViewIntegration`](src/Illuminate/ViewIntegration.php) - based on [illuminate/view](https://github.com/illuminate/view), also known as [Blade](https://laravel.com/docs/5.4/blade)
 
-**NOTE**: The said integrations above needs to include their required packages first.
+**NOTE**: The mentioned integrations above needs to include their required dependencies first.
 
 ### HTTP Middlewares
 
 All of the HTTP middlewares below are implemented in the `v0.4.1` of [PSR-15](https://github.com/http-interop/http-middleware/tree/0.4.1).
 
-* [`CORS`](src/Middleware/Cors.php) - adds additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+* [`CrossOriginHeaders`](src/Middleware/CrossOriginHeaders.php) - adds additional headers for [cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 * [`EmptyStringToNull`](src/Middleware/EmptyStringToNull.php) - converts the empty strings from the incoming HTTP request values as `null`
-* [`FormMethodSpoofing`](src/Middleware/FormMethodSpoofing.php) - changes the HTTP method of the request based on the `_method` input value from a `<form>` tag
-* [`JSON`](src/Middleware/Json.php) - changes the `Content-Type` value of the response to `application/json`
+* [`SpoofFormMethod`](src/Middleware/SpoofFormMethod.php) - changes the HTTP method of the request based on the `_method` input value from a `<form>` tag
+* [`JsonHeaders`](src/Middleware/Json.php) - changes the `Content-Type` value of the response to `application/json`
 * [`TrimString`](src/Middleware/TrimString.php) - trims the available strings from the incoming HTTP request
 
 ## Change log

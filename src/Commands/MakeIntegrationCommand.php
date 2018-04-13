@@ -38,5 +38,5 @@ class MakeIntegrationCommand extends MakeControllerCommand
     /**
      * @var string
      */
-    protected $text = 'Create a new integration class';
+    protected $text = 'Create a new Slytherin Integration class';
 }

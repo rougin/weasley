@@ -2,7 +2,7 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
-## [0.6.0](https://github.com/rougin/weasley/compare/v0.5.0...v0.6.0) - Unreleased
+## [0.6.0](https://github.com/rougin/weasley/compare/v0.5.0...v0.6.0) - 2018-04-13
 
 **NOTE**: This release may break your application if upgrading from `v0.5.0` release.
 
@@ -19,6 +19,12 @@ All notable changes to `Weasley` will be documented in this file.
 - Moved `Integrations\Illuminate` to `Illuminate`
 - Moved `Commands` and `Templates` directory to root directory
 - Moved contents of `Http` directory to root directory
+- `Cors` middleware to `CrossOriginHeaders`
+- `Json` middleware to `JsonHeaders`
+
+### Deprecated
+- `Http\Controllers` directory
+- `Http\Middleware` directory
 
 ### Removed
 - `illuminate/database` package as required

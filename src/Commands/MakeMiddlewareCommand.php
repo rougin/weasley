@@ -38,5 +38,5 @@ class MakeMiddlewareCommand extends MakeControllerCommand
     /**
      * @var string
      */
-    protected $text = 'Create a new HTTP middleware class';
+    protected $text = 'Create a new v0.4.1 of PSR-15 middleware class';
 }
