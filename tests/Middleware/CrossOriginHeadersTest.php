@@ -27,4 +27,22 @@ class CrossOriginHeadersTest extends AbstractTestCase
 
         $this->assertTrue($response->hasHeader($header));
     }
+
+    /**
+     * Tests MiddlewareInterface::process with OPTIONS HTTP method.
+     *
+     * @return void
+     */
+    public function testProcessMethodWithOptionHttpMethod()
+    {
+        $this->request = $this->request->withMethod('OPTIONS');
+
+        $dispatcher = $this->dispatcher->push(new Cors);
+
+        $response = $dispatcher->process($this->request, $this->delegate);
+
+        $header = 'Access-Control-Allow-Origin';
+
+        $this->assertFalse($response->hasHeader($header));
+    }
 }

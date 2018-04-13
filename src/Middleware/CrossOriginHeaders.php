@@ -14,10 +14,6 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class CrossOriginHeaders implements MiddlewareInterface
 {
-    const ALLOW_ORIGIN = 'Access-Control-Allow-Origin';
-
-    const ALLOW_METHODS = 'Access-Control-Allow-Methods';
-
     /**
      * @var array
      */
@@ -53,15 +49,21 @@ class CrossOriginHeaders implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $response = new \Rougin\Slytherin\Http\Response;
+        $origin = 'Access-Control-Allow-Origin';
 
-        $options = $request->getMethod() === 'OPTIONS';
+        $method = 'Access-Control-Allow-Methods';
 
-        $options && $response = $delegate->process($request);
+        if ($request->getMethod() !== 'OPTIONS') {
+            $response = $delegate->process($request);
 
-        $result = $response->withHeader(self::ALLOW_ORIGIN, $this->allowed);
+            $result = $response->withHeader($origin, $this->allowed);
 
-        return $result->withHeader(self::ALLOW_METHODS, $this->methods);
+            $response = $result->withHeader($method, $this->methods);
+
+            return $response;
+        }
+
+        return new \Rougin\Slytherin\Http\Response;
     }
 
     /**

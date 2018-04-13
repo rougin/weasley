@@ -2,6 +2,11 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
+## [0.6.1](https://github.com/rougin/weasley/compare/v0.6.0...v0.6.1) - 2018-04-13
+
+### Fixed
+- Incorrect logic in `CrossOriginHeaders`
+
 ## [0.6.0](https://github.com/rougin/weasley/compare/v0.5.0...v0.6.0) - 2018-04-13
 
 **NOTE**: This release may break your application if upgrading from `v0.5.0` release.
