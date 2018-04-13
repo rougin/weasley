@@ -3,7 +3,7 @@
 namespace Rougin\Weasley\Middleware;
 
 /**
- * "Trim String" Middleware
+ * Trim String Middleware
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>

@@ -2,13 +2,15 @@
 
 namespace Rougin\Weasley\Middleware;
 
+use Rougin\Weasley\Http\Middleware\Cors;
+
 /**
- * CORS Middleware Test
+ * Cross Origin Headers Middleware Test
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class CorsTest extends AbstractTestCase
+class CrossOriginHeadersTest extends AbstractTestCase
 {
     /**
      * Tests MiddlewareInterface::process.

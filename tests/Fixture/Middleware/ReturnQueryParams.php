@@ -1,18 +1,18 @@
 <?php
 
-namespace Rougin\Weasley\Middleware;
+namespace Rougin\Weasley\Fixture\Middleware;
 
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * JSON Middleware
+ * "Return $_GET Parameters" Middleware
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class Json implements MiddlewareInterface
+class ReturnQueryParams implements MiddlewareInterface
 {
     /**
      * Process an incoming server request and return a response, optionally
@@ -26,8 +26,8 @@ class Json implements MiddlewareInterface
     {
         $response = $delegate->process($request);
 
-        $new = $response->withHeader('Content-Type', 'application/json');
+        $query = $request->getQueryParams();
 
-        return $response->hasHeader('Content-Type') ? $response : $new;
+        return $response->withHeader('Query-Params', $query);
     }
 }

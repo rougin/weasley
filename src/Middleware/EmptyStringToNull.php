@@ -3,7 +3,7 @@
 namespace Rougin\Weasley\Middleware;
 
 /**
- * "Empty String To Null" Middleware
+ * Empty String To Null Middleware
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>

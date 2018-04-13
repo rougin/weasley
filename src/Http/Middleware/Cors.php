@@ -2,15 +2,15 @@
 
 namespace Rougin\Weasley\Http\Middleware;
 
-use Rougin\Weasley\Middleware\Cors as Middleware;
+use Rougin\Weasley\Middleware\CrossOriginHeaders;
 
 /**
  * CORS Middleware
- * NOTE: To be removed in v1.0.0. Use Middleware instead.
+ * NOTE: To be removed in v1.0.0. Use CrossOriginHeaders instead.
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class Cors extends Middleware
+class Cors extends CrossOriginHeaders
 {
 }

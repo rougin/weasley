@@ -7,12 +7,12 @@ use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * Form Method Spoofing Middleware
+ * Spoof Form Method Middleware
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class FormMethodSpoofing implements MiddlewareInterface
+class SpoofFormMethod implements MiddlewareInterface
 {
     /**
      * @var string

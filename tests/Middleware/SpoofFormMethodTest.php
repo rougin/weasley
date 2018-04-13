@@ -5,12 +5,12 @@ namespace Rougin\Weasley\Middleware;
 use Rougin\Weasley\Fixture\Middleware\CheckPatchMethod;
 
 /**
- * "Form Method Spoofing" Middleware Test
+ * Spoof Form Method Middleware Test
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class FormMethodSpoofingTest extends AbstractTestCase
+class SpoofFormMethodTest extends AbstractTestCase
 {
     /**
      * Tests MiddlewareInterface::process.
@@ -23,7 +23,7 @@ class FormMethodSpoofingTest extends AbstractTestCase
 
         $request = $this->request->withParsedBody($data);
 
-        $this->dispatcher->push(new FormMethodSpoofing('_test'));
+        $this->dispatcher->push(new SpoofFormMethod('_test'));
 
         $dispatcher = $this->dispatcher->push(new CheckPatchMethod);
 

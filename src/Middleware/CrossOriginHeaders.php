@@ -7,12 +7,12 @@ use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * CORS Middleware
+ * Cross Origin Headers Middleware
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
  */
-class Cors implements MiddlewareInterface
+class CrossOriginHeaders implements MiddlewareInterface
 {
     const ALLOW_ORIGIN = 'Access-Control-Allow-Origin';
 

@@ -5,7 +5,7 @@ namespace Rougin\Weasley\Middleware;
 use Rougin\Weasley\Fixture\Middleware\CheckTrimmedString;
 
 /**
- * "Trim String" Middleware Test
+ * Trim String Middleware Test
  *
  * @package Weasley
  * @author  Rougin Royce Gutib <rougingutib@gmail.com>
