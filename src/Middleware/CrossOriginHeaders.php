@@ -5,6 +5,7 @@ namespace Rougin\Weasley\Middleware;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Rougin\Slytherin\Http\Response;
 
 /**
  * Cross Origin Headers Middleware
@@ -14,6 +15,10 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class CrossOriginHeaders implements MiddlewareInterface
 {
+    const METHODS = 'Access-Control-Allow-Methods';
+
+    const ORIGIN = 'Access-Control-Allow-Origin';
+
     /**
      * @var array
      */
@@ -32,11 +37,9 @@ class CrossOriginHeaders implements MiddlewareInterface
      */
     public function __construct(array $allowed = null, array $methods = null)
     {
-        $defaults = array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS');
-
         $this->allowed($allowed === null ? array('*') : $allowed);
 
-        $this->methods($methods === null ? $methods : $defaults);
+        $this->methods($methods === null ? $this->methods : $methods);
     }
 
     /**
@@ -49,21 +52,13 @@ class CrossOriginHeaders implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $origin = 'Access-Control-Allow-Origin';
+        $options = $request->getMethod() === 'OPTIONS';
 
-        $method = 'Access-Control-Allow-Methods';
+        $response = $options ? new Response : $delegate->process($request);
 
-        if ($request->getMethod() !== 'OPTIONS') {
-            $response = $delegate->process($request);
+        $response = $response->withHeader(self::ORIGIN, $this->allowed);
 
-            $result = $response->withHeader($origin, $this->allowed);
-
-            $response = $result->withHeader($method, $this->methods);
-
-            return $response;
-        }
-
-        return new \Rougin\Slytherin\Http\Response;
+        return $response->withHeader(self::METHODS, (array) $this->methods);
     }
 
     /**

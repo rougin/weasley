@@ -29,20 +29,38 @@ class CrossOriginHeadersTest extends AbstractTestCase
     }
 
     /**
-     * Tests MiddlewareInterface::process with OPTIONS HTTP method.
+     * Tests MiddlewareInterface::process with allowed methods.
      *
      * @return void
      */
-    public function testProcessMethodWithOptionHttpMethod()
+    public function testProcessMethodWithAllowedMethods()
     {
-        $this->request = $this->request->withMethod('OPTIONS');
-
         $dispatcher = $this->dispatcher->push(new Cors);
 
         $response = $dispatcher->process($this->request, $this->delegate);
 
-        $header = 'Access-Control-Allow-Origin';
+        $expected = array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS');
 
-        $this->assertFalse($response->hasHeader($header));
+        $result = $response->getHeader(Cors::METHODS);
+
+        $this->assertEquals($expected, (array) $result);
+    }
+
+    /**
+     * Tests MiddlewareInterface::process with allowed origins.
+     *
+     * @return void
+     */
+    public function testProcessMethodWithAllowedOrigin()
+    {
+        $expected = array('https://rougin.github.io', 'google.com.ph');
+
+        $dispatcher = $this->dispatcher->push(new Cors($expected));
+
+        $response = $dispatcher->process($this->request, $this->delegate);
+
+        $result = $response->getHeader(Cors::ORIGIN);
+
+        $this->assertEquals($expected, (array) $result);
     }
 }

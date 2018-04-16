@@ -2,6 +2,11 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
+## [0.6.2](https://github.com/rougin/weasley/compare/v0.6.1...v0.6.2) - 2018-04-16
+
+### Fixed
+- Wrong default values in `CrossOriginHeaders::__construct`
+
 ## [0.6.1](https://github.com/rougin/weasley/compare/v0.6.0...v0.6.1) - 2018-04-13
 
 ### Fixed
