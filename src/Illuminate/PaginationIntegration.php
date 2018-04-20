@@ -17,7 +17,7 @@ use Rougin\Slytherin\Integration\IntegrationInterface;
  */
 class PaginationIntegration implements IntegrationInterface
 {
-    const SERVER_REQUEST = 'Psr\Http\Message\ServerRequestInterface';
+    const REQUEST = 'Psr\Http\Message\ServerRequestInterface';
 
     /**
      * Defines the specified integration.
@@ -55,7 +55,7 @@ class PaginationIntegration implements IntegrationInterface
      */
     protected function request(ContainerInterface $container)
     {
-        $request = $container->get(self::SERVER_REQUEST);
+        $request = $container->get((string) self::REQUEST);
 
         return array($request->getQueryParams(), $request);
     }
