@@ -12,7 +12,7 @@ use Symfony\Component\Console\Application;
  */
 class Console extends Application
 {
-    const VERSION = '0.6.2';
+    const VERSION = '0.6.3';
 
     /**
      * Instantiates the console application.

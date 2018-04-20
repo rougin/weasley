@@ -122,9 +122,13 @@ class JsonController extends BaseController
      */
     public function store()
     {
-        list($item, $code) = $this->save();
+        list($result, $code) = $this->save();
 
-        return $this->json($item, $code);
+        $array = is_array($result) === true;
+
+        ! $array && $result = $result->toArray();
+
+        return $this->json($result, $code);
     }
 
     /**
@@ -135,9 +139,13 @@ class JsonController extends BaseController
      */
     public function update($id)
     {
-        list($item, $code) = $this->save($id);
+        $model = 'Illuminate\Database\Eloquent\Model';
 
-        return $this->json($item, $code);
+        list($result, $code) = $this->save($id);
+
+        is_a($result, $model) && $result = null;
+
+        return $this->json($result, (integer) $code);
     }
 
     /**
@@ -212,11 +220,11 @@ class JsonController extends BaseController
 
             $item->update($parsed);
 
-            return array(null, 204);
+            return array($item, 204);
         }
 
         $item = $this->eloquent->create($parsed);
 
-        return array($item->toArray(), 201);
+        return array($item, 201);
     }
 }
