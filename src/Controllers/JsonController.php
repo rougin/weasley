@@ -209,22 +209,20 @@ class JsonController extends BaseController
     {
         $parsed = (array) $this->request->getParsedBody();
 
-        if (! $this->validation->validate($parsed)) {
-            $errors = $this->validation->errors;
+        if ($this->validation->validate($parsed)) {
+            if (is_null($id) === false) {
+                $item = $this->eloquent->find($id);
 
-            return array((array) $errors, 400);
+                $item->update((array) $parsed);
+
+                return array($item, (integer) 204);
+            }
+
+            $item = $this->eloquent->create($parsed);
+
+            return array($item, (integer) 201);
         }
 
-        if (is_null($id) === false) {
-            $item = $this->eloquent->find($id);
-
-            $item->update($parsed);
-
-            return array($item, 204);
-        }
-
-        $item = $this->eloquent->create($parsed);
-
-        return array($item, 201);
+        return array($this->validation->errors, 400);
     }
 }
