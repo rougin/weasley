@@ -2,11 +2,6 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
-## [0.6.4](https://github.com/rougin/weasley/compare/v0.6.3...v0.6.4) - Unreleased
-
-### Added
-- `illuminate/support` package for the `Session` library
-
 ## [0.6.3](https://github.com/rougin/weasley/compare/v0.6.2...v0.6.3) - 2018-04-20
 
 ### Fixed
