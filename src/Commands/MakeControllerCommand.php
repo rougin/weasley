@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Make Controller Command
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class MakeControllerCommand extends Command
 {
@@ -65,7 +65,7 @@ class MakeControllerCommand extends Command
 
         $this->addOption('package', null, $optional, 'Name of the package', 'App');
 
-        $author = 'Rougin Royce Gutib <rougingutib@gmail.com>';
+        $author = 'Rougin Gutib <rougingutib@gmail.com>';
 
         $this->addOption('author', null, $optional, 'Name of the author', $author);
     }
