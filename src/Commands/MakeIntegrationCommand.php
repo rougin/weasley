@@ -6,7 +6,7 @@ namespace Rougin\Weasley\Commands;
  * Make Integration Command
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class MakeIntegrationCommand extends MakeControllerCommand
 {
