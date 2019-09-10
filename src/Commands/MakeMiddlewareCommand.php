@@ -6,7 +6,7 @@ namespace Rougin\Weasley\Commands;
  * Make Middleware Command
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class MakeMiddlewareCommand extends MakeControllerCommand
 {
