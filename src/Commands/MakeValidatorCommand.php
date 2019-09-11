@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
  * Make Validator Command
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class MakeValidatorCommand extends MakeControllerCommand
 {
