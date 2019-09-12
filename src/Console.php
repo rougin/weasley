@@ -8,7 +8,7 @@ use Symfony\Component\Console\Application;
  * Console Application
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class Console extends Application
 {
