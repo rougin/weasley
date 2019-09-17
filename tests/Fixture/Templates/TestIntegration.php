@@ -10,7 +10,7 @@ use Rougin\Slytherin\Integration\IntegrationInterface;
  * TestIntegration
  *
  * @package App
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class TestIntegration implements IntegrationInterface
 {
