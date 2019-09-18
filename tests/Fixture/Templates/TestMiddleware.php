@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * TestMiddleware
  *
  * @package App
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class TestMiddleware implements MiddlewareInterface
 {
