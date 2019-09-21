@@ -9,7 +9,7 @@ use Rougin\Weasley\Middleware\CrossOriginHeaders;
  * NOTE: To be removed in v1.0.0. Use CrossOriginHeaders instead.
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class Cors extends CrossOriginHeaders
 {
