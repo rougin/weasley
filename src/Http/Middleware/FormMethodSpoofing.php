@@ -9,7 +9,7 @@ use Rougin\Weasley\Middleware\SpoofFormMethod;
  * NOTE: To be removed in v1.0.0. Use SpoofFormMethod instead.
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class FormMethodSpoofing extends SpoofFormMethod
 {
