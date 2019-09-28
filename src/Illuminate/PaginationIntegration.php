@@ -13,7 +13,7 @@ use Rougin\Slytherin\Integration\IntegrationInterface;
  * An integration for Laravel's Pagination package (illuminate/pagination).
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class PaginationIntegration implements IntegrationInterface
 {
