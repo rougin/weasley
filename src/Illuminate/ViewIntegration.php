@@ -21,7 +21,7 @@ use Rougin\Weasley\Renderers\BladeRenderer;
  * An integration for Laravel's View package (illuminate/view).
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class ViewIntegration implements IntegrationInterface
 {
