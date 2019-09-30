@@ -11,7 +11,7 @@ use Rougin\Weasley\Illuminate\DatabaseIntegration as Integration;
  * NOTE: To be removed in v1.0.0. Use Rougin\Weasley\Illuminate instead.
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class DatabaseIntegration extends Integration
 {
