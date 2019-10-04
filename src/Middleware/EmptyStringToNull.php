@@ -6,7 +6,7 @@ namespace Rougin\Weasley\Middleware;
  * Empty String To Null Middleware
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class EmptyStringToNull extends TransformRequest
 {
