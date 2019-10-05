@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * JSON Headers Middleware
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class JsonHeaders implements MiddlewareInterface
 {
