@@ -11,7 +11,7 @@ use Rougin\Slytherin\Template\RendererInterface;
  * A simple wrapper of Laravel Blade to Slytherin's RendererInterface.
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class BladeRenderer implements RendererInterface
 {
