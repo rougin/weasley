@@ -6,7 +6,7 @@ namespace Rougin\Weasley\Session;
  * File Session Handler
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class FileSessionHandler implements \SessionHandlerInterface
 {
