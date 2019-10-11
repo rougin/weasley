@@ -6,7 +6,7 @@ namespace Rougin\Weasley\Session;
  * Session
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class Session implements SessionInterface
 {
