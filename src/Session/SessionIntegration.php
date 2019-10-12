@@ -12,7 +12,7 @@ use Rougin\Slytherin\Integration\IntegrationInterface;
  * Bootstraps the additional definitions and integrate it to Slytherin.
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class SessionIntegration implements IntegrationInterface
 {
