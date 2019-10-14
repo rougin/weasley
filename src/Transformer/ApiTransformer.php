@@ -8,7 +8,7 @@ use Illuminate\Contracts\Support\Arrayable;
  * API Transformer
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class ApiTransformer implements TransformerInterface
 {
