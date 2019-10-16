@@ -6,7 +6,7 @@ namespace Rougin\Weasley\Transformer;
  * Transformer Interface
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 interface TransformerInterface
 {
