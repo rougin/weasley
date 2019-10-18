@@ -6,7 +6,7 @@ namespace Rougin\Weasley;
  * Console Application Test
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class ConsoleTest extends \PHPUnit_Framework_TestCase
 {
