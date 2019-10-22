@@ -8,7 +8,7 @@ use Rougin\Weasley\Fixture\Validators\UserValidator;
  * Abstract Validator Test
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
 {
