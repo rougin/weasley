@@ -8,7 +8,7 @@ use Rougin\Slytherin\Container\Container;
  * Session Test
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class SessionTest extends AbstractTestCase
 {
