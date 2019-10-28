@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * "Check $_GET Parameters" Middleware
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class CheckQueryParams implements MiddlewareInterface
 {
