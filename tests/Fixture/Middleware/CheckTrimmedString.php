@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * "Check Trimmed String" Middleware
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class CheckTrimmedString implements MiddlewareInterface
 {
