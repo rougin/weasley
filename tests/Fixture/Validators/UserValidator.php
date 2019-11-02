@@ -8,7 +8,7 @@ use Rougin\Weasley\Validators\AbstractValidator;
  * User Validator
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class UserValidator extends AbstractValidator
 {
