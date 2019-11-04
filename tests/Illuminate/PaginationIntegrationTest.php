@@ -11,7 +11,7 @@ use Rougin\Weasley\Fixture\Models\User;
  * Illuminate Pagination Integration Test
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class PaginationIntegrationTest extends \PHPUnit_Framework_TestCase
 {
