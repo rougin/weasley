@@ -8,7 +8,7 @@ use Rougin\Slytherin\Integration\Configuration;
  * Abstract Test Case
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
 {
