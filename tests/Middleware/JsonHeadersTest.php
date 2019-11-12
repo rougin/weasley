@@ -8,7 +8,7 @@ use Rougin\Weasley\Http\Middleware\Json;
  * JSON Headers Middleware Test
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class JsonHeadersTest extends AbstractTestCase
 {
