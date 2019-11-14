@@ -8,7 +8,7 @@ use Rougin\Weasley\Fixture\Middleware\ReturnQueryParams;
  * Transform Request Middleware Test
  *
  * @package Weasley
- * @author  Rougin Royce Gutib <rougingutib@gmail.com>
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
 class TransformRequestTest extends AbstractTestCase
 {
