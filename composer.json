@@ -2,13 +2,13 @@
     "name": "rougin/weasley",
     "description": "Generators and helpers for the Slytherin framework.",
     "keywords": ["helper", "generator", "slytherin", "workflow", "weasley"],
-    "homepage": "https://rougin.github.io/weasley/",
+    "homepage": "https://roug.in/weasley/",
     "license": "MIT",
     "authors":
     [
         {
             "email": "rougingutib@gmail.com",
-            "homepage": "https://rougin.github.io/",
+            "homepage": "https://roug.in/",
             "name": "Rougin Gutib",
             "role": "Software Engineer"
         }
