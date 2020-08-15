@@ -53,7 +53,7 @@ class CrossOriginHeadersTest extends AbstractTestCase
      */
     public function testProcessMethodWithAllowedOrigin()
     {
-        $expected = array('https://rougin.github.io', 'google.com.ph');
+        $expected = array('https://roug.in', 'google.com.ph');
 
         $dispatcher = $this->dispatcher->push(new Cors($expected));
 
