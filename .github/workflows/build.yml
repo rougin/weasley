@@ -31,7 +31,7 @@ jobs:
       run: composer validate --strict
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+      run: composer install --prefer-dist --no-progress -no-interaction
 
     - name: Install Composer packages for PHP 5.3
       if: ${{ matrix.php-versions == '5.3' }}
