@@ -24,7 +24,7 @@ class SessionTest extends AbstractTestCase
      */
     protected function doSetUp()
     {
-        parent::setUp();
+        parent::doSetUp();
 
         $container = new Container;
 

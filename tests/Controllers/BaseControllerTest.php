@@ -22,7 +22,7 @@ class BaseControllerTest extends AbstractTestCase
      */
     protected function doSetUp()
     {
-        parent::setUp();
+        parent::doSetUp();
 
         $response = $this->container->get(self::RESPONSE);
 
