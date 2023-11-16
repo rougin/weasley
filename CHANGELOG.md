@@ -2,6 +2,12 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
+## [0.6.3](https://github.com/rougin/weasley/compare/v0.6.3...master) - Unreleased
+
+### Changed
+- Replaced `Scrutinizer CI` with `Codecov` for code coverage
+- Replaced `Travis CI` with `Github Actions` for workflow
+
 ## [0.6.3](https://github.com/rougin/weasley/compare/v0.6.2...v0.6.3) - 2018-04-20
 
 ### Fixed
