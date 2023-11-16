@@ -131,6 +131,7 @@ class Session implements SessionInterface
 
     /**
      * Generates a random string.
+     * NOTE: Should be in a single function (or class).
      *
      * @param  integer $length
      * @return string
@@ -146,7 +147,14 @@ class Session implements SessionInterface
             /** @var int<1, max> */
             $size = (integer) ($length - $len);
 
-            $bytes = base64_encode(random_bytes($size));
+            $bytes = openssl_random_pseudo_bytes($length * 2);
+
+            if (function_exists('random_bytes'))
+            {
+                $bytes = call_user_func('random_bytes', $size);
+            }
+
+            $bytes = base64_encode($bytes);
 
             $text = str_replace($search, '', $bytes);
 

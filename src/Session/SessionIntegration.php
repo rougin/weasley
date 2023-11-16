@@ -69,6 +69,7 @@ class SessionIntegration implements IntegrationInterface
 
     /**
      * Generates a random string.
+     * NOTE: Should be in a single function (or class).
      *
      * @param  integer $length
      * @return string
