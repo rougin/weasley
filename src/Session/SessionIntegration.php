@@ -91,7 +91,7 @@ class SessionIntegration implements IntegrationInterface
                 $bytes = call_user_func('random_bytes', $size);
             }
 
-            $bytes = base64_encode(random_bytes($size));
+            $bytes = base64_encode($bytes);
 
             $text = str_replace($search, '', $bytes);
 
