@@ -87,7 +87,7 @@ class MakeControllerCommand extends Command
 
         file_put_contents($file, $this->stub($input));
 
-        $output->writeln('<info>' . $this->message . '</info>');
+        $output->writeln('<info>' . $this->message . '</info>'); return 0;
     }
 
     /**
