@@ -14,7 +14,7 @@ use Rougin\Weasley\Fixture\Middleware\FinalDelegate;
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
+abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
 {
     const DELEGATE = 'Rougin\Weasley\Fixture\Middleware\FinalDelegate';
 
@@ -37,7 +37,7 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function doSetUp()
     {
         list($config, $http) = array(new Configuration, new HttpIntegration);
 

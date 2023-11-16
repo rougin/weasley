@@ -8,7 +8,7 @@ namespace Rougin\Weasley;
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class ConsoleTest extends \PHPUnit_Framework_TestCase
+class ConsoleTest extends \Rougin\Weasley\Testcase
 {
     /**
      * Tests Console::getVersion.

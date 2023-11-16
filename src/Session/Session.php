@@ -97,12 +97,14 @@ class Session implements SessionInterface
      */
     public function regenerate($delete = false)
     {
-        $delete && $this->handler->destroy($this->id);
+        if ($delete)
+        {
+            $this->handler->destroy($this->id);
+        }
 
         $serialized = serialize($this->data);
 
-        // TODO: Remove dependency from Str::random
-        $this->id = (string) str_random(40);
+        $this->id = $this->random(40);
 
         $this->handler->write($this->id, $serialized);
 
@@ -125,5 +127,32 @@ class Session implements SessionInterface
         $this->handler->write($this->id, $data);
 
         return $this;
+    }
+
+    /**
+     * Generates a random string.
+     *
+     * @param  integer $length
+     * @return string
+     */
+    protected function random($length)
+    {
+        $search = array('/', '+', '=');
+
+        $string = '';
+
+        while (($len = strlen($string)) < $length)
+        {
+            /** @var int<1, max> */
+            $size = (integer) ($length - $len);
+
+            $bytes = base64_encode(random_bytes($size));
+
+            $text = str_replace($search, '', $bytes);
+
+            $string .= substr($text, 0, $size);
+        }
+
+        return $string;
     }
 }

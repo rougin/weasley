@@ -11,7 +11,7 @@ use Rougin\Slytherin\Integration\Configuration;
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class DatabaseIntegrationTest extends \PHPUnit_Framework_TestCase
+class DatabaseIntegrationTest extends \Rougin\Weasley\Testcase
 {
     /**
      * @var \Rougin\Slytherin\Integration\IntegrationInterface
@@ -23,7 +23,7 @@ class DatabaseIntegrationTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function doSetUp()
     {
         $message = 'Illuminate\Database is not yet installed.';
 

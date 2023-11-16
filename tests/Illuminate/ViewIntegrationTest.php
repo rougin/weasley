@@ -11,7 +11,7 @@ use Rougin\Slytherin\Integration\Configuration;
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class ViewIntegrationTest extends \PHPUnit_Framework_TestCase
+class ViewIntegrationTest extends \Rougin\Weasley\Testcase
 {
     const RENDERER = 'Rougin\Slytherin\Template\RendererInterface';
 
@@ -20,7 +20,7 @@ class ViewIntegrationTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function doSetUp()
     {
         $message = 'Illuminate\View is not yet installed.';
 

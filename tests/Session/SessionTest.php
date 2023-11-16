@@ -22,7 +22,7 @@ class SessionTest extends AbstractTestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function doSetUp()
     {
         parent::setUp();
 

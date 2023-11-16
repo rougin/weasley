@@ -13,14 +13,14 @@ use Rougin\Weasley\Fixture\Models\User;
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class PaginationIntegrationTest extends \PHPUnit_Framework_TestCase
+class PaginationIntegrationTest extends \Rougin\Weasley\Testcase
 {
     /**
      * Sets up the integration instance.
      *
      * @return void
      */
-    public function setUp()
+    protected function doSetUp()
     {
         $message = 'Illuminate\Pagination is not yet installed.';
 

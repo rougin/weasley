@@ -13,7 +13,7 @@ use Rougin\Weasley\Illuminate\DatabaseIntegration;
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
+abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
 {
     const REQUEST = 'Psr\Http\Message\ServerRequestInterface';
 
@@ -29,7 +29,7 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function doSetUp()
     {
         $message = 'Illuminate\Database is not yet installed.';
 

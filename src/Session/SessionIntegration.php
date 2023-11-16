@@ -33,15 +33,16 @@ class SessionIntegration implements IntegrationInterface
 
         list($container, $handler) = $this->handler($container, $config);
 
-        if (! $cookie = $config->get('app.http.cookies.' . $name, null)) {
+        if (! $cookie = $config->get("app.http.cookies.$name", null))
+        {
             $expiration = $config->get('session.expiration', time() + 7200);
 
-            setcookie($name, $cookie = str_random(40), $expiration, '/');
+            setcookie($name, $cookie = $this->random(40), $expiration, '/');
         }
 
         $handler->open($config->get('session.path'), $cookie);
 
-        $handler->gc(((integer) $config->get('session.lifetime', 60)) * 60);
+        $handler->gc(((int) $config->get('session.lifetime', 60)) * 60);
 
         return $container->set(self::SESSION, new Session($handler, $cookie));
     }
@@ -64,5 +65,32 @@ class SessionIntegration implements IntegrationInterface
         $instance = $container->get($handler);
 
         return array($container->set(self::HANDLER, $instance), $instance);
+    }
+
+    /**
+     * Generates a random string.
+     *
+     * @param  integer $length
+     * @return string
+     */
+    protected function random($length)
+    {
+        $search = array('/', '+', '=');
+
+        $string = '';
+
+        while (($len = strlen($string)) < $length)
+        {
+            /** @var int<1, max> */
+            $size = (integer) ($length - $len);
+
+            $bytes = base64_encode(random_bytes($size));
+
+            $text = str_replace($search, '', $bytes);
+
+            $string .= substr($text, 0, $size);
+        }
+
+        return $string;
     }
 }

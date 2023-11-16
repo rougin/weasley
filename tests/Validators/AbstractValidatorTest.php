@@ -10,7 +10,7 @@ use Rougin\Weasley\Fixture\Validators\UserValidator;
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class AbstractValidatorTest extends \PHPUnit_Framework_TestCase
+class AbstractValidatorTest extends \Rougin\Weasley\Testcase
 {
     /**
      * Tests AbstractValidator::validate.

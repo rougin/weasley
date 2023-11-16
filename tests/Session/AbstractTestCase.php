@@ -10,7 +10,7 @@ use Rougin\Slytherin\Integration\Configuration;
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
+abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
 {
     const SESSION = 'Rougin\Weasley\Session\SessionInterface';
 
@@ -29,7 +29,7 @@ abstract class AbstractTestCase extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function doSetUp()
     {
         $message = 'SessionHandlerInterface is not yet installed.';
 

@@ -4,7 +4,7 @@ namespace Rougin\Weasley\Commands;
 
 use Symfony\Component\Console\Tester\CommandTester;
 
-class MakeIntegrationCommandTest extends \PHPUnit_Framework_TestCase
+class MakeIntegrationCommandTest extends \Rougin\Weasley\Testcase
 {
     /**
      * @var \Rougin\Weasley\Console
@@ -16,7 +16,7 @@ class MakeIntegrationCommandTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function doSetUp()
     {
         $this->console = new \Rougin\Weasley\Console;
     }
