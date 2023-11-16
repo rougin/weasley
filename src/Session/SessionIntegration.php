@@ -84,6 +84,13 @@ class SessionIntegration implements IntegrationInterface
             /** @var int<1, max> */
             $size = (integer) ($length - $len);
 
+            $bytes = openssl_random_pseudo_bytes($length * 2);
+
+            if (function_exists('random_bytes'))
+            {
+                $bytes = call_user_func('random_bytes', $size);
+            }
+
             $bytes = base64_encode(random_bytes($size));
 
             $text = str_replace($search, '', $bytes);
