@@ -2,7 +2,7 @@
 
 namespace Rougin\Weasley\Fixture\Middleware;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
+use Rougin\Slytherin\Middleware\HandlerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class FinalDelegate implements DelegateInterface
+class FinalDelegate implements HandlerInterface
 {
     /**
      * @var \Psr\Http\Message\ResponseInterface
@@ -20,7 +20,7 @@ class FinalDelegate implements DelegateInterface
     protected $response;
 
     /**
-     * Initializes the delegate instance.
+     * Initializes the handler instance.
      *
      * @param \Psr\Http\Message\ResponseInterface $response
      */
@@ -35,7 +35,7 @@ class FinalDelegate implements DelegateInterface
      * @param  \Psr\Http\Message\ServerRequestInterface $request
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function process(ServerRequestInterface $request)
+    public function handle(ServerRequestInterface $request)
     {
         return $this->response;
     }

@@ -27,7 +27,7 @@ class SpoofFormMethodTest extends AbstractTestCase
 
         $dispatcher = $this->dispatcher->push(new CheckPatchMethod);
 
-        $response = $dispatcher->process($request, $this->delegate);
+        $response = $dispatcher->process($request, $this->handler);
 
         $expected = array(true);
 

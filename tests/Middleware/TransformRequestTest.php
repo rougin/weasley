@@ -27,7 +27,7 @@ class TransformRequestTest extends AbstractTestCase
 
         $dispatcher = $this->dispatcher->push(new ReturnQueryParams);
 
-        $response = $dispatcher->process($request, $this->delegate);
+        $response = $dispatcher->process($request, $this->handler);
 
         $result = $response->getHeader('Query-Params');
 

@@ -23,9 +23,9 @@ abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
     const RESPONSE = 'Psr\Http\Message\ResponseInterface';
 
     /**
-     * @var \Interop\Http\ServerMiddleware\DelegateInterface
+     * @var \Rougin\Slytherin\Middleware\HandlerInterface
      */
-    protected $delegate;
+    protected $handler;
 
     /**
      * @var \Rougin\Slytherin\Middleware\DispatcherInterface
@@ -45,7 +45,7 @@ abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
 
         $response = $container->get(self::RESPONSE);
 
-        $this->delegate = new FinalDelegate($response);
+        $this->handler = new FinalDelegate($response);
 
         $this->dispatcher = new Dispatcher;
 

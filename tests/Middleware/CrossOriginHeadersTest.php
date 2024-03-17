@@ -21,7 +21,7 @@ class CrossOriginHeadersTest extends AbstractTestCase
     {
         $dispatcher = $this->dispatcher->push(new Cors);
 
-        $response = $dispatcher->process($this->request, $this->delegate);
+        $response = $dispatcher->process($this->request, $this->handler);
 
         $header = 'Access-Control-Allow-Origin';
 
@@ -37,7 +37,7 @@ class CrossOriginHeadersTest extends AbstractTestCase
     {
         $dispatcher = $this->dispatcher->push(new Cors);
 
-        $response = $dispatcher->process($this->request, $this->delegate);
+        $response = $dispatcher->process($this->request, $this->handler);
 
         $expected = array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS');
 
@@ -57,7 +57,7 @@ class CrossOriginHeadersTest extends AbstractTestCase
 
         $dispatcher = $this->dispatcher->push(new Cors($expected));
 
-        $response = $dispatcher->process($this->request, $this->delegate);
+        $response = $dispatcher->process($this->request, $this->handler);
 
         $result = $response->getHeader(Cors::ORIGIN);
 

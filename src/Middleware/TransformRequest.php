@@ -2,9 +2,9 @@
 
 namespace Rougin\Weasley\Middleware;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Rougin\Slytherin\Middleware\HandlerInterface;
+use Rougin\Slytherin\Middleware\MiddlewareInterface;
 
 /**
  * Transform Request Middleware
@@ -18,11 +18,11 @@ class TransformRequest implements MiddlewareInterface
      * Process an incoming server request and return a response, optionally
      * delegating to the next middleware component to create the response.
      *
-     * @param  \Psr\Http\Message\ServerRequestInterface         $request
-     * @param  \Interop\Http\ServerMiddleware\DelegateInterface $delegate
+     * @param  \Psr\Http\Message\ServerRequestInterface      $request
+     * @param  \Rougin\Slytherin\Middleware\HandlerInterface $handler
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function process(ServerRequestInterface $request, HandlerInterface $handler)
     {
         $get = $this->map($request->getQueryParams());
 
@@ -34,7 +34,7 @@ class TransformRequest implements MiddlewareInterface
 
         $post = $request->withParsedBody($post);
 
-        return $delegate->process($post);
+        return $handler->handle($post);
     }
 
     /**

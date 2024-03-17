@@ -2,9 +2,9 @@
 
 namespace Rougin\Weasley\Middleware;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Rougin\Slytherin\Middleware\HandlerInterface;
+use Rougin\Slytherin\Middleware\MiddlewareInterface;
 
 /**
  * JSON Headers Middleware
@@ -18,13 +18,13 @@ class JsonHeaders implements MiddlewareInterface
      * Process an incoming server request and return a response, optionally
      * delegating to the next middleware component to create the response.
      *
-     * @param  \Psr\Http\Message\ServerRequestInterface         $request
-     * @param  \Interop\Http\ServerMiddleware\DelegateInterface $delegate
+     * @param  \Psr\Http\Message\ServerRequestInterface      $request
+     * @param  \Rougin\Slytherin\Middleware\HandlerInterface $handler
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function process(ServerRequestInterface $request, HandlerInterface $handler)
     {
-        $response = $delegate->process($request);
+        $response = $handler->handle($request);
 
         $new = $response->withHeader('Content-Type', 'application/json');
 

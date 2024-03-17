@@ -21,7 +21,7 @@ class JsonHeadersTest extends AbstractTestCase
     {
         $dispatcher = $this->dispatcher->push(new Json);
 
-        $response = $dispatcher->process($this->request, $this->delegate);
+        $response = $dispatcher->process($this->request, $this->handler);
 
         $expected = array('application/json');
 
