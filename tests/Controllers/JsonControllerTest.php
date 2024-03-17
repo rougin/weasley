@@ -30,8 +30,10 @@ class JsonControllerTest extends AbstractTestCase
     {
         parent::doSetUp();
 
+        /** @var \Psr\Http\Message\ResponseInterface */
         $response = $this->container->get(self::RESPONSE);
 
+        /** @var \Psr\Http\Message\ServerRequestInterface */
         $request = $this->container->get(self::REQUEST);
 
         $this->controller = new UsersController($request, $response);
@@ -46,8 +48,10 @@ class JsonControllerTest extends AbstractTestCase
     {
         $this->setExpectedException('UnexpectedValueException');
 
+        /** @var \Psr\Http\Message\ServerRequestInterface */
         $request = $this->container->get(self::REQUEST);
 
+        /** @var \Psr\Http\Message\ResponseInterface */
         $response = $this->container->get(self::RESPONSE);
 
         new NoModelController($request, $response);
@@ -62,8 +66,10 @@ class JsonControllerTest extends AbstractTestCase
     {
         $this->setExpectedException('UnexpectedValueException');
 
+        /** @var \Psr\Http\Message\ServerRequestInterface */
         $request = $this->container->get(self::REQUEST);
 
+        /** @var \Psr\Http\Message\ResponseInterface */
         $response = $this->container->get(self::RESPONSE);
 
         new NoValidatorController($request, $response);
@@ -92,15 +98,20 @@ class JsonControllerTest extends AbstractTestCase
      */
     public function testIndexMethod()
     {
-        $exists = class_exists(self::PAGINATOR);
+        $response = $this->controller->index();
 
-        $response = $this->controller->index()->getBody();
+        $response = $response->getBody();
 
         $expected = 4 - 1; // Because of testDeleteMethod
 
+        /** @var array<string, mixed> */
         $result = json_decode((string) $response, true);
 
-        $exists === true && $result = $result['items'];
+        if (class_exists(self::PAGINATOR))
+        {
+            /** @var array<integer, mixed> */
+            $result = $result['items'];
+        }
 
         $this->assertCount($expected, $result);
     }
@@ -148,6 +159,7 @@ class JsonControllerTest extends AbstractTestCase
      */
     public function testStoreMethod()
     {
+        /** @var \Psr\Http\Message\ServerRequestInterface */
         $request = $this->container->get(self::REQUEST);
 
         $expected = array('id' => 5, 'name' => 'Weasley');
@@ -194,6 +206,7 @@ class JsonControllerTest extends AbstractTestCase
      */
     public function testUpdateMethod()
     {
+        /** @var \Psr\Http\Message\ServerRequestInterface */
         $request = $this->container->get(self::REQUEST);
 
         $data = array('id' => 4, 'name' => 'Test');

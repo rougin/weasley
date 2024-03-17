@@ -29,22 +29,39 @@ class SessionIntegration implements IntegrationInterface
      */
     public function define(ContainerInterface $container, Configuration $config)
     {
+        /** @var string */
         $name = $config->get('session.cookies', 'weasley_session');
 
         $container->set(self::HANDLER, $handler = $this->handler($config));
 
-        if (! $cookie = $config->get("app.http.cookies.$name", null))
-        {
-            $expiration = $config->get('session.expiration', time() + 7200);
+        /** @var string|null $cookie */
+        $cookie = $config->get("app.http.cookies.$name", null);
 
-            setcookie($name, $cookie = $this->random(40), $expiration, '/');
+        if ($cookie === null)
+        {
+            $cookie = $this->random(40);
+
+            $default = time() + 7200;
+
+            /** @var integer */
+            $expiration = $config->get('session.expiration', $default);
+
+            setcookie($name, $cookie, $expiration, '/');
         }
 
-        $handler->open($config->get('session.path'), $cookie);
+        /** @var string */
+        $sessionPath = $config->get('session.path');
 
-        $handler->gc(((int) $config->get('session.lifetime', 60)) * 60);
+        $handler->open($sessionPath, $cookie);
 
-        return $container->set(self::SESSION, new Session($handler, $cookie));
+        /** @var integer */
+        $lifetime = $config->get('session.lifetime', 60);
+
+        $handler->gc($lifetime * 60);
+
+        $session = new Session($handler, $cookie);
+
+        return $container->set(self::SESSION, $session);
     }
 
     /**
@@ -57,8 +74,10 @@ class SessionIntegration implements IntegrationInterface
     {
         $items = array('file' => new FileSessionHandler);
 
+        /** @var array<string, \SessionHandlerInterface> */
         $handlers = $config->get('session.handlers', $items);
 
+        /** @var string */
         $driver = $config->get('session.driver', 'file');
 
         return $handlers[$driver];

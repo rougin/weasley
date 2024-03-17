@@ -24,9 +24,11 @@ class BaseControllerTest extends AbstractTestCase
     {
         parent::doSetUp();
 
-        $response = $this->container->get(self::RESPONSE);
-
+        /** @var \Psr\Http\Message\ServerRequestInterface */
         $request = $this->container->get(self::REQUEST);
+
+        /** @var \Psr\Http\Message\ResponseInterface */
+        $response = $this->container->get(self::RESPONSE);
 
         $this->controller = new BaseController($request, $response);
     }

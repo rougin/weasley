@@ -50,7 +50,10 @@ class ViewIntegrationTest extends \Rougin\Weasley\Testcase
 
         $expected = 'Hello world!';
 
-        $result = $container->get(self::RENDERER)->render('Hello');
+        /** @var \Rougin\Slytherin\Template\RendererInterface */
+        $renderer = $container->get(self::RENDERER);
+
+        $result = $renderer->render('Hello');
 
         $this->assertEquals($expected, $result);
     }

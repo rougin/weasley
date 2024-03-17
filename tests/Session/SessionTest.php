@@ -30,7 +30,10 @@ class SessionTest extends AbstractTestCase
 
         $container = $this->integration->define($container, $this->config);
 
-        $this->session = $container->get(self::SESSION);
+        /** @var \Rougin\Weasley\Session\Session */
+        $session = $container->get(self::SESSION);
+
+        $this->session = $session;
     }
 
     /**

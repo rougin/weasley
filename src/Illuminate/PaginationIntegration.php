@@ -28,7 +28,8 @@ class PaginationIntegration implements IntegrationInterface
      */
     public function define(ContainerInterface $container, Configuration $config)
     {
-        $request = $container->get((string) self::REQUEST);
+        /** @var \Psr\Http\Message\ServerRequestInterface */
+        $request = $container->get(self::REQUEST);
 
         $query = $request->getQueryParams();
 
@@ -41,9 +42,10 @@ class PaginationIntegration implements IntegrationInterface
 
         $path = function () use ($request)
         {
+            /** @var string|null */
             $uri = $request->getAttribute('REQUEST_URI');
 
-            return isset($uri) ? strtok($uri, '?') : '/';
+            return $uri ? strtok($uri, '?') : '/';
         };
 
         $this->resolve($page, $path);

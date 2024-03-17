@@ -54,7 +54,7 @@ class JsonTransformer implements TransformerInterface
      * Transforms the contents of the result.
      *
      * @param  mixed $data
-     * @return mixed
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function transform($data)
     {

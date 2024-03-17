@@ -101,8 +101,10 @@ class ViewIntegration implements IntegrationInterface
     {
         $view = 'illuminate.view';
 
+        /** @var string|string[] */
         $templates = $config->get($view . '.templates', array());
 
+        /** @var string */
         $compiled = $config->get($view . '.compiled', '');
 
         if (is_string($templates))
@@ -116,6 +118,6 @@ class ViewIntegration implements IntegrationInterface
 
         $result['templates'] = $templates;
 
-        return (array) $result;
+        return $result;
     }
 }

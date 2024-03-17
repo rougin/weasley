@@ -17,14 +17,14 @@ class ApiTransformer implements TransformerInterface
     /**
      * Transforms the contents of the result.
      *
-     * @param  mixed $data
+     * @param  \Illuminate\Contracts\Support\Arrayable $data
      * @return mixed
      */
     public function transform($data)
     {
         $result = $data->toArray();
 
-        if (is_a($data, self::PAGINATOR))
+        if (is_object($data) && is_a($data, self::PAGINATOR))
         {
             /** @var \Illuminate\Pagination\LengthAwarePaginator $data */
             $result = $this->paginator($data);
