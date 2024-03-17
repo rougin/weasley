@@ -26,7 +26,8 @@ class CheckPatchMethod implements MiddlewareInterface
     {
         $response = $handler->handle($request);
 
-        if ($request->getMethod() === 'PATCH') {
+        if ($request->getMethod() === 'PATCH')
+        {
             $key = 'Weasley-Has-PATCH-Method';
 
             $response = $response->withHeader($key, true);

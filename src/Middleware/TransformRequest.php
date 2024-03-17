@@ -45,7 +45,8 @@ class TransformRequest implements MiddlewareInterface
      */
     protected function map(array $items)
     {
-        foreach ((array) $items as $key => $value) {
+        foreach ((array) $items as $key => $value)
+        {
             $new = $this->transform($value);
 
             is_array($value) && $new = $this->map($value);

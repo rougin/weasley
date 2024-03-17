@@ -52,7 +52,8 @@ class Session implements SessionInterface
     {
         $result = false;
 
-        if (isset($this->data[$key]) === true) {
+        if (isset($this->data[$key]) === true)
+        {
             unset($this->data[$key]);
 
             $serialized = (string) serialize($this->data);
@@ -145,7 +146,7 @@ class Session implements SessionInterface
         while (($len = strlen($string)) < $length)
         {
             /** @var int<1, max> */
-            $size = (integer) ($length - $len);
+            $size = (int) ($length - $len);
 
             $bytes = openssl_random_pseudo_bytes($length * 2);
 

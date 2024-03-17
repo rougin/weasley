@@ -29,8 +29,10 @@ class DatabaseIntegration implements IntegrationInterface
 
         $connections = $config->get('database', array());
 
-        foreach ((array) $connections as $key => $value) {
-            if (is_array($value) === true) {
+        foreach ((array) $connections as $key => $value)
+        {
+            if (is_array($value) === true)
+            {
                 $this->connection($config, $key, $value);
 
                 $capsule->addConnection($value, $key);

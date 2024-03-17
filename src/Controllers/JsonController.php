@@ -79,7 +79,8 @@ class JsonController extends BaseController
      */
     public function index()
     {
-        if (class_exists('Illuminate\Pagination\LengthAwarePaginator') === true) {
+        if (class_exists('Illuminate\Pagination\LengthAwarePaginator') === true)
+        {
             list($columns, $current, $filter) = $this->pagination();
 
             $items = $this->eloquent->paginate($filter, $columns, 'page', $current);
@@ -102,11 +103,14 @@ class JsonController extends BaseController
     {
         list($code, $result) = array(200, array());
 
-        try {
+        try
+        {
             $item = $this->eloquent->findOrFail($id);
 
             $result = $item->toArray();
-        } catch (\RuntimeException $error) {
+        }
+        catch (\RuntimeException $error)
+        {
             $code = 404;
 
             $result = 'Specified item not found';
@@ -145,7 +149,7 @@ class JsonController extends BaseController
 
         is_a($result, $model) && $result = null;
 
-        return $this->json($result, (integer) $code);
+        return $this->json($result, (int) $code);
     }
 
     /**
@@ -162,7 +166,8 @@ class JsonController extends BaseController
 
         $names['validator'] = 'Validator ($validator)';
 
-        if ($this->{$name} === '' || $this->{$name} === null) {
+        if ($this->{$name} === '' || $this->{$name} === null)
+        {
             $message = ' must be defined in the controller';
 
             $message = $names[$name] . $message;
@@ -184,7 +189,8 @@ class JsonController extends BaseController
 
         $defaults['columns'] = '*';
 
-        foreach ($defaults as $key => $value) {
+        foreach ($defaults as $key => $value)
+        {
             $exists = ! isset($query[$key]);
 
             $exists && $query[$key] = $value;
@@ -209,18 +215,20 @@ class JsonController extends BaseController
     {
         $parsed = (array) $this->request->getParsedBody();
 
-        if ($this->validation->validate($parsed)) {
-            if (is_null($id) === false) {
+        if ($this->validation->validate($parsed))
+        {
+            if (is_null($id) === false)
+            {
                 $item = $this->eloquent->find($id);
 
                 $item->update((array) $parsed);
 
-                return array($item, (integer) 204);
+                return array($item, (int) 204);
             }
 
             $item = $this->eloquent->create($parsed);
 
-            return array($item, (integer) 201);
+            return array($item, (int) 201);
         }
 
         return array($this->validation->errors, 400);

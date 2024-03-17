@@ -73,7 +73,8 @@ class ViewIntegration implements IntegrationInterface
     {
         $resolver = new EngineResolver;
 
-        $callback = function () use ($compiled, $filesystem) {
+        $callback = function () use ($compiled, $filesystem)
+        {
             $blade = new BladeCompiler($filesystem, $compiled);
 
             return new CompilerEngine($compiler = $blade);

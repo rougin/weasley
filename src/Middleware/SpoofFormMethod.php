@@ -41,7 +41,8 @@ class SpoofFormMethod implements MiddlewareInterface
     {
         $parsed = $request->getParsedBody();
 
-        if (isset($parsed[$this->key]) === true) {
+        if (isset($parsed[$this->key]) === true)
+        {
             $method = strtoupper($parsed[$this->key]);
 
             $request = $request->withMethod($method);

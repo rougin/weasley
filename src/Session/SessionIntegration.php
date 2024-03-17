@@ -81,7 +81,7 @@ class SessionIntegration implements IntegrationInterface
         while (($len = strlen($string)) < $length)
         {
             /** @var int<1, max> */
-            $size = (integer) ($length - $len);
+            $size = (int) ($length - $len);
 
             $bytes = openssl_random_pseudo_bytes($length * 2);
 

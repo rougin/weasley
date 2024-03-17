@@ -30,13 +30,15 @@ class PaginationIntegration implements IntegrationInterface
     {
         list($query, $request) = $this->request($container);
 
-        $page = function ($name = null) use ($query) {
+        $page = function ($name = null) use ($query)
+        {
             $name = $name === null ? 'page' : $name;
 
             return isset($query[$name]) ? $query[$name] : 1;
         };
 
-        $path = function () use ($request) {
+        $path = function () use ($request)
+        {
             $uri = $request->getAttribute('REQUEST_URI');
 
             return isset($uri) ? strtok($uri, '?') : '/';
