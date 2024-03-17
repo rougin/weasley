@@ -13,6 +13,8 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class JsonController extends BaseController
 {
+    const ELOQUENT = 'Illuminate\Database\Eloquent\Model';
+
     /**
      * @var string
      */
@@ -145,11 +147,21 @@ class JsonController extends BaseController
      */
     public function store()
     {
-        list($result, $code) = $this->save();
+        $response = $this->save();
 
-        $array = is_array($result) === true;
+        /** @var object|array<string, string[]> */
+        $result = $response[0];
 
-        ! $array && $result = $result->toArray();
+        /** @var integer */
+        $code = $response[1];
+
+        if (is_object($result) && is_a($result, self::ELOQUENT))
+        {
+            /** @var \Illuminate\Database\Eloquent\Model */
+            $model = $result;
+
+            $result = $model->toArray();
+        }
 
         return $this->json($result, $code);
     }
@@ -162,13 +174,20 @@ class JsonController extends BaseController
      */
     public function update($id)
     {
-        $model = 'Illuminate\Database\Eloquent\Model';
+        $response = $this->save($id);
 
-        list($result, $code) = $this->save($id);
+        /** @var object|array<string, string[]> */
+        $result = $response[0];
 
-        is_a($result, $model) && $result = null;
+        /** @var integer */
+        $code = $response[1];
 
-        return $this->json($result, (int) $code);
+        if (is_object($result) && is_a($result, self::ELOQUENT))
+        {
+            $result = null;
+        }
+
+        return $this->json($result, $code);
     }
 
     /**

@@ -35,19 +35,15 @@ class Session implements SessionInterface
     {
         $this->handler = $handler;
 
-        if ($id === null)
-        {
-            $this->regenerate(true);
-        }
-        else
+        if ($id)
         {
             $this->id = $id;
+
+            /** @var array<string, mixed> */
+            $data = unserialize($handler->read($this->id));
+
+            $this->data = $data;
         }
-
-        /** @var array<string, mixed> */
-        $data = unserialize($handler->read($this->id));
-
-        $this->data = $data;
     }
 
     /**
