@@ -12,21 +12,23 @@ use Illuminate\Contracts\Support\Arrayable;
  */
 class ApiTransformer implements TransformerInterface
 {
-    const PAGINATOR = 'Illuminate\Contracts\Pagination\LengthAwarePaginator';
+    const PAGINATOR = 'Illuminate\Pagination\LengthAwarePaginator';
 
     /**
      * Transforms the contents of the result.
      *
-     * @param  mixed $data
+     * @param  \Illuminate\Contracts\Support\Arrayable $data
      * @return mixed
      */
     public function transform($data)
     {
-        $exists = is_a($data, self::PAGINATOR);
-
         $result = $data->toArray();
 
-        $exists && $result = $this->paginator($data);
+        if (is_object($data) && is_a($data, self::PAGINATOR))
+        {
+            /** @var \Illuminate\Pagination\LengthAwarePaginator $data */
+            $result = $this->paginator($data);
+        }
 
         return $result;
     }
@@ -35,20 +37,26 @@ class ApiTransformer implements TransformerInterface
      * Converts the paginator into Paypal API standards.
      *
      * @param  \Illuminate\Contracts\Support\Arrayable $data
-     * @return array
+     * @return array<string, mixed>
      */
     protected function paginator(Arrayable $data)
     {
-        list($response, $result) = array(array(), $data->toArray());
+        $object = $data->toArray();
 
-        $rounded = round($result['total'] / $result['per_page']);
+        $perPage = (int) $object['per_page'];
 
-        $response['total_items'] = $result['total'];
+        $total = (int) $object['total'];
 
-        $response['total_pages'] = $rounded ?: 1;
+        $rounded = round($total / $perPage);
 
-        $response['items'] = $result['data'];
+        $result = array();
 
-        return $response;
+        $result['total_items'] = $total;
+
+        $result['total_pages'] = $rounded ?: 1;
+
+        $result['items'] = $object['data'];
+
+        return $result;
     }
 }

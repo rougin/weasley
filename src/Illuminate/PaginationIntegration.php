@@ -28,18 +28,24 @@ class PaginationIntegration implements IntegrationInterface
      */
     public function define(ContainerInterface $container, Configuration $config)
     {
-        list($query, $request) = $this->request($container);
+        /** @var \Psr\Http\Message\ServerRequestInterface */
+        $request = $container->get(self::REQUEST);
 
-        $page = function ($name = null) use ($query) {
+        $query = $request->getQueryParams();
+
+        $page = function ($name = null) use ($query)
+        {
             $name = $name === null ? 'page' : $name;
 
             return isset($query[$name]) ? $query[$name] : 1;
         };
 
-        $path = function () use ($request) {
+        $path = function () use ($request)
+        {
+            /** @var string|null */
             $uri = $request->getAttribute('REQUEST_URI');
 
-            return isset($uri) ? strtok($uri, '?') : '/';
+            return $uri ? strtok($uri, '?') : '/';
         };
 
         $this->resolve($page, $path);
@@ -48,23 +54,10 @@ class PaginationIntegration implements IntegrationInterface
     }
 
     /**
-     * Returns the REQUEST_URI and ServerRequest instances.
-     *
-     * @param  \Rougin\Slytherin\Container\ContainerInterface $container
-     * @return array
-     */
-    protected function request(ContainerInterface $container)
-    {
-        $request = $container->get((string) self::REQUEST);
-
-        return array($request->getQueryParams(), $request);
-    }
-
-    /**
      * Sets current page and path resolvers.
      *
-     * @param  callable $page
-     * @param  callable $path
+     * @param  \Closure $page
+     * @param  \Closure $path
      * @return void
      */
     protected function resolve($page, $path)

@@ -20,20 +20,20 @@ class CrossOriginHeaders implements MiddlewareInterface
     const ORIGIN = 'Access-Control-Allow-Origin';
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $allowed = array();
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $methods = array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS');
 
     /**
      * Initializes the middleware instance.
      *
-     * @param array|null $allowed
-     * @param array|null $methods
+     * @param string[]|null $allowed
+     * @param string[]|null $methods
      */
     public function __construct(array $allowed = null, array $methods = null)
     {
@@ -64,7 +64,7 @@ class CrossOriginHeaders implements MiddlewareInterface
     /**
      * Sets the allowed URLS.
      *
-     * @param  array $allowed
+     * @param  string[] $allowed
      * @return self
      */
     public function allowed($allowed)
@@ -77,7 +77,7 @@ class CrossOriginHeaders implements MiddlewareInterface
     /**
      * Sets the allowed HTTP methods.
      *
-     * @param  array $methods
+     * @param  string[] $methods
      * @return self
      */
     public function methods($methods)

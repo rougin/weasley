@@ -13,6 +13,8 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class JsonController extends BaseController
 {
+    const ELOQUENT = 'Illuminate\Database\Eloquent\Model';
+
     /**
      * @var string
      */
@@ -48,11 +50,17 @@ class JsonController extends BaseController
     {
         $this->check('validator');
 
-        $this->validation = new $this->validator;
+        /** @var \Rougin\Weasley\Validators\AbstractValidator */
+        $validation = new $this->validator;
+
+        $this->validation = $validation;
 
         $this->check('model');
 
-        $this->eloquent = new $this->model;
+        /** @var \Illuminate\Database\Eloquent\Model */
+        $model = new $this->model;
+
+        $this->eloquent = $model;
 
         parent::__construct($request, $response);
     }
@@ -79,13 +87,27 @@ class JsonController extends BaseController
      */
     public function index()
     {
-        if (class_exists('Illuminate\Pagination\LengthAwarePaginator') === true) {
-            list($columns, $current, $filter) = $this->pagination();
+        $pagination = 'Illuminate\Pagination\LengthAwarePaginator';
+
+        $items = null;
+
+        if (class_exists($pagination))
+        {
+            $pagination = $this->pagination();
+
+            /** @var string[] */
+            $columns = $pagination['columns'];
+
+            /** @var integer */
+            $current = $pagination['page'];
+
+            /** @var integer */
+            $filter = $pagination['limit'];
 
             $items = $this->eloquent->paginate($filter, $columns, 'page', $current);
         }
 
-        isset($items) || $items = $this->eloquent->all();
+        $items = $items ? $items : $this->eloquent->all();
 
         $transformer = new $this->transformer;
 
@@ -102,11 +124,14 @@ class JsonController extends BaseController
     {
         list($code, $result) = array(200, array());
 
-        try {
+        try
+        {
             $item = $this->eloquent->findOrFail($id);
 
             $result = $item->toArray();
-        } catch (\RuntimeException $error) {
+        }
+        catch (\RuntimeException $error)
+        {
             $code = 404;
 
             $result = 'Specified item not found';
@@ -122,11 +147,21 @@ class JsonController extends BaseController
      */
     public function store()
     {
-        list($result, $code) = $this->save();
+        $response = $this->save();
 
-        $array = is_array($result) === true;
+        /** @var object|array<string, string[]> */
+        $result = $response[0];
 
-        ! $array && $result = $result->toArray();
+        /** @var integer */
+        $code = $response[1];
+
+        if (is_object($result) && is_a($result, self::ELOQUENT))
+        {
+            /** @var \Illuminate\Database\Eloquent\Model */
+            $model = $result;
+
+            $result = $model->toArray();
+        }
 
         return $this->json($result, $code);
     }
@@ -139,13 +174,20 @@ class JsonController extends BaseController
      */
     public function update($id)
     {
-        $model = 'Illuminate\Database\Eloquent\Model';
+        $response = $this->save($id);
 
-        list($result, $code) = $this->save($id);
+        /** @var object|array<string, string[]> */
+        $result = $response[0];
 
-        is_a($result, $model) && $result = null;
+        /** @var integer */
+        $code = $response[1];
 
-        return $this->json($result, (integer) $code);
+        if (is_object($result) && is_a($result, self::ELOQUENT))
+        {
+            $result = null;
+        }
+
+        return $this->json($result, $code);
     }
 
     /**
@@ -162,7 +204,8 @@ class JsonController extends BaseController
 
         $names['validator'] = 'Validator ($validator)';
 
-        if ($this->{$name} === '' || $this->{$name} === null) {
+        if ($this->{$name} === '' || $this->{$name} === null)
+        {
             $message = ' must be defined in the controller';
 
             $message = $names[$name] . $message;
@@ -174,7 +217,7 @@ class JsonController extends BaseController
     /**
      * Define the variables needed for pagination, if available.
      *
-     * @return array
+     * @return array<string, integer|string[]|string>
      */
     protected function pagination()
     {
@@ -184,43 +227,48 @@ class JsonController extends BaseController
 
         $defaults['columns'] = '*';
 
-        foreach ($defaults as $key => $value) {
+        foreach ($defaults as $key => $value)
+        {
             $exists = ! isset($query[$key]);
 
             $exists && $query[$key] = $value;
         }
 
-        $page = $query['page'];
+        $result = array('page' => $query['page']);
 
-        $limit = $query['limit'];
+        $result['limit'] = $query['limit'];
 
         $columns = explode(',', $query['columns']);
 
-        return array($columns, $page, $limit);
+        $result['columns'] = $columns;
+
+        return (array) $result;
     }
 
     /**
      * Creates/updates the data to storage.
      *
      * @param  integer|null $id
-     * @return array
+     * @return array<integer, mixed|integer>
      */
     protected function save($id = null)
     {
         $parsed = (array) $this->request->getParsedBody();
 
-        if ($this->validation->validate($parsed)) {
-            if (is_null($id) === false) {
+        if ($this->validation->validate($parsed))
+        {
+            if (is_null($id) === false)
+            {
                 $item = $this->eloquent->find($id);
 
                 $item->update((array) $parsed);
 
-                return array($item, (integer) 204);
+                return array($item, (int) 204);
             }
 
             $item = $this->eloquent->create($parsed);
 
-            return array($item, (integer) 201);
+            return array($item, (int) 201);
         }
 
         return array($this->validation->errors, 400);

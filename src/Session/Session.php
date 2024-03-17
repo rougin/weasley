@@ -11,7 +11,7 @@ namespace Rougin\Weasley\Session;
 class Session implements SessionInterface
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     protected $data = array();
 
@@ -35,11 +35,15 @@ class Session implements SessionInterface
     {
         $this->handler = $handler;
 
-        $this->id = $id;
+        if ($id)
+        {
+            $this->id = $id;
 
-        $this->id === null && $this->regenerate(true);
+            /** @var array<string, mixed> */
+            $data = unserialize($handler->read($this->id));
 
-        $this->data = unserialize($handler->read($id));
+            $this->data = $data;
+        }
     }
 
     /**
@@ -52,7 +56,8 @@ class Session implements SessionInterface
     {
         $result = false;
 
-        if (isset($this->data[$key]) === true) {
+        if (isset($this->data[$key]) === true)
+        {
             unset($this->data[$key]);
 
             $serialized = (string) serialize($this->data);
@@ -130,8 +135,9 @@ class Session implements SessionInterface
     }
 
     /**
-     * Generates a random string.
      * NOTE: Should be in a single function (or class).
+     *
+     * Generates a random string.
      *
      * @param  integer $length
      * @return string
@@ -144,9 +150,9 @@ class Session implements SessionInterface
 
         while (($len = strlen($string)) < $length)
         {
-            /** @var int<1, max> */
-            $size = (integer) ($length - $len);
+            $size = (int) ($length - $len);
 
+            /** @var string */
             $bytes = openssl_random_pseudo_bytes($length * 2);
 
             if (function_exists('random_bytes'))

@@ -33,6 +33,11 @@ abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
     protected $dispatcher;
 
     /**
+     * @var \Psr\Http\Message\ServerRequestInterface
+     */
+    protected $request;
+
+    /**
      * Sets up the middleware dispatcher instances.
      *
      * @return void
@@ -43,12 +48,16 @@ abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
 
         $container = $http->define(new Container, $config);
 
+        /** @var \Psr\Http\Message\ResponseInterface */
         $response = $container->get(self::RESPONSE);
 
         $this->handler = new FinalDelegate($response);
 
         $this->dispatcher = new Dispatcher;
 
-        $this->request = $container->get(self::REQUEST);
+        /** @var \Psr\Http\Message\ServerRequestInterface */
+        $request = $container->get(self::REQUEST);
+
+        $this->request = $request;
     }
 }

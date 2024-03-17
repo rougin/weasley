@@ -29,8 +29,10 @@ class DatabaseIntegration implements IntegrationInterface
 
         $connections = $config->get('database', array());
 
-        foreach ((array) $connections as $key => $value) {
-            if (is_array($value) === true) {
+        foreach ((array) $connections as $key => $value)
+        {
+            if (is_array($value) === true)
+            {
                 $this->connection($config, $key, $value);
 
                 $capsule->addConnection($value, $key);
@@ -49,7 +51,7 @@ class DatabaseIntegration implements IntegrationInterface
      *
      * @param  \Rougin\Slytherin\Integration\Configuration $config
      * @param  string                                      $key
-     * @param  array                                       $value
+     * @param  array<string, string>                       $value
      * @return void
      */
     protected function connection(Configuration $config, &$key, &$value)

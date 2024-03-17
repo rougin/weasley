@@ -33,11 +33,17 @@ class MakeControllerCommandTest extends \Rougin\Weasley\Testcase
         $command->execute(array('name' => 'TestController'));
 
         $expected = __DIR__ . '/../../src/Http/Controllers/TestController.php';
+        $filename = $expected;
+        /** @var string */
+        $expected = file_get_contents($expected);
+        $expected = str_replace("\r\n", "\n", $expected);
 
         $original = __DIR__ . '/../Fixture/Templates/TestController.php';
+        /** @var string */
+        $original = file_get_contents($original);
 
-        $this->assertFileEquals($expected, $original);
+        $this->assertEquals($expected, $original);
 
-        unlink($expected);
+        unlink($filename);
     }
 }

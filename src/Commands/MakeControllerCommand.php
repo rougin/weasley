@@ -73,9 +73,9 @@ class MakeControllerCommand extends Command
     /**
      * Executes the current command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface  $input
-     * @param  \Symfony\Component\Console\Input\OutputInterface $output
-     * @return void
+     * @param  \Symfony\Component\Console\Input\InputInterface   $input
+     * @param  \Symfony\Component\Console\Output\OutputInterface $output
+     * @return integer
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -87,7 +87,9 @@ class MakeControllerCommand extends Command
 
         file_put_contents($file, $this->stub($input));
 
-        $output->writeln('<info>' . $this->message . '</info>'); return 0;
+        $output->writeln('<info>' . $this->message . '</info>');
+
+        return 0;
     }
 
     /**
@@ -98,14 +100,25 @@ class MakeControllerCommand extends Command
      */
     protected function stub(InputInterface $input)
     {
-        $stub = file_get_contents(__DIR__ . '/../Templates/' . $this->filename);
+        $path = __DIR__ . '/../Templates/';
 
-        $stub = str_replace('$CLASS', $input->getArgument('name'), $stub);
+        /** @var string */
+        $stub = file_get_contents($path . $this->filename);
 
-        $stub = str_replace('$NAMESPACE', $input->getOption('namespace'), $stub);
+        /** @var string */
+        $name = $input->getArgument('name');
+        $stub = str_replace('$CLASS', $name, $stub);
 
-        $stub = str_replace('$PACKAGE', $input->getOption('package'), $stub);
+        /** @var string */
+        $namespace = $input->getOption('namespace');
+        $stub = str_replace('$NAMESPACE', $namespace, $stub);
 
-        return str_replace('$AUTHOR', $input->getOption('author'), $stub);
+        /** @var string */
+        $package = $input->getOption('package');
+        $stub = str_replace('$PACKAGE', $package, $stub);
+
+        /** @var string */
+        $author = $input->getOption('author');
+        return str_replace('$AUTHOR', $author, $stub);
     }
 }

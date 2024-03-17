@@ -25,9 +25,9 @@ use Rougin\Weasley\Renderers\BladeRenderer;
  */
 class ViewIntegration implements IntegrationInterface
 {
-    const VIEW_FACTORY = 'Illuminate\Contracts\View\Factory';
-
     const RENDERER = 'Rougin\Slytherin\Template\RendererInterface';
+
+    const VIEW_FACTORY = 'Illuminate\Contracts\View\Factory';
 
     /**
      * @var string
@@ -45,7 +45,13 @@ class ViewIntegration implements IntegrationInterface
     {
         $filesystem = new Filesystem;
 
-        list($compiled, $templates) = $this->locations($config);
+        $result = $this->locations($config);
+
+        /** @var string */
+        $compiled = $result['compiled'];
+
+        /** @var string[] */
+        $templates = $result['templates'];
 
         $resolver = $this->resolver($compiled, $filesystem);
 
@@ -65,18 +71,19 @@ class ViewIntegration implements IntegrationInterface
     /**
      * Returns the EngineResolver instance.
      *
-     * @param  string php                        $callback
+     * @param  string                            $compiled
      * @param  \Illuminate\Filesystem\Filesystem $filesystem
-     * @return callback
+     * @return \Illuminate\View\Engines\EngineResolver
      */
     protected function resolver($compiled, $filesystem)
     {
         $resolver = new EngineResolver;
 
-        $callback = function () use ($compiled, $filesystem) {
+        $callback = function () use ($compiled, $filesystem)
+        {
             $blade = new BladeCompiler($filesystem, $compiled);
 
-            return new CompilerEngine($compiler = $blade);
+            return new CompilerEngine($blade);
         };
 
         $resolver->register('blade', $callback);
@@ -88,18 +95,29 @@ class ViewIntegration implements IntegrationInterface
      * Returns the compiled and template locations.
      *
      * @param  \Rougin\Slytherin\Integration\Configuration $config
-     * @return array
+     * @return array<string, string[]|string>
      */
     protected function locations(Configuration $config)
     {
         $view = 'illuminate.view';
 
+        /** @var string|string[] */
         $templates = $config->get($view . '.templates', array());
 
+        /** @var string */
         $compiled = $config->get($view . '.compiled', '');
 
-        is_string($templates) && $templates = array($templates);
+        if (is_string($templates))
+        {
+            $templates = array($templates);
+        }
 
-        return array($compiled, $templates);
+        $result = array();
+
+        $result['compiled'] = $compiled;
+
+        $result['templates'] = $templates;
+
+        return $result;
     }
 }

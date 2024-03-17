@@ -23,12 +23,14 @@ class SessionIntegrationTest extends AbstractTestCase
     {
         $container = $this->integration->define(new Container, $this->config);
 
+        /** @var \Rougin\Weasley\Session\SessionInterface */
         $session = $container->get(self::SESSION);
 
         $expected = 'Ron Weasley';
 
         $session->set('user.name', $expected);
 
+        /** @var string */
         $result = $session->get('user.name');
 
         $this->assertEquals($expected, $result);

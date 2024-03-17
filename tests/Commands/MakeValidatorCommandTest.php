@@ -33,11 +33,17 @@ class MakeValidatorCommandTest extends \Rougin\Weasley\Testcase
         $command->execute(array('name' => 'TestValidator'));
 
         $expected = __DIR__ . '/../../src/Validators/TestValidator.php';
+        $filename = $expected;
+        /** @var string */
+        $expected = file_get_contents($expected);
+        $expected = str_replace("\r\n", "\n", $expected);
 
         $original = __DIR__ . '/../Fixture/Templates/TestValidator.php';
+        /** @var string */
+        $original = file_get_contents($original);
 
-        $this->assertFileEquals($expected, $original);
+        $this->assertEquals($expected, $original);
 
-        unlink($expected);
+        unlink($filename);
     }
 }
