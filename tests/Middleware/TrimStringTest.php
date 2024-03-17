@@ -27,7 +27,7 @@ class TrimStringTest extends AbstractTestCase
 
         $dispatcher = $this->dispatcher->push(new CheckTrimmedString);
 
-        $response = $dispatcher->process($request, $this->delegate);
+        $response = $dispatcher->process($request, $this->handler);
 
         $expected = array('name' => 'Rougin', 'address' => 'Secret');
 

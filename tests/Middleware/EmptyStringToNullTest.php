@@ -27,7 +27,7 @@ class EmptyStringToNullTest extends AbstractTestCase
 
         $dispatcher = $this->dispatcher->push(new CheckQueryParams);
 
-        $response = $dispatcher->process($request, $this->delegate);
+        $response = $dispatcher->process($request, $this->handler);
 
         $expected = array('age' => null, 'address' => null);
 
