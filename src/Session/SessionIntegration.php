@@ -31,7 +31,7 @@ class SessionIntegration implements IntegrationInterface
     {
         $name = $config->get('session.cookies', 'weasley_session');
 
-        list($container, $handler) = $this->handler($container, $config);
+        $container->set(self::HANDLER, $handler = $this->handler($config));
 
         if (! $cookie = $config->get("app.http.cookies.$name", null))
         {
@@ -50,26 +50,24 @@ class SessionIntegration implements IntegrationInterface
     /**
      * Returns the specified SessionHandlerInterface.
      *
-     * @param  \Rougin\Slytherin\Container\ContainerInterface $container
-     * @param  \Rougin\Slytherin\Integration\Configuration    $config
+     * @param  \Rougin\Slytherin\Integration\Configuration $config
      * @return \SessionHandlerInterface
      */
-    protected function handler(ContainerInterface $container, Configuration $config)
+    protected function handler(Configuration $config)
     {
-        $default = array('file' => 'Rougin\Weasley\Session\FileSessionHandler');
+        $items = array('file' => new FileSessionHandler);
 
-        $handlers = $config->get('session.handlers', $default);
+        $handlers = $config->get('session.handlers', $items);
 
-        $handler = $handlers[$config->get('session.driver', 'file')];
+        $driver = $config->get('session.driver', 'file');
 
-        $instance = $container->get($handler);
-
-        return array($container->set(self::HANDLER, $instance), $instance);
+        return $handlers[$driver];
     }
 
     /**
-     * Generates a random string.
      * NOTE: Should be in a single function (or class).
+     *
+     * Generates a random string.
      *
      * @param  integer $length
      * @return string
