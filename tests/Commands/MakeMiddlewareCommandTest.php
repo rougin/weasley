@@ -33,11 +33,15 @@ class MakeMiddlewareCommandTest extends \Rougin\Weasley\Testcase
         $command->execute(array('name' => 'TestMiddleware'));
 
         $expected = __DIR__ . '/../../src/Http/Middleware/TestMiddleware.php';
+        $filename = $expected;
+        $expected = file_get_contents($expected);
+        $expected = str_replace("\r\n", "\n", $expected);
 
         $original = __DIR__ . '/../Fixture/Templates/TestMiddleware.php';
+        $original = file_get_contents($original);
 
-        $this->assertFileEquals($expected, $original);
+        $this->assertEquals($expected, $original);
 
-        unlink($expected);
+        unlink($filename);
     }
 }

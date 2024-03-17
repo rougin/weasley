@@ -33,11 +33,15 @@ class MakeIntegrationCommandTest extends \Rougin\Weasley\Testcase
         $command->execute(array('name' => 'TestIntegration'));
 
         $expected = __DIR__ . '/../../src/Integrations/TestIntegration.php';
+        $filename = $expected;
+        $expected = file_get_contents($expected);
+        $expected = str_replace("\r\n", "\n", $expected);
 
         $original = __DIR__ . '/../Fixture/Templates/TestIntegration.php';
+        $original = file_get_contents($original);
 
-        $this->assertFileEquals($expected, $original);
+        $this->assertEquals($expected, $original);
 
-        unlink($expected);
+        unlink($filename);
     }
 }
