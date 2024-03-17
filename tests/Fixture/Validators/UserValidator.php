@@ -15,7 +15,7 @@ class UserValidator extends AbstractValidator
     /**
      * Sets the labels in the validator.
      *
-     * @return array
+     * @return array<string, string>
      */
     protected function labels()
     {
@@ -31,7 +31,7 @@ class UserValidator extends AbstractValidator
     /**
      * Sets the rules in the validator.
      *
-     * @param  array $data
+     * @param  array<string, mixed> $data
      * @return void
      */
     protected function rules(array $data = array())

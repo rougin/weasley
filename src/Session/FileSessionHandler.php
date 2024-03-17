@@ -53,9 +53,10 @@ class FileSessionHandler implements \SessionHandlerInterface
      */
     public function gc($lifetime)
     {
+        /** @var string $file */
         foreach ((array) glob($this->path) as $file)
         {
-            $time = filemtime($file) + $lifetime;
+            $time = ((int) filemtime($file)) + $lifetime;
 
             $valid = $time > time() && file_exists($file);
 
@@ -95,7 +96,13 @@ class FileSessionHandler implements \SessionHandlerInterface
     {
         $file = $this->path . '/' . $id;
 
-        file_exists($file) && $this->data = file_get_contents($file);
+        if (file_exists($file))
+        {
+            /** @var string */
+            $data = file_get_contents($file);
+
+            $this->data = $data;
+        }
 
         return $this->data;
     }

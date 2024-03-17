@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 class JsonTransformer implements TransformerInterface
 {
     /**
-     * @var array
+     * @var array<integer, string>
      */
     protected $errors = array();
 
@@ -60,6 +60,7 @@ class JsonTransformer implements TransformerInterface
     {
         $response = $this->response;
 
+        /** @var string */
         $stream = @json_encode($data, $this->options);
 
         if (json_last_error() !== JSON_ERROR_NONE)

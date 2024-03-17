@@ -33,6 +33,7 @@ class ConsoleTest extends \Rougin\Weasley\Testcase
      */
     protected function changelog()
     {
+        /** @var string[] */
         $file = file(__DIR__ . '/../CHANGELOG.md');
 
         $file = str_replace('## [', '', $file[4]);

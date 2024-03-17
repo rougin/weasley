@@ -28,7 +28,9 @@ class PaginationIntegration implements IntegrationInterface
      */
     public function define(ContainerInterface $container, Configuration $config)
     {
-        list($query, $request) = $this->request($container);
+        $request = $container->get((string) self::REQUEST);
+
+        $query = $request->getQueryParams();
 
         $page = function ($name = null) use ($query)
         {
@@ -50,23 +52,10 @@ class PaginationIntegration implements IntegrationInterface
     }
 
     /**
-     * Returns the REQUEST_URI and ServerRequest instances.
-     *
-     * @param  \Rougin\Slytherin\Container\ContainerInterface $container
-     * @return array
-     */
-    protected function request(ContainerInterface $container)
-    {
-        $request = $container->get((string) self::REQUEST);
-
-        return array($request->getQueryParams(), $request);
-    }
-
-    /**
      * Sets current page and path resolvers.
      *
-     * @param  callable $page
-     * @param  callable $path
+     * @param  \Closure $page
+     * @param  \Closure $path
      * @return void
      */
     protected function resolve($page, $path)

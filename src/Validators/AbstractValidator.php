@@ -13,7 +13,7 @@ use Valitron\Validator;
 abstract class AbstractValidator
 {
     /**
-     * @var array
+     * @var array<string, string[]>
      */
     public $errors = array();
 
@@ -33,14 +33,14 @@ abstract class AbstractValidator
     /**
      * Sets the labels in the validator.
      *
-     * @return array
+     * @return array<string, string>
      */
     abstract protected function labels();
 
     /**
      * Sets the rules in the validator.
      *
-     * @param  array $data
+     * @param  array<string, mixed> $data
      * @return void
      */
     abstract protected function rules(array $data = array());
@@ -48,7 +48,7 @@ abstract class AbstractValidator
     /**
      * Validates the given data against the specified rules.
      *
-     * @param  array $data
+     * @param  array<string, mixed> $data
      * @return boolean
      */
     public function validate(array $data)
@@ -59,12 +59,16 @@ abstract class AbstractValidator
 
         $validator = $this->validator->withData($data);
 
-        $validated = $validator->validate();
+        if ($validator->validate())
+        {
+            return true;
+        }
 
+        /** @var array<string, string[]> */
         $errors = $validator->errors();
 
-        is_array($errors) && $this->errors = $errors;
+        $this->errors = $errors;
 
-        return $validated;
+        return false;
     }
 }

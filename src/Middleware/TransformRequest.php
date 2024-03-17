@@ -40,8 +40,8 @@ class TransformRequest implements MiddlewareInterface
     /**
      * Maps the array to transform each value.
      *
-     * @param  array $items
-     * @return array
+     * @param  array<string, mixed> $items
+     * @return array<string, mixed>
      */
     protected function map(array $items)
     {

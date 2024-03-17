@@ -48,11 +48,17 @@ class JsonController extends BaseController
     {
         $this->check('validator');
 
-        $this->validation = new $this->validator;
+        /** @var \Rougin\Weasley\Validators\AbstractValidator */
+        $validation = new $this->validator;
+
+        $this->validation = $validation;
 
         $this->check('model');
 
-        $this->eloquent = new $this->model;
+        /** @var \Illuminate\Database\Eloquent\Model */
+        $model = new $this->model;
+
+        $this->eloquent = $model;
 
         parent::__construct($request, $response);
     }
@@ -81,16 +87,25 @@ class JsonController extends BaseController
     {
         $pagination = 'Illuminate\Pagination\LengthAwarePaginator';
 
+        $items = null;
+
         if (class_exists($pagination))
         {
-            list($columns, $current, $filter) = $this->pagination();
+            $pagination = $this->pagination();
+
+            /** @var string[] */
+            $columns = $pagination['columns'];
+
+            /** @var integer */
+            $current = $pagination['page'];
+
+            /** @var integer */
+            $filter = $pagination['limit'];
 
             $items = $this->eloquent->paginate($filter, $columns, 'page', $current);
         }
-        else
-        {
-            $items = $this->eloquent->all();
-        }
+
+        $items = $items ? $items : $this->eloquent->all();
 
         $transformer = new $this->transformer;
 
@@ -183,7 +198,7 @@ class JsonController extends BaseController
     /**
      * Define the variables needed for pagination, if available.
      *
-     * @return array
+     * @return array<string, integer|string[]|string>
      */
     protected function pagination()
     {
@@ -200,20 +215,22 @@ class JsonController extends BaseController
             $exists && $query[$key] = $value;
         }
 
-        $page = $query['page'];
+        $result = array('page' => $query['page']);
 
-        $limit = $query['limit'];
+        $result['limit'] = $query['limit'];
 
         $columns = explode(',', $query['columns']);
 
-        return array($columns, $page, $limit);
+        $result['columns'] = $columns;
+
+        return (array) $result;
     }
 
     /**
      * Creates/updates the data to storage.
      *
      * @param  integer|null $id
-     * @return array
+     * @return array<integer, mixed|integer>
      */
     protected function save($id = null)
     {

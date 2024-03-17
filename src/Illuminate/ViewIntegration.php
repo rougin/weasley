@@ -45,7 +45,13 @@ class ViewIntegration implements IntegrationInterface
     {
         $filesystem = new Filesystem;
 
-        list($compiled, $templates) = $this->locations($config);
+        $result = $this->locations($config);
+
+        /** @var string */
+        $compiled = $result['compiled'];
+
+        /** @var string[] */
+        $templates = $result['templates'];
 
         $resolver = $this->resolver($compiled, $filesystem);
 
@@ -89,7 +95,7 @@ class ViewIntegration implements IntegrationInterface
      * Returns the compiled and template locations.
      *
      * @param  \Rougin\Slytherin\Integration\Configuration $config
-     * @return array
+     * @return array<string, string[]|string>
      */
     protected function locations(Configuration $config)
     {
@@ -99,8 +105,17 @@ class ViewIntegration implements IntegrationInterface
 
         $compiled = $config->get($view . '.compiled', '');
 
-        is_string($templates) && $templates = array($templates);
+        if (is_string($templates))
+        {
+            $templates = array($templates);
+        }
 
-        return array($compiled, $templates);
+        $result = array();
+
+        $result['compiled'] = $compiled;
+
+        $result['templates'] = $templates;
+
+        return (array) $result;
     }
 }

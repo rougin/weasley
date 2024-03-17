@@ -31,9 +31,9 @@ class BladeRenderer implements RendererInterface
     /**
      * Renders a template.
      *
-     * @param  string $template
-     * @param  array  $data
-     * @param  array  $merge
+     * @param  string               $template
+     * @param  array<string, mixed> $data
+     * @param  array<string, mixed> $merge
      * @return string
      */
     public function render($template, array $data = array(), $merge = array())

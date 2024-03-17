@@ -51,7 +51,7 @@ class DatabaseIntegration implements IntegrationInterface
      *
      * @param  \Rougin\Slytherin\Integration\Configuration $config
      * @param  string                                      $key
-     * @param  array                                       $value
+     * @param  array<string, string>                       $value
      * @return void
      */
     protected function connection(Configuration $config, &$key, &$value)

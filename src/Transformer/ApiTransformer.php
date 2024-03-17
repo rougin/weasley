@@ -37,26 +37,26 @@ class ApiTransformer implements TransformerInterface
      * Converts the paginator into Paypal API standards.
      *
      * @param  \Illuminate\Contracts\Support\Arrayable $data
-     * @return array
+     * @return array<string, mixed>
      */
     protected function paginator(Arrayable $data)
     {
-        $response = array();
+        $object = $data->toArray();
 
-        $result = $data->toArray();
+        $perPage = (int) $object['per_page'];
 
-        $perPage = (int) $result['per_page'];
-
-        $total = (int) $result['total'];
+        $total = (int) $object['total'];
 
         $rounded = round($total / $perPage);
 
-        $response['total_items'] = $total;
+        $result = array();
 
-        $response['total_pages'] = $rounded ?: 1;
+        $result['total_items'] = $total;
 
-        $response['items'] = $result['data'];
+        $result['total_pages'] = $rounded ?: 1;
 
-        return $response;
+        $result['items'] = $object['data'];
+
+        return $result;
     }
 }

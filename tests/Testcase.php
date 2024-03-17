@@ -12,6 +12,7 @@ use LegacyPHPUnit\TestCase as Legacy;
  */
 class Testcase extends Legacy
 {
+    /** @phpstan-ignore-next-line */
     public function setExpectedException($exception)
     {
         if (method_exists($this, 'expectException'))
