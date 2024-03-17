@@ -13,7 +13,7 @@ use Rougin\Slytherin\Container\Container;
 class SessionTest extends AbstractTestCase
 {
     /**
-     * @var \Rougin\Weasley\Session\SessionInterface
+     * @var \Rougin\Weasley\Session\Session
      */
     protected $session;
 

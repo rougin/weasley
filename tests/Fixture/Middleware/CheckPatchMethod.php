@@ -30,7 +30,7 @@ class CheckPatchMethod implements MiddlewareInterface
         {
             $key = 'Weasley-Has-PATCH-Method';
 
-            $response = $response->withHeader($key, true);
+            $response = $response->withHeader($key, 'true');
         }
 
         return $response;

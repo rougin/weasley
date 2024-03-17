@@ -29,7 +29,7 @@ class SpoofFormMethodTest extends AbstractTestCase
 
         $response = $dispatcher->process($request, $this->handler);
 
-        $expected = array(true);
+        $expected = array('true');
 
         $result = $response->getHeader('Weasley-Has-PATCH-Method');
 

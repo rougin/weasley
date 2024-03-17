@@ -33,7 +33,7 @@ class FileSessionHandler implements \SessionHandlerInterface
     /**
      * Destroys a session.
      *
-     * @param  integer $id
+     * @param  string $id
      * @return boolean
      */
     public function destroy($id)
@@ -88,7 +88,7 @@ class FileSessionHandler implements \SessionHandlerInterface
     /**
      * Reads the session data from the session storage, and returns the results.
      *
-     * @param  integer $id
+     * @param  string $id
      * @return string
      */
     public function read($id)

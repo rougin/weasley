@@ -2,13 +2,15 @@
 
 namespace Rougin\Weasley\Fixture\Models;
 
+use Illuminate\Database\Eloquent\Model;
+
 /**
  * User Model
  *
- * @package Skeleton
+ * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class User extends \Illuminate\Database\Eloquent\Model
+class User extends Model
 {
     /**
      * The table associated with the model.
@@ -20,14 +22,14 @@ class User extends \Illuminate\Database\Eloquent\Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var string[]
      */
     protected $fillable = array('name', 'username', 'password');
 
     /**
      * Indicates if the model should be timestamped.
      *
-     * @var bool
+     * @var boolean
      */
     public $timestamps = false;
 }

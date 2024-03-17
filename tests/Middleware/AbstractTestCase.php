@@ -33,6 +33,11 @@ abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
     protected $dispatcher;
 
     /**
+     * @var \Psr\Http\Message\ServerRequestInterface
+     */
+    protected $request;
+
+    /**
      * Sets up the middleware dispatcher instances.
      *
      * @return void

@@ -25,9 +25,9 @@ use Rougin\Weasley\Renderers\BladeRenderer;
  */
 class ViewIntegration implements IntegrationInterface
 {
-    const VIEW_FACTORY = 'Illuminate\Contracts\View\Factory';
-
     const RENDERER = 'Rougin\Slytherin\Template\RendererInterface';
+
+    const VIEW_FACTORY = 'Illuminate\Contracts\View\Factory';
 
     /**
      * @var string
@@ -65,9 +65,9 @@ class ViewIntegration implements IntegrationInterface
     /**
      * Returns the EngineResolver instance.
      *
-     * @param  string php                        $callback
+     * @param  string                            $compiled
      * @param  \Illuminate\Filesystem\Filesystem $filesystem
-     * @return callback
+     * @return \Illuminate\View\Engines\EngineResolver
      */
     protected function resolver($compiled, $filesystem)
     {
@@ -77,7 +77,7 @@ class ViewIntegration implements IntegrationInterface
         {
             $blade = new BladeCompiler($filesystem, $compiled);
 
-            return new CompilerEngine($compiler = $blade);
+            return new CompilerEngine($blade);
         };
 
         $resolver->register('blade', $callback);

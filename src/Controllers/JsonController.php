@@ -79,14 +79,18 @@ class JsonController extends BaseController
      */
     public function index()
     {
-        if (class_exists('Illuminate\Pagination\LengthAwarePaginator') === true)
+        $pagination = 'Illuminate\Pagination\LengthAwarePaginator';
+
+        if (class_exists($pagination))
         {
             list($columns, $current, $filter) = $this->pagination();
 
             $items = $this->eloquent->paginate($filter, $columns, 'page', $current);
         }
-
-        isset($items) || $items = $this->eloquent->all();
+        else
+        {
+            $items = $this->eloquent->all();
+        }
 
         $transformer = new $this->transformer;
 
