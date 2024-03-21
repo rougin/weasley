@@ -101,32 +101,6 @@ class Check
     }
 
     /**
-     * Sets the labels for the validator.
-     *
-     * @param  array<string, string> $labels
-     * @return self
-     */
-    public function setLabels($labels)
-    {
-        $this->labels = $labels;
-
-        return $this;
-    }
-
-    /**
-     * Sets the rules for the validator.
-     *
-     * @param  array<string, string> $rules
-     * @return self
-     */
-    public function setRules($rules)
-    {
-        $this->rules = $rules;
-
-        return $this;
-    }
-
-    /**
      * Checks if the payload is valid againsts the specified rules.
      *
      * @param  array<string, mixed>|null $data
