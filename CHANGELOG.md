@@ -100,7 +100,7 @@ All notable changes to `Weasley` will be documented in this file.
 ### Added
 - `TransformerInterface` for handling classes that transforms results
 - `JsonTransformer` for transforming the results in JSON format
-- `ApiTransformer` for transforming the results based on [Paypal's API Style Guide](https://github.com/paypal/api-standards/blob/master/api-style-guide.md)
+- `ApiTransformer` for transforming the results based on [Paypal's API Style Guide](https://web.archive.org/web/20220114091735/https://github.com/paypal/api-standards/blob/master/api-style-guide.md)
 - `RestfulController::transformer` for defining the transformer to be used in `RestfulController::index`
 - Exception when the specified item does not exists in `RestfulController::show`
 
