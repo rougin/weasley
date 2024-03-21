@@ -13,7 +13,7 @@ use Valitron\Validator;
 class Rule
 {
     /**
-     * \Valitron\Validator
+     * @var \Valitron\Validator
      */
     protected $valid;
 
@@ -75,9 +75,10 @@ class Rule
 
         if ($name === 'contains')
         {
-            $value = trim($values[0]);
+            /** @var string */
+            $value = end($values);
 
-            if (trim(end($values)) === 'true')
+            if (trim($value) === 'true')
             {
                 $this->valid->rule($name, $field, $values, true);
 

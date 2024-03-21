@@ -45,7 +45,7 @@ class Check
     /**
      * Returns the first error after validation.
      *
-     * @return string
+     * @return string|null
      */
     public function firstError()
     {
@@ -84,8 +84,9 @@ class Check
     /**
      * Adds a new error message to the specified key.
      *
-     * @param string $key
-     * @param string $text
+     * @param  string $key
+     * @param  string $text
+     * @return self
      */
     public function setError($key, $text)
     {

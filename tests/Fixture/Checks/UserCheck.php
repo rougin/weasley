@@ -32,7 +32,7 @@ class UserCheck extends Check
      * Sets the rules in the validator.
      *
      * @param  array<string, mixed> $data
-     * @return void
+     * @return array<string, string>
      */
     public function rules(array $data)
     {
