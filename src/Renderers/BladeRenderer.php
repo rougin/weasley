@@ -6,7 +6,7 @@ use Illuminate\Contracts\View\Factory;
 use Rougin\Slytherin\Template\RendererInterface;
 
 /**
- * Illuminate's View (Blade) Renderer
+ * Laravel Blade Renderer
  *
  * A simple wrapper of Laravel Blade to Slytherin's RendererInterface.
  *
@@ -38,8 +38,6 @@ class BladeRenderer implements RendererInterface
      */
     public function render($template, array $data = array(), $merge = array())
     {
-        $view = $this->factory->make($template, $data, $merge);
-
-        return $view->render();
+        return $this->factory->make($template, $data, $merge)->render();
     }
 }
