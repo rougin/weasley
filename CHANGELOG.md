@@ -2,10 +2,11 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
-## [0.6.5](https://github.com/rougin/weasley/compare/v0.6.4...v0.6.5) - Unreleased
+## [0.7.0](https://github.com/rougin/weasley/compare/v0.6.4...v0.7.0) - Unreleased
 
 ### Changed
 - Conformed HTTP middlewares from `http-interop/http-middleware` to `rougin/slytherin`'s own middleware
+- Improve code quality and code formatting with `phpstan`, `php-cs-fixer`
 
 ### Fixed
 - Unit tests in running `SessionIntegration`
