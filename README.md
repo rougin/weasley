@@ -66,6 +66,54 @@ Access the generator commands through `vendor/bin/weasley` in the terminal/comma
 
 **NOTE**: All of the HTTP middlewares above are implemented in the `v0.4.1` of [PSR-15](https://github.com/http-interop/http-middleware/tree/0.4.1).
 
+### Validation
+
+Weasley also provides a validation class on top of [Valitron](https://github.com/vlucas/valitron). Kindly create a class that extends to the `Check` class:
+
+``` php
+use Rougin\Weasley\Check;
+
+class UserCheck extends Check
+{
+    protected $labels =
+    [
+        'name' => 'Name',
+        'email' => 'Email',
+        'age' => 'Age',
+    ];
+
+    protected $rules =
+    [
+        'name' => 'required',
+        'setting' => 'required|email',
+        'type' => 'required|numeric',
+    ];
+}
+```
+
+Once created, the data can be submitted to the said class for validation:
+
+``` php
+$check = new UserCheck;
+
+$data = /* e.g., data from request */;
+
+if ($check->valid($data))
+{
+  // $data passed from validation
+}
+else
+{
+  // Get the available errors ---
+  $errors = $check->errors();
+  // ----------------------------
+
+  // Or get the first error only ---
+  echo $check->firstError();
+  // -------------------------------
+}
+```
+
 ## Changelog
 
 Please see [CHANGELOG][link-changelog] for more information what has changed recently.
