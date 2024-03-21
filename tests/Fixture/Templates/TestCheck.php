@@ -1,16 +1,16 @@
 <?php
 
-namespace $NAMESPACE;
+namespace App\Checks;
 
 use Rougin\Weasley\Check;
 
 /**
- * $CLASS
+ * TestCheck
  *
- * @package $PACKAGE
- * @author  $AUTHOR
+ * @package App
+ * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class $CLASS extends Check
+class TestCheck extends Check
 {
     /**
      * @var array<string, string>

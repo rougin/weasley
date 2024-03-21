@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Validators;
+namespace $NAMESPACE;
 
 use Rougin\Weasley\Validators\AbstractValidator;
 
 /**
- * TestValidator
+ * $CLASS
  *
- * @package App
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ * @package $PACKAGE
+ * @author  $AUTHOR
  */
-class TestValidator extends AbstractValidator
+class $CLASS extends AbstractValidator
 {
     /**
      * Sets the labels in the validator.
