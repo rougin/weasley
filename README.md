@@ -33,7 +33,8 @@ Access the generator commands through `vendor/bin/weasley` in the terminal/comma
 
 | Controller | Description |
 | ---------- | ----------- |
-| [HttpRoute](https://github.com/rougin/weasley/blob/master/src/Routes/JsonRoute.php) | Provides methods for RESTful APIs in [JSON](https://en.wikipedia.org/wiki/JSON) format. |
+| [HttpRoute](https://github.com/rougin/weasley/blob/master/src/Routes/HttpRoute.php) | A simple HTTP route class for RESTful APIs. |
+| [JsonRoute](https://github.com/rougin/weasley/blob/master/src/Routes/JsonRoute.php) | Provides methods for RESTful APIs in [JSON](https://en.wikipedia.org/wiki/JSON) format. |
 
 **NOTE**: In other PHP frameworks, this is also known as `Controllers`.
 
