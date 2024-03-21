@@ -56,7 +56,7 @@ class AllowCrossOrigin implements MiddlewareInterface
 
         $response = new Response;
 
-        if ( ! $options)
+        if (! $options)
         {
             $response = $handler->handle($request);
         }

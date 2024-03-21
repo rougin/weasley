@@ -44,7 +44,7 @@ class MutateRequest implements MiddlewareInterface
     /**
      * Maps the array to mutate each value.
      *
-     * @param  array<string, string> $items
+     * @param  array<string, mixed> $items
      * @return array<string, mixed>
      */
     protected function map(array $items)
