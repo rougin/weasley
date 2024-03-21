@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Psr\Http\Message\ServerRequestInterface;
 use Rougin\Slytherin\Middleware\HandlerInterface;
 use Rougin\Slytherin\Middleware\MiddlewareInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * TestMiddleware

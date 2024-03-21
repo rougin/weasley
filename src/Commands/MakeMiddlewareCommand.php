@@ -2,13 +2,17 @@
 
 namespace Rougin\Weasley\Commands;
 
+use Rougin\Weasley\Scripts\CreateHandler;
+
 /**
+ * @deprecated since v0.7, use "Scripts/CreateHandler" instead.
+ *
  * Make Middleware Command
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class MakeMiddlewareCommand extends MakeControllerCommand
+class MakeMiddlewareCommand extends CreateHandler
 {
     /**
      * @var string
@@ -16,9 +20,9 @@ class MakeMiddlewareCommand extends MakeControllerCommand
     protected $command = 'make:middleware';
 
     /**
-     * @var string
+     * @var boolean
      */
-    protected $filename = 'Middleware.stub';
+    protected $deprecated = true;
 
     /**
      * @var string

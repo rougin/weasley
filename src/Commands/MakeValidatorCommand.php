@@ -2,16 +2,17 @@
 
 namespace Rougin\Weasley\Commands;
 
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
+use Rougin\Weasley\Scripts\CreateCheck;
 
 /**
+ * @deprecated since v0.7, use "Scripts/CreateCheck" instead.
+ *
  * Make Validator Command
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class MakeValidatorCommand extends MakeControllerCommand
+class MakeValidatorCommand extends CreateCheck
 {
     /**
      * @var string
@@ -19,9 +20,9 @@ class MakeValidatorCommand extends MakeControllerCommand
     protected $command = 'make:validator';
 
     /**
-     * @var string
+     * @var boolean
      */
-    protected $filename = 'Validator.stub';
+    protected $deprecated = true;
 
     /**
      * @var string

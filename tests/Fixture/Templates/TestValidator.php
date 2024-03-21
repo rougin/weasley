@@ -2,7 +2,7 @@
 
 namespace App\Validators;
 
-use Rougin\Weasley\Validators\AbstractValidator;
+use Rougin\Weasley\Check;
 
 /**
  * TestValidator
@@ -10,7 +10,7 @@ use Rougin\Weasley\Validators\AbstractValidator;
  * @package App
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class TestValidator extends AbstractValidator
+class TestValidator extends Check
 {
     /**
      * Sets the labels in the validator.

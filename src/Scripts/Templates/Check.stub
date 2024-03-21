@@ -2,7 +2,7 @@
 
 namespace $NAMESPACE;
 
-use Rougin\Weasley\Validators\AbstractValidator;
+use Rougin\Weasley\Check;
 
 /**
  * $CLASS
@@ -10,7 +10,7 @@ use Rougin\Weasley\Validators\AbstractValidator;
  * @package $PACKAGE
  * @author  $AUTHOR
  */
-class $CLASS extends AbstractValidator
+class $CLASS extends Check
 {
     /**
      * Sets the labels in the validator.

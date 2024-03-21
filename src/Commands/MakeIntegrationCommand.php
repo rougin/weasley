@@ -2,13 +2,17 @@
 
 namespace Rougin\Weasley\Commands;
 
+use Rougin\Weasley\Scripts\CreatePackage;
+
 /**
+ * @deprecated since v0.7, use "Scripts/CreatePackage" instead.
+ *
  * Make Integration Command
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class MakeIntegrationCommand extends MakeControllerCommand
+class MakeIntegrationCommand extends CreatePackage
 {
     /**
      * @var string
@@ -16,9 +20,9 @@ class MakeIntegrationCommand extends MakeControllerCommand
     protected $command = 'make:integration';
 
     /**
-     * @var string
+     * @var boolean
      */
-    protected $filename = 'Integration.stub';
+    protected $deprecated = true;
 
     /**
      * @var string
