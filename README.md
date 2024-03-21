@@ -51,17 +51,19 @@ Access the generator commands through `vendor/bin/weasley` in the terminal/comma
 
 **NOTE**: The mentioned integrations above needs to include their required dependencies first.
 
-### HTTP Middlewares
+### HTTP Handlers
 
-| Middleware | Description |
+The following classes below uses the [Middleware](https://github.com/rougin/slytherin/wiki/Middleware) component of Slytherin:
+
+| Handler | Description |
 | ---------- | ----------- |
-| [CrossOriginHeaders](https://github.com/rougin/weasley/blob/master/src/Middleware/CrossOriginHeaders.php) | Adds additional headers for [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) |
-| [EmptyStringToNull](https://github.com/rougin/weasley/blob/master/src/Middleware/EmptyStringToNull.php) | Converts the empty strings from request as `null` |
-| [SpoofFormMethod](https://github.com/rougin/weasley/blob/master/src/Middleware/SpoofFormMethod.php) | Replaces the HTTP verb  from `_method` value |
-| [JsonHeaders](https://github.com/rougin/weasley/blob/master/src/Middleware/Json.php) | Changes content response to `application/json` |
-| [TrimString](https://github.com/rougin/weasley/blob/master/src/Middleware/TrimString.php) | Trims the strings from an incoming request |
+| [AllowCrossOrigin](https://github.com/rougin/weasley/blob/master/src/Handlers/AllowCrossOrigin.php) | Adds additional headers for [Cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (CORS). |
+| [EmptyStringToNull](https://github.com/rougin/weasley/blob/master/src/Handlers/EmptyStringToNull.php) | Converts the empty strings from request as `null`. |
+| [JsonContentType](https://github.com/rougin/weasley/blob/master/src/Handlers/JsonContentType.php) | Changes content response to `application/json`. |
+| [SpoofHttpMethod](https://github.com/rougin/weasley/blob/master/src/Handlers/SpoofHttpMethod.php) | Replaces the HTTP verb  from `_method` value. |
+| [TrimStringValue](https://github.com/rougin/weasley/blob/master/src/Handlers/TrimStringValue.php) | Trims the strings from an incoming request. |
 
-**NOTE**: All of the HTTP middlewares above are implemented in the `v0.4.1` of [PSR-15](https://github.com/http-interop/http-middleware/tree/0.4.1).
+**NOTE**: In other PHP frameworks, this is also known as `Middlewares`.
 
 ## Changelog
 
