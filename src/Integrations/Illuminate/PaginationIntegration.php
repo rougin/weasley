@@ -5,10 +5,9 @@ namespace Rougin\Weasley\Integrations\Illuminate;
 use Rougin\Weasley\Illuminate\PaginationIntegration as Integration;
 
 /**
- * Illuminate's Pagination Integration
+ * @deprecated since ~0.6, use "Illuminate/PaginationIntegration" instead.
  *
- * An integration for Laravel's Pagination package (illuminate/pagination).
- * NOTE: To be removed in v1.0.0. Use Rougin\Weasley\Illuminate instead.
+ * Illuminate's Pagination Integration
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
