@@ -76,7 +76,7 @@ class Check
      * @param  array<string, mixed> $data
      * @return array<string, string>
      */
-    public function rules(array $data)
+    public function rules($data)
     {
         return $this->rules;
     }
@@ -101,6 +101,32 @@ class Check
     }
 
     /**
+     * Sets the labels for the validator.
+     *
+     * @param  array<string, string> $labels
+     * @return self
+     */
+    public function setLabels($labels)
+    {
+        $this->labels = $labels;
+
+        return $this;
+    }
+
+    /**
+     * Sets the rules for the validator.
+     *
+     * @param  array<string, string> $rules
+     * @return self
+     */
+    public function setRules($rules)
+    {
+        $this->rules = $rules;
+
+        return $this;
+    }
+
+    /**
      * Checks if the payload is valid againsts the specified rules.
      *
      * @param  array<string, mixed>|null $data
@@ -119,11 +145,18 @@ class Check
 
         $rules = $this->rules($data);
 
-        foreach ($rules as $key => $value)
+        foreach ($rules as $key => $rule)
         {
-            $rule = new Rule($valid);
+            // Break down multiple rules ---
+            $items = explode('|', $rule);
 
-            $valid = $rule->parse($key, $value);
+            // TODO: Allow custom rules from existing, new ones ---
+            foreach ($items as $item)
+            {
+                $valid->rule($item, $key);
+            }
+            // ----------------------------------------------------
+            // -----------------------------
         }
 
         $valid = $valid->withData($data);
