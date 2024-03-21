@@ -41,6 +41,7 @@ class MakeIntegrationCommandTest extends \Rougin\Weasley\Testcase
         $original = __DIR__ . '/../Fixture/Templates/TestIntegration.php';
         /** @var string */
         $original = file_get_contents($original);
+        $original = str_replace("\r\n", "\n", $original);
 
         $this->assertEquals($expected, $original);
 

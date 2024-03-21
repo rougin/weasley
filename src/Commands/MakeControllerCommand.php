@@ -100,7 +100,7 @@ class MakeControllerCommand extends Command
      */
     protected function stub(InputInterface $input)
     {
-        $path = __DIR__ . '/../Templates/';
+        $path = __DIR__ . '/Templates/';
 
         /** @var string */
         $stub = file_get_contents($path . $this->filename);
