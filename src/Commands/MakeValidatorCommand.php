@@ -42,5 +42,5 @@ class MakeValidatorCommand extends CreateCheck
     /**
      * @var string
      */
-    protected $text = 'Create a new validator class based on Valitron';
+    protected $text = 'Creates a new validator class based on Valitron';
 }

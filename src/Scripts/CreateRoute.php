@@ -43,5 +43,5 @@ class CreateRoute extends AbstractMake
     /**
      * @var string
      */
-    protected $text = 'Create a new HTTP route class';
+    protected $text = 'Creates a new HTTP route class';
 }

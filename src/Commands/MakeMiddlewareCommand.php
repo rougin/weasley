@@ -42,5 +42,5 @@ class MakeMiddlewareCommand extends CreateHandler
     /**
      * @var string
      */
-    protected $text = 'Create a new v0.4.1 of PSR-15 middleware class';
+    protected $text = 'Creates a new v0.4.1 of PSR-15 middleware class';
 }

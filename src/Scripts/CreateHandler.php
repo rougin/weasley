@@ -43,5 +43,5 @@ class CreateHandler extends AbstractMake
     /**
      * @var string
      */
-    protected $text = 'Create a new Slytherin Middleware class';
+    protected $text = 'Creates a new Slytherin Middleware class';
 }

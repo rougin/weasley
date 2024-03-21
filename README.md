@@ -24,10 +24,10 @@ Access the generator commands through `vendor/bin/weasley` in the terminal/comma
 
 | Command | Description |
 | ------- | ----------- |
-| make:controller | Creates a new HTTP controller class |
-| make:integration | Creates a new [Slytherin Integration](https://github.com/rougin/slytherin/blob/master/src/Integration/IntegrationInterface.php) class |
-| make:middleware | Creates a new `v0.4.1` of [PSR-15](https://github.com/http-interop/http-middleware/tree/0.4.1) middleware class |
-| make:validator | Creates a new validator class based on [Valitron](https://github.com/vlucas/valitron) |
+| make:check | Creates a new check (validation) class based on [Valitron](https://github.com/vlucas/valitron) |
+| make:handler | Creates a new [Slytherin Middleware](https://github.com/rougin/slytherin/wiki/Middleware) class |
+| make:package | Creates a new [Slytherin Integration](https://github.com/rougin/slytherin/wiki/IntegrationInterface-Implementation) class |
+| make:route | Creates a new HTTP route class |
 
 ### HTTP Controllers
 

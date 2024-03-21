@@ -43,5 +43,5 @@ class CreatePackage extends AbstractMake
     /**
      * @var string
      */
-    protected $text = 'Create a new Slytherin Integration class';
+    protected $text = 'Creates a new Slytherin Integration class';
 }

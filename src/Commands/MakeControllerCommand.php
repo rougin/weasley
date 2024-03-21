@@ -42,5 +42,5 @@ class MakeControllerCommand extends CreateRoute
     /**
      * @var string
      */
-    protected $text = 'Create a new HTTP controller class';
+    protected $text = 'Creates a new HTTP controller class';
 }
