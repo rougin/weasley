@@ -16,9 +16,9 @@ use Rougin\Weasley\Session\Session as WeasleySession;
  */
 class Session implements IntegrationInterface
 {
-    const HANDLER = 'Rougin\Weasley\Session\SessionHandlerInterface';
+    const HANDLER = 'SessionHandlerInterface';
 
-    const SESSION = 'Rougin\Weasley\Session\SessionInterface';
+    const SESSION = 'Rougin\Weasley\Contract\Session';
 
     /**
      * Defines the specified integration.

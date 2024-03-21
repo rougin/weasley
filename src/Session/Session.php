@@ -2,13 +2,15 @@
 
 namespace Rougin\Weasley\Session;
 
+use Rougin\Weasley\Contract\Session as Contract;
+
 /**
  * Session
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class Session implements SessionInterface
+class Session implements Contract
 {
     /**
      * @var array<string, mixed>
