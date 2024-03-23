@@ -8,6 +8,7 @@ All notable changes to `Weasley` will be documented in this file.
 - Conformed HTTP middlewares from `http-interop/http-middleware` to `rougin/slytherin`'s own middleware
 - Improve code quality and code formatting with `phpstan`, `php-cs-fixer`
 - `Controllers` directory to `Routes` directory
+- `Middleware` directory to `Handlers` directory
 
 ### Fixed
 - Unit tests in running `SessionIntegration`
