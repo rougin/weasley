@@ -5,7 +5,7 @@ namespace Rougin\Weasley\Commands;
 use Rougin\Weasley\Scripts\CreateHandler;
 
 /**
- * @deprecated since v0.7, use "Scripts/CreateHandler" instead.
+ * @deprecated since ~0.7, use "Scripts/CreateHandler" instead.
  *
  * Make Middleware Command
  *
