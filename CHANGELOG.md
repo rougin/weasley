@@ -4,12 +4,24 @@ All notable changes to `Weasley` will be documented in this file.
 
 ## [0.7.0](https://github.com/rougin/weasley/compare/v0.6.4...v0.7.0) - Unreleased
 
+### Added
+- `Random` for generating random strings in `Assorted` directory
+
 ### Changed
 - Conformed HTTP middlewares from `http-interop/http-middleware` to `rougin/slytherin`'s own middleware
 - Improve code quality and code formatting with `phpstan`, `php-cs-fixer`
+- `Controllers` directory to `Routes` directory
+- `Middleware` directory to `Handlers` directory
+- `Illuminate` directory to `Packages` directory
+
+### Deprecated
+- `Controllers` directory (use `Routes` directory instead)
+- `Middleware` directory (use `Handlers` directory instead)
+- `Illuminate` directory (use `Packages` directory instead)
 
 ### Fixed
 - Unit tests in running `SessionIntegration`
+- `FileSessionHandler:gc` - Checking if file or directory for deletion
 
 ## [0.6.4](https://github.com/rougin/weasley/compare/v0.6.3...v0.6.4) - 2023-11-16
 

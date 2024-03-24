@@ -58,9 +58,11 @@ class FileSessionHandler implements \SessionHandlerInterface
         {
             $time = ((int) filemtime($file)) + $lifetime;
 
-            $valid = $time > time() && file_exists($file);
+            $expired = $time < time();
 
-            $valid === false && unlink($file);
+            $exists = ! is_dir($file) && file_exists($file);
+
+            $expired && $exists && unlink((string) $file);
         }
 
         return true;

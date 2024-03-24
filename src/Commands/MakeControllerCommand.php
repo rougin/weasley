@@ -5,7 +5,7 @@ namespace Rougin\Weasley\Commands;
 use Rougin\Weasley\Scripts\CreateRoute;
 
 /**
- * @deprecated since v0.7, use "Scripts/CreateRoute" instead.
+ * @deprecated since ~0.7, use "Scripts/CreateRoute" instead.
  *
  * Make Controller Command
  *

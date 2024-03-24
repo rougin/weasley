@@ -5,7 +5,7 @@ namespace Rougin\Weasley\Commands;
 use Rougin\Weasley\Scripts\CreatePackage;
 
 /**
- * @deprecated since v0.7, use "Scripts/CreatePackage" instead.
+ * @deprecated since ~0.7, use "Scripts/CreatePackage" instead.
  *
  * Make Integration Command
  *

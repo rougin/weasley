@@ -69,7 +69,6 @@ class BaseControllerTest extends AbstractTestCase
 
     /**
      * Tests BaseController::toJson.
-     * NOTE: Must be removed in v1.0.0. Use "json" instead.
      *
      * @return void
      */
