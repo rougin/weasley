@@ -9,6 +9,12 @@ All notable changes to `Weasley` will be documented in this file.
 - Improve code quality and code formatting with `phpstan`, `php-cs-fixer`
 - `Controllers` directory to `Routes` directory
 - `Middleware` directory to `Handlers` directory
+- `Illuminate` directory to `Packages` directory
+
+### Deprecated
+- `Controllers` directory (use `Routes` directory instead)
+- `Middleware` directory (use `Handlers` directory instead)
+- `Illuminate` directory (use `Packages` directory instead)
 
 ### Fixed
 - Unit tests in running `SessionIntegration`

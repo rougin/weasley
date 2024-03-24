@@ -47,7 +47,7 @@ The following classes below are using the [`IntegrationInterface`](https://githu
 | [Laravel/Eloquent](https://github.com/rougin/weasley/blob/master/src/Packages/Laravel/Eloquent.php) | Based on the [illuminate/database](https://github.com/illuminate/database) ([Eloquent](https://laravel.com/docs/11.x/eloquent)). |
 | [Laravel/Blade](https://github.com/rougin/weasley/blob/master/src/Packages/Laravel/Blade.php) | Based on the [illuminate/view](https://github.com/illuminate/view) ([Blade](https://laravel.com/docs/11.x/blade)). |
 | [Laravel/Paginate](https://github.com/rougin/weasley/blob/master/src/Packages/Laravel/Paginate.php) | Based on the [illuminate/pagination](https://github.com/illuminate/pagination). |
-| [SessionIntegration](https://github.com/rougin/weasley/blob/master/src/Packages/Session.php) | A simple implementation of the [SessionHandlerInterface](https://secure.php.net/manual/en/class.sessionhandlerinterface.php). |
+| [Session](https://github.com/rougin/weasley/blob/master/src/Packages/Session.php) | A simple implementation of the [SessionHandlerInterface](https://secure.php.net/manual/en/class.sessionhandlerinterface.php). |
 
 **NOTE**: The mentioned integrations above needs to include their required dependencies first.
 
