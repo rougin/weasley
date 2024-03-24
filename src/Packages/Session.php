@@ -5,8 +5,9 @@ namespace Rougin\Weasley\Packages;
 use Rougin\Slytherin\Container\ContainerInterface;
 use Rougin\Slytherin\Integration\Configuration;
 use Rougin\Slytherin\Integration\IntegrationInterface;
+use Rougin\Weasley\Assorted\Random;
 use Rougin\Weasley\Session\FileSessionHandler;
-use Rougin\Weasley\Session\Session as WeasleySession;
+use Rougin\Weasley\Session\Session as Instance;
 
 /**
  * Session Package
@@ -32,14 +33,16 @@ class Session implements IntegrationInterface
         /** @var string */
         $name = $config->get('session.cookies', 'weasley_session');
 
-        $container->set(self::HANDLER, $handler = $this->handler($config));
+        $handler = $this->handler($config);
+
+        $container->set(self::HANDLER, $handler);
 
         /** @var string|null $cookie */
         $cookie = $config->get("app.http.cookies.$name", null);
 
         if ($cookie === null)
         {
-            $cookie = $this->random(40);
+            $cookie = Random::make(40);
 
             $default = time() + 7200;
 
@@ -59,7 +62,7 @@ class Session implements IntegrationInterface
 
         $handler->gc($lifetime * 60);
 
-        $session = new WeasleySession($handler, $cookie);
+        $session = new Instance($handler, $cookie);
 
         return $container->set(self::SESSION, $session);
     }
@@ -81,41 +84,5 @@ class Session implements IntegrationInterface
         $driver = $config->get('session.driver', 'file');
 
         return $handlers[$driver];
-    }
-
-    /**
-     * NOTE: Should be in a single function (or class).
-     *
-     * Generates a random string.
-     *
-     * @param  integer $length
-     * @return string
-     */
-    protected function random($length)
-    {
-        $search = array('/', '+', '=');
-
-        $string = '';
-
-        while (($len = strlen($string)) < $length)
-        {
-            $size = (int) ($length - $len);
-
-            /** @var string */
-            $bytes = openssl_random_pseudo_bytes($length * 2);
-
-            if (function_exists('random_bytes'))
-            {
-                $bytes = call_user_func('random_bytes', $size);
-            }
-
-            $bytes = base64_encode($bytes);
-
-            $text = str_replace($search, '', $bytes);
-
-            $string .= substr($text, 0, $size);
-        }
-
-        return $string;
     }
 }
