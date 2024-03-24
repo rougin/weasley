@@ -12,7 +12,7 @@ use Rougin\Slytherin\Integration\Configuration;
  */
 abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
 {
-    const SESSION = 'Rougin\Weasley\Session\SessionInterface';
+    const SESSION = 'Rougin\Weasley\Contract\Session';
 
     /**
      * @var \Rougin\Slytherin\Integration\Configuration
@@ -31,11 +31,12 @@ abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
      */
     protected function doSetUp()
     {
-        $message = 'SessionHandlerInterface is not yet installed.';
-
         $interface = 'SessionHandlerInterface';
 
-        interface_exists($interface) || $this->markTestSkipped($message);
+        if (! interface_exists($interface))
+        {
+            $this->markTestSkipped('SessionHandlerInterface is not yet installed.');
+        }
 
         $path = __DIR__ . '/../Fixture/Storage/Sessions';
 

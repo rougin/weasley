@@ -38,19 +38,16 @@ Access the generator commands through `vendor/bin/weasley` in the terminal/comma
 
 **NOTE**: In other PHP frameworks, this is also known as `Controllers`.
 
-### Integrations
+### Packages
 
-| Integration | Description |
+The following classes below are using the [`IntegrationInterface`](https://github.com/rougin/slytherin/wiki/IntegrationInterface-Implementation) from Slytherin:
+
+| Package | Description |
 | ----------- | ----------- |
-| [SessionIntegration](https://github.com/rougin/weasley/blob/master/src/Session/SessionIntegration.php) | An implementation of [SessionHandlerInterface](https://secure.php.net/manual/en/class.sessionhandlerinterface.php). |
-
-#### Illuminate (Laravel's individual components)
-
-| Integration | Description |
-| ----------- | ----------- |
-| [DatabaseIntegration](https://github.com/rougin/weasley/blob/master/src/Illuminate/DatabaseIntegration.php) | Based on [illuminate/database](https://github.com/illuminate/database) ([Eloquent](https://laravel.com/docs/5.4/eloquent)). |
-| [PaginationIntegration](https://github.com/rougin/weasley/blob/master/src/Illuminate/PaginationIntegration.php) | Based on [illuminate/pagination](https://github.com/illuminate/pagination). |
-| [ViewIntegration](https://github.com/rougin/weasley/blob/master/src/Illuminate/ViewIntegration.php) | Based on [illuminate/view](https://github.com/illuminate/view) ([Blade](https://laravel.com/docs/5.4/blade)). |
+| [Laravel/Eloquent](https://github.com/rougin/weasley/blob/master/src/Packages/Laravel/Eloquent.php) | Based on the [illuminate/database](https://github.com/illuminate/database) ([Eloquent](https://laravel.com/docs/11.x/eloquent)). |
+| [Laravel/Blade](https://github.com/rougin/weasley/blob/master/src/Packages/Laravel/Blade.php) | Based on the [illuminate/view](https://github.com/illuminate/view) ([Blade](https://laravel.com/docs/11.x/blade)). |
+| [Laravel/Paginate](https://github.com/rougin/weasley/blob/master/src/Packages/Laravel/Paginate.php) | Based on the [illuminate/pagination](https://github.com/illuminate/pagination). |
+| [SessionIntegration](https://github.com/rougin/weasley/blob/master/src/Packages/Session.php) | A simple implementation of the [SessionHandlerInterface](https://secure.php.net/manual/en/class.sessionhandlerinterface.php). |
 
 **NOTE**: The mentioned integrations above needs to include their required dependencies first.
 

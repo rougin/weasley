@@ -5,10 +5,9 @@ namespace Rougin\Weasley\Integrations\Illuminate;
 use Rougin\Weasley\Illuminate\ViewIntegration as Integration;
 
 /**
- * Illuminate's View Integration
+ * @deprecated since ~0.6, use "Illuminate/ViewIntegration" instead.
  *
- * An integration for Laravel's View package (illuminate/view).
- * NOTE: To be removed in v1.0.0. Use Rougin\Weasley\Illuminate instead.
+ * Illuminate's View Integration
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
