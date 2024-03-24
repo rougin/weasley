@@ -66,6 +66,17 @@ The following classes below uses the [Middleware](https://github.com/rougin/slyt
 
 **NOTE**: In other PHP frameworks, this is also known as `Middlewares`.
 
+### Mutators
+
+Mutators are classes that mutates (transforms) specified result (e.g., [PSR-07](https://www.php-fig.org/psr/psr-7/) responses, API data, etc.):
+
+| Handler | Description |
+| ---------- | ----------- |
+| [JsonMutator](https://github.com/rougin/weasley/blob/master/src/Mutators/JsonMutator.php) | Mutates the PSR-07 response in JSON format. |
+| [RestMutator](https://github.com/rougin/weasley/blob/master/src/Mutators/RestMutator.php) | Mutates the result created from `Laravel/Paginate` based on [Paypal's API Style Guide](https://web.archive.org/web/20220114091735/https://github.com/paypal/api-standards/blob/master/api-style-guide.md). |
+
+**NOTE**: The `Laravel/Paginate` package must be included to use the parsing capabilities of `RestMutator`.
+
 ## Changelog
 
 Please see [CHANGELOG][link-changelog] for more information what has changed recently.

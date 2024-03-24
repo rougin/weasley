@@ -17,11 +17,12 @@ class RestMutator implements Mutator
 
     /**
      * @deprecated since ~0.7, use "mutate" instead.
+     * @codeCoverageIgnore
      *
      * Transforms the contents of the result.
      *
      * @param  \Illuminate\Contracts\Support\Arrayable $data
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return mixed
      */
     public function transform($data)
     {

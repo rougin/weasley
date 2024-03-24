@@ -53,11 +53,12 @@ class JsonMutator implements Mutator
 
     /**
      * @deprecated since ~0.7, use "mutate" instead.
+     * @codeCoverageIgnore
      *
      * Transforms the contents of the result.
      *
      * @param  mixed $data
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return mixed
      */
     public function transform($data)
     {

@@ -4,7 +4,7 @@ namespace Rougin\Weasley\Routes;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Rougin\Weasley\Transformer\JsonTransformer;
+use Rougin\Weasley\Mutators\JsonMutator;
 
 /**
  * HTTP Route
@@ -68,9 +68,10 @@ class HttpRoute
     {
         $response = $this->response->withStatus($code);
 
-        $transformer = new JsonTransformer($response, $options);
+        $transformer = new JsonMutator($response, $options);
 
-        return $transformer->transform($data);
+        /** @var \Psr\Http\Message\ResponseInterface */
+        return $transformer->mutate($data);
     }
 
     /**
