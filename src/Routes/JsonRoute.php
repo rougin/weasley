@@ -28,7 +28,14 @@ class JsonRoute extends HttpRoute
     /**
      * @var string|null
      */
-    protected $transformer = 'Rougin\Weasley\Transformer\ApiTransformer';
+    protected $mutator = 'Rougin\Weasley\Mutators\RestMutator';
+
+    /**
+     * @deprecated since ~0.7, use "$mutator" instead.
+     *
+     * @var string|null
+     */
+    protected $transformer = null;
 
     /**
      * @var \Rougin\Weasley\Validators\AbstractValidator
@@ -109,9 +116,16 @@ class JsonRoute extends HttpRoute
 
         $items = $items ? $items : $this->eloquent->all();
 
-        $transformer = new $this->transformer;
+        /** @var \Rougin\Weasley\Contract\Mutator */
+        $mutator = new $this->mutator;
 
-        return $this->json($transformer->transform($items));
+        if ($this->transformer)
+        {
+            /** @var \Rougin\Weasley\Transformer\TransformerInterface */
+            $mutator = new $this->transformer;
+        }
+
+        return $this->json($mutator->mutate($items));
     }
 
     /**
