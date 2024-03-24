@@ -12,6 +12,7 @@ All notable changes to `Weasley` will be documented in this file.
 
 ### Fixed
 - Unit tests in running `SessionIntegration`
+- `FileSessionHandler:gc` - Checking if file or directory for deletion
 
 ## [0.6.4](https://github.com/rougin/weasley/compare/v0.6.3...v0.6.4) - 2023-11-16
 
