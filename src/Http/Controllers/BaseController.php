@@ -5,8 +5,9 @@ namespace Rougin\Weasley\Http\Controllers;
 use Rougin\Weasley\Controllers\BaseController as Controller;
 
 /**
+ * @deprecated since ~0.6, use "Controllers/BaseController" instead.
+ *
  * Base Controller
- * NOTE: To be removed in v1.0.0. Use Controllers instead.
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>

@@ -3,8 +3,9 @@
 namespace Rougin\Weasley\Http\Controllers;
 
 /**
+ * @deprecated since ~0.6, use "Controllers/JsonController" instead.
+ *
  * RESTful Controller
- * NOTE: To be removed in v1.0.0. Use JsonController instead.
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>

@@ -55,9 +55,9 @@ class HttpRoute
     }
 
     /**
+     * NOTE: To be changed in ~1.0, its visibility must be "protected".
+     *
      * Returns the specified data to JSON.
-     * NOTE: Must be moved to JsonController in v1.0.0.
-     * The visibility of this method must also be "protected".
      *
      * @param  mixed   $data
      * @param  integer $code
@@ -74,8 +74,9 @@ class HttpRoute
     }
 
     /**
+     * @deprecated since ~0.2, use "json" instead.
+     *
      * Returns the specified data to JSON.
-     * NOTE: To be removed in v1.0.0. Use "json" method instead.
      *
      * @param  mixed   $data
      * @param  integer $code
