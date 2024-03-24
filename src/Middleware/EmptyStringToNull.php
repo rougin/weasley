@@ -2,22 +2,16 @@
 
 namespace Rougin\Weasley\Middleware;
 
+use Rougin\Weasley\Handlers\EmptyStringToNull as Handler;
+
 /**
+ * @deprecated since ~0.7, use "Handlers/EmptyStringToNull" instead.
+ *
  * Empty String To Null Middleware
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class EmptyStringToNull extends TransformRequest
+class EmptyStringToNull extends Handler
 {
-    /**
-     * Transforms the specified value.
-     *
-     * @param  mixed $value
-     * @return mixed
-     */
-    protected function transform($value)
-    {
-        return is_string($value) && $value === '' ? null : $value;
-    }
 }

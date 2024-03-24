@@ -5,7 +5,7 @@ namespace Rougin\Weasley\Commands;
 use Rougin\Weasley\Scripts\CreateCheck;
 
 /**
- * @deprecated since v0.7, use "Scripts/CreateCheck" instead.
+ * @deprecated since ~0.7, use "Scripts/CreateCheck" instead.
  *
  * Make Validator Command
  *

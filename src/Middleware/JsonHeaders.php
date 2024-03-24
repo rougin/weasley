@@ -2,32 +2,16 @@
 
 namespace Rougin\Weasley\Middleware;
 
-use Psr\Http\Message\ServerRequestInterface;
-use Rougin\Slytherin\Middleware\HandlerInterface;
-use Rougin\Slytherin\Middleware\MiddlewareInterface;
+use Rougin\Weasley\Handlers\JsonContentType;
 
 /**
+ * @deprecated since ~0.7, use "Handlers/JsonContentType" instead.
+ *
  * JSON Headers Middleware
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class JsonHeaders implements MiddlewareInterface
+class JsonHeaders extends JsonContentType
 {
-    /**
-     * Process an incoming server request and return a response, optionally
-     * delegating to the next middleware component to create the response.
-     *
-     * @param  \Psr\Http\Message\ServerRequestInterface      $request
-     * @param  \Rougin\Slytherin\Middleware\HandlerInterface $handler
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function process(ServerRequestInterface $request, HandlerInterface $handler)
-    {
-        $response = $handler->handle($request);
-
-        $new = $response->withHeader('Content-Type', 'application/json');
-
-        return $response->hasHeader('Content-Type') ? $response : $new;
-    }
 }

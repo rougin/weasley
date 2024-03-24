@@ -19,7 +19,10 @@ class TrimStringTest extends AbstractTestCase
      */
     public function testProcessMethod()
     {
-        $query = array('name' => 'Rougin  ', 'address' => '  Secret');
+        $query = array('name' => 'Rougin  ');
+        $query['address'] = '  Secret';
+        $query['details'] = array();
+        $query['details']['sports'] = 'Programming    ';
 
         $request = $this->request->withQueryParams($query);
 
@@ -29,7 +32,10 @@ class TrimStringTest extends AbstractTestCase
 
         $response = $dispatcher->process($request, $this->handler);
 
-        $expected = array('name' => 'Rougin', 'address' => 'Secret');
+        $expected = array('name' => 'Rougin');
+        $expected['address'] = 'Secret';
+        $expected['details'] = array();
+        $expected['details']['sports'] = 'Programming';
 
         $result = $response->getHeader('Trimmed-Query-Params');
 
