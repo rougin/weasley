@@ -5,8 +5,9 @@ namespace Rougin\Weasley\Http\Middleware;
 use Rougin\Weasley\Middleware\CrossOriginHeaders;
 
 /**
+ * @deprecated since ~0.6, use "Middleware/CrossOriginHeaders" instead.
+ *
  * CORS Middleware
- * NOTE: To be removed in v1.0.0. Use CrossOriginHeaders instead.
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>

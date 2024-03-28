@@ -2,13 +2,16 @@
 
 namespace Rougin\Weasley\Session;
 
+use Rougin\Weasley\Assorted\Random;
+use Rougin\Weasley\Contract\Session as Contract;
+
 /**
  * Session
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>
  */
-class Session implements SessionInterface
+class Session implements Contract
 {
     /**
      * @var array<string, mixed>
@@ -109,7 +112,7 @@ class Session implements SessionInterface
 
         $serialized = serialize($this->data);
 
-        $this->id = $this->random(40);
+        $this->id = Random::make(40);
 
         $this->handler->write($this->id, $serialized);
 
@@ -132,41 +135,5 @@ class Session implements SessionInterface
         $this->handler->write($this->id, $data);
 
         return $this;
-    }
-
-    /**
-     * NOTE: Should be in a single function (or class).
-     *
-     * Generates a random string.
-     *
-     * @param  integer $length
-     * @return string
-     */
-    protected function random($length)
-    {
-        $search = array('/', '+', '=');
-
-        $string = '';
-
-        while (($len = strlen($string)) < $length)
-        {
-            $size = (int) ($length - $len);
-
-            /** @var string */
-            $bytes = openssl_random_pseudo_bytes($length * 2);
-
-            if (function_exists('random_bytes'))
-            {
-                $bytes = call_user_func('random_bytes', $size);
-            }
-
-            $bytes = base64_encode($bytes);
-
-            $text = str_replace($search, '', $bytes);
-
-            $string .= substr($text, 0, $size);
-        }
-
-        return $string;
     }
 }

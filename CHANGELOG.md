@@ -4,14 +4,26 @@ All notable changes to `Weasley` will be documented in this file.
 
 ## [0.7.0](https://github.com/rougin/weasley/compare/v0.6.4...v0.7.0) - Unreleased
 
+### Added
+- `Random` for generating random strings in `Assorted` directory
+
 ### Changed
 - Conformed HTTP middlewares from `http-interop/http-middleware` to `rougin/slytherin`'s own middleware
 - Improve code quality and code formatting with `phpstan`, `php-cs-fixer`
 - `Controllers` directory to `Routes` directory
+- `Middleware` directory to `Handlers` directory
+- `Illuminate` directory to `Packages` directory
 - `Validators` directory to `Validate` directory
+
+### Deprecated
+- `Controllers` directory (use `Routes` directory instead)
+- `Middleware` directory (use `Handlers` directory instead)
+- `Illuminate` directory (use `Packages` directory instead)
+- `Validators` directory (use `Validate` directory instead)
 
 ### Fixed
 - Unit tests in running `SessionIntegration`
+- `FileSessionHandler:gc` - Checking if file or directory for deletion
 
 ## [0.6.4](https://github.com/rougin/weasley/compare/v0.6.3...v0.6.4) - 2023-11-16
 
@@ -102,7 +114,7 @@ All notable changes to `Weasley` will be documented in this file.
 ### Added
 - `TransformerInterface` for handling classes that transforms results
 - `JsonTransformer` for transforming the results in JSON format
-- `ApiTransformer` for transforming the results based on [Paypal's API Style Guide](https://github.com/paypal/api-standards/blob/master/api-style-guide.md)
+- `ApiTransformer` for transforming the results based on [Paypal's API Style Guide](https://web.archive.org/web/20220114091735/https://github.com/paypal/api-standards/blob/master/api-style-guide.md)
 - `RestfulController::transformer` for defining the transformer to be used in `RestfulController::index`
 - Exception when the specified item does not exists in `RestfulController::show`
 

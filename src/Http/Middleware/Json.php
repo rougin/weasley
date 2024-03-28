@@ -5,8 +5,9 @@ namespace Rougin\Weasley\Http\Middleware;
 use Rougin\Weasley\Middleware\JsonHeaders;
 
 /**
+ * @deprecated since ~0.6, use "Middleware/JsonHeaders" instead.
+ *
  * JSON Middleware
- * NOTE: To be removed in v1.0.0. Use JsonHeaders instead.
  *
  * @package Weasley
  * @author  Rougin Gutib <rougingutib@gmail.com>

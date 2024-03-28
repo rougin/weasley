@@ -4,7 +4,7 @@ namespace Rougin\Weasley\Routes;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Rougin\Weasley\Transformer\JsonTransformer;
+use Rougin\Weasley\Mutators\JsonMutator;
 
 /**
  * HTTP Route
@@ -55,9 +55,9 @@ class HttpRoute
     }
 
     /**
+     * NOTE: To be changed in ~1.0, its visibility must be "protected".
+     *
      * Returns the specified data to JSON.
-     * NOTE: Must be moved to JsonController in v1.0.0.
-     * The visibility of this method must also be "protected".
      *
      * @param  mixed   $data
      * @param  integer $code
@@ -68,14 +68,16 @@ class HttpRoute
     {
         $response = $this->response->withStatus($code);
 
-        $transformer = new JsonTransformer($response, $options);
+        $transformer = new JsonMutator($response, $options);
 
-        return $transformer->transform($data);
+        /** @var \Psr\Http\Message\ResponseInterface */
+        return $transformer->mutate($data);
     }
 
     /**
+     * @deprecated since ~0.2, use "json" instead.
+     *
      * Returns the specified data to JSON.
-     * NOTE: To be removed in v1.0.0. Use "json" method instead.
      *
      * @param  mixed   $data
      * @param  integer $code

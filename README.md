@@ -38,33 +38,44 @@ Access the generator commands through `vendor/bin/weasley` in the terminal/comma
 
 **NOTE**: In other PHP frameworks, this is also known as `Controllers`.
 
-### Integrations
+### Packages
 
-| Integration | Description |
+The following classes below are using the [`IntegrationInterface`](https://github.com/rougin/slytherin/wiki/IntegrationInterface-Implementation) from Slytherin:
+
+| Package | Description |
 | ----------- | ----------- |
-| [SessionIntegration](https://github.com/rougin/weasley/blob/master/src/Session/SessionIntegration.php) | An implementation of [SessionHandlerInterface](https://secure.php.net/manual/en/class.sessionhandlerinterface.php). |
-
-#### Illuminate (Laravel's individual components)
-
-| Integration | Description |
-| ----------- | ----------- |
-| [DatabaseIntegration](https://github.com/rougin/weasley/blob/master/src/Illuminate/DatabaseIntegration.php) | Based on [illuminate/database](https://github.com/illuminate/database) ([Eloquent](https://laravel.com/docs/5.4/eloquent)). |
-| [PaginationIntegration](https://github.com/rougin/weasley/blob/master/src/Illuminate/PaginationIntegration.php) | Based on [illuminate/pagination](https://github.com/illuminate/pagination). |
-| [ViewIntegration](https://github.com/rougin/weasley/blob/master/src/Illuminate/ViewIntegration.php) | Based on [illuminate/view](https://github.com/illuminate/view) ([Blade](https://laravel.com/docs/5.4/blade)). |
+| [Laravel/Eloquent](https://github.com/rougin/weasley/blob/master/src/Packages/Laravel/Eloquent.php) | Based on the [illuminate/database](https://github.com/illuminate/database) ([Eloquent](https://laravel.com/docs/11.x/eloquent)). |
+| [Laravel/Blade](https://github.com/rougin/weasley/blob/master/src/Packages/Laravel/Blade.php) | Based on the [illuminate/view](https://github.com/illuminate/view) ([Blade](https://laravel.com/docs/11.x/blade)). |
+| [Laravel/Paginate](https://github.com/rougin/weasley/blob/master/src/Packages/Laravel/Paginate.php) | Based on the [illuminate/pagination](https://github.com/illuminate/pagination). |
+| [Session](https://github.com/rougin/weasley/blob/master/src/Packages/Session.php) | A simple implementation of the [SessionHandlerInterface](https://secure.php.net/manual/en/class.sessionhandlerinterface.php). |
 
 **NOTE**: The mentioned integrations above needs to include their required dependencies first.
 
-### HTTP Middlewares
+### HTTP Handlers
 
-| Middleware | Description |
+The following classes below uses the [Middleware](https://github.com/rougin/slytherin/wiki/Middleware) component of Slytherin:
+
+| Handler | Description |
 | ---------- | ----------- |
-| [CrossOriginHeaders](https://github.com/rougin/weasley/blob/master/src/Middleware/CrossOriginHeaders.php) | Adds additional headers for [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing). |
-| [EmptyStringToNull](https://github.com/rougin/weasley/blob/master/src/Middleware/EmptyStringToNull.php) | Converts the empty strings from request as `null`. |
-| [SpoofFormMethod](https://github.com/rougin/weasley/blob/master/src/Middleware/SpoofFormMethod.php) | Replaces the HTTP verb  from `_method` value. |
-| [JsonHeaders](https://github.com/rougin/weasley/blob/master/src/Middleware/Json.php) | Changes content response to `application/json`. |
-| [TrimString](https://github.com/rougin/weasley/blob/master/src/Middleware/TrimString.php) | Trims the strings from an incoming request. |
+| [AllowCrossOrigin](https://github.com/rougin/weasley/blob/master/src/Handlers/AllowCrossOrigin.php) | Adds additional headers for [Cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (CORS). |
+| [EmptyStringToNull](https://github.com/rougin/weasley/blob/master/src/Handlers/EmptyStringToNull.php) | Converts the empty strings from request as `null`. |
+| [JsonContentType](https://github.com/rougin/weasley/blob/master/src/Handlers/JsonContentType.php) | Changes content response to `application/json`. |
+| [MutateRequest](https://github.com/rougin/weasley/blob/master/src/Handlers/MutateRequest.php) | A middleware that can be extended to mutate/transform values from the request. |
+| [SpoofHttpMethod](https://github.com/rougin/weasley/blob/master/src/Handlers/SpoofHttpMethod.php) | Replaces the HTTP verb  from `_method` value. |
+| [TrimStringValue](https://github.com/rougin/weasley/blob/master/src/Handlers/TrimStringValue.php) | Trims the strings from an incoming request. |
 
-**NOTE**: All of the HTTP middlewares above are implemented in the `v0.4.1` of [PSR-15](https://github.com/http-interop/http-middleware/tree/0.4.1).
+**NOTE**: In other PHP frameworks, this is also known as `Middlewares`.
+
+### Mutators
+
+Mutators are classes that mutates (transforms) specified result (e.g., [PSR-07](https://www.php-fig.org/psr/psr-7/) responses, API data, etc.):
+
+| Handler | Description |
+| ---------- | ----------- |
+| [JsonMutator](https://github.com/rougin/weasley/blob/master/src/Mutators/JsonMutator.php) | Mutates the PSR-07 response in JSON format. |
+| [RestMutator](https://github.com/rougin/weasley/blob/master/src/Mutators/RestMutator.php) | Mutates the result created from `Laravel/Paginate` based on [Paypal's API Style Guide](https://web.archive.org/web/20220114091735/https://github.com/paypal/api-standards/blob/master/api-style-guide.md). |
+
+**NOTE**: The `Laravel/Paginate` package must be included to use the parsing capabilities of `RestMutator`.
 
 ### Validation
 
