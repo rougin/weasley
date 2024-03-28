@@ -13,11 +13,13 @@ All notable changes to `Weasley` will be documented in this file.
 - `Controllers` directory to `Routes` directory
 - `Middleware` directory to `Handlers` directory
 - `Illuminate` directory to `Packages` directory
+- `Validators` directory to `Validate` directory
 
 ### Deprecated
 - `Controllers` directory (use `Routes` directory instead)
 - `Middleware` directory (use `Handlers` directory instead)
 - `Illuminate` directory (use `Packages` directory instead)
+- `Validators` directory (use `Validate` directory instead)
 
 ### Fixed
 - Unit tests in running `SessionIntegration`

@@ -20,6 +20,11 @@ class MakeValidatorCommand extends CreateCheck
     protected $command = 'make:validator';
 
     /**
+     * @var string
+     */
+    protected $filename = 'Validate.stub';
+
+    /**
      * @var boolean
      */
     protected $deprecated = true;

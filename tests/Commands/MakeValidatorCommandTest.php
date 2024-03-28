@@ -47,4 +47,31 @@ class MakeValidatorCommandTest extends \Rougin\Weasley\Testcase
 
         unlink($filename);
     }
+
+    /**
+     * Tests MakeValidatorCommand::execute.
+     *
+     * @return void
+     */
+    public function test_make_check_command()
+    {
+        $command = new CommandTester($this->console->find('make:check'));
+
+        $command->execute(array('name' => 'TestCheck'));
+
+        $expected = __DIR__ . '/../../src/Checks/TestCheck.php';
+        $filename = $expected;
+        /** @var string */
+        $expected = file_get_contents($expected);
+        $expected = str_replace("\r\n", "\n", $expected);
+
+        $original = __DIR__ . '/../Fixture/Templates/TestCheck.php';
+        /** @var string */
+        $original = file_get_contents($original);
+        $original = str_replace("\r\n", "\n", $original);
+
+        $this->assertEquals($expected, $original);
+
+        unlink($filename);
+    }
 }
