@@ -2,7 +2,7 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
-## [0.7.0](https://github.com/rougin/weasley/compare/v0.6.4...v0.7.0) - Unreleased
+## [0.7.0](https://github.com/rougin/weasley/compare/v0.6.4...v0.7.0) - 2024-04-08
 
 **NOTE**: This release may break your application if upgrading from `v0.7.0` release.
 
