@@ -4,6 +4,8 @@ All notable changes to `Weasley` will be documented in this file.
 
 ## [0.7.0](https://github.com/rougin/weasley/compare/v0.6.4...v0.7.0) - Unreleased
 
+**NOTE**: This release may break your application if upgrading from `v0.7.0` release.
+
 ### Added
 - `Random` for generating random strings in `Assorted` directory
 
@@ -24,6 +26,9 @@ All notable changes to `Weasley` will be documented in this file.
 ### Fixed
 - Unit tests in running `SessionIntegration`
 - `FileSessionHandler:gc` - Checking if file or directory for deletion
+
+### Removed
+- `http-interop/http-middleware` as required dependency
 
 ## [0.6.4](https://github.com/rougin/weasley/compare/v0.6.3...v0.6.4) - 2023-11-16
 
