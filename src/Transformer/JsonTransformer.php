@@ -10,7 +10,8 @@ use Rougin\Weasley\Mutators\JsonMutator;
  * JSON Transformer
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class JsonTransformer extends JsonMutator
 {

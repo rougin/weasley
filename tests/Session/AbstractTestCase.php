@@ -8,7 +8,8 @@ use Rougin\Slytherin\Integration\Configuration;
  * Abstract Test Case
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
 {

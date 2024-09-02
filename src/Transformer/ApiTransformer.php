@@ -10,7 +10,8 @@ use Rougin\Weasley\Mutators\RestMutator;
  * API Transformer
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class ApiTransformer extends RestMutator
 {

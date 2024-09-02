@@ -6,14 +6,16 @@ namespace Rougin\Weasley\Contract;
  * Mutator Interface
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 interface Mutator
 {
     /**
      * Mutates the contents of the result.
      *
-     * @param  mixed $data
+     * @param mixed $data
+     *
      * @return mixed
      */
     public function mutate($data);

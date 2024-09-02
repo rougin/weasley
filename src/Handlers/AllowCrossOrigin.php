@@ -11,7 +11,8 @@ use Rougin\Slytherin\Http\Response;
  * Allow Cross Origin Headers Middleware
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class AllowCrossOrigin implements MiddlewareInterface
 {
@@ -46,8 +47,9 @@ class AllowCrossOrigin implements MiddlewareInterface
      * Process an incoming server request and return a response, optionally
      * delegating to the next middleware component to create the response.
      *
-     * @param  \Psr\Http\Message\ServerRequestInterface      $request
-     * @param  \Rougin\Slytherin\Middleware\HandlerInterface $handler
+     * @param \Psr\Http\Message\ServerRequestInterface      $request
+     * @param \Rougin\Slytherin\Middleware\HandlerInterface $handler
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function process(ServerRequestInterface $request, HandlerInterface $handler)
@@ -68,7 +70,8 @@ class AllowCrossOrigin implements MiddlewareInterface
     /**
      * Sets the allowed URLS.
      *
-     * @param  string[] $allowed
+     * @param string[] $allowed
+     *
      * @return self
      */
     public function allowed($allowed)
@@ -81,7 +84,8 @@ class AllowCrossOrigin implements MiddlewareInterface
     /**
      * Sets the allowed HTTP methods.
      *
-     * @param  string[] $methods
+     * @param string[] $methods
+     *
      * @return self
      */
     public function methods($methods)

@@ -9,7 +9,8 @@ use Rougin\Weasley\Contract\Mutator;
  * JSON Transformer
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class JsonMutator implements Mutator
 {
@@ -57,7 +58,8 @@ class JsonMutator implements Mutator
      *
      * Transforms the contents of the result.
      *
-     * @param  mixed $data
+     * @param mixed $data
+     *
      * @return mixed
      */
     public function transform($data)
@@ -68,7 +70,8 @@ class JsonMutator implements Mutator
     /**
      * Mutates the contents of the result.
      *
-     * @param  mixed $data
+     * @param mixed $data
+     *
      * @return mixed
      */
     public function mutate($data)

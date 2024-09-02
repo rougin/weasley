@@ -9,7 +9,8 @@ use Rougin\Slytherin\Integration\Configuration;
  * Illuminate View Integration Test
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class ViewIntegrationTest extends \Rougin\Weasley\Testcase
 {

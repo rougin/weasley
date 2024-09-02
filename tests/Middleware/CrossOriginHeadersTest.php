@@ -8,7 +8,8 @@ use Rougin\Weasley\Http\Middleware\Cors;
  * Cross Origin Headers Middleware Test
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class CrossOriginHeadersTest extends AbstractTestCase
 {

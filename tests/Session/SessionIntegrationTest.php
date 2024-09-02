@@ -8,7 +8,8 @@ use Rougin\Slytherin\Container\Container;
  * Session Integration Test
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class SessionIntegrationTest extends AbstractTestCase
 {

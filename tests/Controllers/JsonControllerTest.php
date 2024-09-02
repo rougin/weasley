@@ -10,7 +10,8 @@ use Rougin\Weasley\Fixture\Controllers\UsersController;
  * JSON Controller Test
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class JsonControllerTest extends AbstractTestCase
 {

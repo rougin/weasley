@@ -21,7 +21,8 @@ use Rougin\Weasley\Renderers\BladeRenderer;
  * An integration for the Laravel Blade package (illuminate/view).
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class Blade implements IntegrationInterface
 {
@@ -37,8 +38,9 @@ class Blade implements IntegrationInterface
     /**
      * Defines the specified integration.
      *
-     * @param  \Rougin\Slytherin\Container\ContainerInterface $container
-     * @param  \Rougin\Slytherin\Integration\Configuration    $config
+     * @param \Rougin\Slytherin\Container\ContainerInterface $container
+     * @param \Rougin\Slytherin\Integration\Configuration    $config
+     *
      * @return \Rougin\Slytherin\Container\ContainerInterface
      */
     public function define(ContainerInterface $container, Configuration $config)
@@ -73,8 +75,9 @@ class Blade implements IntegrationInterface
     /**
      * Returns the EngineResolver instance.
      *
-     * @param  string                            $compiled
-     * @param  \Illuminate\Filesystem\Filesystem $filesystem
+     * @param string                            $compiled
+     * @param \Illuminate\Filesystem\Filesystem $filesystem
+     *
      * @return \Illuminate\View\Engines\EngineResolver
      */
     protected function resolver($compiled, $filesystem)
@@ -96,8 +99,9 @@ class Blade implements IntegrationInterface
     /**
      * Returns the compiled and template locations.
      *
-     * @param  \Rougin\Slytherin\Integration\Configuration $config
-     * @return array<string, string[]|string>
+     * @param \Rougin\Slytherin\Integration\Configuration $config
+     *
+     * @return array<string, string|string[]>
      */
     protected function locations(Configuration $config)
     {

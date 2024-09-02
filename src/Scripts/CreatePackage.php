@@ -6,7 +6,8 @@ namespace Rougin\Weasley\Scripts;
  * Create Package Command
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class CreatePackage extends AbstractMake
 {

@@ -9,7 +9,8 @@ use Rougin\Weasley\Fixture\Checks\UserCheckWithData;
  * Check Test
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class CheckTest extends Testcase
 {

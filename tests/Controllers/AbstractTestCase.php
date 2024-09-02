@@ -11,7 +11,8 @@ use Rougin\Weasley\Illuminate\DatabaseIntegration;
  * Abstract Test Case
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
 {

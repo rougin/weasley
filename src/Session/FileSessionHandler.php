@@ -6,7 +6,8 @@ namespace Rougin\Weasley\Session;
  * File Session Handler
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class FileSessionHandler implements \SessionHandlerInterface
 {
@@ -33,7 +34,8 @@ class FileSessionHandler implements \SessionHandlerInterface
     /**
      * Destroys a session.
      *
-     * @param  string $id
+     * @param string $id
+     *
      * @return boolean
      */
     public function destroy($id)
@@ -48,7 +50,8 @@ class FileSessionHandler implements \SessionHandlerInterface
     /**
      * Cleans up expired sessions.
      *
-     * @param  integer $lifetime
+     * @param integer $lifetime
+     *
      * @return boolean
      */
     public function gc($lifetime)
@@ -71,8 +74,9 @@ class FileSessionHandler implements \SessionHandlerInterface
     /**
      * Re-initialize existing session, or creates a new one.
      *
-     * @param  string $path
-     * @param  string $id
+     * @param string $path
+     * @param string $id
+     *
      * @return boolean
      */
     public function open($path, $id)
@@ -91,7 +95,8 @@ class FileSessionHandler implements \SessionHandlerInterface
     /**
      * Reads the session data from the session storage, and returns the results.
      *
-     * @param  string $id
+     * @param string $id
+     *
      * @return string
      */
     public function read($id)
@@ -112,8 +117,9 @@ class FileSessionHandler implements \SessionHandlerInterface
     /**
      * Writes the session data to the session storage.
      *
-     * @param  string $id
-     * @param  string $data
+     * @param string $id
+     * @param string $data
+     *
      * @return boolean
      */
     public function write($id, $data)

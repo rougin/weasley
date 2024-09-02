@@ -6,7 +6,8 @@ use LegacyPHPUnit\TestCase as Legacy;
 
 /**
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  *
  * @codeCoverageIgnore
  */

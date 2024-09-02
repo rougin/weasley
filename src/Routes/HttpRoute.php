@@ -10,7 +10,8 @@ use Rougin\Weasley\Mutators\JsonMutator;
  * HTTP Route
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class HttpRoute
 {
@@ -44,7 +45,8 @@ class HttpRoute
     /**
      * Sets the server request instance.
      *
-     * @param  \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     *
      * @return self
      */
     public function request(ServerRequestInterface $request)
@@ -59,9 +61,10 @@ class HttpRoute
      *
      * Returns the specified data to JSON.
      *
-     * @param  mixed   $data
-     * @param  integer $code
-     * @param  integer $options
+     * @param mixed   $data
+     * @param integer $code
+     * @param integer $options
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function json($data, $code = 200, $options = 0)
@@ -79,9 +82,10 @@ class HttpRoute
      *
      * Returns the specified data to JSON.
      *
-     * @param  mixed   $data
-     * @param  integer $code
-     * @param  integer $options
+     * @param mixed   $data
+     * @param integer $code
+     * @param integer $options
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function toJson($data, $code = 200, $options = 0)

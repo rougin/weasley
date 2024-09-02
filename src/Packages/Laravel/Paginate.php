@@ -13,7 +13,8 @@ use Rougin\Slytherin\Integration\IntegrationInterface;
  * An integration for the Laravel Pagination package (illuminate/pagination).
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class Paginate implements IntegrationInterface
 {
@@ -22,8 +23,9 @@ class Paginate implements IntegrationInterface
     /**
      * Defines the specified integration.
      *
-     * @param  \Rougin\Slytherin\Container\ContainerInterface $container
-     * @param  \Rougin\Slytherin\Integration\Configuration    $config
+     * @param \Rougin\Slytherin\Container\ContainerInterface $container
+     * @param \Rougin\Slytherin\Integration\Configuration    $config
+     *
      * @return \Rougin\Slytherin\Container\ContainerInterface
      */
     public function define(ContainerInterface $container, Configuration $config)
@@ -56,8 +58,9 @@ class Paginate implements IntegrationInterface
     /**
      * Sets current page and path resolvers.
      *
-     * @param  \Closure $page
-     * @param  \Closure $path
+     * @param \Closure $page
+     * @param \Closure $path
+     *
      * @return void
      */
     protected function resolve($page, $path)

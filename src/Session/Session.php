@@ -9,7 +9,8 @@ use Rougin\Weasley\Contract\Session as Contract;
  * Session
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class Session implements Contract
 {
@@ -52,7 +53,8 @@ class Session implements Contract
     /**
      * Removes the value from the specified key.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return boolean
      */
     public function delete($key)
@@ -76,8 +78,9 @@ class Session implements Contract
     /**
      * Returns the value from the specified key.
      *
-     * @param  string     $key
-     * @param  mixed|null $default
+     * @param string     $key
+     * @param mixed|null $default
+     *
      * @return mixed
      */
     public function get($key, $default = null)
@@ -100,7 +103,8 @@ class Session implements Contract
     /**
      * Updates the current session ID with a newly generated one.
      *
-     * @param  boolean $delete
+     * @param boolean $delete
+     *
      * @return boolean
      */
     public function regenerate($delete = false)
@@ -122,8 +126,9 @@ class Session implements Contract
     /**
      * Sets the value to the specified key.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return self
      */
     public function set($key, $value)

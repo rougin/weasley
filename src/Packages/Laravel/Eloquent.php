@@ -13,15 +13,17 @@ use Rougin\Slytherin\Integration\IntegrationInterface;
  * An integration for the Laravel Eloquent package (illuminate/database).
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class Eloquent implements IntegrationInterface
 {
     /**
      * Defines the specified integration.
      *
-     * @param  \Rougin\Slytherin\Container\ContainerInterface $container
-     * @param  \Rougin\Slytherin\Integration\Configuration    $config
+     * @param \Rougin\Slytherin\Container\ContainerInterface $container
+     * @param \Rougin\Slytherin\Integration\Configuration    $config
+     *
      * @return \Rougin\Slytherin\Container\ContainerInterface
      */
     public function define(ContainerInterface $container, Configuration $config)
@@ -51,9 +53,10 @@ class Eloquent implements IntegrationInterface
     /**
      * Updates the parameters of the current connection.
      *
-     * @param  \Rougin\Slytherin\Integration\Configuration $config
-     * @param  string                                      $key
-     * @param  array<string, string>                       $value
+     * @param \Rougin\Slytherin\Integration\Configuration $config
+     * @param string                                      $key
+     * @param array<string, string>                       $value
+     *
      * @return void
      */
     protected function connection(Configuration $config, &$key, &$value)

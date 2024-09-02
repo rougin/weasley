@@ -8,7 +8,8 @@ use Rougin\Weasley\Fixture\Middleware\CheckTrimmedString;
  * Trim String Middleware Test
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class TrimStringTest extends AbstractTestCase
 {

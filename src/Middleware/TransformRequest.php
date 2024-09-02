@@ -10,7 +10,8 @@ use Rougin\Weasley\Handlers\MutateRequest;
  * Transform Request Middleware
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class TransformRequest extends MutateRequest
 {

@@ -10,7 +10,8 @@ use Rougin\Weasley\Handlers\EmptyStringToNull as Handler;
  * Empty String To Null Middleware
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class EmptyStringToNull extends Handler
 {

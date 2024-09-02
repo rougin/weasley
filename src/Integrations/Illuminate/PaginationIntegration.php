@@ -10,7 +10,8 @@ use Rougin\Weasley\Illuminate\PaginationIntegration as Integration;
  * Illuminate's Pagination Integration
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class PaginationIntegration extends Integration
 {

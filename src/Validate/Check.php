@@ -8,7 +8,8 @@ use Valitron\Validator;
  * Check
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class Check
 {
@@ -73,7 +74,8 @@ class Check
     /**
      * Returns the specified rules based from the payload.
      *
-     * @param  array<string, mixed> $data
+     * @param array<string, mixed> $data
+     *
      * @return array<string, string>
      */
     public function rules($data)
@@ -84,8 +86,9 @@ class Check
     /**
      * Adds a new error message to the specified key.
      *
-     * @param  string $key
-     * @param  string $text
+     * @param string $key
+     * @param string $text
+     *
      * @return self
      */
     public function setError($key, $text)
@@ -103,7 +106,8 @@ class Check
     /**
      * Checks if the payload is valid againsts the specified rules.
      *
-     * @param  array<string, mixed>|null $data
+     * @param array<string, mixed>|null $data
+     *
      * @return boolean
      */
     public function valid(array $data = null)

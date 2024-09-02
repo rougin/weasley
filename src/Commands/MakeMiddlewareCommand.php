@@ -10,7 +10,8 @@ use Rougin\Weasley\Scripts\CreateHandler;
  * Make Middleware Command
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class MakeMiddlewareCommand extends CreateHandler
 {

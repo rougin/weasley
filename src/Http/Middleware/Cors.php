@@ -10,7 +10,8 @@ use Rougin\Weasley\Middleware\CrossOriginHeaders;
  * CORS Middleware
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class Cors extends CrossOriginHeaders
 {

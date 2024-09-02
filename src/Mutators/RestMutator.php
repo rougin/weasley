@@ -9,7 +9,8 @@ use Rougin\Weasley\Contract\Mutator;
  * API Transformer
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class RestMutator implements Mutator
 {
@@ -21,7 +22,8 @@ class RestMutator implements Mutator
      *
      * Transforms the contents of the result.
      *
-     * @param  \Illuminate\Contracts\Support\Arrayable $data
+     * @param \Illuminate\Contracts\Support\Arrayable $data
+     *
      * @return mixed
      */
     public function transform($data)
@@ -32,7 +34,8 @@ class RestMutator implements Mutator
     /**
      * Mutates the contents of the result.
      *
-     * @param  \Illuminate\Contracts\Support\Arrayable $data
+     * @param \Illuminate\Contracts\Support\Arrayable $data
+     *
      * @return mixed
      */
     public function mutate($data)
@@ -51,7 +54,8 @@ class RestMutator implements Mutator
     /**
      * Converts the paginator into Paypal API standards.
      *
-     * @param  \Illuminate\Contracts\Support\Arrayable $data
+     * @param \Illuminate\Contracts\Support\Arrayable $data
+     *
      * @return array<string, mixed>
      */
     protected function paginator(Arrayable $data)

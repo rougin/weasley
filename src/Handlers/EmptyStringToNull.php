@@ -6,14 +6,16 @@ namespace Rougin\Weasley\Handlers;
  * Empty String To Null Middleware
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class EmptyStringToNull extends MutateRequest
 {
     /**
      * Mutates the specified value.
      *
-     * @param  mixed $value
+     * @param mixed $value
+     *
      * @return mixed
      */
     protected function mutate($value)

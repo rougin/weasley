@@ -10,7 +10,8 @@ use Rougin\Weasley\Handlers\SpoofHttpMethod;
  * Spoof Form Method Middleware
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class SpoofFormMethod extends SpoofHttpMethod
 {

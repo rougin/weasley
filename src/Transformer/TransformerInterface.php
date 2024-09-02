@@ -10,7 +10,8 @@ use Rougin\Weasley\Contract\Mutator;
  * Transformer Interface
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 interface TransformerInterface extends Mutator
 {
@@ -19,7 +20,8 @@ interface TransformerInterface extends Mutator
      *
      * Transforms the contents of the result.
      *
-     * @param  mixed $data
+     * @param mixed $data
+     *
      * @return mixed
      */
     public function transform($data);

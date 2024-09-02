@@ -6,14 +6,16 @@ namespace Rougin\Weasley\Assorted;
  * Random String
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class Random
 {
     /**
      * Generates a random string.
      *
-     * @param  integer $length
+     * @param integer $length
+     *
      * @return string
      */
     public static function make($length)

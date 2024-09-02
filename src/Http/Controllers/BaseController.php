@@ -10,7 +10,8 @@ use Rougin\Weasley\Controllers\BaseController as Controller;
  * Base Controller
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class BaseController extends Controller
 {

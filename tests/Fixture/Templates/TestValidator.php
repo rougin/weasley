@@ -8,7 +8,8 @@ use Rougin\Weasley\Validators\AbstractValidator;
  * TestValidator
  *
  * @package App
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class TestValidator extends AbstractValidator
 {
@@ -29,7 +30,8 @@ class TestValidator extends AbstractValidator
     /**
      * Sets the rules in the validator.
      *
-     * @param  array<string, mixed> $data
+     * @param array<string, mixed> $data
+     *
      * @return void
      */
     protected function rules(array $data = array())

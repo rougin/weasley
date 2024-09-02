@@ -8,7 +8,8 @@ use Rougin\Weasley\Validators\AbstractValidator;
  * User Validator
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class UserValidator extends AbstractValidator
 {
@@ -31,7 +32,8 @@ class UserValidator extends AbstractValidator
     /**
      * Sets the rules in the validator.
      *
-     * @param  array<string, mixed> $data
+     * @param array<string, mixed> $data
+     *
      * @return void
      */
     protected function rules(array $data = array())

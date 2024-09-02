@@ -10,7 +10,8 @@ use Rougin\Weasley\Handlers\JsonContentType;
  * JSON Headers Middleware
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class JsonHeaders extends JsonContentType
 {

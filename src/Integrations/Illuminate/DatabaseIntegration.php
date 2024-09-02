@@ -10,7 +10,8 @@ use Rougin\Weasley\Illuminate\DatabaseIntegration as Integration;
  * Illuminate's Database Integration
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class DatabaseIntegration extends Integration
 {

@@ -10,7 +10,8 @@ use Rougin\Weasley\Illuminate\ViewIntegration as Integration;
  * Illuminate's View Integration
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class ViewIntegration extends Integration
 {

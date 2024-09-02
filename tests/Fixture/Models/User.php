@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * User Model
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class User extends Model
 {

@@ -10,7 +10,8 @@ use Rougin\Weasley\Handlers\AllowCrossOrigin;
  * Cross Origin Headers Middleware
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class CrossOriginHeaders extends AllowCrossOrigin
 {

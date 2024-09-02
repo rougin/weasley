@@ -8,7 +8,8 @@ use Rougin\Weasley\Http\Controllers\RestfulController;
  * No Validator Controller
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class NoValidatorController extends RestfulController
 {

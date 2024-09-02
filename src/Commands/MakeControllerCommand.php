@@ -10,7 +10,8 @@ use Rougin\Weasley\Scripts\CreateRoute;
  * Make Controller Command
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class MakeControllerCommand extends CreateRoute
 {

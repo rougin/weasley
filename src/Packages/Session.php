@@ -13,7 +13,8 @@ use Rougin\Weasley\Session\Session as Instance;
  * Session Package
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class Session implements IntegrationInterface
 {
@@ -24,8 +25,9 @@ class Session implements IntegrationInterface
     /**
      * Defines the specified integration.
      *
-     * @param  \Rougin\Slytherin\Container\ContainerInterface $container
-     * @param  \Rougin\Slytherin\Integration\Configuration    $config
+     * @param \Rougin\Slytherin\Container\ContainerInterface $container
+     * @param \Rougin\Slytherin\Integration\Configuration    $config
+     *
      * @return \Rougin\Slytherin\Container\ContainerInterface
      */
     public function define(ContainerInterface $container, Configuration $config)
@@ -70,7 +72,8 @@ class Session implements IntegrationInterface
     /**
      * Returns the specified SessionHandlerInterface.
      *
-     * @param  \Rougin\Slytherin\Integration\Configuration $config
+     * @param \Rougin\Slytherin\Integration\Configuration $config
+     *
      * @return \SessionHandlerInterface
      */
     protected function handler(Configuration $config)

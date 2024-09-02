@@ -9,7 +9,8 @@ use Psr\Http\Message\ServerRequestInterface;
  * JSON Route
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class JsonRoute extends HttpRoute
 {
@@ -75,7 +76,8 @@ class JsonRoute extends HttpRoute
     /**
      * Deletes the specified item from storage.
      *
-     * @param  integer $id
+     * @param integer $id
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function delete($id)
@@ -131,7 +133,8 @@ class JsonRoute extends HttpRoute
     /**
      * Shows the specified item.
      *
-     * @param  integer $id
+     * @param integer $id
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function show($id)
@@ -163,7 +166,7 @@ class JsonRoute extends HttpRoute
     {
         $response = $this->save();
 
-        /** @var object|array<string, string[]> */
+        /** @var array<string, string[]>|object */
         $result = $response[0];
 
         /** @var integer */
@@ -183,14 +186,15 @@ class JsonRoute extends HttpRoute
     /**
      * Updates the specified item from storage.
      *
-     * @param  integer $id
+     * @param integer $id
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function update($id)
     {
         $response = $this->save($id);
 
-        /** @var object|array<string, string[]> */
+        /** @var array<string, string[]>|object */
         $result = $response[0];
 
         /** @var integer */
@@ -209,7 +213,8 @@ class JsonRoute extends HttpRoute
      *
      * @throws \UnexpectedValueException
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return void
      */
     protected function check($name)
@@ -231,7 +236,7 @@ class JsonRoute extends HttpRoute
     /**
      * Define the variables needed for pagination, if available.
      *
-     * @return array<string, integer|string[]|string>
+     * @return array<string, integer|string|string[]>
      */
     protected function pagination()
     {
@@ -262,8 +267,9 @@ class JsonRoute extends HttpRoute
     /**
      * Creates/updates the data to storage.
      *
-     * @param  integer|null $id
-     * @return array<integer, mixed|integer>
+     * @param integer|null $id
+     *
+     * @return array<integer, integer|mixed>
      */
     protected function save($id = null)
     {

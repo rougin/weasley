@@ -8,7 +8,8 @@ use Rougin\Weasley\Check;
  * User Check
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class UserCheckWithData extends Check
 {

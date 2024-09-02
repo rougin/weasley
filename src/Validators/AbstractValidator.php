@@ -8,7 +8,8 @@ use Valitron\Validator;
  * Abstract Validator
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 abstract class AbstractValidator
 {
@@ -37,7 +38,8 @@ abstract class AbstractValidator
     /**
      * Sets the rules in the validator.
      *
-     * @param  array<string, mixed> $data
+     * @param array<string, mixed> $data
+     *
      * @return void
      */
     abstract protected function rules(array $data = array());
@@ -45,7 +47,8 @@ abstract class AbstractValidator
     /**
      * Validates the given data against the specified rules.
      *
-     * @param  array<string, mixed> $data
+     * @param array<string, mixed> $data
+     *
      * @return boolean
      */
     public function validate(array $data)

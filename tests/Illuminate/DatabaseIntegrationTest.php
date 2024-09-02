@@ -9,7 +9,8 @@ use Rougin\Slytherin\Integration\Configuration;
  * Illuminate Database Integration Test
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class DatabaseIntegrationTest extends \Rougin\Weasley\Testcase
 {

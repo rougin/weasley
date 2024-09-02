@@ -10,7 +10,8 @@ use Rougin\Slytherin\Middleware\MiddlewareInterface;
  * Mutate Request Middleware
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class MutateRequest implements MiddlewareInterface
 {
@@ -18,8 +19,9 @@ class MutateRequest implements MiddlewareInterface
      * Process an incoming server request and return a response, optionally
      * delegating to the next middleware component to create the response.
      *
-     * @param  \Psr\Http\Message\ServerRequestInterface      $request
-     * @param  \Rougin\Slytherin\Middleware\HandlerInterface $handler
+     * @param \Psr\Http\Message\ServerRequestInterface      $request
+     * @param \Rougin\Slytherin\Middleware\HandlerInterface $handler
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function process(ServerRequestInterface $request, HandlerInterface $handler)
@@ -44,7 +46,8 @@ class MutateRequest implements MiddlewareInterface
     /**
      * Maps the array to mutate each value.
      *
-     * @param  array<string, mixed> $items
+     * @param array<string, mixed> $items
+     *
      * @return array<string, mixed>
      */
     protected function map(array $items)
@@ -76,7 +79,8 @@ class MutateRequest implements MiddlewareInterface
      *
      * Transforms the specified value.
      *
-     * @param  mixed $value
+     * @param mixed $value
+     *
      * @return mixed
      */
     protected function transform($value)
@@ -87,7 +91,8 @@ class MutateRequest implements MiddlewareInterface
     /**
      * Mutates the specified value.
      *
-     * @param  mixed $value
+     * @param mixed $value
+     *
      * @return mixed
      */
     protected function mutate($value)

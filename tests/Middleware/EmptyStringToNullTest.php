@@ -8,7 +8,8 @@ use Rougin\Weasley\Fixture\Middleware\CheckQueryParams;
  * "Empty String To Null" Middleware Test
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class EmptyStringToNullTest extends AbstractTestCase
 {

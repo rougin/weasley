@@ -8,7 +8,8 @@ use Rougin\Weasley\Check;
  * TestCheck
  *
  * @package App
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class TestCheck extends Check
 {

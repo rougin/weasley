@@ -10,7 +10,8 @@ use Rougin\Weasley\Contract\Session;
  * Session Interface
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 interface SessionInterface extends Session
 {

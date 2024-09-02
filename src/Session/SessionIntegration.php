@@ -10,7 +10,8 @@ use Rougin\Weasley\Packages\Session;
  * Session Integration
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class SessionIntegration extends Session
 {

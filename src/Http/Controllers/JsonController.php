@@ -10,7 +10,8 @@ use Rougin\Weasley\Controllers\JsonController as Controller;
  * JSON Controller
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class JsonController extends Controller
 {

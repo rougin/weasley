@@ -8,7 +8,8 @@ use Rougin\Weasley\Fixture\Middleware\CheckPatchMethod;
  * Spoof Form Method Middleware Test
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class SpoofFormMethodTest extends AbstractTestCase
 {

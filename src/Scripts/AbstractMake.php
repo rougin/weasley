@@ -12,7 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Abstract Make Command
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class AbstractMake extends Command
 {
@@ -87,8 +88,9 @@ class AbstractMake extends Command
     /**
      * Executes the current command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface   $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface $output
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
      * @return integer
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -109,7 +111,8 @@ class AbstractMake extends Command
     /**
      * Generates a new stub based on the input.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     *
      * @return string
      */
     protected function stub(InputInterface $input)

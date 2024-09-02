@@ -8,7 +8,8 @@ use Rougin\Weasley\Check;
  * User Check
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class UserCheck extends Check
 {
@@ -31,7 +32,8 @@ class UserCheck extends Check
     /**
      * Sets the rules in the validator.
      *
-     * @param  array<string, mixed> $data
+     * @param array<string, mixed> $data
+     *
      * @return array<string, string>
      */
     public function rules($data)

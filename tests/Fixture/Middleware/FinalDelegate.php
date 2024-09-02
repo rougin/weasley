@@ -10,7 +10,8 @@ use Psr\Http\Message\ServerRequestInterface;
  * Final Delegate
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class FinalDelegate implements HandlerInterface
 {
@@ -32,7 +33,8 @@ class FinalDelegate implements HandlerInterface
     /**
      * Dispatch the next available middleware and return the response.
      *
-     * @param  \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function handle(ServerRequestInterface $request)

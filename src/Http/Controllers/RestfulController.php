@@ -8,7 +8,8 @@ namespace Rougin\Weasley\Http\Controllers;
  * RESTful Controller
  *
  * @package Weasley
- * @author  Rougin Gutib <rougingutib@gmail.com>
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
  */
 class RestfulController extends JsonController
 {
