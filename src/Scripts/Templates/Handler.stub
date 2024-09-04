@@ -10,7 +10,8 @@ use Psr\Http\Message\ServerRequestInterface;
  * $CLASS
  *
  * @package $PACKAGE
- * @author  $AUTHOR
+ *
+ * @author $AUTHOR
  */
 class $CLASS implements MiddlewareInterface
 {

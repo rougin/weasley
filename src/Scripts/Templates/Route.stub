@@ -6,7 +6,8 @@ namespace $NAMESPACE;
  * $CLASS
  *
  * @package $PACKAGE
- * @author  $AUTHOR
+ *
+ * @author $AUTHOR
  */
 class $CLASS
 {

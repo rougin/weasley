@@ -8,7 +8,8 @@ use Rougin\Weasley\Check;
  * $CLASS
  *
  * @package $PACKAGE
- * @author  $AUTHOR
+ *
+ * @author $AUTHOR
  */
 class $CLASS extends Check
 {
