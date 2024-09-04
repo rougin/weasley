@@ -16,10 +16,11 @@ use Rougin\Slytherin\Integration\IntegrationInterface;
 class $CLASS implements IntegrationInterface
 {
     /**
-     * Defines the specified integration.
+     * Defines the specified package.
      *
-     * @param  \Rougin\Slytherin\Container\ContainerInterface $container
-     * @param  \Rougin\Slytherin\Integration\Configuration    $config
+     * @param \Rougin\Slytherin\Container\ContainerInterface $container
+     * @param \Rougin\Slytherin\Integration\Configuration    $config
+     *
      * @return \Rougin\Slytherin\Container\ContainerInterface
      */
     public function define(ContainerInterface $container, Configuration $config)

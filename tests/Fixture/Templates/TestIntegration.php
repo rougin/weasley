@@ -16,7 +16,7 @@ use Rougin\Slytherin\Integration\IntegrationInterface;
 class TestIntegration implements IntegrationInterface
 {
     /**
-     * Defines the specified integration.
+     * Defines the specified package.
      *
      * @param \Rougin\Slytherin\Container\ContainerInterface $container
      * @param \Rougin\Slytherin\Integration\Configuration    $config
