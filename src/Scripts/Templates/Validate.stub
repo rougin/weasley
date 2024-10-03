@@ -30,7 +30,8 @@ class $CLASS extends AbstractValidator
     /**
      * Sets the rules in the validator.
      *
-     * @param  array<string, mixed> $data
+     * @param array<string, mixed> $data
+     *
      * @return void
      */
     protected function rules(array $data = array())
