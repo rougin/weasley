@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: [ '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2' ]
+        php-versions: [ '5.3', '5.4', '5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3' ]
     name: Run Unit Test on PHP ${{ matrix.php-versions }}
     steps:
     - name: Checkout
@@ -79,7 +79,11 @@ jobs:
 
     - name: Install Composer packages for PHP 8.2
       if: ${{ matrix.php-versions == '8.2' }}
-      run: composer require illuminate/database illuminate/pagination illuminate/view http-interop/http-middleware:^0.4.1 --no-plugins --dev
+      run: composer require laravel/serializable-closure illuminate/database illuminate/pagination illuminate/view http-interop/http-middleware:^0.4.1 --no-plugins --dev
+
+    - name: Install Composer packages for PHP 8.3
+      if: ${{ matrix.php-versions == '8.2' }}
+      run: composer require laravel/serializable-closure illuminate/database illuminate/pagination illuminate/view http-interop/http-middleware:^0.4.1 --no-plugins --dev
 
     - name: Run test suite
       run: vendor/bin/phpunit --coverage-clover=coverage.clover
