@@ -1,7 +1,7 @@
 {
   "name": "rougin/weasley",
-  "description": "Generators and helpers for the Slytherin framework.",
-  "keywords": ["helper", "generator", "slytherin", "workflow", "weasley"],
+  "description": "Utility belt for Slytherin micro-framework.",
+  "keywords": [ "helper", "generator", "utility", "workflow" ],
   "homepage": "https://roug.in/weasley/",
   "license": "MIT",
   "authors":
