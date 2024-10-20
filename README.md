@@ -6,7 +6,7 @@
 [![Coverage Status][ico-coverage]][link-coverage]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-A package that provides generators, helpers, and utilities for [Slytherin](/slytherin/).
+A package that provides generators, helpers, and utilities for [Slytherin](https://roug.in/slytherin/).
 
 ## Installation
 
