@@ -6,7 +6,7 @@
 [![Coverage Status][ico-coverage]][link-coverage]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-`Weasley` is an utility package in PHP that provides generators, helpers, and utilities for [Slytherin](https://roug.in/slytherin/). This will improve the overall productivity when writing web applications based on the `Slytherin` PHP micro-framework.
+`Weasley` is an utility package in PHP that provides generators, helpers, and utilities for [Slytherin](https://roug.in/slytherin/). Its goal is to improve the overall productivity when writing web applications based on the `Slytherin` PHP micro-framework.
 
 ## Installation
 
@@ -15,6 +15,8 @@ Install the `Weasley` package via [Composer](https://getcomposer.org/):
 ``` bash
 $ composer require rougin/weasley
 ```
+
+Once installed, kindly see the following features below provided by `Weasley`:
 
 ## Code generators
 
@@ -42,7 +44,7 @@ Creates a new [Slytherin Integration](https://github.com/rougin/slytherin/wiki/I
 
 Creates a new [HTTP route](https://github.com/rougin/slytherin/wiki/Defining-HTTP-Routes) class.
 
-## HTTP Routes
+## HTTP routes
 
 In creating web applications, `Weasley` also provides PHP classes to create HTTP routes based on the [RESTful](https://en.wikipedia.org/wiki/REST) style.
 
@@ -89,7 +91,7 @@ $ composer require illuminate/paginate
 
 `Weasley` also provides a simple implementation of the [SessionHandlerInterface](https://secure.php.net/manual/en/class.sessionhandlerinterface.php).
 
-## HTTP Handlers
+## HTTP handlers
 
 `Weasley` has the following HTTP middlewares (HTTP handlers in this case) to improve the handling of HTTP requests and its respective responses:
 
