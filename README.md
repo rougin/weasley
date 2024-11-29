@@ -6,7 +6,7 @@
 [![Coverage Status][ico-coverage]][link-coverage]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-`Weasley` is an utility package in PHP that provides generators, helpers, and utilities for [Slytherin](https://roug.in/slytherin/). Its goal is to improve the overall productivity when writing web applications based on the `Slytherin` PHP micro-framework.
+`Weasley` is a PHP package that provides generators, helpers, and utility classes for the [Slytherin](https://roug.in/slytherin/). Its goal is to improve the overall productivity when writing web applications based on `Slytherin` by reducing in writing code related to [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
 
 ## Installation
 
