@@ -1,21 +1,18 @@
 <?php
 
-namespace Rougin\Weasley;
+namespace Rougin\Weasley\Validators;
 
 use Rougin\Weasley\Fixture\Validators\UserValidator;
+use Rougin\Weasley\Testcase;
 
 /**
- * Abstract Validator Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class AbstractValidatorTest extends \Rougin\Weasley\Testcase
+class AbstractValidatorTest extends Testcase
 {
     /**
-     * Tests AbstractValidator::validate.
-     *
      * @return void
      */
     public function testValidateMethod()

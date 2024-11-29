@@ -7,8 +7,6 @@ use Rougin\Slytherin\Middleware\HandlerInterface;
 use Rougin\Slytherin\Middleware\MiddlewareInterface;
 
 /**
- * "Check $_GET Parameters" Middleware
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
@@ -16,9 +14,6 @@ use Rougin\Slytherin\Middleware\MiddlewareInterface;
 class CheckQueryParams implements MiddlewareInterface
 {
     /**
-     * Process an incoming server request and return a response, optionally
-     * delegating to the next middleware component to create the response.
-     *
      * @param \Psr\Http\Message\ServerRequestInterface      $request
      * @param \Rougin\Slytherin\Middleware\HandlerInterface $handler
      *

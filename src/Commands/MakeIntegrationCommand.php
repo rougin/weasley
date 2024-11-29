@@ -7,8 +7,6 @@ use Rougin\Weasley\Scripts\CreatePackage;
 /**
  * @deprecated since ~0.7, use "Scripts/CreatePackage" instead.
  *
- * Make Integration Command
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

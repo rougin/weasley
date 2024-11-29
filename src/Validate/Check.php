@@ -5,8 +5,6 @@ namespace Rougin\Weasley\Validate;
 use Valitron\Validator;
 
 /**
- * Check
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

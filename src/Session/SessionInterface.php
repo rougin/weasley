@@ -7,8 +7,6 @@ use Rougin\Weasley\Contract\Session;
 /**
  * @deprecated since ~0.7, use "Contract/Session instead".
  *
- * Session Interface
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

@@ -8,10 +8,6 @@ use Rougin\Slytherin\Integration\Configuration;
 use Rougin\Slytherin\Integration\IntegrationInterface;
 
 /**
- * Laravel Pagination Integration
- *
- * An integration for the Laravel Pagination package (illuminate/pagination).
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

@@ -7,8 +7,6 @@ use Rougin\Slytherin\Middleware\HandlerInterface;
 use Rougin\Slytherin\Middleware\MiddlewareInterface;
 
 /**
- * Spoof HTTP Method Middleware
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

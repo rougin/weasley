@@ -4,21 +4,18 @@ namespace Rougin\Weasley\Illuminate;
 
 use Rougin\Slytherin\Container\Container;
 use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Weasley\Testcase;
 
 /**
- * Illuminate View Integration Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class ViewIntegrationTest extends \Rougin\Weasley\Testcase
+class ViewIntegrationTest extends Testcase
 {
     const RENDERER = 'Rougin\Slytherin\Template\RendererInterface';
 
     /**
-     * Sets up the integration instance.
-     *
      * @return void
      */
     protected function doSetUp()

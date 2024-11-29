@@ -3,8 +3,6 @@
 namespace Rougin\Weasley\Handlers;
 
 /**
- * Trim String Middleware
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

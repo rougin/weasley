@@ -5,7 +5,7 @@ namespace Rougin\Weasley\Validators;
 use Valitron\Validator;
 
 /**
- * Abstract Validator
+ * @deprecated since ~0.8, use "Check" instead.
  *
  * @package Weasley
  *

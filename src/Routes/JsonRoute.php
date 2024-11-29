@@ -6,8 +6,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * JSON Route
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

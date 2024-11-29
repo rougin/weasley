@@ -7,8 +7,6 @@ use Rougin\Weasley\Packages\Session;
 /**
  * @deprecated since ~0.7, use "Packages/Session" instead.
  *
- * Session Integration
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

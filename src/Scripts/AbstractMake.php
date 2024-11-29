@@ -9,8 +9,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Abstract Make Command
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

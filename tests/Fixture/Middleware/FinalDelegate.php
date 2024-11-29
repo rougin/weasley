@@ -7,8 +7,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * Final Delegate
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
@@ -21,8 +19,6 @@ class FinalDelegate implements HandlerInterface
     protected $response;
 
     /**
-     * Initializes the handler instance.
-     *
      * @param \Psr\Http\Message\ResponseInterface $response
      */
     public function __construct(ResponseInterface $response)
@@ -31,8 +27,6 @@ class FinalDelegate implements HandlerInterface
     }
 
     /**
-     * Dispatch the next available middleware and return the response.
-     *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      *
      * @return \Psr\Http\Message\ResponseInterface

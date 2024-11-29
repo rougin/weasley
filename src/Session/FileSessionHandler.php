@@ -3,8 +3,6 @@
 namespace Rougin\Weasley\Session;
 
 /**
- * File Session Handler
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

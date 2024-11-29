@@ -6,8 +6,6 @@ use Illuminate\Contracts\Support\Arrayable;
 use Rougin\Weasley\Contract\Mutator;
 
 /**
- * API Transformer
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

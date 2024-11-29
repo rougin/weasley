@@ -7,8 +7,6 @@ use Rougin\Weasley\Controllers\BaseController as Controller;
 /**
  * @deprecated since ~0.6, use "Controllers/BaseController" instead.
  *
- * Base Controller
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

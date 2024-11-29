@@ -7,15 +7,14 @@ use Rougin\Slytherin\Http\HttpIntegration;
 use Rougin\Slytherin\Integration\Configuration;
 use Rougin\Slytherin\Middleware\Dispatcher;
 use Rougin\Weasley\Fixture\Middleware\FinalDelegate;
+use Rougin\Weasley\Testcase;
 
 /**
- * Abstract Test Case
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
+abstract class AbstractTestCase extends Testcase
 {
     const DELEGATE = 'Rougin\Weasley\Fixture\Middleware\FinalDelegate';
 
@@ -39,8 +38,6 @@ abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
     protected $request;
 
     /**
-     * Sets up the middleware dispatcher instances.
-     *
      * @return void
      */
     protected function doSetUp()

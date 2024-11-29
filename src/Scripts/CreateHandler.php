@@ -3,8 +3,6 @@
 namespace Rougin\Weasley\Scripts;
 
 /**
- * Create Handler Command
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

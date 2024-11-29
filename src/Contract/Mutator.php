@@ -3,8 +3,6 @@
 namespace Rougin\Weasley\Contract;
 
 /**
- * Mutator Interface
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

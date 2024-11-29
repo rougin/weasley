@@ -8,8 +8,6 @@ use Rougin\Slytherin\Middleware\MiddlewareInterface;
 use Rougin\Slytherin\Http\Response;
 
 /**
- * Allow Cross Origin Headers Middleware
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

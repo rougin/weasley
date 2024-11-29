@@ -3,17 +3,13 @@
 namespace Rougin\Weasley;
 
 /**
- * Console Application Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class ConsoleTest extends \Rougin\Weasley\Testcase
+class ConsoleTest extends Testcase
 {
     /**
-     * Tests Console::getVersion.
-     *
      * @return void
      */
     public function testGetVersionMethod()
@@ -28,8 +24,6 @@ class ConsoleTest extends \Rougin\Weasley\Testcase
     }
 
     /**
-     * Returns the latest version from CHANGELOG.md.
-     *
      * @return string
      */
     protected function changelog()

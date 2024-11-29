@@ -7,8 +7,6 @@ use Rougin\Weasley\Fixture\Controllers\NoValidatorController;
 use Rougin\Weasley\Fixture\Controllers\UsersController;
 
 /**
- * JSON Controller Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
@@ -23,8 +21,6 @@ class JsonControllerTest extends AbstractTestCase
     protected $controller;
 
     /**
-     * Sets up the controller instance.
-     *
      * @return void
      */
     protected function doSetUp()
@@ -41,8 +37,6 @@ class JsonControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests JsonController::__construct without a model.
-     *
      * @return void
      */
     public function testConstructMagicMethodWithoutModel()
@@ -59,8 +53,6 @@ class JsonControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests JsonController::__construct without a validator.
-     *
      * @return void
      */
     public function testConstructMagicMethodWithoutValidator()
@@ -77,8 +69,6 @@ class JsonControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests JsonController::delete.
-     *
      * @return void
      */
     public function testDeleteMethod()
@@ -93,8 +83,6 @@ class JsonControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests JsonController::index.
-     *
      * @return void
      */
     public function testIndexMethod()
@@ -118,8 +106,6 @@ class JsonControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests JsonController::show.
-     *
      * @return void
      */
     public function testShowMethod()
@@ -138,8 +124,6 @@ class JsonControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests JsonController::show with an error.
-     *
      * @return void
      */
     public function testShowMethodWithError()
@@ -154,8 +138,6 @@ class JsonControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests JsonController::store.
-     *
      * @return void
      */
     public function testStoreMethod()
@@ -181,8 +163,6 @@ class JsonControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests JsonController::store with validation errors.
-     *
      * @return void
      */
     public function testStoreMethodWithValidationErrors()
@@ -201,8 +181,6 @@ class JsonControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests JsonController::update.
-     *
      * @return void
      */
     public function testUpdateMethod()
@@ -230,8 +208,6 @@ class JsonControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests JsonController::update with validation errors.
-     *
      * @return void
      */
     public function testUpdateMethodWithValidationErrors()

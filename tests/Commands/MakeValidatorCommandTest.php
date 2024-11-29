@@ -2,9 +2,15 @@
 
 namespace Rougin\Weasley\Commands;
 
+use Rougin\Weasley\Testcase;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class MakeValidatorCommandTest extends \Rougin\Weasley\Testcase
+/**
+ * @package Weasley
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
+ */
+class MakeValidatorCommandTest extends Testcase
 {
     /**
      * @var \Rougin\Weasley\Console
@@ -12,8 +18,6 @@ class MakeValidatorCommandTest extends \Rougin\Weasley\Testcase
     protected $console;
 
     /**
-     * Sets up the console application.
-     *
      * @return void
      */
     protected function doSetUp()
@@ -22,8 +26,6 @@ class MakeValidatorCommandTest extends \Rougin\Weasley\Testcase
     }
 
     /**
-     * Tests MakeValidatorCommand::execute.
-     *
      * @return void
      */
     public function testExecuteMethod()
@@ -49,8 +51,6 @@ class MakeValidatorCommandTest extends \Rougin\Weasley\Testcase
     }
 
     /**
-     * Tests MakeValidatorCommand::execute.
-     *
      * @return void
      */
     public function test_make_check_command()

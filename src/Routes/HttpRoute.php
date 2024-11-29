@@ -7,8 +7,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Rougin\Weasley\Mutators\JsonMutator;
 
 /**
- * HTTP Route
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

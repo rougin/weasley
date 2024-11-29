@@ -8,10 +8,6 @@ use Rougin\Slytherin\Integration\Configuration;
 use Rougin\Slytherin\Integration\IntegrationInterface;
 
 /**
- * Laravel Eloquent Integration
- *
- * An integration for the Laravel Eloquent package (illuminate/database).
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

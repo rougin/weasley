@@ -3,8 +3,6 @@
 namespace Rougin\Weasley\Scripts;
 
 /**
- * Create Check Command
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

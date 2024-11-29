@@ -2,9 +2,15 @@
 
 namespace Rougin\Weasley\Commands;
 
+use Rougin\Weasley\Testcase;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class MakeControllerCommandTest extends \Rougin\Weasley\Testcase
+/**
+ * @package Weasley
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
+ */
+class MakeControllerCommandTest extends Testcase
 {
     /**
      * @var \Rougin\Weasley\Console
@@ -12,8 +18,6 @@ class MakeControllerCommandTest extends \Rougin\Weasley\Testcase
     protected $console;
 
     /**
-     * Sets up the console application.
-     *
      * @return void
      */
     protected function doSetUp()
@@ -22,8 +26,6 @@ class MakeControllerCommandTest extends \Rougin\Weasley\Testcase
     }
 
     /**
-     * Tests MakeControllerCommand::execute.
-     *
      * @return void
      */
     public function testExecuteMethod()

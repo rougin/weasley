@@ -6,8 +6,6 @@ use Psr\Http\Message\ResponseInterface;
 use Rougin\Weasley\Contract\Mutator;
 
 /**
- * JSON Transformer
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
