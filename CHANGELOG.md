@@ -2,6 +2,11 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
+## [0.7.1](https://github.com/rougin/weasley/compare/v0.7.0...v0.7.1) - 2025-07-29
+
+### Added
+- Version `~7.0` for `symfony/console`
+
 ## [0.7.0](https://github.com/rougin/weasley/compare/v0.6.4...v0.7.0) - 2024-04-08
 
 **NOTE**: This release may break your application if upgrading from `v0.7.0` release.
