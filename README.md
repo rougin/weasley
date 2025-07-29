@@ -16,6 +16,9 @@ Install the `Weasley` package via [Composer](https://getcomposer.org/):
 $ composer require rougin/weasley
 ```
 
+> [!NOTE]
+> When using the `weasley` command, the [Symfony Console](https://symfony.com/doc/current/components/console.html) must be installed first.
+
 Once installed, kindly see the following features below provided by `Weasley`:
 
 ## Code generators
