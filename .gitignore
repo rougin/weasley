@@ -1,8 +1,11 @@
+.gemini
 .php-cs-fixer.cache
 .phpunit.result.cache
+AGENTS.md
 build
 composer.lock
 docs
+GEMINI.md
 tests/Fixture/Storage/Compiled
 tests/Fixture/Storage/Sessions
 vendor
