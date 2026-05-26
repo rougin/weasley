@@ -2,76 +2,118 @@
 
 namespace Rougin\Weasley\Commands;
 
+use Rougin\Weasley\Console;
+use Rougin\Weasley\Testcase;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class MakeValidatorCommandTest extends \Rougin\Weasley\Testcase
+/**
+ * @package Weasley
+ *
+ * @author Rougin Gutib <rougingutib@gmail.com>
+ */
+class MakeValidatorCommandTest extends Testcase
 {
     /**
-     * @var \Rougin\Weasley\Console
+     * @var \Symfony\Component\Console\Application
      */
-    protected $console;
+    protected $app;
 
     /**
-     * Sets up the console application.
-     *
+     * @var string
+     */
+    protected $name = 'make:validator';
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_created()
+    {
+        // Run the command from the console app ---
+        $command = $this->app->find($this->name);
+
+        $command = new CommandTester($command);
+
+        $data = array('name' => 'TestValidator');
+
+        $command->execute($data);
+        // ----------------------------------------
+
+        // Prepare the expected file after generation ---
+        $path = '/src/Validators/TestValidator.php';
+
+        $expect = $file = $this->getRoot() . $path;
+
+        /** @var string */
+        $expect = file_get_contents($expect);
+
+        $expect = str_replace("\r\n", "\n", $expect);
+        // ----------------------------------------------
+
+        // Find the actual generated file -------------------
+        $path = '/tests/Fixture/Templates/TestValidator.php';
+
+        $actual = $this->getRoot() . $path;
+
+        /** @var string */
+        $actual = file_get_contents($actual);
+
+        $actual = str_replace("\r\n", "\n", $actual);
+        // --------------------------------------------------
+
+        $this->assertEquals($expect, $actual);
+
+        unlink($file);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_check_created()
+    {
+        // Run the command from the console app ---
+        $command = $this->app->find('make:check');
+
+        $command = new CommandTester($command);
+
+        $data = array('name' => 'TestCheck');
+
+        $command->execute($data);
+        // ----------------------------------------
+
+        // Prepare the expected file after generation ---
+        $path = '/src/Checks/TestCheck.php';
+
+        $expect = $file = $this->getRoot() . $path;
+
+        /** @var string */
+        $expect = file_get_contents($expect);
+
+        $expect = str_replace("\r\n", "\n", $expect);
+        // ----------------------------------------------
+
+        // Find the actual generated file ---------------
+        $path = '/tests/Fixture/Templates/TestCheck.php';
+
+        $actual = $this->getRoot() . $path;
+
+        /** @var string */
+        $actual = file_get_contents($actual);
+
+        $actual = str_replace("\r\n", "\n", $actual);
+        // ----------------------------------------------
+
+        $this->assertEquals($expect, $actual);
+
+        unlink($file);
+    }
+
+    /**
      * @return void
      */
     protected function doSetUp()
     {
-        $this->console = new \Rougin\Weasley\Console;
-    }
+        $app = new Console;
 
-    /**
-     * Tests MakeValidatorCommand::execute.
-     *
-     * @return void
-     */
-    public function testExecuteMethod()
-    {
-        $command = new CommandTester($this->console->find('make:validator'));
-
-        $command->execute(array('name' => 'TestValidator'));
-
-        $expected = __DIR__ . '/../../src/Validators/TestValidator.php';
-        $filename = $expected;
-        /** @var string */
-        $expected = file_get_contents($expected);
-        $expected = str_replace("\r\n", "\n", $expected);
-
-        $original = __DIR__ . '/../Fixture/Templates/TestValidator.php';
-        /** @var string */
-        $original = file_get_contents($original);
-        $original = str_replace("\r\n", "\n", $original);
-
-        $this->assertEquals($expected, $original);
-
-        unlink($filename);
-    }
-
-    /**
-     * Tests MakeValidatorCommand::execute.
-     *
-     * @return void
-     */
-    public function test_make_check_command()
-    {
-        $command = new CommandTester($this->console->find('make:check'));
-
-        $command->execute(array('name' => 'TestCheck'));
-
-        $expected = __DIR__ . '/../../src/Checks/TestCheck.php';
-        $filename = $expected;
-        /** @var string */
-        $expected = file_get_contents($expected);
-        $expected = str_replace("\r\n", "\n", $expected);
-
-        $original = __DIR__ . '/../Fixture/Templates/TestCheck.php';
-        /** @var string */
-        $original = file_get_contents($original);
-        $original = str_replace("\r\n", "\n", $original);
-
-        $this->assertEquals($expected, $original);
-
-        unlink($filename);
+        $this->app = $app->make();
     }
 }

@@ -16,14 +16,10 @@ class TestCheck extends Check
     /**
      * @var array<string, string>
      */
-    protected $labels = array(
-        //
-    );
+    protected $labels = array();
 
     /**
      * @var array<string, string>
      */
-    protected $rules = array(
-        //
-    );
+    protected $rules = array();
 }

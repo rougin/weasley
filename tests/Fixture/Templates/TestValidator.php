@@ -2,7 +2,7 @@
 
 namespace App\Validators;
 
-use Rougin\Weasley\Validators\AbstractValidator;
+use Rougin\Weasley\Check;
 
 /**
  * TestValidator
@@ -11,31 +11,15 @@ use Rougin\Weasley\Validators\AbstractValidator;
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class TestValidator extends AbstractValidator
+class TestValidator extends Check
 {
     /**
-     * Sets the labels in the validator.
-     *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function labels()
-    {
-        $labels = array();
-
-        //
-
-        return $labels;
-    }
+    protected $labels = array();
 
     /**
-     * Sets the rules in the validator.
-     *
-     * @param array<string, mixed> $data
-     *
-     * @return void
+     * @var array<string, string>
      */
-    protected function rules(array $data = array())
-    {
-        //
-    }
+    protected $rules = array();
 }

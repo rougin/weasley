@@ -3,8 +3,6 @@
 namespace Rougin\Weasley\Scripts;
 
 /**
- * Create Route Command
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
@@ -15,16 +13,6 @@ class CreateRoute extends AbstractMake
      * @var string
      */
     protected $command = 'make:route';
-
-    /**
-     * @var string[]
-     */
-    protected $aliases = array('make:controller');
-
-    /**
-     * @var string
-     */
-    protected $filename = 'Route.stub';
 
     /**
      * @var string

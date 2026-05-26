@@ -47,7 +47,7 @@ class JsonControllerTest extends AbstractTestCase
      */
     public function testConstructMagicMethodWithoutModel()
     {
-        $this->setExpectedException('UnexpectedValueException');
+        $this->doExpectException('UnexpectedValueException');
 
         /** @var \Psr\Http\Message\ServerRequestInterface */
         $request = $this->container->get(self::REQUEST);
@@ -65,7 +65,7 @@ class JsonControllerTest extends AbstractTestCase
      */
     public function testConstructMagicMethodWithoutValidator()
     {
-        $this->setExpectedException('UnexpectedValueException');
+        $this->doExpectException('UnexpectedValueException');
 
         /** @var \Psr\Http\Message\ServerRequestInterface */
         $request = $this->container->get(self::REQUEST);

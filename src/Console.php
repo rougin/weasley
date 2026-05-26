@@ -2,6 +2,8 @@
 
 namespace Rougin\Weasley;
 
+use Rougin\Blueprint\Blueprint;
+use Rougin\Blueprint\Wrapper;
 use Rougin\Weasley\Commands\MakeControllerCommand;
 use Rougin\Weasley\Commands\MakeIntegrationCommand;
 use Rougin\Weasley\Commands\MakeMiddlewareCommand;
@@ -10,18 +12,15 @@ use Rougin\Weasley\Scripts\CreateCheck;
 use Rougin\Weasley\Scripts\CreateHandler;
 use Rougin\Weasley\Scripts\CreatePackage;
 use Rougin\Weasley\Scripts\CreateRoute;
-use Symfony\Component\Console\Application;
 
 /**
- * Console Application
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class Console extends Application
+class Console extends Blueprint
 {
-    const VERSION = '0.7.0';
+    const VERSION = '0.8.0';
 
     /**
      * Instantiates the console application.
@@ -30,20 +29,39 @@ class Console extends Application
      */
     public function __construct($version = self::VERSION)
     {
-        parent::__construct('Weasley', $version);
+        $this->setName('Weasley');
 
-        // Old commands -----------------------
-        $this->add(new MakeControllerCommand);
-        $this->add(new MakeIntegrationCommand);
-        $this->add(new MakeMiddlewareCommand);
-        $this->add(new MakeValidatorCommand);
-        // ------------------------------------
+        $this->setVersion($version);
+    }
 
-        // New commands --------------
-        $this->add(new CreateCheck);
-        $this->add(new CreateHandler);
-        $this->add(new CreatePackage);
-        $this->add(new CreateRoute);
-        // ---------------------------
+    /**
+     * @return \Symfony\Component\Console\Command\Command[]
+     */
+    protected function getCommands()
+    {
+        $items = array();
+
+        $rows = array();
+
+        // Old commands (to be removed) -----
+        $rows[] = new MakeControllerCommand;
+        $rows[] = new MakeIntegrationCommand;
+        $rows[] = new MakeMiddlewareCommand;
+        $rows[] = new MakeValidatorCommand;
+        // ----------------------------------
+
+        $rows[] = new CreateCheck;
+        $rows[] = new CreateHandler;
+        $rows[] = new CreatePackage;
+        $rows[] = new CreateRoute;
+
+        foreach ($rows as $item)
+        {
+            /** @phpstan-ignore-next-line */
+            $items[] = new Wrapper($item);
+        }
+
+        /** @phpstan-ignore-next-line */
+        return $items;
     }
 }

@@ -2,15 +2,11 @@
 
 namespace Rougin\Weasley\Scripts;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
+use Rougin\Blueprint\Command;
+use Rougin\Classidy\Classidy;
+use Rougin\Classidy\Generator;
 
 /**
- * Abstract Make Command
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
@@ -26,11 +22,6 @@ class AbstractMake extends Command
      * @var boolean
      */
     protected $deprecated = false;
-
-    /**
-     * @var string
-     */
-    protected $filename = '';
 
     /**
      * @var string
@@ -53,13 +44,14 @@ class AbstractMake extends Command
     protected $text = '';
 
     /**
-     * Sets the configurations of the current command.
-     *
      * @return void
      */
-    protected function configure()
+    public function init()
     {
-        $this->setName($this->command);
+        if ($this->command)
+        {
+            $this->name = $this->command;
+        }
 
         $text = $this->text;
 
@@ -68,74 +60,106 @@ class AbstractMake extends Command
             $text = '(Deprecated) ' . $text;
         }
 
-        $this->setDescription($text);
+        $this->description = $text;
 
-        $this->addArgument('name', InputArgument::REQUIRED, 'Name of the class');
+        // "Name" argument ---------------
+        $text = 'Name of the class';
 
-        $optional = InputOption::VALUE_OPTIONAL;
+        $this->addArgument('name', $text);
+        // -------------------------------
 
-        $this->addOption('path', null, $optional, 'Path for the file to be created', $this->path);
+        // "Path" option (--path) ------------------------
+        $text = 'Path for the file to be created';
 
-        $this->addOption('namespace', null, $optional, 'Namespace of the class', $this->namespace);
+        $this->addValueOption('path', $text, $this->path);
+        // -----------------------------------------------
 
-        $this->addOption('package', null, $optional, 'Name of the package', 'App');
+        // "Namespace" option (--namespace) --------------
+        $text = 'Namespace of the class';
 
-        $author = 'Rougin Gutib <rougingutib@gmail.com>';
+        $value = $this->namespace;
 
-        $this->addOption('author', null, $optional, 'Name of the author', $author);
+        $this->addValueOption('namespace', $text, $value);
+        // -----------------------------------------------
+
+        // "Package" option (--package) ---------------
+        $text = 'Name of the package';
+
+        $this->addValueOption('package', $text, 'App');
+        // --------------------------------------------
+
+        // "Author" option (--author) ------------------
+        $value = 'Rougin Gutib <rougingutib@gmail.com>';
+
+        $text = 'Name of the author';
+
+        $this->addValueOption('author', $text, $value);
+        // ---------------------------------------------
     }
 
     /**
-     * Executes the current command.
-     *
-     * @param \Symfony\Component\Console\Input\InputInterface   $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
      * @return integer
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    public function run()
     {
-        $path = getcwd() . '/' . $input->getOption('path');
+        /** @var string */
+        $optPath = $this->getOption('path');
+
+        $path = getcwd() . '/' . $optPath;
 
         file_exists($path) || mkdir($path, 0777, true);
 
-        $file = $path . '/' . $input->getArgument('name') . '.php';
+        /** @var string */
+        $argName = $this->getArgument('name');
 
-        file_put_contents($file, $this->stub($input));
+        $file = $path . '/' . $argName . '.php';
 
-        $output->writeln('<info>' . $this->message . '</info>');
+        $class = $this->stub();
 
-        return 0;
+        $maker = new Generator;
+
+        file_put_contents($file, $maker->make($class));
+
+        $this->showPass($this->message);
+
+        return self::RETURN_SUCCESS;
     }
 
     /**
-     * Generates a new stub based on the input.
-     *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     *
-     * @return string
+     * @return \Rougin\Classidy\Classidy
      */
-    protected function stub(InputInterface $input)
+    protected function stub()
     {
-        $path = __DIR__ . '/Templates/';
+        $class = new Classidy;
 
+        // Set the name of the class ------
         /** @var string */
-        $stub = file_get_contents($path . $this->filename);
+        $name = $this->getArgument('name');
 
-        /** @var string */
-        $name = $input->getArgument('name');
-        $stub = str_replace('$CLASS', $name, $stub);
+        $class->setName($name);
+        // --------------------------------
 
+        // Set the namespace of the class -----
         /** @var string */
-        $namespace = $input->getOption('namespace');
-        $stub = str_replace('$NAMESPACE', $namespace, $stub);
+        $value = $this->getOption('namespace');
 
-        /** @var string */
-        $package = $input->getOption('package');
-        $stub = str_replace('$PACKAGE', $package, $stub);
+        $class->setNamespace($value);
+        // ------------------------------------
 
+        // Set the package name of the class ---
         /** @var string */
-        $author = $input->getOption('author');
-        return str_replace('$AUTHOR', $author, $stub);
+        $value = $this->getOption('package');
+
+        $class->setPackage($value);
+        // -------------------------------------
+
+        // Set the author of the classs ----
+        /** @var string */
+        $value = $this->getOption('author');
+
+        $class->setAuthor($value);
+        // ---------------------------------
+
+        return $class->setComment($name);
     }
 }

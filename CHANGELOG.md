@@ -2,6 +2,12 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
+## [0.8.0](https://github.com/rougin/weasley/compare/v0.6.4...v0.7.0) - Unreleased
+
+### Changed
+- Migrated to [Blueprint](https://github.com/rougin/blueprint) for console commands
+- Migrated to [Classidy](https://github.com/rougin/classidy) for code generation
+
 ## [0.7.0](https://github.com/rougin/weasley/compare/v0.6.4...v0.7.0) - 2024-04-08
 
 **NOTE**: This release may break your application if upgrading from `v0.7.0` release.

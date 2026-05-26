@@ -3,36 +3,30 @@
 namespace Rougin\Weasley;
 
 /**
- * Console Application Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class ConsoleTest extends \Rougin\Weasley\Testcase
+class ConsoleTest extends Testcase
 {
     /**
-     * Tests Console::getVersion.
-     *
      * @return void
      */
-    public function testGetVersionMethod()
+    public function test_passed_if_correct_version()
     {
-        $expected = $this->changelog();
+        $expect = $this->getChangelog();
 
         $app = new Console;
 
-        $result = $app->getVersion();
+        $actual = $app->make()->getVersion();
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
-     * Returns the latest version from CHANGELOG.md.
-     *
      * @return string
      */
-    protected function changelog()
+    protected function getChangelog()
     {
         /** @var string[] */
         $file = file(__DIR__ . '/../CHANGELOG.md');
