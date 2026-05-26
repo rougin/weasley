@@ -127,17 +127,11 @@ else
 
 ## Changelog
 
-Please see [CHANGELOG][link-changelog] for more information what has changed recently.
+Please see [CHANGELOG][link-changelog] for more recent changes.
 
-## Testing
+## Contributing
 
-``` bash
-$ composer test
-```
-
-## Credits
-
-- [All contributors][link-contributors]
+See [CONTRIBUTING][link-contributing] on how to contribute.
 
 ## License
 
@@ -151,7 +145,8 @@ The MIT License (MIT). Please see [LICENSE][link-license] for more information.
 
 [link-build]: https://github.com/rougin/weasley/actions
 [link-changelog]: https://github.com/rougin/weasley/blob/master/CHANGELOG.md
-[link-contributors]: https://github.com/rougin/weasley/contributors
+[link-contributing]: https://github.com/rougin/weasley/blob/master/CONTRIBUTING.md
+
 [link-coverage]: https://app.codecov.io/gh/rougin/weasley
 [link-downloads]: https://packagist.org/packages/rougin/weasley
 [link-license]: https://github.com/rougin/weasley/blob/master/LICENSE.md
