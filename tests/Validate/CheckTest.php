@@ -6,8 +6,6 @@ use Rougin\Weasley\Fixture\Checks\UserCheck;
 use Rougin\Weasley\Fixture\Checks\UserCheckWithData;
 
 /**
- * Check Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

@@ -5,8 +5,6 @@ namespace Rougin\Weasley\Session;
 use Rougin\Slytherin\Container\Container;
 
 /**
- * Session Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
@@ -19,8 +17,6 @@ class SessionTest extends AbstractTestCase
     protected $session;
 
     /**
-     * Sets up the session instance.
-     *
      * @return void
      */
     protected function doSetUp()
@@ -38,8 +34,6 @@ class SessionTest extends AbstractTestCase
     }
 
     /**
-     * Tests SessionInterface::delete.
-     *
      * @runInSeparateProcess
      *
      * @return void
@@ -54,8 +48,6 @@ class SessionTest extends AbstractTestCase
     }
 
     /**
-     * Tests SessionInterface::get.
-     *
      * @runInSeparateProcess
      *
      * @return void
@@ -72,8 +64,6 @@ class SessionTest extends AbstractTestCase
     }
 
     /**
-     * Tests SessionInterface::regenerate.
-     *
      * @runInSeparateProcess
      *
      * @return void

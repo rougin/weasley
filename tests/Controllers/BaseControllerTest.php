@@ -3,8 +3,6 @@
 namespace Rougin\Weasley\Controllers;
 
 /**
- * Base Controller Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
@@ -17,8 +15,6 @@ class BaseControllerTest extends AbstractTestCase
     protected $controller;
 
     /**
-     * Sets up the controller instance.
-     *
      * @return void
      */
     protected function doSetUp()
@@ -35,8 +31,6 @@ class BaseControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests BaseController::json.
-     *
      * @return void
      */
     public function testJsonMethod()
@@ -51,8 +45,6 @@ class BaseControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests BaseController::json with an error.
-     *
      * @return void
      */
     public function testJsonMethodWithError()
@@ -69,8 +61,6 @@ class BaseControllerTest extends AbstractTestCase
     }
 
     /**
-     * Tests BaseController::toJson.
-     *
      * @return void
      */
     public function testToJsonMethod()

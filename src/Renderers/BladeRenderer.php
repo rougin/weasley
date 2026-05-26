@@ -6,10 +6,6 @@ use Illuminate\Contracts\View\Factory;
 use Rougin\Slytherin\Template\RendererInterface;
 
 /**
- * Laravel Blade Renderer
- *
- * A simple wrapper of Laravel Blade to Slytherin's RendererInterface.
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

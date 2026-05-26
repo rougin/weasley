@@ -5,8 +5,6 @@ namespace Rougin\Weasley\Fixture\Controllers;
 use Rougin\Weasley\Http\Controllers\RestfulController;
 
 /**
- * Users Controller
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

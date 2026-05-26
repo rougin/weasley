@@ -5,8 +5,6 @@ namespace Rougin\Weasley\Fixture\Checks;
 use Rougin\Weasley\Check;
 
 /**
- * User Check
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
@@ -14,8 +12,6 @@ use Rougin\Weasley\Check;
 class UserCheck extends Check
 {
     /**
-     * Sets the labels in the validator.
-     *
      * @return array<string, string>
      */
     public function labels()
@@ -30,8 +26,6 @@ class UserCheck extends Check
     }
 
     /**
-     * Sets the rules in the validator.
-     *
      * @param array<string, mixed> $data
      *
      * @return array<string, string>

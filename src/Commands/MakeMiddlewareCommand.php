@@ -7,8 +7,6 @@ use Rougin\Weasley\Scripts\CreateHandler;
 /**
  * @deprecated since ~0.7, use "Scripts/CreateHandler" instead.
  *
- * Make Middleware Command
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

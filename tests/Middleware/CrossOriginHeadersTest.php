@@ -5,8 +5,6 @@ namespace Rougin\Weasley\Middleware;
 use Rougin\Weasley\Http\Middleware\Cors;
 
 /**
- * Cross Origin Headers Middleware Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
@@ -14,8 +12,6 @@ use Rougin\Weasley\Http\Middleware\Cors;
 class CrossOriginHeadersTest extends AbstractTestCase
 {
     /**
-     * Tests MiddlewareInterface::process.
-     *
      * @return void
      */
     public function testProcessMethod()
@@ -30,8 +26,6 @@ class CrossOriginHeadersTest extends AbstractTestCase
     }
 
     /**
-     * Tests MiddlewareInterface::process with allowed methods.
-     *
      * @return void
      */
     public function testProcessMethodWithAllowedMethods()
@@ -48,8 +42,6 @@ class CrossOriginHeadersTest extends AbstractTestCase
     }
 
     /**
-     * Tests MiddlewareInterface::process with allowed origins.
-     *
      * @return void
      */
     public function testProcessMethodWithAllowedOrigin()

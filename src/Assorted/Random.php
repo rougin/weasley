@@ -3,8 +3,6 @@
 namespace Rougin\Weasley\Assorted;
 
 /**
- * Random String
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

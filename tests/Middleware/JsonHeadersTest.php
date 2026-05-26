@@ -5,8 +5,6 @@ namespace Rougin\Weasley\Middleware;
 use Rougin\Weasley\Http\Middleware\Json;
 
 /**
- * JSON Headers Middleware Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
@@ -14,8 +12,6 @@ use Rougin\Weasley\Http\Middleware\Json;
 class JsonHeadersTest extends AbstractTestCase
 {
     /**
-     * Tests MiddlewareInterface::process.
-     *
      * @return void
      */
     public function testProcessMethod()

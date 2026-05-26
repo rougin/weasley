@@ -7,8 +7,6 @@ use Rougin\Weasley\Scripts\CreateCheck;
 /**
  * @deprecated since ~0.7, use "Scripts/CreateCheck" instead.
  *
- * Make Validator Command
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

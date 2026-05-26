@@ -82,7 +82,7 @@ jobs:
       run: composer require laravel/serializable-closure illuminate/database illuminate/pagination illuminate/view http-interop/http-middleware:^0.4.1 --no-plugins --dev
 
     - name: Install Composer packages for PHP 8.3
-      if: ${{ matrix.php-versions == '8.2' }}
+      if: ${{ matrix.php-versions == '8.3' }}
       run: composer require laravel/serializable-closure illuminate/database illuminate/pagination illuminate/view http-interop/http-middleware:^0.4.1 --no-plugins --dev
 
     - name: Run test suite

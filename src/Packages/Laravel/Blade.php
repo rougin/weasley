@@ -16,10 +16,6 @@ use Rougin\Slytherin\Integration\IntegrationInterface;
 use Rougin\Weasley\Renderers\BladeRenderer;
 
 /**
- * Laravel Blade Integration
- *
- * An integration for the Laravel Blade package (illuminate/view).
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

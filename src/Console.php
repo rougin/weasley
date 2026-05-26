@@ -23,8 +23,6 @@ class Console extends Blueprint
     const VERSION = '0.8.0';
 
     /**
-     * Instantiates the console application.
-     *
      * @param string $version
      */
     public function __construct($version = self::VERSION)

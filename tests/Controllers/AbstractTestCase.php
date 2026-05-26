@@ -6,15 +6,14 @@ use Rougin\Slytherin\Container\Container;
 use Rougin\Slytherin\Http\HttpIntegration;
 use Rougin\Slytherin\Integration\Configuration;
 use Rougin\Weasley\Illuminate\DatabaseIntegration;
+use Rougin\Weasley\Testcase;
 
 /**
- * Abstract Test Case
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
+abstract class AbstractTestCase extends Testcase
 {
     const REQUEST = 'Psr\Http\Message\ServerRequestInterface';
 
@@ -26,8 +25,6 @@ abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
     protected $container;
 
     /**
-     * Sets up the request and response instances.
-     *
      * @return void
      */
     protected function doSetUp()

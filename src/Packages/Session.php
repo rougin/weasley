@@ -10,8 +10,6 @@ use Rougin\Weasley\Session\FileSessionHandler;
 use Rougin\Weasley\Session\Session as Instance;
 
 /**
- * Session Package
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

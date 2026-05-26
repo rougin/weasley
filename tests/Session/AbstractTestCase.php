@@ -3,15 +3,14 @@
 namespace Rougin\Weasley\Session;
 
 use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Weasley\Testcase;
 
 /**
- * Abstract Test Case
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
+abstract class AbstractTestCase extends Testcase
 {
     const SESSION = 'Rougin\Weasley\Contract\Session';
 
@@ -26,8 +25,6 @@ abstract class AbstractTestCase extends \Rougin\Weasley\Testcase
     protected $integration;
 
     /**
-     * Sets up the session instance.
-     *
      * @return void
      */
     protected function doSetUp()

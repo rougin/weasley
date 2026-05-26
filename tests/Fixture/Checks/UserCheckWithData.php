@@ -5,8 +5,6 @@ namespace Rougin\Weasley\Fixture\Checks;
 use Rougin\Weasley\Check;
 
 /**
- * User Check
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

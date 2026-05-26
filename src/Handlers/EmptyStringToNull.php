@@ -3,8 +3,6 @@
 namespace Rougin\Weasley\Handlers;
 
 /**
- * Empty String To Null Middleware
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

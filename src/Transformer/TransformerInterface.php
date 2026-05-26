@@ -7,8 +7,6 @@ use Rougin\Weasley\Contract\Mutator;
 /**
  * @deprecated since ~0.7, use "Contract/Mutator" instead.
  *
- * Transformer Interface
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

@@ -7,8 +7,6 @@ use Rougin\Weasley\Scripts\CreateRoute;
 /**
  * @deprecated since ~0.7, use "Scripts/CreateRoute" instead.
  *
- * Make Controller Command
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

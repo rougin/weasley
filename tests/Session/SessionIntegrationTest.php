@@ -5,8 +5,6 @@ namespace Rougin\Weasley\Session;
 use Rougin\Slytherin\Container\Container;
 
 /**
- * Session Integration Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>

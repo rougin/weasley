@@ -5,8 +5,6 @@ namespace Rougin\Weasley\Middleware;
 use Rougin\Weasley\Fixture\Middleware\ReturnQueryParams;
 
 /**
- * Transform Request Middleware Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
@@ -14,8 +12,6 @@ use Rougin\Weasley\Fixture\Middleware\ReturnQueryParams;
 class TransformRequestTest extends AbstractTestCase
 {
     /**
-     * Tests MiddlewareInterface::process.
-     *
      * @return void
      */
     public function testProcessMethod()

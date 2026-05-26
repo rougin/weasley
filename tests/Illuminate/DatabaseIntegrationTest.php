@@ -4,15 +4,14 @@ namespace Rougin\Weasley\Illuminate;
 
 use Rougin\Slytherin\Container\Container;
 use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Weasley\Testcase;
 
 /**
- * Illuminate Database Integration Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class DatabaseIntegrationTest extends \Rougin\Weasley\Testcase
+class DatabaseIntegrationTest extends Testcase
 {
     /**
      * @var \Rougin\Slytherin\Integration\IntegrationInterface
@@ -20,8 +19,6 @@ class DatabaseIntegrationTest extends \Rougin\Weasley\Testcase
     protected $integration;
 
     /**
-     * Sets up the integration instance.
-     *
      * @return void
      */
     protected function doSetUp()
@@ -36,8 +33,6 @@ class DatabaseIntegrationTest extends \Rougin\Weasley\Testcase
     }
 
     /**
-     * Tests IntegrationInterface::define.
-     *
      * @return void
      */
     public function testDefineMethod()

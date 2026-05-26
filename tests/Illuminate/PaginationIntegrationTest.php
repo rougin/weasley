@@ -6,19 +6,16 @@ use Rougin\Slytherin\Container\Container;
 use Rougin\Slytherin\Http\HttpIntegration;
 use Rougin\Slytherin\Integration\Configuration;
 use Rougin\Weasley\Fixture\Models\User;
+use Rougin\Weasley\Testcase;
 
 /**
- * Illuminate Pagination Integration Test
- *
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class PaginationIntegrationTest extends \Rougin\Weasley\Testcase
+class PaginationIntegrationTest extends Testcase
 {
     /**
-     * Sets up the integration instance.
-     *
      * @return void
      */
     protected function doSetUp()
@@ -31,8 +28,6 @@ class PaginationIntegrationTest extends \Rougin\Weasley\Testcase
     }
 
     /**
-     * Tests IntegrationInterface::define.
-     *
      * @return void
      */
     public function testDefineMethod()
