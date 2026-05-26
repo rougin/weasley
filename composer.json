@@ -1,7 +1,7 @@
 {
   "name": "rougin/weasley",
-  "description": "Utility belt for Slytherin micro-framework.",
-  "keywords": [ "helper", "generator", "utility", "workflow" ],
+  "description": "Helpers and utilities for Slytherin.",
+  "keywords": [ "helper", "utility", "slytherin" ],
   "homepage": "https://roug.in/weasley/",
   "license": "MIT",
   "authors":
@@ -43,5 +43,11 @@
     {
       "Rougin\\Weasley\\": "tests"
     }
+  },
+  "scripts":
+  {
+    "analyze": "phpstan analyse",
+    "restyle": "php-cs-fixer fix --config=phpstyle.php",
+    "test": "phpunit"
   }
 }
