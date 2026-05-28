@@ -185,9 +185,13 @@ else
 }
 ```
 
-## Testing
+## Changelog
 
 Please see [CHANGELOG][link-changelog] for more recent changes.
+
+## Upgrade Guide
+
+As `Weasley` continues to evolve, there might be some breaking changes in its internal code during development. The said changes can be found in [UPGRADING][link-upgrading].
 
 ## Contributing
 
@@ -206,8 +210,8 @@ The MIT License (MIT). Please see [LICENSE][link-license] for more information.
 [link-build]: https://github.com/rougin/weasley/actions
 [link-changelog]: https://github.com/rougin/weasley/blob/master/CHANGELOG.md
 [link-contributing]: https://github.com/rougin/weasley/blob/master/CONTRIBUTING.md
-
 [link-coverage]: https://app.codecov.io/gh/rougin/weasley
 [link-downloads]: https://packagist.org/packages/rougin/weasley
 [link-license]: https://github.com/rougin/weasley/blob/master/LICENSE.md
 [link-packagist]: https://packagist.org/packages/rougin/weasley
+[link-upgrading]: https://github.com/rougin/weasley/blob/master/UPGRADING.md
