@@ -85,8 +85,13 @@ jobs:
       if: ${{ matrix.php-versions == '8.3' }}
       run: composer require laravel/serializable-closure illuminate/database illuminate/pagination illuminate/view http-interop/http-middleware:^0.4.1 --no-plugins --dev
 
-    - name: Run test suite
+    - name: Run test suite (all PHP versions)
+      if: ${{ matrix.php-versions != '5.3' }}
       run: vendor/bin/phpunit --coverage-clover=coverage.clover
+
+    - name: Run test suite (for PHP 5.3)
+      if: ${{ matrix.php-versions == '5.3' }}
+      run: vendor/bin/phpunit --no-coverage
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4-beta
