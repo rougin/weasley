@@ -54,16 +54,30 @@ class FileSessionHandler implements \SessionHandlerInterface
      */
     public function gc($lifetime)
     {
-        /** @var string $file */
-        foreach ((array) glob($this->path) as $file)
+        $files = glob($this->path);
+
+        if ($files === false)
         {
-            $time = ((int) filemtime($file)) + $lifetime;
+            $files = array();
+        }
+
+        /** @var string $file */
+        foreach ($files as $file)
+        {
+            $mtime = filemtime($file);
+
+            if ($mtime === false)
+            {
+                continue;
+            }
+
+            $time = $mtime + $lifetime;
 
             $expired = $time < time();
 
             $exists = ! is_dir($file) && file_exists($file);
 
-            $expired && $exists && unlink((string) $file);
+            $expired && $exists && unlink($file);
         }
 
         return true;
@@ -79,9 +93,9 @@ class FileSessionHandler implements \SessionHandlerInterface
      */
     public function open($path, $id)
     {
-        $file = (string) $path . '/' . $id;
+        $file = $path . '/' . $id;
 
-        $this->path = (string) $path;
+        $this->path = $path;
 
         is_dir($path) || mkdir($path, 777);
 
@@ -122,7 +136,7 @@ class FileSessionHandler implements \SessionHandlerInterface
      */
     public function write($id, $data)
     {
-        $file = (string) $this->path . '/' . $id;
+        $file = $this->path . '/' . $id;
 
         $result = file_put_contents($file, $data);
 

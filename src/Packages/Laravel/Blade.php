@@ -118,6 +118,6 @@ class Blade implements IntegrationInterface
 
         $result['templates'] = $templates;
 
-        return (array) $result;
+        return $result;
     }
 }

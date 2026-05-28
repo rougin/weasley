@@ -33,6 +33,7 @@ class Paginate implements IntegrationInterface
 
         $page = function ($name = null) use ($query)
         {
+            /** @var string */
             $name = $name === null ? 'page' : $name;
 
             return isset($query[$name]) ? $query[$name] : 1;

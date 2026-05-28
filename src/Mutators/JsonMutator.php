@@ -76,10 +76,9 @@ class JsonMutator implements Mutator
     {
         $response = $this->response;
 
-        /** @var string */
         $stream = @json_encode($data, $this->options);
 
-        if (json_last_error() !== JSON_ERROR_NONE)
+        if ($stream === false)
         {
             $stream = $this->errors[json_last_error()];
 

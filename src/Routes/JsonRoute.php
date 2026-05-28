@@ -80,6 +80,7 @@ class JsonRoute extends HttpRoute
      */
     public function delete($id)
     {
+        /** @var \Illuminate\Database\Eloquent\Model */
         $item = $this->eloquent->find($id);
 
         $item->delete();
@@ -141,6 +142,7 @@ class JsonRoute extends HttpRoute
 
         try
         {
+            /** @var \Illuminate\Database\Eloquent\Model */
             $item = $this->eloquent->findOrFail($id);
 
             $result = $item->toArray();
@@ -234,7 +236,7 @@ class JsonRoute extends HttpRoute
     /**
      * Define the variables needed for pagination, if available.
      *
-     * @return array<string, integer|string|string[]>
+     * @return array<string, mixed>
      */
     protected function pagination()
     {
@@ -255,11 +257,14 @@ class JsonRoute extends HttpRoute
 
         $result['limit'] = $query['limit'];
 
-        $columns = explode(',', $query['columns']);
+        /** @var string */
+        $columns = $query['columns'];
+
+        $columns = explode(',', $columns);
 
         $result['columns'] = $columns;
 
-        return (array) $result;
+        return $result;
     }
 
     /**
@@ -271,24 +276,26 @@ class JsonRoute extends HttpRoute
      */
     protected function save($id = null)
     {
-        $parsed = (array) $this->request->getParsedBody();
+        /** @var array<string, mixed> */
+        $parsed = $this->request->getParsedBody();
 
-        if ($this->validation->validate($parsed))
+        if (! $this->validation->validate($parsed))
         {
-            if (is_null($id) === false)
-            {
-                $item = $this->eloquent->find($id);
-
-                $item->update((array) $parsed);
-
-                return array($item, (int) 204);
-            }
-
-            $item = $this->eloquent->create($parsed);
-
-            return array($item, (int) 201);
+            return array($this->validation->errors, 400);
         }
 
-        return array($this->validation->errors, 400);
+        if (is_null($id) === false)
+        {
+            /** @var \Illuminate\Database\Eloquent\Model */
+            $item = $this->eloquent->find($id);
+
+            $item->update($parsed);
+
+            return array($item, 204);
+        }
+
+        $item = $this->eloquent->create($parsed);
+
+        return array($item, 201);
     }
 }

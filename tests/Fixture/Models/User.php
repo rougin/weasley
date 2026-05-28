@@ -17,7 +17,7 @@ class User extends Model
     protected $table = 'users';
 
     /**
-     * @var string[]
+     * @var array<integer, string>
      */
     protected $fillable = array('name', 'username', 'password');
 

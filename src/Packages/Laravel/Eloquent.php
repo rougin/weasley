@@ -26,16 +26,17 @@ class Eloquent implements IntegrationInterface
     {
         $capsule = new Manager;
 
-        /** @var array<string, array<string, string>> */
-        $connections = $config->get('database', array());
+        /** @var array<string, mixed> */
+        $items = $config->get('database', array());
 
-        foreach ($connections as $key => $value)
+        foreach ($items as $key => $item)
         {
-            if (is_array($value))
+            if (is_array($item))
             {
-                $this->connection($config, $key, $value);
+                /** @var array<string, mixed> $item */
+                $this->connection($config, $key, $item);
 
-                $capsule->addConnection($value, $key);
+                $capsule->addConnection($item, $key);
             }
         }
 
@@ -51,7 +52,7 @@ class Eloquent implements IntegrationInterface
      *
      * @param \Rougin\Slytherin\Integration\Configuration $config
      * @param string                                      $key
-     * @param array<string, string>                       $value
+     * @param array<string, mixed>                        $value
      *
      * @return void
      */
@@ -62,7 +63,7 @@ class Eloquent implements IntegrationInterface
         /** @var string */
         $collation = $config->get($collation, 'utf8_unicode_ci');
 
-        $value['collation'] = (string) $collation;
+        $value['collation'] = $collation;
 
         $prefix = 'database.' . $key . '.prefix';
 
@@ -70,6 +71,6 @@ class Eloquent implements IntegrationInterface
 
         $default = $key === $config->get('database.default');
 
-        $key = $default ? 'default' : (string) $key;
+        $key = $default ? 'default' : $key;
     }
 }

@@ -41,10 +41,18 @@ class Session implements Contract
         {
             $this->id = $id;
 
-            /** @var array<string, mixed> */
-            $data = unserialize($handler->read($this->id));
+            $raw = $handler->read($this->id);
 
-            $this->data = $data;
+            if ($raw !== false)
+            {
+                /** @var array<string, mixed>|false */
+                $data = unserialize($raw);
+
+                if ($data !== false)
+                {
+                    $this->data = $data;
+                }
+            }
         }
     }
 
@@ -63,7 +71,7 @@ class Session implements Contract
         {
             unset($this->data[$key]);
 
-            $serialized = (string) serialize($this->data);
+            $serialized = serialize($this->data);
 
             $this->handler->write($this->id, $serialized);
 

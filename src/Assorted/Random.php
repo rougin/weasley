@@ -24,7 +24,7 @@ class Random
 
         while (($len = strlen($string)) < $length)
         {
-            $size = (int) ($length - $len);
+            $size = $length - $len;
 
             /** @var string */
             $bytes = openssl_random_pseudo_bytes($length * 2);
@@ -32,6 +32,8 @@ class Random
             // Use "random_bytes" if PHP version is ~7.0 ------
             if (function_exists('random_bytes'))
             {
+                $size = max(1, $size);
+
                 $bytes = call_user_func('random_bytes', $size);
             }
             // ------------------------------------------------

@@ -2,6 +2,10 @@ parameters:
   level: 10
   bootstrapFiles:
     - src/Session/Aliases.php
+  excludePaths:
+    analyse:
+      - src/Session/V1
+      - src/Session/V2
   paths:
     - src
     - tests

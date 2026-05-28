@@ -20,7 +20,7 @@ class RestMutator implements Mutator
      *
      * Transforms the contents of the result.
      *
-     * @param \Illuminate\Contracts\Support\Arrayable $data
+     * @param \Illuminate\Contracts\Support\Arrayable<integer|string, mixed> $data
      *
      * @return mixed
      */
@@ -32,7 +32,7 @@ class RestMutator implements Mutator
     /**
      * Mutates the contents of the result.
      *
-     * @param \Illuminate\Contracts\Support\Arrayable $data
+     * @param \Illuminate\Contracts\Support\Arrayable<integer|string, mixed> $data
      *
      * @return mixed
      */
@@ -40,9 +40,9 @@ class RestMutator implements Mutator
     {
         $result = $data->toArray();
 
-        if (is_object($data) && is_a($data, self::PAGINATOR))
+        if (is_a($data, self::PAGINATOR))
         {
-            /** @var \Illuminate\Pagination\LengthAwarePaginator $data */
+            /** @var \Illuminate\Pagination\LengthAwarePaginator<integer|string, mixed> $data */
             $result = $this->paginator($data);
         }
 
@@ -52,7 +52,7 @@ class RestMutator implements Mutator
     /**
      * Converts the paginator into Paypal API standards.
      *
-     * @param \Illuminate\Contracts\Support\Arrayable $data
+     * @param \Illuminate\Contracts\Support\Arrayable<integer|string, mixed> $data
      *
      * @return array<string, mixed>
      */
@@ -60,9 +60,11 @@ class RestMutator implements Mutator
     {
         $object = $data->toArray();
 
-        $perPage = (int) $object['per_page'];
+        /** @var integer */
+        $perPage = $object['per_page'];
 
-        $total = (int) $object['total'];
+        /** @var integer */
+        $total = $object['total'];
 
         $rounded = round($total / $perPage);
 

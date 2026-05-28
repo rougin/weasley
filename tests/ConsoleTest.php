@@ -28,10 +28,17 @@ class ConsoleTest extends Testcase
      */
     protected function getChangelog()
     {
-        /** @var string[] */
-        $file = file(__DIR__ . '/../CHANGELOG.md');
+        $file = __DIR__ . '/../CHANGELOG.md';
 
-        $file = str_replace('## [', '', $file[4]);
+        /** @var string */
+        $file = file_get_contents($file);
+
+        $lines = preg_split('/\r\n|\r|\n/', $file);
+
+        if ($lines !== false)
+        {
+            $file = str_replace('## [', '', $lines[4]);
+        }
 
         return substr($file, 0, 5);
     }
