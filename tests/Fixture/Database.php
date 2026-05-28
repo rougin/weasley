@@ -85,7 +85,7 @@ class Database
         $row['password'] = 'gutib';
         $users[] = $row;
 
-        $test = password_hash('test', PASSWORD_BCRYPT);
+        $test = '$2y$10$BM8FxFtyL7oy22U9VHGraOynYyuvRaRn.8PkB1/DyHOLvwJVdti2y';
 
         $row = array('id' => 4);
         $row['name'] = 'Test';
