@@ -1,5 +1,7 @@
 parameters:
   level: 10
+  bootstrapFiles:
+    - src/Session/Aliases.php
   paths:
     - src
     - tests
