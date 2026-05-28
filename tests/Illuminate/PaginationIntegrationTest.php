@@ -2,9 +2,10 @@
 
 namespace Rougin\Weasley\Illuminate;
 
+use Illuminate\Database\Capsule\Manager;
 use Rougin\Slytherin\Container\Container;
 use Rougin\Slytherin\Http\HttpIntegration;
-use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Weasley\Fixture\Database;
 use Rougin\Weasley\Fixture\Models\User;
 use Rougin\Weasley\Testcase;
 
@@ -32,13 +33,23 @@ class PaginationIntegrationTest extends Testcase
      */
     public function testDefineMethod()
     {
+        $config = Database::config();
+
+        $eloquent = new DatabaseIntegration;
+
+        $eloquent->define(new Container, $config);
+
+        $pdo = Manager::connection()->getPdo();
+
+        Database::migrate($pdo);
+
+        Database::seed($pdo);
+
         $expected = 'Illuminate\Pagination\LengthAwarePaginator';
 
         $http = new HttpIntegration;
 
         $pagination = new PaginationIntegration;
-
-        $config = new Configuration;
 
         $container = $http->define(new Container, $config);
 

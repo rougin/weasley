@@ -3,7 +3,7 @@
 namespace Rougin\Weasley\Illuminate;
 
 use Rougin\Slytherin\Container\Container;
-use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Weasley\Fixture\Database;
 use Rougin\Weasley\Testcase;
 
 /**
@@ -37,15 +37,9 @@ class DatabaseIntegrationTest extends Testcase
      */
     public function testDefineMethod()
     {
-        $path = __DIR__ . '/../Fixture/Database.sqlite';
+        $config = Database::config();
 
         $container = new Container;
-
-        $config = new Configuration;
-
-        $config->set('database.default', 'sqlite');
-        $config->set('database.sqlite.driver', 'sqlite');
-        $config->set('database.sqlite.database', $path);
 
         $expected = 'Psr\Container\ContainerInterface';
 

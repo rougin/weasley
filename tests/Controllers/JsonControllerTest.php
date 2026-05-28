@@ -91,7 +91,7 @@ class JsonControllerTest extends AbstractTestCase
 
         $response = $response->getBody();
 
-        $expected = 4 - 1; // Because of testDeleteMethod
+        $expected = 4;
 
         /** @var array<string, mixed> */
         $result = json_decode((string) $response, true);

@@ -2,9 +2,10 @@
 
 namespace Rougin\Weasley\Controllers;
 
+use Illuminate\Database\Capsule\Manager;
 use Rougin\Slytherin\Container\Container;
 use Rougin\Slytherin\Http\HttpIntegration;
-use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Weasley\Fixture\Database;
 use Rougin\Weasley\Illuminate\DatabaseIntegration;
 use Rougin\Weasley\Testcase;
 
@@ -35,20 +36,19 @@ abstract class AbstractTestCase extends Testcase
 
         class_exists($class) || $this->markTestSkipped($message);
 
-        list($config, $path) = array(new Configuration, '');
-
-        $path = __DIR__ . '/../Fixture/Database.sqlite';
-
-        $config->set('database.default', 'sqlite');
-        $config->set('database.sqlite.database', $path);
-        $config->set('database.sqlite.driver', 'sqlite');
-        $config->set('database.sqlite.prefix', '');
+        $config = Database::config();
 
         $eloquent = new DatabaseIntegration;
 
         $http = new HttpIntegration;
 
         $container = $eloquent->define(new Container, $config);
+
+        $pdo = Manager::connection()->getPdo();
+
+        Database::migrate($pdo);
+
+        Database::seed($pdo);
 
         $this->container = $http->define($container, $config);
     }
