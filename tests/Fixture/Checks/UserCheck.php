@@ -30,7 +30,7 @@ class UserCheck extends Check
      *
      * @return array<string, string>
      */
-    public function rules($data)
+    public function rules(array $data)
     {
         $rules = array('name' => 'required');
 

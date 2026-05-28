@@ -43,6 +43,18 @@ $this->validator->rule('required', 'name');
 $this->valid->addRule('name', 'required');
 ```
 
+### `rules()` signature now requires `array` type hint
+
+Since `Check` now extends `Rougin\Valla\Check`, overriding the `rules()` method requires the `array` type hint on its parameter to be compatible with PHP 7.0+:
+
+``` php
+// Before (PHP 5.3 compatible, breaks PHP 7.0+)
+public function rules($data)
+
+// After (compatible with all PHP versions)
+public function rules(array $data)
+```
+
 ### Validators deprecated
 
 The `AbstractValidator` class is now deprecated. Use `Check` instead:
