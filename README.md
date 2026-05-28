@@ -98,6 +98,9 @@ $ composer require illuminate/paginate
 
 `Weasley` has the following HTTP middlewares (HTTP handlers in this case) to improve the handling of HTTP requests and its respective responses:
 
+> [!NOTE]
+> Starting `~0.8`, all HTTP middlewares are now migrated to [Onion](https://github.com/rougin/onion) which is a collection of Slytherin-based HTTP middlewares.
+
 ### `AllowCrossOrigin`
 
 Adds additional headers for [Cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (CORS).
