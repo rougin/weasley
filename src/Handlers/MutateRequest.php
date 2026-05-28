@@ -2,45 +2,15 @@
 
 namespace Rougin\Weasley\Handlers;
 
-use Psr\Http\Message\ServerRequestInterface;
-use Rougin\Slytherin\Middleware\HandlerInterface;
-use Rougin\Slytherin\Middleware\MiddlewareInterface;
+use Rougin\Onion\Transform;
 
 /**
  * @package Weasley
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class MutateRequest implements MiddlewareInterface
+class MutateRequest extends Transform
 {
-    /**
-     * Process an incoming server request and return a response, optionally
-     * delegating to the next middleware component to create the response.
-     *
-     * @param \Psr\Http\Message\ServerRequestInterface      $request
-     * @param \Rougin\Slytherin\Middleware\HandlerInterface $handler
-     *
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    public function process(ServerRequestInterface $request, HandlerInterface $handler)
-    {
-        /** @var array<string, string> */
-        $query = $request->getQueryParams();
-
-        $get = $this->map($query);
-
-        $request = $request->withQueryParams($get);
-
-        /** @var array<string, string> */
-        $post = $request->getParsedBody();
-
-        $post = $this->map($post);
-
-        $post = $request->withParsedBody($post);
-
-        return $handler->handle($post);
-    }
-
     /**
      * Maps the array to mutate each value.
      *
@@ -48,7 +18,7 @@ class MutateRequest implements MiddlewareInterface
      *
      * @return array<string, mixed>
      */
-    protected function map(array $items)
+    protected function map($items)
     {
         foreach ($items as $key => $value)
         {

@@ -2,11 +2,12 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
-## [0.8.0](https://github.com/rougin/weasley/compare/v0.6.4...v0.7.0) - Unreleased
+## [0.8.0](https://github.com/rougin/weasley/compare/v0.7.1...v0.8.0) - Unreleased
 
 ### Changed
 - Migrated to [Blueprint](https://github.com/rougin/blueprint) for console commands
 - Migrated to [Classidy](https://github.com/rougin/classidy) for code generation
+- Migrated to [Onion](https://github.com/rougin/onion) for HTTP middlewares (Handlers)
 
 ## [0.7.1](https://github.com/rougin/weasley/compare/v0.7.0...v0.7.1) - 2025-07-29
 
