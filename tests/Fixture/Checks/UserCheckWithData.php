@@ -12,14 +12,6 @@ use Rougin\Weasley\Check;
 class UserCheckWithData extends Check
 {
     /**
-     * @var array<string, mixed>
-     */
-    protected $data = array(
-        'name' => 'Rougin',
-        'password' => '1234',
-    );
-
-    /**
      * @var array<string, string>
      */
     protected $labels = array(

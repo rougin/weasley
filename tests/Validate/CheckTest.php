@@ -58,7 +58,9 @@ class CheckTest extends Testcase
     {
         $check = new UserCheckWithData;
 
-        $check->valid();
+        $data = array('name' => 'Rougin', 'password' => '1234');
+
+        $check->valid($data);
 
         $expected = array('username' => array());
         $expected['username'][] = 'Username is required';
@@ -75,7 +77,9 @@ class CheckTest extends Testcase
     {
         $check = new UserCheckWithData;
 
-        $check->valid();
+        $data = array('name' => 'Rougin', 'password' => '1234');
+
+        $check->valid($data);
 
         $expected = 'Username is required';
 

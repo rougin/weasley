@@ -32,7 +32,7 @@ class CreateCheck extends AbstractMake
     /**
      * @var string
      */
-    protected $text = 'Creates a new check (validation) class based on Valitron';
+    protected $text = 'Creates a new check (validation) class';
 
     /**
      * @return \Rougin\Classidy\Classidy

@@ -20,8 +20,7 @@
     "rougin/classidy": "~0.1",
     "rougin/onion": "~0.1",
     "rougin/slytherin": "~0.9",
-    "rougin/valla": "~0.1",
-    "vlucas/valitron": "~1.4"
+    "rougin/valla": "~0.1"
   },
   "require-dev":
   {

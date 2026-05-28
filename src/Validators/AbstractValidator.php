@@ -2,7 +2,7 @@
 
 namespace Rougin\Weasley\Validators;
 
-use Valitron\Validator;
+use Rougin\Valla\Valid;
 
 /**
  * @deprecated since ~0.8, use "Check" instead.
@@ -19,13 +19,13 @@ abstract class AbstractValidator
     public $errors = array();
 
     /**
-     * @var \Valitron\Validator
+     * @var \Rougin\Valla\Valid
      */
-    protected $validator;
+    protected $valid;
 
     public function __construct()
     {
-        $this->validator = new Validator;
+        $this->valid = new Valid;
     }
 
     /**
@@ -53,21 +53,20 @@ abstract class AbstractValidator
      */
     public function validate(array $data)
     {
-        $this->validator->labels($this->labels());
+        $labels = $this->labels();
+
+        $this->valid->setLabels($labels);
 
         $this->rules($data);
 
-        $validator = $this->validator->withData($data);
+        $this->valid->setData($data);
 
-        if ($validator->validate())
+        if ($this->valid->passed())
         {
             return true;
         }
 
-        /** @var array<string, string[]> */
-        $errors = $validator->errors();
-
-        $this->errors = $errors;
+        $this->errors = $this->valid->getErrors();
 
         return false;
     }
