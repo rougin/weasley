@@ -14,6 +14,8 @@ use Rougin\Valla\Valid;
 abstract class AbstractValidator
 {
     /**
+     * @deprecated since ~0.8, use "errors()" instead.
+     *
      * @var array<string, string[]>
      */
     public $errors = array();
@@ -36,6 +38,8 @@ abstract class AbstractValidator
     abstract protected function labels();
 
     /**
+     * @deprecated since ~0.8, use "rules" property and "valid" method instead.
+     *
      * Sets the rules in the validator.
      *
      * @param array<string, mixed> $data
@@ -45,6 +49,8 @@ abstract class AbstractValidator
     abstract protected function rules(array $data = array());
 
     /**
+     * @deprecated since ~0.8, use "valid" instead.
+     *
      * Validates the given data against the specified rules.
      *
      * @param array<string, mixed> $data
@@ -53,9 +59,7 @@ abstract class AbstractValidator
      */
     public function validate(array $data)
     {
-        $labels = $this->labels();
-
-        $this->valid->setLabels($labels);
+        $this->valid->setLabels($this->labels());
 
         $this->rules($data);
 

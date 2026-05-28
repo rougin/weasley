@@ -26,6 +26,8 @@ class UserValidator extends AbstractValidator
     }
 
     /**
+     * @deprecated since ~0.8, use "rules" instead.
+     *
      * @param array<string, mixed> $data
      *
      * @return void
