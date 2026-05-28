@@ -7,7 +7,15 @@ All notable changes to `Weasley` will be documented in this file.
 ### Changed
 - Migrated to [Blueprint](https://github.com/rougin/blueprint) for console commands
 - Migrated to [Classidy](https://github.com/rougin/classidy) for code generation
+- Migrated to [Ezekiel](https://github.com/rougin/ezekiel) for test database schema and seeding
 - Migrated to [Onion](https://github.com/rougin/onion) for HTTP middlewares (Handlers)
+- Migrated to [Valla](https://github.com/rougin/valla) for validation (Check)
+
+### Deprecated
+- `Validators\AbstractValidator` (use `Check` instead)
+
+### Removed
+- `Check::$data` property and its implicit fallback in `valid()`
 
 ## [0.7.1](https://github.com/rougin/weasley/compare/v0.7.0...v0.7.1) - 2025-07-29
 
