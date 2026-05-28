@@ -10,176 +10,525 @@
 
 ## Installation
 
-Install the `Weasley` package via [Composer](https://getcomposer.org/):
+Install `Weasley` through [Composer](https://getcomposer.org/):
 
 ``` bash
 $ composer require rougin/weasley
 ```
 
-Once installed, kindly see the following features below provided by `Weasley`:
+## Basic usage
+
+`Weasley` is built on a layered architecture where each domain delegates to a dedicated package:
+
+| Package | Purpose |
+|---------|---------|
+| [Slytherin](https://github.com/rougin/slytherin) | Simple, extensible PHP micro-framework. |
+| [Onion](https://github.com/rougin/onion) | HTTP middlewares for Slytherin. |
+| [Valla](https://github.com/rougin/valla) | A simple validation package in PHP. |
+| [Blueprint](https://github.com/rougin/blueprint) | A bootstrap for PHP console projects. |
+| [Classidy](https://github.com/rougin/classidy) | Create PHP classes using PHP. |
 
 ## Code generators
 
-`Weasley` provides commands that generates code based on the specified type (e.g., `Check`, `Route`, etc.). These commands allow `Slytherin` to be a rapid prototyping tool in creating web-based applications.
+`Weasley` provides commands that generate code for Slytherin components. These commands allow `Slytherin` to be a rapid prototyping tool when creating web-based applications.
 
-To access the list of available commands, kindly run its namesake command from the terminal:
+Use the `weasley` command to access the list of its available commands:
 
 ``` bash
 $ vendor/bin/weasley
 ```
 
-### `make:check`
+### Available commands
 
-Creates a new check (validation) class based on [Valitron](https://github.com/vlucas/valitron).
+| Command | Description |
+|---------|-------------|
+| `make:check` | Creates a new validation (`Check`) class |
+| `make:handler` | Creates a new [HTTP Middleware](https://github.com/rougin/slytherin/wiki/Middleware) class |
+| `make:package` | Creates a new [Slytherin Integration](https://github.com/rougin/slytherin/wiki/IntegrationInterface-Implementation) class |
+| `make:route` | Creates a new [HTTP route](https://github.com/rougin/slytherin/wiki/Defining-HTTP-Routes) class |
 
-### `make:handler`
+Each command accepts the following options:
 
-Creates a new [HTTP Middleware](https://github.com/rougin/slytherin/wiki/Middleware) class.
+``` bash
+$ vendor/bin/weasley make:check UserCheck --path src/Checks --namespace App\Checks --author "John Doe"
+```
 
-### `make:package`
-
-Creates a new [Slytherin Integration](https://github.com/rougin/slytherin/wiki/IntegrationInterface-Implementation) class.
-
-### `make:route`
-
-Creates a new [HTTP route](https://github.com/rougin/slytherin/wiki/Defining-HTTP-Routes) class.
+| Option | Default | Description |
+|--------|---------|-------------|
+| `--path` | `src/Checks` | Directory where the file will be created |
+| `--namespace` | `App\Checks` | Namespace for the generated class |
+| `--author` | _(empty)_ | Author name in the class docblock |
 
 ## HTTP routes
 
-In creating web applications, `Weasley` also provides PHP classes to create HTTP routes based on the [RESTful](https://en.wikipedia.org/wiki/REST) style.
-
-> [!NOTE]
-> In other PHP frameworks, this is also known as `Controllers`.
+`Weasley` provides classes for creating HTTP routes in the [RESTful](https://en.wikipedia.org/wiki/REST) style. In other PHP frameworks, these are also known as _Controllers_.
 
 ### `HttpRoute`
 
-A simple HTTP route class for RESTful APIs.
+A simple HTTP route class that provides a `json()` helper for returning JSON responses:
+
+``` php
+use Rougin\Weasley\Route;
+
+class Welcome extends Route
+{
+    public function index()
+    {
+        $data = array('message' => 'Hello world!');
+
+        return $this->json($data);
+    }
+}
+```
+
+The `Route` class is a root-namespace alias for `Rougin\Weasley\Routes\HttpRoute`. It accepts the PSR-07 request and response through its constructor:
+
+``` php
+/** @var \Psr\Http\Message\ServerRequestInterface */
+$request = /** ... */;
+
+/** @var \Psr\Http\Message\ResponseInterface */
+$response = /** ... */;
+
+$route = new Welcome($request, $response);
+
+/** @var \Psr\Http\Message\ResponseInterface */
+$result = $route->index();
+```
 
 ### `JsonRoute`
 
-Similar with `HttpRoute` but the response will be returned in [JSON](https://en.wikipedia.org/wiki/JSON) format.
+Extends `HttpRoute` with built-in CRUD operations backed by an Eloquent model and a validator:
 
-## Third-party packages
+``` php
+use Rougin\Weasley\Routes\JsonRoute;
 
-To conform with the usage of [`IntegrationInterface`](https://github.com/rougin/slytherin/wiki/IntegrationInterface-Implementation) from `Slytherin`, `Weasley` also provides the following third-party integrations with other PHP packages:
+class UsersRoute extends JsonRoute
+{
+    protected $model = 'Acme\Models\User';
 
-### `Laravel\Eloquent`
+    protected $mutator = 'Rougin\Weasley\Mutators\RestMutator';
 
-This package enables the usage of [Eloquent](https://laravel.com/docs/eloquent) to `Slytherin` which is an [Object-relational mapper (ORM)](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) from [Laravel](https://laravel.com). To use this package, kindly install its required package first in `Composer`:
-
-``` bash
-$ composer require illuminate/database
+    protected $validator = 'Acme\Checks\UserCheck';
+}
 ```
 
-### `Laravel\Blade`
+Once defined, the following methods become available:
 
-`Laravel\Blade` allows `Slytherin` to use [Blade](https://laravel.com/docs/blade) from `Laravel` for creating PHP templates using the `Blade` templating engine. Use the command below to install the specified package from `Composer`:
+| Method | HTTP Equivalent | Description |
+|--------|----------------|-------------|
+| `index()` | `GET /users` | Returns all records (paginated when `illuminate/pagination` is installed) |
+| `show($id)` | `GET /users/{id}` | Returns a single record |
+| `store()` | `POST /users` | Creates a new record from the parsed request body |
+| `update($id)` | `PUT /users/{id}` | Updates an existing record |
+| `delete($id)` | `DELETE /users/{id}` | Deletes a record |
 
-``` bash
-$ composer require illuminate/view
-```
-
-### `Laravel\Paginate`
-
-This is a simple third-party package that allows `Eloquent` to generate pagination links based on its models. Kindly use the command below to install this third-party package:
-
-``` bash
-$ composer require illuminate/paginate
-```
-
-### `Session`
-
-`Weasley` also provides a simple implementation of the [SessionHandlerInterface](https://secure.php.net/manual/en/class.sessionhandlerinterface.php).
+The `$model` must be an Eloquent model with `$fillable` defined. The `$validator` must be a `Check` subclass. Both are validated at construction time and will throw `UnexpectedValueException` if missing.
 
 ## HTTP handlers
 
-`Weasley` has the following HTTP middlewares (HTTP handlers in this case) to improve the handling of HTTP requests and its respective responses:
+`Weasley` provides HTTP middlewares (handlers) that process incoming requests and outgoing responses. Each handler implements `Rougin\Slytherin\Middleware\MiddlewareInterface`.
 
 > [!NOTE]
-> Starting `~0.8`, all HTTP middlewares are now migrated to [Onion](https://github.com/rougin/onion) which is a collection of Slytherin-based HTTP middlewares.
+> Starting v0.8, all handler classes are thin wrappers over [Onion](https://github.com/rougin/onion) (`rougin/onion`). Every feature described below originates from Onion's classes.
 
 ### `AllowCrossOrigin`
 
-Adds additional headers for [Cross-origin resource sharing](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (CORS).
+Adds [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) headers to every response:
+
+``` php
+use Rougin\Weasley\Handlers\AllowCrossOrigin;
+
+// Default: allows all origins, allows GET/POST/PUT/DELETE/OPTIONS
+$cors = new AllowCrossOrigin;
+
+// Restrict to specific origins and methods via constructor
+$cors = new AllowCrossOrigin(
+    array('https://example.com', 'https://api.example.com'),
+    array('GET', 'POST')
+);
+
+// Or configure fluently
+$cors = (new AllowCrossOrigin)
+    ->allowed(array('https://example.com'))
+    ->methods(array('GET', 'POST', 'DELETE'));
+```
+
+> [!NOTE]
+> If the incoming request method is `OPTIONS`, the handler returns an empty response immediately (preflight support).
 
 ### `EmptyStringToNull`
 
-Converts the empty strings from request as `null`.
+Converts empty, `"null"`, and `"undefined"` string values from query parameters and parsed body to actual `null`:
+
+``` php
+use Rougin\Weasley\Handlers\EmptyStringToNull;
+
+$handler = new EmptyStringToNull;
+// query params: ?age=&name=null&role=undefined
+// becomes:      ['age' => null, 'name' => null, 'role' => null]
+```
 
 ### `JsonContentType`
 
-Changes content response to `application/json`.
+Sets the `Content-Type` header to `application/json` on every response that does not already have one:
+
+``` php
+use Rougin\Weasley\Handlers\JsonContentType;
+
+$handler = new JsonContentType;
+// Response header: Content-Type: application/json
+```
 
 ### `MutateRequest`
 
-A middleware that can be extended to mutate/transform values from the request.
+An extensible base class for transforming request values. Extend it and override the `transform()` method:
+
+``` php
+use Rougin\Weasley\Handlers\MutateRequest;
+
+class SanitizeHtml extends MutateRequest
+{
+    protected function transform($value)
+    {
+        return is_string($value) ? strip_tags($value) : $value;
+    }
+}
+```
+
+The `transform()` method is called recursively on every value in query parameters and the parsed body. Arrays are recursed into automatically.
 
 ### `SpoofHttpMethod`
 
-Replaces the HTTP verb  from `_method` value.
+Replaces the HTTP verb of the request with the value of a configurable key from the parsed body, enabling HTML forms to simulate `PATCH`, `PUT`, or `DELETE`:
+
+``` php
+use Rougin\Weasley\Handlers\SpoofHttpMethod;
+
+// Default key is "_method"
+$spoof = new SpoofHttpMethod;
+
+// Use a custom key
+$spoof = new SpoofHttpMethod('_action');
+// or fluently: $spoof->key('_action');
+```
+
+When the request body contains `['_method' => 'PATCH']`, the request method becomes `PATCH`.
 
 ### `TrimStringValue`
 
-Trims the strings from an incoming request.
+Trims whitespace from all string values in query parameters and the parsed body:
 
-## Mutators
+``` php
+use Rougin\Weasley\Handlers\TrimStringValue;
 
-Provided by `Weasley`, mutators are classes that mutates (transforms) to a specified result (e.g., [PSR-07](https://www.php-fig.org/psr/psr-7/) responses, API data, etc.):
-
-### `JsonMutator`
-
-Mutates a `PSR-07` response in JSON format.
-
-### `RestMutator`
-
-Mutates a response created from the `Laravel/Paginate` package based on [Paypal's API Style Guide](https://web.archive.org/web/20220114091735/https://github.com/paypal/api-standards/blob/master/api-style-guide.md).
+$handler = new TrimStringValue;
+// query params: ?name=  Rougin
+// becomes:      ['name' => 'Rougin']
+```
 
 ## Validation
 
-`Weasley` also provides a simple validation class on top of [Valitron](https://github.com/vlucas/valitron) using the `Check` class:
+`Weasley` provides the `Check` class for validating data. It is built on [Valla](https://github.com/rougin/valla) (`rougin/valla`) and supports all rules from Valla's rule engine (e.g., `required`, `email`, and more):
+
+``` php
+$check = new UserCheck;
+
+$data = /* e.g., from request */;
+
+if ($check->valid($data))
+{
+    // Data passed validation
+}
+else
+{
+    // Get all errors: array<string, string[]>
+    $errors = $check->errors();
+
+    // Get the first error only
+    echo $check->firstError(); // e.g., "Age is required"
+}
+```
+
+Error messages are built from the label and the rule description. For example, a missing `email` field with the label `"Email"` produces `"Email is required"`.
+
+### Method-based style (recommended)
+
+The method-based style is recommended when rules depend on the submitted data (e.g., conditionally requiring a field):
 
 ``` php
 use Rougin\Weasley\Check;
 
 class UserCheck extends Check
 {
-    protected $labels =
-    [
-        'name' => 'Name',
-        'email' => 'Email',
-        'age' => 'Age',
-    ];
+    /**
+     * @return array<string, string>
+     */
+    public function labels()
+    {
+        return array(
+            'name' => 'Name',
+            'email' => 'Email',
+            'age' => 'Age',
+        );
+    }
 
-    protected $rules =
-    [
-        'name' => 'required',
-        'setting' => 'required|email',
-        'type' => 'required|numeric',
-    ];
+    /**
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, string>
+     */
+    public function rules(array $data)
+    {
+        $rules = array(
+            'name' => 'required',
+            'email' => 'required|email',
+            'age' => 'required|numeric|min:18',
+        );
+
+        return $rules;
+    }
 }
 ```
 
-Once created, the data can be submitted to the said class for validation:
+### Property-based style (legacy)
+
+This can also define rules and labels as protected properties for simple, static rule sets:
 
 ``` php
-$check = new UserCheck;
+use Rougin\Weasley\Check;
 
-$data = /* e.g., data from request */;
-
-if ($check->valid($data))
+class SimpleCheck extends Check
 {
-  // $data passed from validation
-}
-else
-{
-  // Get the available errors ---
-  $errors = $check->errors();
-  // ----------------------------
+    protected $labels = array(
+        'name' => 'Name',
+        'email' => 'Email',
+    );
 
-  // Or get the first error only ---
-  echo $check->firstError();
-  // -------------------------------
+    protected $rules = array(
+        'name' => 'required',
+        'email' => 'required|email',
+    );
 }
+```
+
+## Mutators
+
+Mutators transform data into a specified output format (e.g., PSR-07 responses, API payloads). They implement `Rougin\Weasley\Contract\Mutator`.
+
+### `JsonMutator`
+
+Encodes data as JSON and returns a PSR-07 response:
+
+``` php
+use Rougin\Weasley\Mutators\JsonMutator;
+
+$mutator = new JsonMutator($response);
+$result = $mutator->mutate(array('status' => 'success'));
+// Content-Type: application/json
+// Body: {"status":"success"}
+```
+
+A second argument accepts [JSON encoding options](https://www.php.net/manual/en/json.constants.php):
+
+``` php
+$mutator = new JsonMutator($response, JSON_PRETTY_PRINT);
+```
+
+### `RestMutator`
+
+Formats paginated results following [PayPal's API Style Guide](https://web.archive.org/web/20220114091735/https://github.com/paypal/api-standards/blob/master/api-style-guide.md):
+
+``` php
+use Rougin\Weasley\Mutators\RestMutator;
+
+$mutator = new RestMutator;
+$result = $mutator->mutate($paginator);
+
+// $result becomes:
+// [
+//     'total_items' => 100,
+//     'total_pages' => 10,
+//     'items' => [...],
+// ]
+```
+
+When the data is not a `LengthAwarePaginator`, the mutator wraps it as `['items' => $data]`.
+
+## Third-party packages
+
+`Weasley` provides `IntegrationInterface` implementations for wiring third-party packages into Slytherin's container.
+
+### `Laravel\Eloquent`
+
+Enables [Eloquent ORM](https://laravel.com/docs/eloquent) from [Laravel](https://laravel.com):
+
+``` bash
+$ composer require illuminate/database
+```
+
+``` php
+use Rougin\Slytherin\Container\Container;
+use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Weasley\Packages\Laravel\Eloquent;
+
+$config = new Configuration;
+$config->set('database.default', 'sqlite');
+$config->set('database.sqlite.driver', 'sqlite');
+$config->set('database.sqlite.database', ':memory:');
+
+$container = new Container;
+(new Eloquent)->define($container, $config);
+
+// Eloquent models are now available globally
+$users = User::all();
+```
+
+### `Laravel\Blade`
+
+Enables [Blade](https://laravel.com/docs/blade) templating:
+
+``` bash
+$ composer require illuminate/view
+```
+
+``` php
+use Rougin\Slytherin\Container\Container;
+use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Weasley\Packages\Laravel\Blade;
+
+$config = new Configuration;
+$config->set('illuminate.view.templates', __DIR__ . '/templates');
+$config->set('illuminate.view.compiled', __DIR__ . '/cache');
+
+$container = new Container;
+(new Blade)->define($container, $config);
+
+// Resolve the renderer from the container
+$renderer = $container->get('Rougin\Weasley\Renderers\BladeRenderer');
+echo $renderer->render('welcome', array('name' => 'Rougin'));
+```
+
+### `Laravel\Paginate`
+
+Adds pagination support to Eloquent models:
+
+``` bash
+$ composer require illuminate/pagination
+```
+
+``` php
+use Rougin\Slytherin\Container\Container;
+use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Weasley\Packages\Laravel\Paginate;
+
+// Assuming Eloquent is already booted (see above)
+$container = new Container;
+(new Paginate)->define($container, new Configuration);
+
+// Eloquent models now have a paginate() method
+$paginator = User::paginate(10); // 10 per page
+
+echo $paginator->total();      // total records
+echo $paginator->currentPage(); // current page number
+```
+
+### `Session`
+
+Provides session management through `SessionHandlerInterface`:
+
+``` php
+use Rougin\Slytherin\Container\Container;
+use Rougin\Slytherin\Integration\Configuration;
+use Rougin\Weasley\Packages\Session;
+
+$config = new Configuration;
+$config->set('session.cookies', array());
+$config->set('session.expiration', 3600);
+$config->set('session.path', __DIR__ . '/sessions');
+
+$container = new Container;
+(new Session)->define($container, $config);
+
+// Resolve the session from the container ---
+$class = 'Rougin\Weasley\Contract\Session';
+
+$session = $container->get($class);
+// ------------------------------------------
+
+$session->set('user_id', 42);
+echo $session->get('user_id'); // 42
+
+$session->regenerate();      // rotate session ID
+$session->delete('user_id'); // remove a key
+```
+
+## Contracts
+
+`Weasley` defines interfaces for its extensible components:
+
+### `Contract\Mutator`
+
+``` php
+namespace Rougin\Weasley\Contract;
+
+interface Mutator
+{
+    /**
+     * @param mixed $data
+     * @return mixed
+     */
+    public function mutate($data);
+}
+```
+
+Implement this interface to create custom mutators. `JsonMutator` and `RestMutator` are built-in implementations.
+
+### `Contract\Session`
+
+``` php
+namespace Rougin\Weasley\Contract;
+
+interface Session
+{
+    /**
+     * @param string $key
+     * @param mixed  $default
+     * @return mixed
+     */
+    public function get($key, $default = null);
+
+    /**
+     * @param string $key
+     * @param mixed  $value
+     * @return self
+     */
+    public function set($key, $value);
+
+    /**
+     * @param string $key
+     * @return boolean
+     */
+    public function delete($key);
+
+    /**
+     * @param boolean $delete
+     * @return boolean
+     */
+    public function regenerate($delete = false);
+}
+```
+
+## Utilities
+
+### `Random`
+
+Generates cryptographically secure random strings:
+
+``` php
+use Rougin\Weasley\Assorted\Random;
+
+$token = Random::make(32); // e.g., "a7f3b9c2d1e8..."
 ```
 
 ## Changelog
