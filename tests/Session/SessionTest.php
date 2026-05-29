@@ -14,7 +14,7 @@ class SessionTest extends AbstractTestCase
     /**
      * @var \Rougin\Weasley\Session\Session
      */
-    protected $session;
+    protected $self;
 
     /**
      * @runInSeparateProcess
@@ -53,7 +53,7 @@ class SessionTest extends AbstractTestCase
     {
         $expect = 'default_value';
 
-        $actual = $this->session->get('undefined', $expect);
+        $actual = $this->self->get('undefined', $expect);
 
         $this->assertEquals($expect, $actual);
     }
@@ -65,11 +65,11 @@ class SessionTest extends AbstractTestCase
      */
     public function test_passed_if_id_regenerated()
     {
-        $expect = $this->session->id();
+        $expect = $this->self->id();
 
-        $this->session->regenerate(true);
+        $this->self->regenerate(true);
 
-        $actual = $this->session->id();
+        $actual = $this->self->id();
 
         $this->assertNotEquals($expect, $actual);
     }
@@ -81,11 +81,11 @@ class SessionTest extends AbstractTestCase
      */
     public function test_passed_if_key_deleted()
     {
-        $this->session->set('deleted', true);
+        $this->self->set('deleted', true);
 
-        $this->session->delete('deleted');
+        $this->self->delete('deleted');
 
-        $actual = $this->session->get('deleted');
+        $actual = $this->self->get('deleted');
 
         $this->assertNull($actual);
     }
@@ -97,7 +97,7 @@ class SessionTest extends AbstractTestCase
      */
     public function test_passed_if_nonexistent_deleted()
     {
-        $actual = $this->session->delete('nonexistent');
+        $actual = $this->self->delete('nonexistent');
 
         $this->assertFalse($actual);
     }
@@ -109,19 +109,19 @@ class SessionTest extends AbstractTestCase
      */
     public function test_passed_if_regenerated_keep_data()
     {
-        $expect = $this->session->id();
+        $expect = $this->self->id();
 
-        $this->session->set('keep', 'value');
+        $this->self->set('keep', 'value');
 
-        $this->session->regenerate(false);
+        $this->self->regenerate(false);
 
-        $actual = $this->session->id();
+        $actual = $this->self->id();
 
         $this->assertNotEquals($expect, $actual);
 
         $expect = 'value';
 
-        $actual = $this->session->get('keep');
+        $actual = $this->self->get('keep');
 
         $this->assertEquals($expect, $actual);
     }
@@ -133,7 +133,7 @@ class SessionTest extends AbstractTestCase
      */
     public function test_passed_if_set_fluent()
     {
-        $actual = $this->session->set('chain', 'test');
+        $actual = $this->self->set('chain', 'test');
 
         $class = 'Rougin\Weasley\Session\Session';
 
@@ -149,9 +149,9 @@ class SessionTest extends AbstractTestCase
     {
         $expect = 'Lorem ipsum dolor sit amet';
 
-        $this->session->set('test', $expect);
+        $this->self->set('test', $expect);
 
-        $actual = $this->session->get('test');
+        $actual = $this->self->get('test');
 
         $this->assertEquals($expect, $actual);
     }
@@ -163,15 +163,15 @@ class SessionTest extends AbstractTestCase
     {
         parent::doSetUp();
 
-        $app = new Container;
+        $app = new SessionIntegration;
 
-        $fn = array($this->integration, 'define');
+        $new = new Container;
 
-        $app = $fn($app, $this->config);
+        $app = $app->define($new, $this->config);
 
         /** @var \Rougin\Weasley\Session\Session */
-        $session = $app->get(self::SESSION);
+        $self = $app->get(self::SESSION);
 
-        $this->session = $session;
+        $this->self = $self;
     }
 }

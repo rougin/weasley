@@ -12,22 +12,20 @@ use Rougin\Slytherin\Container\Container;
 class SessionIntegrationTest extends AbstractTestCase
 {
     /**
-     * Tests IntegrationInterface::define.
-     *
      * @runInSeparateProcess
      *
      * @return void
      */
     public function test_passed_if_integration_defined()
     {
-        $container = new Container;
+        $app = new SessionIntegration;
 
-        $fn = array($this->integration, 'define');
+        $new = new Container;
 
-        $container = $fn($container, $this->config);
+        $app = $app->define($new, $this->config);
 
         /** @var \Rougin\Weasley\Contract\Session */
-        $session = $container->get(self::SESSION);
+        $session = $app->get(self::SESSION);
 
         $expect = 'Ron Weasley';
 

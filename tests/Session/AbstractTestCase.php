@@ -20,11 +20,6 @@ abstract class AbstractTestCase extends Testcase
     protected $config;
 
     /**
-     * @var \Rougin\Slytherin\Integration\IntegrationInterface
-     */
-    protected $integration;
-
-    /**
      * @return void
      */
     protected function doSetUp()
@@ -43,7 +38,5 @@ abstract class AbstractTestCase extends Testcase
         $data = array('session' => array('path' => $path));
 
         $this->config = new Configuration($data);
-
-        $this->integration = new SessionIntegration;
     }
 }
