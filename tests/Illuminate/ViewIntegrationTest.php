@@ -22,8 +22,6 @@ class ViewIntegrationTest extends Testcase
     {
         $config = new Configuration;
 
-        $view = new ViewIntegration;
-
         $path = __DIR__ . '/../Fixture/Storage/Compiled';
 
         $config->set('illuminate.view.compiled', $path);
@@ -32,12 +30,14 @@ class ViewIntegrationTest extends Testcase
 
         $config->set('illuminate.view.templates', $plates);
 
-        $container = $view->define(new Container, $config);
+        $view = new ViewIntegration;
+
+        $app = $view->define(new Container, $config);
 
         $expect = 'Hello world!';
 
         /** @var \Rougin\Slytherin\Template\RendererInterface */
-        $renderer = $container->get(self::RENDERER);
+        $renderer = $app->get(self::RENDERER);
 
         $actual = $renderer->render('Hello');
 

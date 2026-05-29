@@ -16,7 +16,7 @@ class DatabaseIntegrationTest extends Testcase
     /**
      * @var \Rougin\Slytherin\Integration\IntegrationInterface
      */
-    protected $integration;
+    protected $self;
 
     /**
      * @return void
@@ -25,15 +25,11 @@ class DatabaseIntegrationTest extends Testcase
     {
         $config = Database::config();
 
-        $container = new Container;
+        $app = new Container;
 
         $expect = 'Psr\Container\ContainerInterface';
 
-        $fn = array($this->integration, 'define');
-
-        $fn = array($this->integration, 'define');
-
-        $actual = $fn($container, $config);
+        $actual = $this->self->define($app, $config);
 
         $this->assertInstanceOf($expect, $actual);
     }
@@ -52,6 +48,6 @@ class DatabaseIntegrationTest extends Testcase
             $this->markTestSkipped($text);
         }
 
-        $this->integration = new DatabaseIntegration;
+        $this->self = new DatabaseIntegration;
     }
 }

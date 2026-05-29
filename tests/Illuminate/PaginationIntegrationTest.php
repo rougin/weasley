@@ -37,13 +37,13 @@ class PaginationIntegrationTest extends Testcase
 
         $http = new HttpIntegration;
 
-        $pagination = new PaginationIntegration;
+        $app = new Container;
 
-        $container = new Container;
+        $app = $http->define($app, $config);
 
-        $container = $http->define($container, $config);
+        $self = new PaginationIntegration;
 
-        $container = $pagination->define($container, $config);
+        $app = $self->define($app, $config);
 
         $actual = User::paginate();
 
