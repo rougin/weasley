@@ -33,7 +33,9 @@ class FileSessionHandlerTest extends Testcase
             $this->markTestSkipped('SessionHandlerInterface is not yet installed.');
         }
 
-        $this->path = __DIR__ . '/../Fixture/Storage/SessionsHandler';
+        $path = __DIR__ . '/../Fixture';
+
+        $this->path = $path . '/Storage/Sessions';
 
         $this->handler = new FileSessionHandler;
     }
@@ -43,18 +45,21 @@ class FileSessionHandlerTest extends Testcase
      */
     protected function doTearDown()
     {
-        $files = glob($this->path . '/*');
+        $ids = array('test_session');
 
-        if ($files !== false)
+        $ids[] = 'test_read';
+        $ids[] = 'nonexistent_other';
+        $ids[] = 'test_write';
+        $ids[] = 'test_destroy';
+        $ids[] = 'gc_test';
+        $ids[] = 'gc_expired';
+
+        foreach ($ids as $id)
         {
-            /** @var string $file */
-            foreach ($files as $file)
-            {
-                is_dir($file) || unlink($file);
-            }
-        }
+            $file = $this->path . '/' . $id;
 
-        is_dir($this->path) && rmdir($this->path);
+            file_exists($file) && unlink($file);
+        }
     }
 
     /**
