@@ -17,130 +17,11 @@ class SessionTest extends AbstractTestCase
     protected $session;
 
     /**
-     * @return void
-     */
-    protected function doSetUp()
-    {
-        parent::doSetUp();
-
-        $container = new Container;
-
-        $container = $this->integration->define($container, $this->config);
-
-        /** @var \Rougin\Weasley\Session\Session */
-        $session = $container->get(self::SESSION);
-
-        $this->session = $session;
-    }
-
-    /**
      * @runInSeparateProcess
      *
      * @return void
      */
-    public function testDeleteMethod()
-    {
-        $this->session->set('deleted', true);
-
-        $this->session->delete('deleted');
-
-        $this->assertNull($this->session->get('deleted'));
-    }
-
-    /**
-     * @runInSeparateProcess
-     *
-     * @return void
-     */
-    public function testGetMethod()
-    {
-        $expected = 'Lorem ipsum dolor sit amet';
-
-        $this->session->set('test', $expected);
-
-        $result = $this->session->get('test');
-
-        $this->assertEquals($expected, $result);
-    }
-
-    /**
-     * @runInSeparateProcess
-     *
-     * @return void
-     */
-    public function testRegenerateMethod()
-    {
-        $expected = $this->session->id();
-
-        $this->session->regenerate(true);
-
-        $result = $this->session->id();
-
-        $this->assertNotEquals($expected, $result);
-    }
-
-    /**
-     * @runInSeparateProcess
-     *
-     * @return void
-     */
-    public function testRegenerateMethodWithoutDelete()
-    {
-        $expected = $this->session->id();
-
-        $this->session->set('keep', 'value');
-
-        $this->session->regenerate(false);
-
-        $result = $this->session->id();
-
-        $this->assertNotEquals($expected, $result);
-
-        $this->assertEquals('value', $this->session->get('keep'));
-    }
-
-    /**
-     * @runInSeparateProcess
-     *
-     * @return void
-     */
-    public function testGetMethodWithDefault()
-    {
-        $result = $this->session->get('undefined_key', 'default_value');
-
-        $this->assertEquals('default_value', $result);
-    }
-
-    /**
-     * @runInSeparateProcess
-     *
-     * @return void
-     */
-    public function testDeleteMethodForNonExistentKey()
-    {
-        $result = $this->session->delete('nonexistent');
-
-        $this->assertFalse($result);
-    }
-
-    /**
-     * @runInSeparateProcess
-     *
-     * @return void
-     */
-    public function testSetMethodReturnsSelf()
-    {
-        $result = $this->session->set('chain', 'test');
-
-        $this->assertInstanceOf('Rougin\Weasley\Session\Session', $result);
-    }
-
-    /**
-     * @runInSeparateProcess
-     *
-     * @return void
-     */
-    public function testConstructorWithExistingData()
+    public function test_passed_if_data_persisted()
     {
         $path = __DIR__ . '/../Fixture/Storage/Sessions';
 
@@ -156,8 +37,141 @@ class SessionTest extends AbstractTestCase
 
         $second = new Session($handler, $id);
 
-        $result = $second->get('persist');
+        $expect = 'loaded';
 
-        $this->assertEquals('loaded', $result);
+        $actual = $second->get('persist');
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function test_passed_if_default_returned()
+    {
+        $expect = 'default_value';
+
+        $actual = $this->session->get('undefined', $expect);
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function test_passed_if_id_regenerated()
+    {
+        $expect = $this->session->id();
+
+        $this->session->regenerate(true);
+
+        $actual = $this->session->id();
+
+        $this->assertNotEquals($expect, $actual);
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function test_passed_if_key_deleted()
+    {
+        $this->session->set('deleted', true);
+
+        $this->session->delete('deleted');
+
+        $actual = $this->session->get('deleted');
+
+        $this->assertNull($actual);
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function test_passed_if_nonexistent_deleted()
+    {
+        $actual = $this->session->delete('nonexistent');
+
+        $this->assertFalse($actual);
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function test_passed_if_regenerated_keep_data()
+    {
+        $expect = $this->session->id();
+
+        $this->session->set('keep', 'value');
+
+        $this->session->regenerate(false);
+
+        $actual = $this->session->id();
+
+        $this->assertNotEquals($expect, $actual);
+
+        $expect = 'value';
+
+        $actual = $this->session->get('keep');
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function test_passed_if_set_fluent()
+    {
+        $actual = $this->session->set('chain', 'test');
+
+        $class = 'Rougin\Weasley\Session\Session';
+
+        $this->assertInstanceOf($class, $actual);
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function test_passed_if_value_retrieved()
+    {
+        $expect = 'Lorem ipsum dolor sit amet';
+
+        $this->session->set('test', $expect);
+
+        $actual = $this->session->get('test');
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @return void
+     */
+    protected function doSetUp()
+    {
+        parent::doSetUp();
+
+        $app = new Container;
+
+        $fn = array($this->integration, 'define');
+
+        $app = $fn($app, $this->config);
+
+        /** @var \Rougin\Weasley\Session\Session */
+        $session = $app->get(self::SESSION);
+
+        $this->session = $session;
     }
 }

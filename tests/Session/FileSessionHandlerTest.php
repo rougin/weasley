@@ -14,12 +14,166 @@ class FileSessionHandlerTest extends Testcase
     /**
      * @var \SessionHandlerInterface
      */
-    protected $handler;
+    protected $self;
 
     /**
      * @var string
      */
     protected $path = '';
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_close_succeeds()
+    {
+        $this->assertTrue($this->self->close());
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_destroy_succeeds()
+    {
+        $id = 'test_destroy';
+
+        $this->self->open($this->path, $id);
+
+        $this->self->write($id, 'some data');
+
+        $file = $this->path . '/' . $id;
+
+        $this->assertTrue(file_exists($file));
+
+        $actual = $this->self->destroy($id);
+
+        $this->assertTrue($actual);
+
+        $this->assertFalse(file_exists($file));
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_gc_cleans_normal()
+    {
+        $id = 'gc_test';
+
+        $this->self->open($this->path, $id);
+
+        $this->self->write($id, 'some data');
+
+        $this->self->gc(3600);
+
+        $file = $this->path . '/' . $id;
+
+        $this->assertTrue(file_exists($file));
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_gc_deletes_expired()
+    {
+        $id = 'gc_expired';
+
+        $this->self->open($this->path, $id);
+
+        $this->self->write($id, 'old data');
+
+        $file = $this->path . '/' . $id;
+
+        touch($file, time() - 7200);
+
+        $this->self->gc(3600);
+
+        $this->assertFalse(file_exists($file));
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_gc_empty_path()
+    {
+        $self = new FileSessionHandler;
+
+        $actual = $self->gc(3600);
+
+        $this->assertTrue($actual || is_int($actual));
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_open_succeeds()
+    {
+        $id = 'test_session';
+
+        $actual = $this->self->open($this->path, $id);
+
+        $this->assertTrue($actual);
+
+        $this->assertTrue(is_dir($this->path));
+
+        $file = $this->path . '/' . $id;
+
+        $this->assertTrue(file_exists($file));
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_read_missing_file()
+    {
+        $id = 'nonexistent';
+
+        $this->self->open($this->path, $id . '_other');
+
+        $actual = $this->self->read($id);
+
+        $this->assertEquals('', $actual);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_read_succeeds()
+    {
+        $id = 'test_read';
+
+        $this->self->open($this->path, $id);
+
+        $data = 'serialized_content';
+
+        $this->self->write($id, $data);
+
+        $expect = $data;
+
+        $actual = $this->self->read($id);
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_write_succeeds()
+    {
+        $id = 'test_write';
+
+        $this->self->open($this->path, $id);
+
+        $data = 'hello_world';
+
+        $actual = $this->self->write($id, $data);
+
+        $this->assertTrue($actual);
+
+        $expect = $data;
+
+        $actual = $this->self->read($id);
+
+        $this->assertEquals($expect, $actual);
+    }
 
     /**
      * @return void
@@ -30,14 +184,16 @@ class FileSessionHandlerTest extends Testcase
 
         if (! interface_exists($interface))
         {
-            $this->markTestSkipped('SessionHandlerInterface is not yet installed.');
+            $text = $interface . ' not yet installed.';
+
+            $this->markTestSkipped($text);
         }
 
         $path = __DIR__ . '/../Fixture';
 
         $this->path = $path . '/Storage/Sessions';
 
-        $this->handler = new FileSessionHandler;
+        $this->self = new FileSessionHandler;
     }
 
     /**
@@ -60,147 +216,5 @@ class FileSessionHandlerTest extends Testcase
 
             file_exists($file) && unlink($file);
         }
-    }
-
-    /**
-     * @return void
-     */
-    public function testCloseMethod()
-    {
-        $this->assertTrue($this->handler->close());
-    }
-
-    /**
-     * @return void
-     */
-    public function testOpenMethod()
-    {
-        $id = 'test_session';
-
-        $result = $this->handler->open($this->path, $id);
-
-        $this->assertTrue($result);
-
-        $this->assertTrue(is_dir($this->path));
-
-        $this->assertTrue(file_exists($this->path . '/' . $id));
-    }
-
-    /**
-     * @return void
-     */
-    public function testReadMethod()
-    {
-        $id = 'test_read';
-
-        $this->handler->open($this->path, $id);
-
-        $data = 'serialized_content';
-
-        $this->handler->write($id, $data);
-
-        $result = $this->handler->read($id);
-
-        $this->assertEquals($data, $result);
-    }
-
-    /**
-     * @return void
-     */
-    public function testReadMethodWithNoFile()
-    {
-        $id = 'nonexistent';
-
-        $this->handler->open($this->path, $id . '_other');
-
-        $result = $this->handler->read($id);
-
-        $this->assertEquals('', $result);
-    }
-
-    /**
-     * @return void
-     */
-    public function testWriteMethod()
-    {
-        $id = 'test_write';
-
-        $this->handler->open($this->path, $id);
-
-        $data = 'hello_world';
-
-        $result = $this->handler->write($id, $data);
-
-        $this->assertTrue($result);
-
-        $this->assertEquals($data, $this->handler->read($id));
-    }
-
-    /**
-     * @return void
-     */
-    public function testDestroyMethod()
-    {
-        $id = 'test_destroy';
-
-        $this->handler->open($this->path, $id);
-
-        $this->handler->write($id, 'some data');
-
-        $this->assertTrue(file_exists($this->path . '/' . $id));
-
-        $result = $this->handler->destroy($id);
-
-        $this->assertTrue($result);
-
-        $this->assertFalse(file_exists($this->path . '/' . $id));
-    }
-
-    /**
-     * @return void
-     */
-    public function testGcMethod()
-    {
-        $id = 'gc_test';
-
-        $this->handler->open($this->path, $id);
-
-        $this->handler->write($id, 'some data');
-
-        $this->handler->gc(3600);
-
-        $this->assertTrue(file_exists($this->path . '/' . $id));
-    }
-
-    /**
-     * @return void
-     */
-    public function testGcMethodWithExpiredFile()
-    {
-        $id = 'gc_expired';
-
-        $this->handler->open($this->path, $id);
-
-        $this->handler->write($id, 'old data');
-
-        $file = $this->path . '/' . $id;
-
-        touch($file, time() - 7200);
-
-        $this->handler->gc(3600);
-
-        $this->assertFalse(file_exists($file));
-    }
-
-    /**
-     * @return void
-     */
-    public function testGcMethodWithEmptyPath()
-    {
-        $handler = new FileSessionHandler;
-
-        $result = $handler->gc(3600);
-
-        $this->assertTrue($result || is_int($result));
     }
 }

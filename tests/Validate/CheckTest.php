@@ -15,7 +15,51 @@ class CheckTest extends Testcase
     /**
      * @return void
      */
-    public function test_passed_validation()
+    public function test_failed_if_data_missing_field()
+    {
+        $check = new UserCheckWithData;
+
+        $data = array('name' => 'Rougin');
+
+        $data['password'] = '1234';
+
+        $check->valid($data);
+
+        $expect = array('username' => array());
+
+        $expect['username'][] = 'Username is required';
+
+        $actual = $check->errors();
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_failed_if_field_missing()
+    {
+        $check = new UserCheck;
+
+        $data = array('name' => 'Rougin');
+
+        $data['username'] = 'rougin';
+
+        $check->valid($data);
+
+        $expect = array('password' => array());
+
+        $expect['password'][] = 'Password is required';
+
+        $actual = $check->errors();
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_all_fields_valid()
     {
         $check = new UserCheck;
 
@@ -25,73 +69,35 @@ class CheckTest extends Testcase
 
         $data['password'] = '12345';
 
-        $result = $check->valid($data);
+        $actual = $check->valid($data);
 
-        $this->assertTrue($result);
+        $this->assertTrue($actual);
     }
 
     /**
      * @return void
      */
-    public function test_failed_validation()
+    public function test_passed_if_first_error_exists()
     {
-        $check = new UserCheck;
+        $check = new UserCheckWithData;
 
         $data = array('name' => 'Rougin');
 
-        $data['username'] = 'rougin';
+        $data['password'] = '1234';
 
         $check->valid($data);
 
-        $expected = array('password' => array());
-        $expected['password'][] = 'Password is required';
-
-        $actual = $check->errors();
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @return void
-     */
-    public function test_failed_validation_with_data()
-    {
-        $check = new UserCheckWithData;
-
-        $data = array('name' => 'Rougin', 'password' => '1234');
-
-        $check->valid($data);
-
-        $expected = array('username' => array());
-        $expected['username'][] = 'Username is required';
-
-        $actual = $check->errors();
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @return void
-     */
-    public function test_first_error_from_failed_validation()
-    {
-        $check = new UserCheckWithData;
-
-        $data = array('name' => 'Rougin', 'password' => '1234');
-
-        $check->valid($data);
-
-        $expected = 'Username is required';
+        $expect = 'Username is required';
 
         $actual = $check->firstError();
 
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
      * @return void
      */
-    public function test_first_error_from_passed_validation()
+    public function test_passed_if_first_error_null()
     {
         $check = new UserCheck;
 

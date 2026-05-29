@@ -23,18 +23,21 @@ abstract class AbstractTestCase extends Testcase
     /**
      * @var \Psr\Container\ContainerInterface
      */
-    protected $container;
+    protected $app;
 
     /**
      * @return void
      */
     protected function doSetUp()
     {
-        $message = 'Illuminate\Database is not yet installed.';
-
         $class = 'Illuminate\Database\Capsule\Manager';
 
-        class_exists($class) || $this->markTestSkipped($message);
+        if (! class_exists($class))
+        {
+            $text = 'Illuminate\Database not yet installed.';
+
+            $this->markTestSkipped($text);
+        }
 
         $config = Database::config();
 
@@ -42,7 +45,9 @@ abstract class AbstractTestCase extends Testcase
 
         $http = new HttpIntegration;
 
-        $container = $eloquent->define(new Container, $config);
+        $app = new Container;
+
+        $app = $eloquent->define($app, $config);
 
         $pdo = Manager::connection()->getPdo();
 
@@ -50,6 +55,24 @@ abstract class AbstractTestCase extends Testcase
 
         Database::seed($pdo);
 
-        $this->container = $http->define($container, $config);
+        $this->app = $http->define($app, $config);
+    }
+
+    /**
+     * @return \Psr\Http\Message\ServerRequestInterface
+     */
+    protected function getRequest()
+    {
+        /** @var \Psr\Http\Message\ServerRequestInterface */
+        return $this->app->get(self::REQUEST);
+    }
+
+    /**
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    protected function getResponse()
+    {
+        /** @var \Psr\Http\Message\ResponseInterface */
+        return $this->app->get(self::RESPONSE);
     }
 }

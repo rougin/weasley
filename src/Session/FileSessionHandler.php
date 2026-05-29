@@ -16,6 +16,6 @@ Interop::register('FileSessionHandler');
  *
  * @author Rougin Gutib <rougingutib@gmail.com>
  */
-class FileSessionHandler extends NewFileSessionHandler
+class FileSessionHandler extends NewFileSessionHandler implements \SessionHandlerInterface
 {
 }

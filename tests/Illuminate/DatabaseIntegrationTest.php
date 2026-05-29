@@ -21,30 +21,37 @@ class DatabaseIntegrationTest extends Testcase
     /**
      * @return void
      */
-    protected function doSetUp()
-    {
-        $message = 'Illuminate\Database is not yet installed.';
-
-        $class = 'Illuminate\Database\Capsule\Manager';
-
-        class_exists($class) || $this->markTestSkipped($message);
-
-        $this->integration = new DatabaseIntegration;
-    }
-
-    /**
-     * @return void
-     */
-    public function testDefineMethod()
+    public function test_passed_if_integration_defined()
     {
         $config = Database::config();
 
         $container = new Container;
 
-        $expected = 'Psr\Container\ContainerInterface';
+        $expect = 'Psr\Container\ContainerInterface';
 
-        $result = $this->integration->define($container, $config);
+        $fn = array($this->integration, 'define');
 
-        $this->assertInstanceOf($expected, $result);
+        $fn = array($this->integration, 'define');
+
+        $actual = $fn($container, $config);
+
+        $this->assertInstanceOf($expect, $actual);
+    }
+
+    /**
+     * @return void
+     */
+    protected function doSetUp()
+    {
+        $class = 'Illuminate\Database\Capsule\Manager';
+
+        if (! class_exists($class))
+        {
+            $text = 'Illuminate\Database not yet installed.';
+
+            $this->markTestSkipped($text);
+        }
+
+        $this->integration = new DatabaseIntegration;
     }
 }

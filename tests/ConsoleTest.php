@@ -37,7 +37,9 @@ class ConsoleTest extends Testcase
 
         if ($lines !== false)
         {
-            $file = str_replace('## [', '', $lines[4]);
+            $text = str_replace('## [', '', $lines[4]);
+
+            $file = $text;
         }
 
         return substr($file, 0, 5);

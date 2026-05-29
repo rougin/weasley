@@ -18,36 +18,18 @@ class JsonControllerTest extends AbstractTestCase
     /**
      * @var \Rougin\Weasley\Controllers\JsonController
      */
-    protected $controller;
+    protected $self;
 
     /**
      * @return void
      */
-    protected function doSetUp()
-    {
-        parent::doSetUp();
-
-        /** @var \Psr\Http\Message\ResponseInterface */
-        $response = $this->container->get(self::RESPONSE);
-
-        /** @var \Psr\Http\Message\ServerRequestInterface */
-        $request = $this->container->get(self::REQUEST);
-
-        $this->controller = new UsersController($request, $response);
-    }
-
-    /**
-     * @return void
-     */
-    public function testConstructMagicMethodWithoutModel()
+    public function test_failed_if_model_not_defined()
     {
         $this->doExpectException('UnexpectedValueException');
 
-        /** @var \Psr\Http\Message\ServerRequestInterface */
-        $request = $this->container->get(self::REQUEST);
+        $request = $this->getRequest();
 
-        /** @var \Psr\Http\Message\ResponseInterface */
-        $response = $this->container->get(self::RESPONSE);
+        $response = $this->getResponse();
 
         new NoModelController($request, $response);
     }
@@ -55,15 +37,13 @@ class JsonControllerTest extends AbstractTestCase
     /**
      * @return void
      */
-    public function testConstructMagicMethodWithoutValidator()
+    public function test_failed_if_validator_not_defined()
     {
         $this->doExpectException('UnexpectedValueException');
 
-        /** @var \Psr\Http\Message\ServerRequestInterface */
-        $request = $this->container->get(self::REQUEST);
+        $request = $this->getRequest();
 
-        /** @var \Psr\Http\Message\ResponseInterface */
-        $response = $this->container->get(self::RESPONSE);
+        $response = $this->getResponse();
 
         new NoValidatorController($request, $response);
     }
@@ -71,13 +51,26 @@ class JsonControllerTest extends AbstractTestCase
     /**
      * @return void
      */
-    public function testDeleteMethod()
+    public function test_passed_if_item_created()
     {
-        $expect = 204;
+        $request = $this->getRequest();
 
-        $response = $this->controller->delete(2);
+        $data = array('id' => 5);
+        $data['name'] = 'Weasley';
+        $data['username'] = 'weasley';
+        $data['password'] = 'weasley';
 
-        $actual = $response->getStatusCode();
+        $request = $request->withParsedBody($data);
+
+        $this->self->request($request);
+
+        $http = $this->self->store();
+
+        $http = $http->getBody()->__toString();
+
+        $expect = $data;
+
+        $actual = json_decode($http, true);
 
         $this->assertEquals($expect, $actual);
     }
@@ -85,9 +78,81 @@ class JsonControllerTest extends AbstractTestCase
     /**
      * @return void
      */
-    public function testIndexMethod()
+    public function test_passed_if_item_deleted()
     {
-        $http = $this->controller->index();
+        $expect = 204;
+
+        $http = $this->self->delete(2);
+
+        $actual = $http->getStatusCode();
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_item_found()
+    {
+        $expect = array('id' => 1);
+        $expect['name'] = 'Rougin';
+        $expect['password'] = 'rougin';
+        $expect['username'] = 'rougin';
+
+        $http = $this->self->show(1);
+
+        $http = $http->getBody()->__toString();
+
+        $actual = json_decode($http, true);
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_item_not_found()
+    {
+        $expect = '"Specified item not found"';
+
+        $http = $this->self->show(99);
+
+        $actual = $http->getBody()->__toString();
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_item_updated()
+    {
+        $request = $this->getRequest();
+
+        $data = array('id' => 4);
+        $data['name'] = 'Test';
+        $data['username'] = 'test';
+        $data['password'] = 'test';
+
+        $request = $request->withParsedBody($data);
+
+        $this->self->request($request);
+
+        $expect = 204;
+
+        $http = $this->self->update($data['id']);
+
+        $actual = $http->getStatusCode();
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_passed_if_items_listed()
+    {
+        $http = $this->self->index();
 
         $http = $http->getBody()->__toString();
 
@@ -108,15 +173,21 @@ class JsonControllerTest extends AbstractTestCase
     /**
      * @return void
      */
-    public function testShowMethod()
+    public function test_passed_if_validation_fails_on_store()
     {
-        $expect = array('id' => 1, 'name' => 'Rougin');
+        $data = array('name' => array());
 
-        $expect['password'] = 'rougin';
+        $data['name'][] = 'Name is required';
 
-        $expect['username'] = 'rougin';
+        $data['username'] = array();
+        $data['username'][] = 'Username is required';
 
-        $http = $this->controller->show(1);
+        $data['password'] = array();
+        $data['password'][] = 'Password is required';
+
+        $expect = $data;
+
+        $http = $this->self->store();
 
         $http = $http->getBody()->__toString();
 
@@ -128,36 +199,21 @@ class JsonControllerTest extends AbstractTestCase
     /**
      * @return void
      */
-    public function testShowMethodWithError()
+    public function test_passed_if_validation_fails_on_update()
     {
-        $expect = '"Specified item not found"';
+        $data = array('name' => array());
 
-        $http = $this->controller->show(99);
+        $data['name'][] = 'Name is required';
 
-        $actual = $http->getBody()->__toString();
+        $data['username'] = array();
+        $data['username'][] = 'Username is required';
 
-        $this->assertEquals($expect, $actual);
-    }
+        $data['password'] = array();
+        $data['password'][] = 'Password is required';
 
-    /**
-     * @return void
-     */
-    public function testStoreMethod()
-    {
-        /** @var \Psr\Http\Message\ServerRequestInterface */
-        $request = $this->container->get(self::REQUEST);
+        $expect = $data;
 
-        $expect = array('id' => 5, 'name' => 'Weasley');
-
-        $expect['username'] = 'weasley';
-
-        $expect['password'] = 'weasley';
-
-        $request = $request->withParsedBody($expect);
-
-        $this->controller->request($request);
-
-        $http = $this->controller->store();
+        $http = $this->self->update(1);
 
         $http = $http->getBody()->__toString();
 
@@ -169,67 +225,16 @@ class JsonControllerTest extends AbstractTestCase
     /**
      * @return void
      */
-    public function testStoreMethodWithValidationErrors()
+    protected function doSetUp()
     {
-        $expect = array('name' => array('Name is required'));
+        parent::doSetUp();
 
-        $expect['username'] = array('Username is required');
+        $request = $this->getRequest();
 
-        $expect['password'] = array('Password is required');
+        $response = $this->getResponse();
 
-        $http = $this->controller->store();
+        $self = new UsersController($request, $response);
 
-        $http = $http->getBody()->__toString();
-
-        $actual = json_decode($http, true);
-
-        $this->assertEquals($expect, $actual);
-    }
-
-    /**
-     * @return void
-     */
-    public function testUpdateMethod()
-    {
-        /** @var \Psr\Http\Message\ServerRequestInterface */
-        $request = $this->container->get(self::REQUEST);
-
-        $data = array('id' => 4, 'name' => 'Test');
-
-        $data['username'] = 'test';
-
-        $data['password'] = 'test';
-
-        $request = $request->withParsedBody($data);
-
-        $this->controller->request($request);
-
-        $expect = 204;
-
-        $http = $this->controller->update($data['id']);
-
-        $actual = $http->getStatusCode();
-
-        $this->assertEquals($expect, $actual);
-    }
-
-    /**
-     * @return void
-     */
-    public function testUpdateMethodWithValidationErrors()
-    {
-        $expect = array('name' => array('Name is required'));
-
-        $expect['username'] = array('Username is required');
-
-        $expect['password'] = array('Password is required');
-
-        $http = $this->controller->update(1);
-
-        $http = $http->getBody()->__toString();
-
-        $actual = json_decode($http, true);
-
-        $this->assertEquals($expect, $actual);
+        $this->self = $self;
     }
 }

@@ -28,7 +28,6 @@ class MakeControllerCommandTest extends Testcase
      */
     public function test_passed_if_created()
     {
-        // Run the command from the console app ---
         $command = $this->app->find($this->name);
 
         $command = new CommandTester($command);
@@ -36,21 +35,19 @@ class MakeControllerCommandTest extends Testcase
         $data = array('name' => 'TestController');
 
         $command->execute($data);
-        // ----------------------------------------
 
-        // Prepare the expected file after generation -----
-        $path = '/src/Http/Controllers/TestController.php';
+        $path = '/src/Http/Controllers';
+        $path .= '/TestController.php';
 
-        $expect = $file = $this->getRoot() . $path;
+        $file = $this->getRoot() . $path;
 
         /** @var string */
-        $expect = file_get_contents($expect);
+        $expect = file_get_contents($file);
 
         $expect = str_replace("\r\n", "\n", $expect);
-        // ------------------------------------------------
 
-        // Find the actual generated file --------------------
-        $path = '/tests/Fixture/Templates/TestController.php';
+        $path = '/tests/Fixture/Templates';
+        $path .= '/TestController.php';
 
         $actual = $this->getRoot() . $path;
 
@@ -58,7 +55,6 @@ class MakeControllerCommandTest extends Testcase
         $actual = file_get_contents($actual);
 
         $actual = str_replace("\r\n", "\n", $actual);
-        // ---------------------------------------------------
 
         $this->assertEquals($expect, $actual);
 

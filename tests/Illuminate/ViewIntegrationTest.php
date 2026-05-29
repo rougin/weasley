@@ -18,41 +18,44 @@ class ViewIntegrationTest extends Testcase
     /**
      * @return void
      */
-    protected function doSetUp()
+    public function test_passed_if_integration_defined()
     {
-        $message = 'Illuminate\View is not yet installed.';
+        $config = new Configuration;
 
-        $class = 'Illuminate\View\Factory';
+        $view = new ViewIntegration;
 
-        class_exists($class) || $this->markTestSkipped($message);
-    }
+        $path = __DIR__ . '/../Fixture/Storage/Compiled';
 
-    /**
-     * Tests IntegrationInterface::define.
-     *
-     * @return void
-     */
-    public function testDefineMethod()
-    {
-        list($config, $view) = array(new Configuration, new ViewIntegration);
+        $config->set('illuminate.view.compiled', $path);
 
-        $compiled = __DIR__ . '/../Fixture/Storage/Compiled';
+        $plates = __DIR__ . '/../Fixture/Templates';
 
-        $templates = __DIR__ . '/../Fixture/Templates';
-
-        $config->set('illuminate.view.compiled', $compiled);
-
-        $config->set('illuminate.view.templates', $templates);
+        $config->set('illuminate.view.templates', $plates);
 
         $container = $view->define(new Container, $config);
 
-        $expected = 'Hello world!';
+        $expect = 'Hello world!';
 
         /** @var \Rougin\Slytherin\Template\RendererInterface */
         $renderer = $container->get(self::RENDERER);
 
-        $result = $renderer->render('Hello');
+        $actual = $renderer->render('Hello');
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @return void
+     */
+    protected function doSetUp()
+    {
+        $class = 'Illuminate\View\Factory';
+
+        if (! class_exists($class))
+        {
+            $text = 'Illuminate\View not yet installed.';
+
+            $this->markTestSkipped($text);
+        }
     }
 }

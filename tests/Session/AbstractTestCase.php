@@ -33,7 +33,9 @@ abstract class AbstractTestCase extends Testcase
 
         if (! interface_exists($interface))
         {
-            $this->markTestSkipped('SessionHandlerInterface is not yet installed.');
+            $text = $interface . ' not yet installed.';
+
+            $this->markTestSkipped($text);
         }
 
         $path = __DIR__ . '/../Fixture/Storage/Sessions';

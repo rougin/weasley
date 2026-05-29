@@ -19,19 +19,7 @@ class PaginationIntegrationTest extends Testcase
     /**
      * @return void
      */
-    protected function doSetUp()
-    {
-        $message = 'Illuminate\Pagination is not yet installed.';
-
-        $class = 'Illuminate\Pagination\LengthAwarePaginator';
-
-        class_exists($class) || $this->markTestSkipped($message);
-    }
-
-    /**
-     * @return void
-     */
-    public function testDefineMethod()
+    public function test_passed_if_integration_defined()
     {
         $config = Database::config();
 
@@ -45,18 +33,35 @@ class PaginationIntegrationTest extends Testcase
 
         Database::seed($pdo);
 
-        $expected = 'Illuminate\Pagination\LengthAwarePaginator';
+        $expect = 'Illuminate\Pagination\LengthAwarePaginator';
 
         $http = new HttpIntegration;
 
         $pagination = new PaginationIntegration;
 
-        $container = $http->define(new Container, $config);
+        $container = new Container;
+
+        $container = $http->define($container, $config);
 
         $container = $pagination->define($container, $config);
 
-        $result = User::paginate();
+        $actual = User::paginate();
 
-        $this->assertInstanceOf($expected, $result);
+        $this->assertInstanceOf($expect, $actual);
+    }
+
+    /**
+     * @return void
+     */
+    protected function doSetUp()
+    {
+        $class = 'Illuminate\Pagination\LengthAwarePaginator';
+
+        if (! class_exists($class))
+        {
+            $text = 'Illuminate\Pagination not yet installed.';
+
+            $this->markTestSkipped($text);
+        }
     }
 }

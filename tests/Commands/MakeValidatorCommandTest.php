@@ -26,31 +26,26 @@ class MakeValidatorCommandTest extends Testcase
     /**
      * @return void
      */
-    public function test_passed_if_created()
+    public function test_passed_if_check_created()
     {
-        // Run the command from the console app ---
-        $command = $this->app->find($this->name);
+        $command = $this->app->find('make:check');
 
         $command = new CommandTester($command);
 
-        $data = array('name' => 'TestValidator');
+        $data = array('name' => 'TestCheck');
 
         $command->execute($data);
-        // ----------------------------------------
 
-        // Prepare the expected file after generation ---
-        $path = '/src/Validators/TestValidator.php';
+        $path = '/src/Checks/TestCheck.php';
 
-        $expect = $file = $this->getRoot() . $path;
+        $file = $this->getRoot() . $path;
 
         /** @var string */
-        $expect = file_get_contents($expect);
+        $expect = file_get_contents($file);
 
         $expect = str_replace("\r\n", "\n", $expect);
-        // ----------------------------------------------
 
-        // Find the actual generated file -------------------
-        $path = '/tests/Fixture/Templates/TestValidator.php';
+        $path = '/tests/Fixture/Templates/TestCheck.php';
 
         $actual = $this->getRoot() . $path;
 
@@ -58,7 +53,6 @@ class MakeValidatorCommandTest extends Testcase
         $actual = file_get_contents($actual);
 
         $actual = str_replace("\r\n", "\n", $actual);
-        // --------------------------------------------------
 
         $this->assertEquals($expect, $actual);
 
@@ -68,31 +62,26 @@ class MakeValidatorCommandTest extends Testcase
     /**
      * @return void
      */
-    public function test_passed_if_check_created()
+    public function test_passed_if_created()
     {
-        // Run the command from the console app ---
-        $command = $this->app->find('make:check');
+        $command = $this->app->find($this->name);
 
         $command = new CommandTester($command);
 
-        $data = array('name' => 'TestCheck');
+        $data = array('name' => 'TestValidator');
 
         $command->execute($data);
-        // ----------------------------------------
 
-        // Prepare the expected file after generation ---
-        $path = '/src/Checks/TestCheck.php';
+        $path = '/src/Validators/TestValidator.php';
 
-        $expect = $file = $this->getRoot() . $path;
+        $file = $this->getRoot() . $path;
 
         /** @var string */
-        $expect = file_get_contents($expect);
+        $expect = file_get_contents($file);
 
         $expect = str_replace("\r\n", "\n", $expect);
-        // ----------------------------------------------
 
-        // Find the actual generated file ---------------
-        $path = '/tests/Fixture/Templates/TestCheck.php';
+        $path = '/tests/Fixture/Templates/TestValidator.php';
 
         $actual = $this->getRoot() . $path;
 
@@ -100,7 +89,6 @@ class MakeValidatorCommandTest extends Testcase
         $actual = file_get_contents($actual);
 
         $actual = str_replace("\r\n", "\n", $actual);
-        // ----------------------------------------------
 
         $this->assertEquals($expect, $actual);
 

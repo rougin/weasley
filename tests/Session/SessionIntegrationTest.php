@@ -18,20 +18,24 @@ class SessionIntegrationTest extends AbstractTestCase
      *
      * @return void
      */
-    public function testDefineMethod()
+    public function test_passed_if_integration_defined()
     {
-        $container = $this->integration->define(new Container, $this->config);
+        $container = new Container;
+
+        $fn = array($this->integration, 'define');
+
+        $container = $fn($container, $this->config);
 
         /** @var \Rougin\Weasley\Contract\Session */
         $session = $container->get(self::SESSION);
 
-        $expected = 'Ron Weasley';
+        $expect = 'Ron Weasley';
 
-        $session->set('user.name', $expected);
+        $session->set('user.name', $expect);
 
         /** @var string */
-        $result = $session->get('user.name');
+        $actual = $session->get('user.name');
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expect, $actual);
     }
 }
