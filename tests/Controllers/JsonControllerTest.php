@@ -73,13 +73,13 @@ class JsonControllerTest extends AbstractTestCase
      */
     public function testDeleteMethod()
     {
-        $expected = 204;
+        $expect = 204;
 
         $response = $this->controller->delete(2);
 
-        $result = $response->getStatusCode();
+        $actual = $response->getStatusCode();
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
@@ -87,22 +87,22 @@ class JsonControllerTest extends AbstractTestCase
      */
     public function testIndexMethod()
     {
-        $response = $this->controller->index();
+        $http = $this->controller->index();
 
-        $response = $response->getBody();
+        $http = $http->getBody()->__toString();
 
-        $expected = 4;
+        $expect = 4;
 
         /** @var array<string, mixed> */
-        $result = json_decode((string) $response, true);
+        $actual = json_decode($http, true);
 
         if (class_exists(self::PAGINATOR))
         {
             /** @var array<integer, mixed> */
-            $result = $result['items'];
+            $actual = $actual['items'];
         }
 
-        $this->assertCount($expected, $result);
+        $this->assertCount($expect, $actual);
     }
 
     /**
@@ -110,17 +110,19 @@ class JsonControllerTest extends AbstractTestCase
      */
     public function testShowMethod()
     {
-        $expected = array('id' => 1, 'name' => 'Rougin');
+        $expect = array('id' => 1, 'name' => 'Rougin');
 
-        $expected['password'] = 'rougin';
+        $expect['password'] = 'rougin';
 
-        $expected['username'] = 'rougin';
+        $expect['username'] = 'rougin';
 
-        $response = $this->controller->show(1)->getBody();
+        $http = $this->controller->show(1);
 
-        $result = json_decode((string) $response, true);
+        $http = $http->getBody()->__toString();
 
-        $this->assertEquals($expected, $result);
+        $actual = json_decode($http, true);
+
+        $this->assertEquals($expect, $actual);
     }
 
     /**
@@ -128,13 +130,13 @@ class JsonControllerTest extends AbstractTestCase
      */
     public function testShowMethodWithError()
     {
-        $expected = '"Specified item not found"';
+        $expect = '"Specified item not found"';
 
-        $response = $this->controller->show(99);
+        $http = $this->controller->show(99);
 
-        $result = (string) $response->getBody();
+        $actual = $http->getBody()->__toString();
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
@@ -145,21 +147,23 @@ class JsonControllerTest extends AbstractTestCase
         /** @var \Psr\Http\Message\ServerRequestInterface */
         $request = $this->container->get(self::REQUEST);
 
-        $expected = array('id' => 5, 'name' => 'Weasley');
+        $expect = array('id' => 5, 'name' => 'Weasley');
 
-        $expected['username'] = 'weasley';
+        $expect['username'] = 'weasley';
 
-        $expected['password'] = 'weasley';
+        $expect['password'] = 'weasley';
 
-        $request = $request->withParsedBody($expected);
+        $request = $request->withParsedBody($expect);
 
         $this->controller->request($request);
 
-        $response = $this->controller->store()->getBody();
+        $http = $this->controller->store();
 
-        $result = json_decode((string) $response, true);
+        $http = $http->getBody()->__toString();
 
-        $this->assertEquals($expected, $result);
+        $actual = json_decode($http, true);
+
+        $this->assertEquals($expect, $actual);
     }
 
     /**
@@ -167,17 +171,19 @@ class JsonControllerTest extends AbstractTestCase
      */
     public function testStoreMethodWithValidationErrors()
     {
-        $response = $this->controller->store()->getBody();
+        $expect = array('name' => array('Name is required'));
 
-        $expected = array('name' => array('Name is required'));
+        $expect['username'] = array('Username is required');
 
-        $expected['username'] = array('Username is required');
+        $expect['password'] = array('Password is required');
 
-        $expected['password'] = array('Password is required');
+        $http = $this->controller->store();
 
-        $result = json_decode((string) $response, true);
+        $http = $http->getBody()->__toString();
 
-        $this->assertEquals($expected, $result);
+        $actual = json_decode($http, true);
+
+        $this->assertEquals($expect, $actual);
     }
 
     /**
@@ -198,13 +204,13 @@ class JsonControllerTest extends AbstractTestCase
 
         $this->controller->request($request);
 
-        $expected = 204;
+        $expect = 204;
 
-        $response = $this->controller->update($data['id']);
+        $http = $this->controller->update($data['id']);
 
-        $result = $response->getStatusCode();
+        $actual = $http->getStatusCode();
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expect, $actual);
     }
 
     /**
@@ -212,16 +218,18 @@ class JsonControllerTest extends AbstractTestCase
      */
     public function testUpdateMethodWithValidationErrors()
     {
-        $response = $this->controller->update(1)->getBody();
+        $expect = array('name' => array('Name is required'));
 
-        $expected = array('name' => array('Name is required'));
+        $expect['username'] = array('Username is required');
 
-        $expected['username'] = array('Username is required');
+        $expect['password'] = array('Password is required');
 
-        $expected['password'] = array('Password is required');
+        $http = $this->controller->update(1);
 
-        $result = json_decode((string) $response, true);
+        $http = $http->getBody()->__toString();
 
-        $this->assertEquals($expected, $result);
+        $actual = json_decode($http, true);
+
+        $this->assertEquals($expect, $actual);
     }
 }

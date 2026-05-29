@@ -35,13 +35,15 @@ class BaseControllerTest extends AbstractTestCase
      */
     public function testJsonMethod()
     {
-        $expected = array('name' => 'Rougin', 'project' => 'Weasley');
+        $expect = array('name' => 'Rougin', 'project' => 'Weasley');
 
-        $response = $this->controller->json($expected);
+        $http = $this->controller->json($expect);
 
-        $result = json_decode((string) $response->getBody(), true);
+        $http = $http->getBody()->__toString();
 
-        $this->assertEquals($expected, $result);
+        $actual = json_decode($http, true);
+
+        $this->assertEquals($expect, $actual);
     }
 
     /**
@@ -51,13 +53,18 @@ class BaseControllerTest extends AbstractTestCase
     {
         $data = urldecode('bad utf string %C4_');
 
-        $expected = 'Malformed UTF-8 characters, possibly incorrectly encoded';
+        $expect = 'null';
 
-        $response = $this->controller->json($data);
+        if (defined('JSON_ERROR_UTF8'))
+        {
+            $expect = 'Malformed UTF-8 characters, possibly incorrectly encoded';
+        }
 
-        $result = (string) $response->getBody();
+        $http = $this->controller->json($data);
 
-        $this->assertEquals($expected, $result);
+        $actual = $http->getBody()->__toString();
+
+        $this->assertEquals($expect, $actual);
     }
 
     /**
@@ -65,12 +72,14 @@ class BaseControllerTest extends AbstractTestCase
      */
     public function testToJsonMethod()
     {
-        $expected = array('name' => 'Rougin', 'project' => 'Weasley');
+        $expect = array('name' => 'Rougin', 'project' => 'Weasley');
 
-        $response = $this->controller->toJson($expected);
+        $http = $this->controller->toJson($expect);
 
-        $result = json_decode((string) $response->getBody(), true);
+        $http = $http->getBody()->__toString();
 
-        $this->assertEquals($expected, $result);
+        $actual = json_decode($http, true);
+
+        $this->assertEquals($expect, $actual);
     }
 }
