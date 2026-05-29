@@ -74,19 +74,25 @@ class JsonMutator implements Mutator
      */
     public function mutate($data)
     {
-        $response = $this->response;
+        $http = $this->response;
 
         $stream = @json_encode($data, $this->options);
 
-        if ($stream === false)
-        {
-            $stream = $this->errors[json_last_error()];
+        $error = json_last_error();
 
-            $response = $response->withStatus(400);
+        if ($error !== JSON_ERROR_NONE)
+        {
+            $stream = $this->errors[$error];
+
+            $http = $http->withStatus(400);
         }
 
-        $response->getBody()->write($stream);
+        $http->getBody()->write($stream);
 
-        return $response->withHeader('Content-Type', 'application/json');
+        $type = 'Content-Type';
+
+        $value = 'application/json';
+
+        return $http->withHeader($type, $value);
     }
 }
