@@ -15,39 +15,77 @@ class JsonMutator implements Mutator
     /**
      * @var array<integer, string>
      */
-    protected $errors = array();
+    protected $errors = array(
+
+        // JSON_ERROR_NONE -----
+        'No error has occurred',
+        // ---------------------
+
+        // JSON_ERROR_DEPTH ------------------------
+        'The maximum stack depth has been exceeded',
+        // -----------------------------------------
+
+        // JSON_ERROR_STATE_MISMATCH ---
+        'Invalid or malformed JSON',
+        // -----------------------------
+
+        // JSON_ERROR_CTRL_CHAR --------------------------------
+        'Control character error, possibly incorrectly encoded',
+        // -----------------------------------------------------
+
+        // JSON_ERROR_SYNTAX ---
+        'Syntax error',
+        // ---------------------
+
+        // JSON_ERROR_UTF8 ----------------------------------------
+        'Malformed UTF-8 characters, possibly incorrectly encoded',
+        // --------------------------------------------------------
+
+        // JSON_ERROR_RECURSION --------------------------------------
+        'One or more recursive references in the value to be encoded',
+        // -----------------------------------------------------------
+
+        // JSON_ERROR_INF_OR_NAN ----------------------------------
+        'One or more NAN or INF values in the value to be encoded',
+        // --------------------------------------------------------
+
+        // JSON_ERROR_UNSUPPORTED_TYPE ----------------------
+        'A value of a type that cannot be encoded was given',
+        // --------------------------------------------------
+
+        // JSON_ERROR_INVALID_PROPERTY_NAME ---------------
+        'A property name that cannot be encoded was given',
+        // ------------------------------------------------
+
+        // JSON_ERROR_UTF16 ----------------------------------------
+        'Malformed UTF-16 characters, possibly incorrectly encoded',
+        // ---------------------------------------------------------
+
+        // JSON_ERROR_NON_BACKED_ENUM --------------------------------
+        'Value contains a non-backed enum which cannot be serialized',
+        // -----------------------------------------------------------
+
+    );
 
     /**
      * @var integer
      */
-    protected $options = 0;
+    protected $flags = 0;
 
     /**
      * @var \Psr\Http\Message\ResponseInterface
      */
-    protected $response;
+    protected $http;
 
     /**
-     * @param \Psr\Http\Message\ResponseInterface $response
-     * @param integer                             $options
+     * @param \Psr\Http\Message\ResponseInterface $http
+     * @param integer                             $flags
      */
-    public function __construct(ResponseInterface $response, $options = 0)
+    public function __construct(ResponseInterface $http, $flags = 0)
     {
-        $this->errors[] = 'No errors';
-        $this->errors[] = 'Maximum stack depth exceeded';
-        $this->errors[] = 'Underflow or the modes mismatch';
-        $this->errors[] = 'Unexpected control character found';
-        $this->errors[] = 'Syntax error, malformed JSON';
-        $this->errors[] = 'Malformed UTF-8 characters, possibly incorrectly encoded';
-        $this->errors[] = 'One or more recursive references in the value to be encoded';
-        $this->errors[] = 'One or more NAN or INF values in the value to be encoded';
-        $this->errors[] = 'A value of a type that cannot be encoded was given';
-        $this->errors[] = 'A property name that cannot be encoded was given';
-        $this->errors[] = 'Malformed UTF-16 characters, possibly incorrectly encoded';
+        $this->flags = $flags;
 
-        $this->options = $options;
-
-        $this->response = $response;
+        $this->http = $http;
     }
 
     /**
@@ -74,9 +112,9 @@ class JsonMutator implements Mutator
      */
     public function mutate($data)
     {
-        $http = $this->response;
+        $http = $this->http;
 
-        $stream = @json_encode($data, $this->options);
+        $stream = @json_encode($data, $this->flags);
 
         $error = json_last_error();
 
@@ -87,7 +125,10 @@ class JsonMutator implements Mutator
             $http = $http->withStatus(400);
         }
 
-        $http->getBody()->write($stream);
+        if ($stream !== false)
+        {
+            $http->getBody()->write($stream);
+        }
 
         $type = 'Content-Type';
 
