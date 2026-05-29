@@ -78,4 +78,86 @@ class SessionTest extends AbstractTestCase
 
         $this->assertNotEquals($expected, $result);
     }
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function testRegenerateMethodWithoutDelete()
+    {
+        $expected = $this->session->id();
+
+        $this->session->set('keep', 'value');
+
+        $this->session->regenerate(false);
+
+        $result = $this->session->id();
+
+        $this->assertNotEquals($expected, $result);
+
+        $this->assertEquals('value', $this->session->get('keep'));
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function testGetMethodWithDefault()
+    {
+        $result = $this->session->get('undefined_key', 'default_value');
+
+        $this->assertEquals('default_value', $result);
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function testDeleteMethodForNonExistentKey()
+    {
+        $result = $this->session->delete('nonexistent');
+
+        $this->assertFalse($result);
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function testSetMethodReturnsSelf()
+    {
+        $result = $this->session->set('chain', 'test');
+
+        $this->assertInstanceOf('Rougin\Weasley\Session\Session', $result);
+    }
+
+    /**
+     * @runInSeparateProcess
+     *
+     * @return void
+     */
+    public function testConstructorWithExistingData()
+    {
+        $path = __DIR__ . '/../Fixture/Storage/Sessions';
+
+        $id = 'constructor_load_test';
+
+        $handler = new FileSessionHandler;
+
+        $handler->open($path, $id);
+
+        $first = new Session($handler, $id);
+
+        $first->set('persist', 'loaded');
+
+        $second = new Session($handler, $id);
+
+        $result = $second->get('persist');
+
+        $this->assertEquals('loaded', $result);
+    }
 }

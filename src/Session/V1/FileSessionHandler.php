@@ -54,22 +54,14 @@ class FileSessionHandler implements \SessionHandlerInterface
      */
     public function gc($lifetime)
     {
-        $files = glob($this->path);
+        $files = glob($this->path . '/*');
 
-        if ($files === false)
-        {
-            $files = array();
-        }
+        /** @var string[] */
+        $files = $files === false ? array() : $files;
 
-        /** @var string $file */
         foreach ($files as $file)
         {
             $mtime = filemtime($file);
-
-            if ($mtime === false)
-            {
-                continue;
-            }
 
             $time = $mtime + $lifetime;
 
