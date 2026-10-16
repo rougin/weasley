@@ -25,9 +25,18 @@ abstract class AbstractValidator
      */
     protected $valid;
 
+    /**
+     * @deprecated since ~0.8, use "valid" instead.
+     *
+     * @var \Rougin\Valla\Valid
+     */
+    protected $validator;
+
     public function __construct()
     {
         $this->valid = new Valid;
+
+        $this->validator = new Valid;
     }
 
     /**
