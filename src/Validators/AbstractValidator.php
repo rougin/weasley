@@ -36,7 +36,7 @@ abstract class AbstractValidator
     {
         $this->valid = new Valid;
 
-        $this->validator = new Valid;
+        $this->validator = $this->valid;
     }
 
     /**
