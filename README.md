@@ -130,7 +130,7 @@ The `$model` must be an Eloquent model with `$fillable` defined. The `$validator
 `Weasley` provides HTTP middlewares (handlers) that process incoming requests and outgoing responses. Each handler implements `Rougin\Slytherin\Middleware\MiddlewareInterface`.
 
 > [!NOTE]
-> Starting v0.8, all handler classes are thin wrappers over [Onion](https://github.com/rougin/onion) (`rougin/onion`). Every feature described below originates from Onion's classes.
+> Starting v0.8, all handler classes are thin wrappers over [Onion](https://github.com/rougin/onion). Every feature described below originates from Onion's classes.
 
 ### `AllowCrossOrigin`
 
@@ -229,7 +229,7 @@ $handler = new TrimStringValue;
 
 ## Validation
 
-`Weasley` provides the `Check` class for validating data. It is built on [Valla](https://github.com/rougin/valla) (`rougin/valla`) and supports all rules from Valla's rule engine (e.g., `required`, `email`, and more):
+`Weasley` provides the `Check` class for validating data. It is built on [Valla](https://github.com/rougin/valla) and supports all rules from Valla's rule engine (e.g., `required`, `email`, and more):
 
 ``` php
 $check = new UserCheck;
