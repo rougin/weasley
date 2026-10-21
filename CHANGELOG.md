@@ -2,7 +2,7 @@
 
 All notable changes to `Weasley` will be documented in this file.
 
-## [0.8.0](https://github.com/rougin/weasley/compare/v0.7.1...v0.8.0) - Unreleased
+## [0.8.0](https://github.com/rougin/weasley/compare/v0.7.1...v0.8.0) - 2026-10-21
 
 ### Changed
 - Migrated to [Blueprint](https://github.com/rougin/blueprint) for console commands
